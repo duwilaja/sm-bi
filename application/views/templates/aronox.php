@@ -58,6 +58,9 @@ if(count($farr)>0&&$session['nrp']!=''){
 		<!-- fancybox CSS-->
 		<link rel="stylesheet" href="<?php echo $base_url;?>my/vendor/jquery-fancybox/jquery.fancybox.min.css">
 		
+		<!-- leaflet CSS-->
+		<link rel="stylesheet" href="<?php echo $base_url;?>my/vendor/leaflet/leaflet.css">
+		
 		<!-- overwrite css -->
 		<link href="<?php echo $base_url;?>my/css/custom.css" rel="stylesheet" />
 
@@ -81,15 +84,6 @@ if(count($farr)>0&&$session['nrp']!=''){
 								<img src="<?php echo $base_url;?>my/images/sm.png" class="header-brand-img mobile-logo" alt="Aronox logo">
 							</a>
 
-							<!--div class="mt-1">
-								<form class="form-inline" method="POST" action="n_device.php">
-									<div class="search-element">
-										<input name="cari" type="search" class="form-control header-search" placeholder="Search..." aria-label="Search" tabindex="1">
-										<button class="btn btn-primary-color" type="submit"><i class="fa fa-search"></i></button>
-									</div>
-								</form>
-							</div><!-- SEARCH -->
-
 							<div class="d-flex order-lg-2 ml-auto">
 								<!--a href="#" data-toggle="search" class="nav-link nav-link-lg d-md-none navsearch"><i class="fa fa-search"></i></a-->
 								<div class="dropdown   header-fullscreen" >
@@ -97,58 +91,6 @@ if(count($farr)>0&&$session['nrp']!=''){
 										<i class="mdi mdi-arrow-collapse"></i>
 									</a>
 								</div>
-								<!--div class="dropdown d-md-flex message hidden">
-									<a class="nav-link icon text-center" data-toggle="dropdown">
-										<i class="mdi mdi-email-outline"></i>
-										<span class="nav-unread bg-warning-1 pulse"></span>
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-										<a href="#" class="dropdown-item d-flex mt-2 pb-3">
-											<div class="avatar avatar-md brround mr-3 d-block cover-image" data-image-src="aronox/assets/images/users/5.jpg">
-												<span class="avatar-status bg-green"></span>
-											</div>
-											<div>
-												<strong>Madeleine</strong>
-												<p class="mb-0 fs-13">Hey! there I' am available</p>
-												<div class="small">3 hours ago</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="avatar avatar-md brround mr-3 d-block cover-image" data-image-src="aronox/assets/images/users/8.jpg">
-												<span class="avatar-status bg-red"></span>
-											</div>
-											<div>
-												<strong>Anthony</strong>
-												<p class="mb-0 fs-13 ">New product Launching</p>
-												<div class="small">5  hour ago</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="avatar avatar-md brround mr-3 d-block cover-image" data-image-src="aronox/assets/images/users/11.jpg">
-												<span class="avatar-status bg-yellow"></span>
-											</div>
-											<div>
-												<strong>Olivia</strong>
-												<p class="mb-0 fs-13 ">New Schedule Realease</p>
-												<div class="small">45 mintues ago</div>
-											</div>
-										</a>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item text-center">See all Messages</a>
-									</div>
-								</div><!-- MESSAGE-BOX -->
-
-								<!--div class="dropdown header-notify">
-									<a class="nav-link icon" data-toggle="dropdown">
-										<i class="mdi mdi-bell-outline"></i>
-										<span class="pulse bg-danger hidden"></span>
-									</a>
-									<div id="lonceng" class="hidden">
-									<div id="isilonceng" class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-									
-									</div>
-									</div>
-								</div-->
 								
 								<div class="dropdown ">
 									<a class="nav-link pr-0 leading-none" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -159,16 +101,12 @@ if(count($farr)>0&&$session['nrp']!=''){
 										<img class="avatar avatar-md brround" src="<?php echo $avatar?>" alt="image">
 									 </a>
 									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow ">
-										<a class="dropdown-item" href="<?php echo $base_url?>profile">
+										<!--a class="dropdown-item" href="<?php echo $base_url?>profile">
 											<i class="dropdown-icon mdi mdi-account-outline "></i> My Profile
-										</a>
+										</a-->
 										<a class="dropdown-item" href="<?php echo $base_url?>login/out">
 											<i class="dropdown-icon mdi  mdi-logout-variant"></i> Sign out
 										</a>
-									<!--div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="<?php echo $base_url?>users">
-											<i class="dropdown-icon mdi  mdi-account-multiple"></i> Users
-										</a-->
 									</div>
 								</div>
 							</div>
@@ -182,54 +120,48 @@ if(count($farr)>0&&$session['nrp']!=''){
 					<div class="horizontal-mainwrapper container clearfix">
 						<nav class="horizontalMenu clearfix">
 							<ul class="horizontalMenu-list">
-								<!--li aria-haspopup="true"><a href="<?php echo $base_url?>home" class=""><i class="fa fa-at"></i> Home</a>
+								<li aria-haspopup="true"><a href="<?php echo $base_url?>home" class=""><i class="fa fa-at"></i> Home</a>
 								</li>
-								<li aria-haspopup="true"><a href="<?php echo $base_url?>profile" class=""><i class="fa fa-address-card-o"></i> Profil</a>
-								</li-->
-								<li aria-haspopup="true"><a href="<?php echo $base_url?>laporan" class="sub-icon"><i class="fa fa-pencil-square-o"></i> Formulir</a>
-								</li>
-								<li aria-haspopup="true"><a href="<?php echo $base_url?>rekap" class="sub-icon"><i class="fa fa-file-text-o"></i> Rekap</a>
-								</li>
-								<!--li aria-haspopup="true"><a href="<?php echo $base_url?>dashboard" class="sub-icon"><i class="fa fa-dashboard"></i> Dashboard</a>
-								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-dashboard"></i> Overview <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-map-o"></i> Laporan <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true" class="home"><a class="home" href="home.php">Summary</a></li>
-										<li aria-haspopup="true" class="home"><a class="home" href="home2.php">Dash Pusat</a></li>
-										<li aria-haspopup="true" class="home"><a class="home" href="home3.php">Dash Polda</a></li>
-										<li aria-haspopup="true" class="home"><a class="home" href="home4.php">Dash Polres</a></li>
-									</ul>
-								</li-->
-						<?php if($session['adm']=='Y'){?>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-cogs"></i> Setup <i class="fa fa-angle-down horizontal-icon"></i></a>
-									<ul class="sub-menu">
-										<!--li aria-haspopup="true"><a href="m_user.php">User</a></li-->
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>setup/polda">Polda</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>setup/polres">Polres</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>setup/direktorat">Direktorat</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>setup/subdit">Subdit</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>setup/bagian">Bagian</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>setup/subbag">Sub Bagian</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>setup/unit">Unit</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>setup/pangkat">Kepangkatan</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>setup/dasargiat">Dasar Giat</a></li>
+										<li aria-haspopup="true"><a href="#">Standard</a></li>
+										<li aria-haspopup="true"><a href="#">Bulanan</a></li>
+										<li aria-haspopup="true"><a href="#">Periodic</a></li>
+										<li aria-haspopup="true"><a href="#">Tabulasi Silang</a></li>
 									</ul>
 								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-database"></i>Master Data <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-file-text"></i> Data <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
-										<!--li aria-haspopup="true"><a href="m_user.php">User</a></li-->
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>MasterData/kondisi_alam">Kondisi Alam</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>MasterData/kondisi_jalan">Kondisi Jalan</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>MasterData/kondisi_lalin">Kondisi Lalin</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>MasterData/prasarana_public">Prasarana Public</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>MasterData/potensi_masyarakat">Potensi Masyarakat</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>MasterData/kegiatan">Kegiatan</a></li>
-										<!-- <li aria-haspopup="true"><a href="<?php echo $base_url?>unit">Unit</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>pangkat">Kepangkatan</a></li>
-										<li aria-haspopup="true"><a href="<?php echo $base_url?>dasargiat">Dasar Giat</a></li> -->
+										<li aria-haspopup="true"><a href="#">Cybercop</a></li>
+										<li aria-haspopup="true"><a href="#">ERI</a></li>
+										<li aria-haspopup="true"><a href="#">SDC</a></li>
+										<li aria-haspopup="true"><a href="#">SSC</a></li>
+										<li aria-haspopup="true"><a href="#">TMC</a></li>
+										<li aria-haspopup="true"><a href="#">INTAN</a></li>
+										<li aria-haspopup="true"><a href="#">AIS</a></li>
+										<li aria-haspopup="true"><a href="#">TAA</a></li>
+										<li aria-haspopup="true"><a href="#">TARC</a></li>
 									</ul>
 								</li>
-						<?php } ?>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-line-chart"></i> Statistic <i class="fa fa-angle-down horizontal-icon"></i></a>
+									<ul class="sub-menu">
+										<li aria-haspopup="true"><a href="#">Trend Data</a></li>
+										<li aria-haspopup="true"><a href="#">Case Fatality Rate</a></li>
+										<li aria-haspopup="true"><a href="#">Fatality Index</a></li>
+										<li aria-haspopup="true"><a href="#">Risk Exposure</a></li>
+										<li aria-haspopup="true"><a href="#">Ambang Gangguan</a></li>
+										<li aria-haspopup="true"><a href="#">Index Kemacetan</a></li>
+									</ul>
+								</li>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-bullhorn"></i> Action <i class="fa fa-angle-down horizontal-icon"></i></a>
+									<ul class="sub-menu">
+										<li aria-haspopup="true"><a href="#">Rekomendasi</a></li>
+										<li aria-haspopup="true"><a href="#">RSPA</a></li>
+										<li aria-haspopup="true"><a href="#">Road Safety Campaign</a></li>
+										<li aria-haspopup="true"><a href="#">Literasi Road Safety</a></li>
+										<li aria-haspopup="true"><a href="#">Road Safety Program</a></li>
+									</ul>
+								</li>
 							</ul>
 						</nav>
 						<!--Nav end -->
@@ -321,6 +253,7 @@ if(count($farr)>0&&$session['nrp']!=''){
     <script src="<?php echo $base_url;?>my/vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="<?php echo $base_url;?>my/vendor/jquery-fancybox/jquery.fancybox.min.js"></script>
     <script src="<?php echo $base_url;?>my/vendor/chart.js/Chart.min.js"></script>
+	<script src="<?php echo $base_url;?>my/vendor/leaflet/leaflet.js"></script>
 
 	<?php if(@$js_local){ ?>
 		<script src="<?= base_url('my/js_local/'.$js_local);?>"></script>

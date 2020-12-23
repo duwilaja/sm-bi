@@ -70,9 +70,8 @@ $base_url = base_url();
 							<div class="container text-center single-page single-pageimage construction-body">
 				    <div class="row justify-content-center">
 						<div class="col-xl-7 col-lg-6 col-md-12">
-							<!--img src="<?php echo $base_url;?>aronox/assets/images/sm_img/gambar-logo.png" class="construction-img mb-7 h-480  mt-5 mt-xl-0" alt="">
-							<img src="<?php echo $base_url;?>aronox/assets/images/svgs/login.svg" class="construction-img mb-7 h-480  mt-5 mt-xl-0" alt=""-->
-							<img src="<?php echo $base_url;?>my/images/gambar-login.png" class="mb-7 mt-5 mt-xl-0" alt="">
+							<img src="<?php echo $base_url;?>aronox/assets/images/svgs/undraw.svg" class="construction-img mb-7 h-480  mt-5 mt-xl-0" alt="">
+							<!--img src="<?php echo $base_url;?>my/images/gambar-login.png" class="mb-7 mt-5 mt-xl-0" alt=""-->
 						</div>
 						<div class="col-xl-5 col-lg-6 col-md-12 ">
 							<div class="col-lg-12">
@@ -94,17 +93,17 @@ $base_url = base_url();
 												<button type="submit" class="btn btn-primary btn-block">Login</button>
 												<!--a class="btn btn-primary btn-block" href="welcome/blank">Login</a-->
 											</div>
-											<div class="col-12 mb-0">
+											<!--div class="col-12 mb-0">
 												<a href="#" onclick="openForm('',0,'#reset_form');" data-toggle="modal" data-target="#modal_reset" class="btn btn-link box-shadow-0 px-0">Forgot password?</a>
 												<p class=" mb-0">Don't have account?<a href="#" onclick="openForm('',0,'#register_form');" data-toggle="modal" data-target="#modal_register" class="text-primary ml-1">Sign UP</a></p>
-											</div>
+											</div-->
 										</div>
 									</form>
 									<div class="card-body social-icons border-top">
 										<!--a class="btn  btn-social btn-fb mr-2"><i class="fa fa-facebook"></i> </a>
 										<a class="btn  btn-social btn-googleplus mr-2"><i class="fa fa-google-plus"></i></a>
 										<a class="btn  btn-social btn-twitter-transparant  "><i class="fa fa-twitter"></i></a-->
-										Smart Management
+										Smart Management BI
 									</div>
 								</div>
 							</div>

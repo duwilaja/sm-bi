@@ -2,5 +2,5 @@
 
 <h1>this is the content</h1>
 <?php
-	print_r($dummy);
+	//print_r($dummy);
 ?>
