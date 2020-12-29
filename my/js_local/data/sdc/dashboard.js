@@ -13,25 +13,25 @@ var options = {
     },
     series: [{
         name: 'Mengantuk',
-        type: 'line',
+        type: 'bar',
         // data: [ 25,29,27,26,27, 24,26,28, 27,29,28, 29,27, 25, 26,24, 20,]
         data: [100,50,100,50]
     }, 
     {
         name: 'Mabuk',
-        type: 'line',
+        type: 'bar',
         // data: [ 35,39,37,36,37, 34,36,38, 37,39,38, 39,37, 35, 36,34, 30,]
         data: [50,25,50,25]
     }, 
     {
         name: 'Terserempet',
-        type: 'line',
+        type: 'bar',
         // data: [37, 35, 36,34,32,39, 38,40, 43, 46,45, 49,50, 52,53,52, 55]
         data: [20,15,20,15]
     },
     {
         name: 'Balap Liar',
-        type: 'line',
+        type: 'bar',
         data: [30,10,30,10]
     }],
      fill: {
@@ -81,7 +81,7 @@ chart.render();
 	gradientStroke3.addColorStop(1, '#2393ff7d');
 	
     var myChart = new Chart( myCanvas, {
-		type: 'line',
+		type: 'bar',
 		data: {
             labels: ["Januari","Februari","Meret", "April","Mei", "Juni","Juli","Agustus","September","Oktober", "November", "Desember" ],
             type: 'line',

@@ -12,22 +12,27 @@ var options = {
         width:2
     },
     series: [{
-        name: 'Kecelakaan',
-        type: 'bar',
+        name: 'Mengantuk',
+        type: 'line',
         // data: [ 25,29,27,26,27, 24,26,28, 27,29,28, 29,27, 25, 26,24, 20,]
-        data: [80,50,100,50,12]
+        data: [100,50,100,50]
     }, 
     {
-        name: 'Kemacetan',
-        type: 'bar',
+        name: 'Mabuk',
+        type: 'line',
         // data: [ 35,39,37,36,37, 34,36,38, 37,39,38, 39,37, 35, 36,34, 30,]
-        data: [50,25,50,25,87]
+        data: [50,25,50,25]
+    }, 
+    {
+        name: 'Terserempet',
+        type: 'line',
+        // data: [37, 35, 36,34,32,39, 38,40, 43, 46,45, 49,50, 52,53,52, 55]
+        data: [20,15,20,15]
     },
     {
-        name: 'Kondisi Jalur',
-        type: 'bar',
-        // data: [ 35,39,37,36,37, 34,36,38, 37,39,38, 39,37, 35, 36,34, 30,]
-        data: [50,25,50,25,87]
+        name: 'Balap Liar',
+        type: 'line',
+        data: [30,10,30,10]
     }],
      fill: {
      type:'solid',
@@ -37,7 +42,7 @@ var options = {
             show: true,
             borderColor: 'rgba(142, 156, 173,0.2)',
         },
-    colors:['#4a32d4','#f7592d','#f7be2d','#3abc1d','#f72d66'],
+    colors: ['#fb1c52', '#ff8519','#fffb14','#44ff1f'],
     xaxis: {
         // type: 'datetime',
         // categories: ['Dec 01', 'Dec 02','Dec 03','Dec 04','Dec 05','Dec 06','Dec 07','Dec 08','Dec 09 ','Dec 10','Dec 11','Dec 12','Dec 13','Dec 14','Dec 15 ','Dec 16','Dec 17'],
@@ -55,46 +60,6 @@ var options = {
     }
 }
 var chart = new ApexCharts(document.querySelector("#live-chart"), options);
-chart.render();
-
-
-var options = {
-    chart: {
-        width: 380,
-        height:230,
-        type: 'donut',
-    },
-    dataLabels: {
-        enabled: false
-    },
-    series: [50000, 20000, 10000, 10000, 10000],
-    colors:['#4a32d4','#f7592d','#f7be2d','#3abc1d','#f72d66'],
-    labels: [
-            "Kecelakaan",
-            "Kemacetan",
-            "Mobil Penumpang",
-            "Sepeda Motor",
-            "Kendaraan Khusus"
-        ],
-    responsive: [{
-        breakpoint: 480,
-        options: {
-            chart: {
-                width: 200
-            },
-            legend: {
-                show: false,
-            }
-        }
-    }],
-   
-}
-
-var chart = new ApexCharts(
-    document.querySelector("#chart-pie"),
-    options
-);
-
 chart.render();
 
 
