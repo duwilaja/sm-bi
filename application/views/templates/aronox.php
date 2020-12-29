@@ -134,7 +134,7 @@ if(count($farr)>0&&$session['nrp']!=''){
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="#">Cybercop</a></li>
 										<li aria-haspopup="true"><a href="#">ERI</a></li>
-										<li aria-haspopup="true"><a href="#">SDC</a></li>
+										<li aria-haspopup="true"><a href="<?=site_url('data/sdc')?>">SDC</a></li>
 										<li aria-haspopup="true"><a href="#">SSC</a></li>
 										<li aria-haspopup="true"><a href="#">TMC</a></li>
 										<li aria-haspopup="true"><a href="#">INTAN</a></li>
@@ -258,9 +258,14 @@ if(count($farr)>0&&$session['nrp']!=''){
     <script src="<?php echo $base_url;?>my/vendor/chart.js/Chart.min.js"></script>
 	<script src="<?php echo $base_url;?>my/vendor/leaflet/leaflet.js"></script>
 
+	<script src="<?php echo $base_url;?>aronox/assets/js/apexcharts.js"></script>
+
 	<?php if(@$js_local){ ?>
 		<script src="<?= base_url('my/js_local/'.$js_local);?>"></script>
 	<?php } ?>
+
+	<script src="https://unpkg.com/@google/markerclustererplus@5.1.0/dist/markerclustererplus.min.js"></script>
+	<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUFXBbjbdO3QWCZHn_HLR4DbTO878fT6E&callback=initMap"></script>
     
 	<!-- global vars -->
 	<script>
