@@ -38,7 +38,7 @@ $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +79,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language']	= 'indonesia';
 
 /*
 |--------------------------------------------------------------------------
@@ -327,7 +327,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = md5('nxbasu019jh10jsad');
 
 /*
 |--------------------------------------------------------------------------
