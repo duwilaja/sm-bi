@@ -12,27 +12,32 @@ var options = {
         width:2
     },
     series: [{
-        name: 'Mengantuk',
-        type: 'line',
+        name: 'Mobil PNP',
+        type: 'bar',
         // data: [ 25,29,27,26,27, 24,26,28, 27,29,28, 29,27, 25, 26,24, 20,]
-        data: [100,50,100,50]
+        data: [80,50,100,50,12]
     }, 
     {
-        name: 'Mabuk',
-        type: 'line',
+        name: 'Bus',
+        type: 'bar',
         // data: [ 35,39,37,36,37, 34,36,38, 37,39,38, 39,37, 35, 36,34, 30,]
-        data: [50,25,50,25]
+        data: [50,25,50,25,87]
     }, 
     {
-        name: 'Terserempet',
-        type: 'line',
+        name: 'Mobil Barang',
+        type: 'bar',
         // data: [37, 35, 36,34,32,39, 38,40, 43, 46,45, 49,50, 52,53,52, 55]
-        data: [20,15,20,15]
+        data: [20,15,20,15,15]
     },
     {
-        name: 'Balap Liar',
-        type: 'line',
-        data: [30,10,30,10]
+        name: 'Sepeda Motor',
+        type: 'bar',
+        data: [30,10,80,10,11]
+    },
+    {
+        name: 'Kendaraan Khusus',
+        type: 'bar',
+        data: [35,15,10,50,10]
     }],
      fill: {
      type:'solid',
@@ -42,7 +47,7 @@ var options = {
             show: true,
             borderColor: 'rgba(142, 156, 173,0.2)',
         },
-    colors: ['#fb1c52', '#ff8519','#fffb14','#44ff1f'],
+    colors:['#4a32d4','#f7592d','#f7be2d','#3abc1d','#f72d66'],
     xaxis: {
         // type: 'datetime',
         // categories: ['Dec 01', 'Dec 02','Dec 03','Dec 04','Dec 05','Dec 06','Dec 07','Dec 08','Dec 09 ','Dec 10','Dec 11','Dec 12','Dec 13','Dec 14','Dec 15 ','Dec 16','Dec 17'],
@@ -60,6 +65,46 @@ var options = {
     }
 }
 var chart = new ApexCharts(document.querySelector("#live-chart"), options);
+chart.render();
+
+
+var options = {
+    chart: {
+        width: 380,
+        height:230,
+        type: 'donut',
+    },
+    dataLabels: {
+        enabled: false
+    },
+    series: [50000, 20000, 10000, 10000, 10000],
+    colors:['#4a32d4','#f7592d','#f7be2d','#3abc1d','#f72d66'],
+    labels: [
+            "Mobil PNP",
+            "Bus",
+            "Mobil Penumpang",
+            "Sepeda Motor",
+            "Kendaraan Khusus"
+        ],
+    responsive: [{
+        breakpoint: 480,
+        options: {
+            chart: {
+                width: 200
+            },
+            legend: {
+                show: false,
+            }
+        }
+    }],
+   
+}
+
+var chart = new ApexCharts(
+    document.querySelector("#chart-pie"),
+    options
+);
+
 chart.render();
 
 
