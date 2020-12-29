@@ -34,23 +34,30 @@ var options = {
         type: 'line',
         data: [30,10,30,10]
     }],
-     fill: {
-     type:'solid',
-     opacity: [1, 1,1],
-  },
-    grid: {
-            show: true,
-            borderColor: 'rgba(142, 156, 173,0.2)',
+    plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: '55%',
+          endingShape: 'rounded'
         },
+    },
+    fill: {
+        type:'solid',
+        opacity: [1, 1,1],
+    },
+    grid: {
+        show: true,
+        borderColor: 'rgba(142, 156, 173,0.2)',
+    },
     colors: ['#fb1c52', '#ff8519','#fffb14','#44ff1f'],
     xaxis: {
         // type: 'datetime',
         // categories: ['Dec 01', 'Dec 02','Dec 03','Dec 04','Dec 05','Dec 06','Dec 07','Dec 08','Dec 09 ','Dec 10','Dec 11','Dec 12','Dec 13','Dec 14','Dec 15 ','Dec 16','Dec 17'],
         categories: ['31-11-2020','01-12-2020','02-12-2020','03-12-2020'],
         color: '#fff',
-         style: {
+        style: {
             colors: ['#000'],
-         },
+        },
         
     },
     tooltip: {
@@ -63,469 +70,469 @@ var chart = new ApexCharts(document.querySelector("#live-chart"), options);
 chart.render();
 
 
-	/* chartjs (#sales) */
-	var myCanvas = document.getElementById("sales");
-	
-	var myCanvasContext = myCanvas.getContext("2d");
-	var gradientStroke = myCanvasContext.createLinearGradient(0, 80, 0, 280);
-	var gradientStroke2 = myCanvasContext.createLinearGradient(0, 80, 0, 280);
-	var gradientStroke3 = myCanvasContext.createLinearGradient(0, 80, 0, 280);
-	
-	gradientStroke.addColorStop(0, 'rgb(251 28 82 / 58%)');
-	gradientStroke.addColorStop(1, 'rgb(251 28 82 / 87%)');
+/* chartjs (#sales) */
+var myCanvas = document.getElementById("sales");
 
-	gradientStroke2.addColorStop(0, 'rgba(74, 50, 212, 0.8)');
-	gradientStroke2.addColorStop(1, 'rgba(74, 50, 212, 0.09)');
+var myCanvasContext = myCanvas.getContext("2d");
+var gradientStroke = myCanvasContext.createLinearGradient(0, 80, 0, 280);
+var gradientStroke2 = myCanvasContext.createLinearGradient(0, 80, 0, 280);
+var gradientStroke3 = myCanvasContext.createLinearGradient(0, 80, 0, 280);
 
-	gradientStroke3.addColorStop(0, '#2393ff9e');
-	gradientStroke3.addColorStop(1, '#2393ff7d');
-	
-    var myChart = new Chart( myCanvas, {
-		type: 'line',
-		data: {
-            labels: ["Januari","Februari","Meret", "April","Mei", "Juni","Juli","Agustus","September","Oktober", "November", "Desember" ],
-            type: 'line',
-            datasets: [ {
-				label: 'Perpanjang SIM',
-				data: [0, 35, 24, 64, 93, 55, 39,60, 61, 54, 62, 63],
-				backgroundColor: gradientStroke,
-				borderColor: '#FFF',
-				pointBackgroundColor:'#fff',
-				pointHoverBackgroundColor:gradientStroke,
-				pointBorderColor :'#007adf',
-				pointHoverBorderColor :gradientStroke,
-				pointBorderWidth :0,
-				pointRadius :0,
-				pointHoverRadius :0,
-				lineTension: 0.2,
-				 borderWidth: 2,
-                    fill: 'origin'
-            },{
-				label: 'SIM Baru',
-				data: [90, 35, 24, 64, 43, 55, 39,60, 61, 54, 62, 63],
-				backgroundColor: gradientStroke2,
-				borderColor: '#FFF',
-				pointBackgroundColor:'#fff',
-				pointHoverBackgroundColor:gradientStroke2,
-				pointBorderColor :'#007adf',
-				pointHoverBorderColor :gradientStroke2,
-				pointBorderWidth :0,
-				pointRadius :0,
-				pointHoverRadius :0,
-				lineTension: 0.2,
-				 borderWidth: 2,
-                    fill: 'origin'
-            },{
-				label: 'DPS',
-				data: [30, 25, 20, 14, 33, 85, 79,90, 61, 54, 62, 63],
-				backgroundColor: gradientStroke3,
-				borderColor: '#FFF',
-				pointBackgroundColor:'#fff',
-				pointHoverBackgroundColor:gradientStroke3,
-				pointBorderColor :'#007adf',
-				pointHoverBorderColor :gradientStroke3,
-				pointBorderWidth :0,
-				pointRadius :0,
-				pointHoverRadius :0,
-				lineTension: 0.2,
-				 borderWidth: 2,
-                    fill: 'origin'
-            }, ]
+gradientStroke.addColorStop(0, 'rgb(251 28 82 / 58%)');
+gradientStroke.addColorStop(1, 'rgb(251 28 82 / 87%)');
+
+gradientStroke2.addColorStop(0, 'rgba(74, 50, 212, 0.8)');
+gradientStroke2.addColorStop(1, 'rgba(74, 50, 212, 0.09)');
+
+gradientStroke3.addColorStop(0, '#2393ff9e');
+gradientStroke3.addColorStop(1, '#2393ff7d');
+
+var myChart = new Chart( myCanvas, {
+    type: 'line',
+    data: {
+        labels: ["Januari","Februari","Meret", "April","Mei", "Juni","Juli","Agustus","September","Oktober", "November", "Desember" ],
+        type: 'line',
+        datasets: [ {
+            label: 'Perpanjang SIM',
+            data: [0, 35, 24, 64, 93, 55, 39,60, 61, 54, 62, 63],
+            backgroundColor: gradientStroke,
+            borderColor: '#FFF',
+            pointBackgroundColor:'#fff',
+            pointHoverBackgroundColor:gradientStroke,
+            pointBorderColor :'#007adf',
+            pointHoverBorderColor :gradientStroke,
+            pointBorderWidth :0,
+            pointRadius :0,
+            pointHoverRadius :0,
+            lineTension: 0.2,
+            borderWidth: 2,
+            fill: 'origin'
+        },{
+            label: 'SIM Baru',
+            data: [90, 35, 24, 64, 43, 55, 39,60, 61, 54, 62, 63],
+            backgroundColor: gradientStroke2,
+            borderColor: '#FFF',
+            pointBackgroundColor:'#fff',
+            pointHoverBackgroundColor:gradientStroke2,
+            pointBorderColor :'#007adf',
+            pointHoverBorderColor :gradientStroke2,
+            pointBorderWidth :0,
+            pointRadius :0,
+            pointHoverRadius :0,
+            lineTension: 0.2,
+            borderWidth: 2,
+            fill: 'origin'
+        },{
+            label: 'DPS',
+            data: [30, 25, 20, 14, 33, 85, 79,90, 61, 54, 62, 63],
+            backgroundColor: gradientStroke3,
+            borderColor: '#FFF',
+            pointBackgroundColor:'#fff',
+            pointHoverBackgroundColor:gradientStroke3,
+            pointBorderColor :'#007adf',
+            pointHoverBorderColor :gradientStroke3,
+            pointBorderWidth :0,
+            pointRadius :0,
+            pointHoverRadius :0,
+            lineTension: 0.2,
+            borderWidth: 2,
+            fill: 'origin'
+        }, ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        tooltips: {
+            mode: 'index',
+            titleFontSize: 12,
+            titleFontColor: '#000',
+            bodyFontColor: '#000',
+            backgroundColor: '#fff',
+            cornerRadius: 3,
+            intersect: false,
         },
-		options: {
-			responsive: true,
-			maintainAspectRatio: false,
-			tooltips: {
-				mode: 'index',
-				titleFontSize: 12,
-				titleFontColor: '#000',
-				bodyFontColor: '#000',
-				backgroundColor: '#fff',
-				cornerRadius: 3,
-				intersect: false,
-			},
-			 stepsize: 200,
-                min: 0,
-                max: 400,
-			legend: {
-				display: false,
-				labels: {
-					usePointStyle: false,
-				},
-			},
-			scales: {
-				xAxes: [{
-					
-					display: true,
-					gridLines: {
-						display: false,
-						drawBorder: false
-					},
-					ticks: {
-                            fontColor: '#b0bac9',
-                            autoSkip: true,
-                            maxTicksLimit: 9,
-                            maxRotation: 0,
-                            labelOffset: 10
-                        },
-					scaleLabel: {
-						display: false,
-						labelString: 'Month',
-						fontColor: 'transparent'
-					}
-				}],
-				yAxes: [{
-					ticks: {
-						fontColor: "#b0bac9",
-					 },
-					display: true,
-					gridLines: {
-						display: false,
-						drawBorder: false
-					},
-					scaleLabel: {
-						display: false,
-						labelString: 'sales',
-						fontColor: 'transparent'
-					}
-				}]
-			},
-			title: {
-				display: false,
-				text: 'Normal Legend'
-			}
-		}
-	});
-	/* chartjs (#sales) closed */
+        stepsize: 200,
+        min: 0,
+        max: 400,
+        legend: {
+            display: false,
+            labels: {
+                usePointStyle: false,
+            },
+        },
+        scales: {
+            xAxes: [{
+                
+                display: true,
+                gridLines: {
+                    display: false,
+                    drawBorder: false
+                },
+                ticks: {
+                    fontColor: '#b0bac9',
+                    autoSkip: true,
+                    maxTicksLimit: 9,
+                    maxRotation: 0,
+                    labelOffset: 10
+                },
+                scaleLabel: {
+                    display: false,
+                    labelString: 'Month',
+                    fontColor: 'transparent'
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    fontColor: "#b0bac9",
+                },
+                display: true,
+                gridLines: {
+                    display: false,
+                    drawBorder: false
+                },
+                scaleLabel: {
+                    display: false,
+                    labelString: 'sales',
+                    fontColor: 'transparent'
+                }
+            }]
+        },
+        title: {
+            display: false,
+            text: 'Normal Legend'
+        }
+    }
+});
+/* chartjs (#sales) closed */
 
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 10,
         center: {lat: -6.941041, lng: 107.517584},
         styles:[
-        {
-            "elementType": "geometry",
-            "stylers": [
             {
-                "color": "#f5f5f5"
-            }
-            ]
-        },
-        {
-            "elementType": "labels.icon",
-            "stylers": [
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#f5f5f5"
+                    }
+                ]
+            },
             {
-                "visibility": "off"
-            }
-            ]
-        },
-        {
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
             {
-                "color": "#616161"
-            }
-            ]
-        },
-        {
-            "elementType": "labels.text.stroke",
-            "stylers": [
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#616161"
+                    }
+                ]
+            },
             {
-                "color": "#f5f5f5"
-            }
-            ]
-        },
-        {
-            "featureType": "administrative.land_parcel",
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "elementType": "labels.text.stroke",
+                "stylers": [
+                    {
+                        "color": "#f5f5f5"
+                    }
+                ]
+            },
             {
-                "color": "#bdbdbd"
-            }
-            ]
-        },
-        {
-            "featureType": "poi",
-            "elementType": "geometry",
-            "stylers": [
+                "featureType": "administrative.land_parcel",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#bdbdbd"
+                    }
+                ]
+            },
             {
-                "color": "#eeeeee"
-            }
-            ]
-        },
-        {
-            "featureType": "poi",
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "featureType": "poi",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#eeeeee"
+                    }
+                ]
+            },
             {
-                "color": "#757575"
-            }
-            ]
-        },
-        {
-            "featureType": "poi.park",
-            "elementType": "geometry",
-            "stylers": [
+                "featureType": "poi",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#757575"
+                    }
+                ]
+            },
             {
-                "color": "#e5e5e5"
-            }
-            ]
-        },
-        {
-            "featureType": "poi.park",
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "featureType": "poi.park",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#e5e5e5"
+                    }
+                ]
+            },
             {
-                "color": "#9e9e9e"
-            }
-            ]
-        },
-        {
-            "featureType": "road",
-            "elementType": "geometry",
-            "stylers": [
+                "featureType": "poi.park",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#9e9e9e"
+                    }
+                ]
+            },
             {
-                "color": "#ffffff"
-            }
-            ]
-        },
-        {
-            "featureType": "road.arterial",
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "featureType": "road",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#ffffff"
+                    }
+                ]
+            },
             {
-                "color": "#757575"
-            }
-            ]
-        },
-        {
-            "featureType": "road.highway",
-            "elementType": "geometry",
-            "stylers": [
+                "featureType": "road.arterial",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#757575"
+                    }
+                ]
+            },
             {
-                "color": "#dadada"
-            }
-            ]
-        },
-        {
-            "featureType": "road.highway",
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "featureType": "road.highway",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#dadada"
+                    }
+                ]
+            },
             {
-                "color": "#616161"
-            }
-            ]
-        },
-        {
-            "featureType": "road.local",
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "featureType": "road.highway",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#616161"
+                    }
+                ]
+            },
             {
-                "color": "#9e9e9e"
-            }
-            ]
-        },
-        {
-            "featureType": "transit.line",
-            "elementType": "geometry",
-            "stylers": [
+                "featureType": "road.local",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#9e9e9e"
+                    }
+                ]
+            },
             {
-                "color": "#e5e5e5"
-            }
-            ]
-        },
-        {
-            "featureType": "transit.station",
-            "elementType": "geometry",
-            "stylers": [
+                "featureType": "transit.line",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#e5e5e5"
+                    }
+                ]
+            },
             {
-                "color": "#eeeeee"
-            }
-            ]
-        },
-        {
-            "featureType": "water",
-            "elementType": "geometry",
-            "stylers": [
+                "featureType": "transit.station",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#eeeeee"
+                    }
+                ]
+            },
             {
-                "color": "#c9c9c9"
-            }
-            ]
-        },
-        {
-            "featureType": "water",
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#c9c9c9"
+                    }
+                ]
+            },
             {
-                "color": "#9e9e9e"
+                "featureType": "water",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#9e9e9e"
+                    }
+                ]
             }
-            ]
-        }
         ]
     });
-
+    
     var map2 = new google.maps.Map(document.getElementById('map2'), {
         zoom: 10,
         center: {lat: -6.941041, lng: 107.517584},
         styles:[
-        {
-            "elementType": "geometry",
-            "stylers": [
             {
-                "color": "#f5f5f5"
-            }
-            ]
-        },
-        {
-            "elementType": "labels.icon",
-            "stylers": [
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#f5f5f5"
+                    }
+                ]
+            },
             {
-                "visibility": "off"
-            }
-            ]
-        },
-        {
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
             {
-                "color": "#616161"
-            }
-            ]
-        },
-        {
-            "elementType": "labels.text.stroke",
-            "stylers": [
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#616161"
+                    }
+                ]
+            },
             {
-                "color": "#f5f5f5"
-            }
-            ]
-        },
-        {
-            "featureType": "administrative.land_parcel",
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "elementType": "labels.text.stroke",
+                "stylers": [
+                    {
+                        "color": "#f5f5f5"
+                    }
+                ]
+            },
             {
-                "color": "#bdbdbd"
-            }
-            ]
-        },
-        {
-            "featureType": "poi",
-            "elementType": "geometry",
-            "stylers": [
+                "featureType": "administrative.land_parcel",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#bdbdbd"
+                    }
+                ]
+            },
             {
-                "color": "#eeeeee"
-            }
-            ]
-        },
-        {
-            "featureType": "poi",
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "featureType": "poi",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#eeeeee"
+                    }
+                ]
+            },
             {
-                "color": "#757575"
-            }
-            ]
-        },
-        {
-            "featureType": "poi.park",
-            "elementType": "geometry",
-            "stylers": [
+                "featureType": "poi",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#757575"
+                    }
+                ]
+            },
             {
-                "color": "#e5e5e5"
-            }
-            ]
-        },
-        {
-            "featureType": "poi.park",
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "featureType": "poi.park",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#e5e5e5"
+                    }
+                ]
+            },
             {
-                "color": "#9e9e9e"
-            }
-            ]
-        },
-        {
-            "featureType": "road",
-            "elementType": "geometry",
-            "stylers": [
+                "featureType": "poi.park",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#9e9e9e"
+                    }
+                ]
+            },
             {
-                "color": "#ffffff"
-            }
-            ]
-        },
-        {
-            "featureType": "road.arterial",
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "featureType": "road",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#ffffff"
+                    }
+                ]
+            },
             {
-                "color": "#757575"
-            }
-            ]
-        },
-        {
-            "featureType": "road.highway",
-            "elementType": "geometry",
-            "stylers": [
+                "featureType": "road.arterial",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#757575"
+                    }
+                ]
+            },
             {
-                "color": "#dadada"
-            }
-            ]
-        },
-        {
-            "featureType": "road.highway",
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "featureType": "road.highway",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#dadada"
+                    }
+                ]
+            },
             {
-                "color": "#616161"
-            }
-            ]
-        },
-        {
-            "featureType": "road.local",
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "featureType": "road.highway",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#616161"
+                    }
+                ]
+            },
             {
-                "color": "#9e9e9e"
-            }
-            ]
-        },
-        {
-            "featureType": "transit.line",
-            "elementType": "geometry",
-            "stylers": [
+                "featureType": "road.local",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#9e9e9e"
+                    }
+                ]
+            },
             {
-                "color": "#e5e5e5"
-            }
-            ]
-        },
-        {
-            "featureType": "transit.station",
-            "elementType": "geometry",
-            "stylers": [
+                "featureType": "transit.line",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#e5e5e5"
+                    }
+                ]
+            },
             {
-                "color": "#eeeeee"
-            }
-            ]
-        },
-        {
-            "featureType": "water",
-            "elementType": "geometry",
-            "stylers": [
+                "featureType": "transit.station",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#eeeeee"
+                    }
+                ]
+            },
             {
-                "color": "#c9c9c9"
-            }
-            ]
-        },
-        {
-            "featureType": "water",
-            "elementType": "labels.text.fill",
-            "stylers": [
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#c9c9c9"
+                    }
+                ]
+            },
             {
-                "color": "#9e9e9e"
+                "featureType": "water",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#9e9e9e"
+                    }
+                ]
             }
-            ]
-        }
         ]
     });
     
@@ -542,7 +549,7 @@ function initMap() {
             label: labels[i % labels.length]
         });
     });
-
+    
     var markers2 = locations2.map(function(location, i) {
         return new google.maps.Marker({
             position: location,
@@ -552,26 +559,26 @@ function initMap() {
     
     // Add a marker clusterer to manage the markers.
     var markerCluster = new MarkerClusterer(map, markers,
-    {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
-    // Add a marker clusterer to manage the markers.
-    var markerCluster2 = new MarkerClusterer(map2, markers2,
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-}
-var locations = [
-    {lat: -7.034920, lng: 107.526471},
-    {lat: -7.028424, lng: 107.521091},
-    {lat: -6.983111, lng: 107.436284},
-    {lat: -6.885647, lng: 107.537207},
-    {lat: -6.892210, lng: 107.536977},
-    {lat: -6.960185, lng: 107.376799},
-];
-
-var locations2 = [
-    {lat: -7.034920, lng: 107.526471},
-    {lat: -7.028424, lng: 107.521091},
-    {lat: -6.983111, lng: 107.436284},
-    {lat: -6.885647, lng: 107.537207},
-    {lat: -6.892210, lng: 107.536977},
-    {lat: -6.960185, lng: 107.376799},
-];
+        
+        // Add a marker clusterer to manage the markers.
+        var markerCluster2 = new MarkerClusterer(map2, markers2,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        }
+        var locations = [
+            {lat: -7.034920, lng: 107.526471},
+            {lat: -7.028424, lng: 107.521091},
+            {lat: -6.983111, lng: 107.436284},
+            {lat: -6.885647, lng: 107.537207},
+            {lat: -6.892210, lng: 107.536977},
+            {lat: -6.960185, lng: 107.376799},
+        ];
+        
+        var locations2 = [
+            {lat: -7.034920, lng: 107.526471},
+            {lat: -7.028424, lng: 107.521091},
+            {lat: -6.983111, lng: 107.436284},
+            {lat: -6.885647, lng: 107.537207},
+            {lat: -6.892210, lng: 107.536977},
+            {lat: -6.960185, lng: 107.376799},
+        ];

@@ -1,4 +1,14 @@
 /*--details-chart open--*/
+var no = 1;
+
+$(document).ready(function () {
+    donat_eri();
+    bar_eri();    
+    donat_eri_tabel();
+    tabel_eri_bulan();
+    dt_tabel_eri();
+});
+
 var options = {
     chart: {
         height: 320,
@@ -11,64 +21,51 @@ var options = {
         curve: 'straight',
         width:2
     },
-    series: [{
-        name: 'Mobil PNP',
-        type: 'bar',
-        // data: [ 25,29,27,26,27, 24,26,28, 27,29,28, 29,27, 25, 26,24, 20,]
-        data: [80,50,100,50,12]
-    }, 
-    {
-        name: 'Bus',
-        type: 'bar',
-        // data: [ 35,39,37,36,37, 34,36,38, 37,39,38, 39,37, 35, 36,34, 30,]
-        data: [50,25,50,25,87]
-    }, 
-    {
-        name: 'Mobil Barang',
-        type: 'bar',
-        // data: [37, 35, 36,34,32,39, 38,40, 43, 46,45, 49,50, 52,53,52, 55]
-        data: [20,15,20,15,15]
-    },
-    {
-        name: 'Sepeda Motor',
-        type: 'bar',
-        data: [30,10,80,10,11]
-    },
-    {
-        name: 'Kendaraan Khusus',
-        type: 'bar',
-        data: [35,15,10,50,10]
-    }],
+    series: [],
      fill: {
      type:'solid',
      opacity: [1, 1,1],
   },
-    grid: {
-            show: true,
-            borderColor: 'rgba(142, 156, 173,0.2)',
-        },
-    colors:['#4a32d4','#f7592d','#f7be2d','#3abc1d','#f72d66'],
-    xaxis: {
-        // type: 'datetime',
-        // categories: ['Dec 01', 'Dec 02','Dec 03','Dec 04','Dec 05','Dec 06','Dec 07','Dec 08','Dec 09 ','Dec 10','Dec 11','Dec 12','Dec 13','Dec 14','Dec 15 ','Dec 16','Dec 17'],
-        categories: ['31-11-2020','01-12-2020','02-12-2020','03-12-2020'],
-        color: '#fff',
-         style: {
-            colors: ['#000'],
-         },
-        
-    },
-    tooltip: {
-        x: {
-            format: 'dd-mm-yyyy'
-        },
+//   plotOptions: {
+//     bar: {
+//       horizontal: false,
+//       columnWidth: '50%',
+//       endingShape: 'rounded'
+//     },
+//   },
+  grid: {
+    yaxis: {
+      lines: {
+        show: false,
+        offsetX: 0,
+        offsetY: 0
+      }
     }
+  },
+  colors:['#4a32d4','#f7592d','#f7be2d','#3abc1d','#f72d66'],
+  xaxis: {
+      // type: 'datetime',
+      // categories: ['Dec 01', 'Dec 02','Dec 03','Dec 04','Dec 05','Dec 06','Dec 07','Dec 08','Dec 09 ','Dec 10','Dec 11','Dec 12','Dec 13','Dec 14','Dec 15 ','Dec 16','Dec 17'],
+      categories: ['31-11-2020'],
+      color: '#fff',
+       style: {
+          colors: ['#000'],
+       },
+  },
+//   yaxis : {
+//     max : 6
+//   },
+  tooltip: {
+      x: {
+          format: 'dd-mm-yyyy'
+      },
+  }
 }
-var chart = new ApexCharts(document.querySelector("#live-chart"), options);
-chart.render();
+var chart_bar = new ApexCharts(document.querySelector("#live-chart"), options);
+chart_bar.render();
 
 
-var options = {
+var options_pie = {
     chart: {
         width: 380,
         height:230,
@@ -77,7 +74,7 @@ var options = {
     dataLabels: {
         enabled: false
     },
-    series: [50000, 20000, 10000, 10000, 10000],
+    series: [0,0,0,0,0],
     colors:['#4a32d4','#f7592d','#f7be2d','#3abc1d','#f72d66'],
     labels: [
             "Mobil PNP",
@@ -93,19 +90,18 @@ var options = {
                 width: 200
             },
             legend: {
-                show: false,
+                show: true,
             }
         }
     }],
-   
 }
 
-var chart = new ApexCharts(
+var chart_donat = new ApexCharts(
     document.querySelector("#chart-pie"),
-    options
+    options_pie
 );
 
-chart.render();
+chart_donat.render();
 
 
 	/* chartjs (#sales) */
@@ -620,3 +616,123 @@ var locations2 = [
     {lat: -6.892210, lng: 107.536977},
     {lat: -6.960185, lng: 107.376799},
 ];
+
+
+
+function bar_eri() { 
+    $.getJSON("../Grafik_api/bar_eri", function(response) {
+        chart_bar.updateSeries(response.data);
+        chart_bar.updateOptions({xaxis: {
+            categories: response.date
+          }});
+    });
+}
+
+function donat_eri() { 
+    $.getJSON("../Grafik_api/donat_eri", function(response) {
+        chart_donat.updateSeries(response.data);
+    });
+}
+
+function donat_eri_tabel() {
+    $('#donat_eri_tabel').html('');
+    $.getJSON("../Grafik_api/donat_eri_tabel", function(r) {
+       r.data.forEach(v => {
+        $('#donat_eri_tabel').append(`<tr class="border-bottom">
+        <td class="p-2"><div class="w-3 h-3 ${v.warna} mr-2 mt-1 brround"></div></td>
+        <td class="p-2">${v.nama}</td>
+        <td class="p-2">${v.value}</td>
+        <td class="p-2">${v.persen}%</td>
+        </tr>`);
+       });
+       $('#total_donat').text(r.total);
+       persen_nt(r.persen_nt)+' last month';
+    });
+}
+
+function persen_nt(r,id='#persen_nt') { 
+    var persen_nt = '<span class="text-success mr-1"><i class="fe fe-arrow-up ml-1"></i>'+r[0]+'%</span>';
+    
+    if (r[1] == 'turun') {
+     persen_nt = '<span class="text-danger mr-1"><i class="fe fe-arrow-down ml-1"></i>'+r[0]+'%</span>';
+    }
+
+    $(id).html(persen_nt);
+ }
+
+function tabel_eri_bulan() {
+    $('#tabel_eri_bulan').html('');
+    $.getJSON("../Grafik_api/tabel_eri_bulan", function(r) {
+       r.data.forEach(v => {
+        var n = no++;
+        $('#tabel_eri_bulan').append(`<tr class="border-bottom">
+        <td class="p-2"><div class="w-3 h-3 mr-2 mt-1 brround">${v.nama}</div></td>
+        <td class="p-2">${v.bulan_ini}</td>
+        <td class="p-2">${v.bulan_lalu}</td>
+        <td class="p-2" id="persen_nt${n}"></td>
+        </tr>`);
+
+        setTimeout(() => {
+            persen_nt(v.persen,"#persen_nt"+n);
+            console.log("#persen_nt"+n);
+        }, 200);
+       });
+
+       $('#tabel_eri_bulan').append(`<tr class="border-bottom" style="background:#fafafa";>
+        <td class="p-2">Total</td>
+        <td class="p-2">${r.total_bln_ini}</td>
+        <td class="p-2">${r.total_bln_lalu}</td>
+        <td class="p-2" id="persen_nt_total"></td>
+        </tr>`);
+
+        persen_nt(r.persen,"#persen_nt_total");
+    });
+    
+}
+
+function dt_tabel_eri() {
+    $('#tabel_eri').DataTable({
+        // Processing indicator
+        "bAutoWidth": false,
+        "destroy": true,
+        "autoWidth": true,
+        "searching": true,
+        "processing": true,
+        // DataTables server-side processing mode
+        "serverSide": true,
+        "scrollX": true,
+        // Initial no order.
+        "order": [],
+        // Load data from an Ajax source
+        "ajax": {
+            "url": '../Grafik_api/dt_eri_polda',
+            "type": "POST",
+            "data" : {
+                'a' : null,
+                'tgl' : null,
+                 'length' : 50,
+            }
+        },
+        // "paging":   false,
+        //Set column definition initialisation properties
+        "columnDefs": [{
+            "targets": [6],
+            "orderable": false
+        }]
+    });
+
+    setTimeout(() => {
+        jml_data_eri();
+    }, 1000);
+}
+
+function jml_data_eri() {
+    $.getJSON("../Grafik_api/jml_data_eri", function(r) {
+        $('#t_pnp').text(r[0]);
+        $('#t_bus').text(r[1]);
+        $('#t_brg').text(r[2]);
+        $('#t_motor').text(r[3]);
+        $('#t_khusus').text(r[4]);
+        $('#t_total').text(r[5]);
+    });
+}

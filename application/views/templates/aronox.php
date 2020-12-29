@@ -43,6 +43,8 @@ if(count($farr)>0&&$session['nrp']!=''){
 		<!-- Select2 css -->
 		<link href="<?php echo $base_url;?>aronox/assets/plugins/select2/select2.min.css" rel="stylesheet" />
 
+		<link href="<?php echo $base_url;?>aronox/assets/css/apexcharts.css" rel="stylesheet" />
+
 		<!-- Skin css-->
 		<link id="theme" rel="stylesheet" type="text/css" media="all" href="<?php echo $base_url;?>aronox/assets/skins/hor-skin/hor-skin1.css" />
 		
@@ -238,9 +240,6 @@ if(count($farr)>0&&$session['nrp']!=''){
 		
 		<!--Select2 js -->
 		<script src="<?php echo $base_url;?>aronox/assets/plugins/select2/select2.full.min.js"></script>
-
-		<script src="<?php echo $base_url;?>aronox/assets/js/apexcharts.js"></script>
-
 					
 	<script src="<?php echo $base_url;?>my/vendor/bootstrap/js/moment.min.js"></script>
     <script src="<?php echo $base_url;?>my/vendor/bootstrap/js/bootstrap-select.min.js"></script>
