@@ -239,8 +239,6 @@ if(count($farr)>0&&$session['nrp']!=''){
 		<!--Select2 js -->
 		<script src="<?php echo $base_url;?>aronox/assets/plugins/select2/select2.full.min.js"></script>
 
-		<script src="<?php echo $base_url;?>aronox/assets/js/apexcharts.js"></script>
-
 					
 	<script src="<?php echo $base_url;?>my/vendor/bootstrap/js/moment.min.js"></script>
     <script src="<?php echo $base_url;?>my/vendor/bootstrap/js/bootstrap-select.min.js"></script>

@@ -21,5 +21,18 @@ class Home extends CI_Controller {
 			$this->load->view('login',$data);
 		}
 	}
+		public function dash_eri()
+	{
+		$user=$this->session->userdata('user_data');
+		if(isset($user)){
+			$data['js_local'] = 'chart/eri.js';
+			$data['session'] = $user;
+			$this->template->load("dash_eri",$data);
+		}else{
+			$retval=array("403","Failed","Please login","error");
+			$data['retval']=$retval;
+			$this->load->view('login',$data);
+		}
+	}
 	
 }
