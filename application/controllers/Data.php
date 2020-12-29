@@ -15,7 +15,9 @@ class Data extends CI_Controller {
         $data['js_local'] = 'data/cybercop/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
-			$this->template->load("data/cybercop/dashboard",$data);
+			// $this->template->load("data/cybercop/dashboard",$data);
+			// 404 page 
+			$this->load->view("error/404",$data);
 		}else{
 			$retval=array("403","Failed","Please login","error");
 			$data['retval']= $retval;
@@ -54,7 +56,10 @@ class Data extends CI_Controller {
         $data['js_local'] = 'data/ssc/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
-			$this->template->load("data/ssc/dashboard",$data);
+			// $this->template->load("data/ssc/dashboard",$data);
+
+			// 404 page 
+			$this->load->view("error/404",$data);
 		}else{
 			$retval=array("403","Failed","Please login","error");
 			$data['retval']= $retval;
@@ -67,7 +72,10 @@ class Data extends CI_Controller {
         $data['js_local'] = 'data/tmc/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
-			$this->template->load("data/tmc/dashboard",$data);
+			// $this->template->load("data/tmc/dashboard",$data);
+
+			// 404 page 
+			// $this->load->view("error/404",$data);
 		}else{
 			$retval=array("403","Failed","Please login","error");
 			$data['retval']= $retval;
@@ -80,7 +88,10 @@ class Data extends CI_Controller {
         $data['js_local'] = 'data/intan/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
-			$this->template->load("data/intan/dashboard",$data);
+			// $this->template->load("data/intan/dashboard",$data);
+
+			// 404 page 
+			$this->load->view("error/404",$data);
 		}else{
 			$retval=array("403","Failed","Please login","error");
 			$data['retval']= $retval;
@@ -93,7 +104,10 @@ class Data extends CI_Controller {
         $data['js_local'] = 'data/ais/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
-			$this->template->load("data/ais/dashboard",$data);
+			// $this->template->load("data/ais/dashboard",$data);
+
+			// 404 page 
+			$this->load->view("error/404",$data);
 		}else{
 			$retval=array("403","Failed","Please login","error");
 			$data['retval']= $retval;
@@ -106,7 +120,10 @@ class Data extends CI_Controller {
         $data['js_local'] = 'data/taa/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
-			$this->template->load("data/taa/dashboard",$data);
+			// $this->template->load("data/taa/dashboard",$data);
+
+			// 404 page 
+			$this->load->view("error/404",$data);
 		}else{
 			$retval=array("403","Failed","Please login","error");
 			$data['retval']= $retval;
@@ -119,7 +136,10 @@ class Data extends CI_Controller {
         $data['js_local'] = 'data/tarc/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
-			$this->template->load("data/tarc/dashboard",$data);
+			// $this->template->load("data/tarc/dashboard",$data);
+
+			// 404 page 
+			$this->load->view("error/404",$data);
 		}else{
 			$retval=array("403","Failed","Please login","error");
 			$data['retval']= $retval;
