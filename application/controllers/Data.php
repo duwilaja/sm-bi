@@ -72,7 +72,7 @@ class Data extends CI_Controller {
         $data['js_local'] = 'data/tmc/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
-			// $this->template->load("data/tmc/dashboard",$data);
+			$this->template->load("data/tmc/dashboard",$data);
 
 			// 404 page 
 			// $this->load->view("error/404",$data);
