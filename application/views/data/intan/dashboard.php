@@ -77,11 +77,6 @@
                     <a href="#"><button class="btn btn-default btn-sm ml-2">Detail</button></a>
 				</div> -->
 				<div class="card-options">
-                        <form >
-                            <div class="input-group">
-                                <input type="date">
-                            </div>
-                        </form>
 				</div>
 			</div>
 			<div class="card-body p-0">
