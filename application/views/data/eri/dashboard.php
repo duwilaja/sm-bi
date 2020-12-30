@@ -108,17 +108,6 @@
 												</thead>
 												<tbody>
 												</tbody>
-												<tfoot>
-													<tr>
-														<td>Total</td>
-														<td id="t_pnp">0</td>
-														<td id="t_bus">0</td>
-														<td id="t_brg">0</td>
-														<td id="t_motor">0</td>
-														<td id="t_khusus">0</td>
-														<td id="t_total">0</td>
-													</tr>
-												</tfoot>
 											</table>
 											<!-- <div class="tombol_detail">
 												<a href="#"><button class="btn btn-default w-100 mt-3">Selengkapnya</button></a>
