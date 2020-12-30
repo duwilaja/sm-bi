@@ -7,7 +7,32 @@ $(document).ready(function () {
     donat_eri_tabel();
     tabel_eri_bulan();
     dt_tabel_eri();
+    slide();
 });
+
+function slide() {
+    $('.owl-carousel').owlCarousel({
+        margin:10,
+        autoplayTimeout:3000,
+        autoplayHoverPause:true,
+        rewind:true,
+        nav:false,
+        autoplay:true,
+        pagination: false,
+        dots: false,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:5
+            }
+        }
+    })
+}
 
 var options = {
     chart: {

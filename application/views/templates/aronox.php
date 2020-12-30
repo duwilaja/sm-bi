@@ -66,6 +66,10 @@ if(count($farr)>0&&$session['nrp']!=''){
 		<!-- overwrite css -->
 		<link href="<?php echo $base_url;?>my/css/custom.css" rel="stylesheet" />
 
+		<!-- Owl -->
+		<link rel="stylesheet" href="<?=base_url('my/vendor/owl/')?>owl.carousel.min.css">
+		<link rel="stylesheet" href="<?=base_url('my/vendor/owl/')?>owl.theme.default.min.css">
+
 	</head>
 
 	<body class="app"><!-- Start Switcher -->
@@ -263,6 +267,9 @@ if(count($farr)>0&&$session['nrp']!=''){
 		<script src="<?= base_url('my/js_local/'.$js_local);?>"></script>
 	<?php } ?>
 
+	<!-- Owl  -->
+	<script src="<?= base_url('my/vendor/owl/owl.carousel.min.js')?>"></script>
+	
 	<script src="https://unpkg.com/@google/markerclustererplus@5.1.0/dist/markerclustererplus.min.js"></script>
 	<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUFXBbjbdO3QWCZHn_HLR4DbTO878fT6E&callback=initMap"></script>
     
