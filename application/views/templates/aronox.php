@@ -132,14 +132,14 @@ if(count($farr)>0&&$session['nrp']!=''){
 							<ul class="horizontalMenu-list">
 								<li aria-haspopup="true"><a href="<?php echo $base_url?>home" class=""><i class="fa fa-at"></i> Home</a>
 								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-map-o"></i> Laporan <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<!-- <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-map-o"></i> Laporan <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="#">Standard</a></li>
 										<li aria-haspopup="true"><a href="#">Bulanan</a></li>
 										<li aria-haspopup="true"><a href="#">Periodic</a></li>
 										<li aria-haspopup="true"><a href="#">Tabulasi Silang</a></li>
 									</ul>
-								</li>
+								</li> -->
 								 <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-file-text"></i> Data <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<!-- <li aria-haspopup="true"><a href="<?=site_url('data/cybercop')?>">Cybercop</a></li> -->
