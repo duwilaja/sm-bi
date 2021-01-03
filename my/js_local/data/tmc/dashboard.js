@@ -67,7 +67,7 @@ var options = {
       }
     }
   },
-  colors:['#4a32d4','#f7592d','#f7be2d','#3abc1d','#f72d66'],
+  colors:['#4a32d4','#f7592d','#f7be2d','#3abc1d'],
   xaxis: {
       // type: 'datetime',
       // categories: ['Dec 01', 'Dec 02','Dec 03','Dec 04','Dec 05','Dec 06','Dec 07','Dec 08','Dec 09 ','Dec 10','Dec 11','Dec 12','Dec 13','Dec 14','Dec 15 ','Dec 16','Dec 17'],
@@ -86,8 +86,10 @@ var options = {
       },
   }
 }
-var chart_bar = new ApexCharts(document.querySelector("#live-chart"), options);
-chart_bar.render();
+var chart_bar_dasar_giat = new ApexCharts(document.querySelector("#dasar-giat"), options);
+var chart_bar_status = new ApexCharts(document.querySelector("#status"), options);
+chart_bar_dasar_giat.render();
+chart_bar_status.render();
 
 
 var options_pie = {
@@ -645,11 +647,17 @@ var locations2 = [
 
 
 function bar_eri() { 
-    $.getJSON("../Grafik_api/bar_eri", function(response) {
-        chart_bar.updateSeries(response.data);
-        chart_bar.updateOptions({xaxis: {
+    $.getJSON("../Grafik_api_dummy/bar_tmc_dasar_giat", function(response) {
+        chart_bar_dasar_giat.updateSeries(response.data);
+        chart_bar_dasar_giat.updateOptions({xaxis: {
             categories: response.date
-          }});
+          }});  
+    });
+    $.getJSON("../Grafik_api_dummy/bar_tmc_status", function(response) {
+        chart_bar_status.updateSeries(response.data);
+        chart_bar_status.updateOptions({xaxis: {
+            categories: response.date
+          }});  
     });
 }
 
