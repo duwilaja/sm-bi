@@ -220,10 +220,24 @@
 														<!-- end row -->
 													</div>
 													<div class="tab_content">
-														
+														<div class="row">
+															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+														</div>		
 													</div>
 													<div class="tab_content">
-														
+														<div class="row">
+															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+														</div>		
+													</div>
+													<div class="tab_content">
+														<div class="row">
+															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+														</div>		
+													</div>
+													<div class="tab_content">
+														<div class="row">
+															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+														</div>		
 													</div>
 												</div>
 											</div>
