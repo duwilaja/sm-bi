@@ -148,9 +148,9 @@ if(count($farr)>0&&$session['nrp']!=''){
 										<li aria-haspopup="true"><a href="<?=site_url('data/ssc')?>">SSC</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/tmc')?>">TMC</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/intan')?>">INTAN</a></li>
-										<!-- <li aria-haspopup="true"><a href="<?=site_url('data/ais')?>">AIS</a></li>
+										<li aria-haspopup="true"><a href="<?=site_url('data/ais')?>">AIS</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/taa')?>">TAA</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/tarc')?>">TARC</a></li> -->
+										<li aria-haspopup="true"><a href="<?=site_url('data/tarc')?>">TARC</a></li>
 									</ul>
 								</li>
 								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-line-chart"></i> Statistic <i class="fa fa-angle-down horizontal-icon"></i></a>
