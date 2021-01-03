@@ -104,10 +104,10 @@ class Data extends CI_Controller {
         $data['js_local'] = 'data/ais/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
-			// $this->template->load("data/ais/dashboard",$data);
+			$this->template->load("data/ais/dashboard",$data);
 
 			// 404 page 
-			$this->load->view("error/404",$data);
+			// $this->load->view("error/404",$data);
 		}else{
 			$retval=array("403","Failed","Please login","error");
 			$data['retval']= $retval;

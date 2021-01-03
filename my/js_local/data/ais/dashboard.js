@@ -12,26 +12,26 @@ var options = {
         width:2
     },
     series: [{
-        name: 'Mengantuk',
-        type: 'line',
+        name: 'Meninggal',
+        type: 'bar',
         // data: [ 25,29,27,26,27, 24,26,28, 27,29,28, 29,27, 25, 26,24, 20,]
-        data: [100,50,100,50]
+        data: [100,50,90,50]
     }, 
     {
-        name: 'Mabuk',
-        type: 'line',
+        name: 'Luka Berat',
+        type: 'bar',
         // data: [ 35,39,37,36,37, 34,36,38, 37,39,38, 39,37, 35, 36,34, 30,]
         data: [50,25,50,25]
     }, 
     {
-        name: 'Terserempet',
-        type: 'line',
+        name: 'Luka Ringan',
+        type: 'bar',
         // data: [37, 35, 36,34,32,39, 38,40, 43, 46,45, 49,50, 52,53,52, 55]
         data: [20,15,20,15]
     },
     {
-        name: 'Balap Liar',
-        type: 'line',
+        name: 'Kerugian Materi',
+        type: 'bar',
         data: [30,10,30,10]
     }],
      fill: {
@@ -46,7 +46,7 @@ var options = {
     xaxis: {
         // type: 'datetime',
         // categories: ['Dec 01', 'Dec 02','Dec 03','Dec 04','Dec 05','Dec 06','Dec 07','Dec 08','Dec 09 ','Dec 10','Dec 11','Dec 12','Dec 13','Dec 14','Dec 15 ','Dec 16','Dec 17'],
-        categories: ['31-11-2020','01-12-2020','02-12-2020','03-12-2020'],
+        categories: ['Januari 2020','Februari 2020','Maret 2020','April 2020'],
         color: '#fff',
          style: {
             colors: ['#000'],
