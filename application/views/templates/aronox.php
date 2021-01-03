@@ -70,6 +70,10 @@ if(count($farr)>0&&$session['nrp']!=''){
 		<link rel="stylesheet" href="<?=base_url('my/vendor/owl/')?>owl.carousel.min.css">
 		<link rel="stylesheet" href="<?=base_url('my/vendor/owl/')?>owl.theme.default.min.css">
 
+
+		<!-- Tabs css-->
+		<link href="<?php echo $base_url;?>aronox/assets/plugins/tabs/style.css" rel="stylesheet" />
+
 	</head>
 
 	<body class="app"><!-- Start Switcher -->
@@ -138,15 +142,15 @@ if(count($farr)>0&&$session['nrp']!=''){
 								</li>
 								 <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-file-text"></i> Data <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="<?=site_url('data/cybercop')?>">Cybercop</a></li>
+										<!-- <li aria-haspopup="true"><a href="<?=site_url('data/cybercop')?>">Cybercop</a></li> -->
 										<li aria-haspopup="true"><a href="<?=site_url('data/eri')?>">ERI</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/sdc')?>">SDC</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/ssc')?>">SSC</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/tmc')?>">TMC</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/intan')?>">INTAN</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/ais')?>">AIS</a></li>
+										<!-- <li aria-haspopup="true"><a href="<?=site_url('data/ais')?>">AIS</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/taa')?>">TAA</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/tarc')?>">TARC</a></li>
+										<li aria-haspopup="true"><a href="<?=site_url('data/tarc')?>">TARC</a></li> -->
 									</ul>
 								</li>
 								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-line-chart"></i> Statistic <i class="fa fa-angle-down horizontal-icon"></i></a>
@@ -244,6 +248,10 @@ if(count($farr)>0&&$session['nrp']!=''){
 		
 		<!--Select2 js -->
 		<script src="<?php echo $base_url;?>aronox/assets/plugins/select2/select2.full.min.js"></script>
+
+		<script src="<?php echo $base_url;?>aronox/assets/plugins/tabs/jquery.multipurpose_tabcontent.js"></script>
+		<script src="<?php echo $base_url;?>aronox/assets/js/tabs.js"></script>
+
 					
 	<script src="<?php echo $base_url;?>my/vendor/bootstrap/js/moment.min.js"></script>
     <script src="<?php echo $base_url;?>my/vendor/bootstrap/js/bootstrap-select.min.js"></script>

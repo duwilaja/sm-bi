@@ -82,31 +82,31 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-md-12">
-		<div class="card">
-			<div class="card-header">
-				<h3 class="card-title">Jumlah Data ERI</h3>
-				<div class="card-options">
-				</div>
-			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table" id="tabel_eri">
-						<thead>
-							<tr>
-								<th>Provinsi</th>
-								<th>Mobil Penumpang</th>
-								<th>Bus</th>
-								<th>Mobil Barang</th>
-								<th>Sepeda Motor</th>
-								<th>Kendaraan Khusus</th>
-								<th>Total</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
+		<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Jumlah Data ERI</h3>
+								<div class="card-options">
+								</div>
+							</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table" id="tabel_eri">
+											<thead>
+												<tr>
+													<th>Provinsi</th>
+													<th>Mobil Penumpang</th>
+													<th>Bus</th>
+													<th>Mobil Barang</th>
+													<th>Sepeda Motor</th>
+													<th>Kendaraan Khusus</th>
+													<th>Total</th>
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
 											<!-- <div class="tombol_detail">
 												<a href="#"><button class="btn btn-default w-100 mt-3">Selengkapnya</button></a>
 											</div> -->
