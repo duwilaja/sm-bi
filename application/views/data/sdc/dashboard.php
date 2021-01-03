@@ -7,6 +7,47 @@
 }
 </style>
 
+
+<div class="row">
+							<div class="col-lg-12 col-md-12">
+								<div  class="card">
+									<div class="card-header">
+										<h3 class="card-title">Filter By</h3>
+										<div class="card-options ">
+											<a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+											<a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+										</div>
+									</div>
+									<div class="card-body">
+										<div class="form-group m-0">
+											<!-- <label class="form-label">Date of birth</label> -->
+											<div class="row gutters-xs">
+												<div class="col-5">
+													<input type="date" class="form-control pull-right" id="reservation">
+												</div>
+												<div class="col-3">
+													<select name="polda" class="form-control custom-select">
+														<option value="">Pilih Polda</option>
+														<option value="1">Aceh</option>
+														<option value="2">Sumut</option>
+														<option value="3">Sumbar</option>
+													</select>
+												</div>
+												<div class="col-4">
+													<select name="" class="form-control custom-select">
+														<option value="">Pilih Polres</option>
+														<option value="">ACEH BARAT</option>
+														<option value="">ACEH BARAT DAYA</option>
+														<option value="">SABANG</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 <!--Row-->
 <div class="row">
 	<div class="col-xl-12 col-md-12 col-lg-12">
