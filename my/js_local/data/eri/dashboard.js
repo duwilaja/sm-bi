@@ -1,9 +1,14 @@
 /*--details-chart open--*/
 var no = 1;
+let pnp = 1;
+let bus = 1;
+let brg = 1;
+let motor = 1;
+let khusus = 1;
 
 $(document).ready(function () {
-    donat_eri();
     bar_eri();    
+    donat_eri();
     donat_eri_tabel();
     tabel_eri_bulan();
     dt_tabel_eri();
@@ -33,236 +38,6 @@ function slide() {
         }
     })
 }
-
-var options = {
-    chart: {
-        height: 320,
-        type: 'area',
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        curve: 'straight',
-        width:2
-    },
-    series: [],
-     fill: {
-     type:'solid',
-     opacity: [1, 1,1],
-  },
-//   plotOptions: {
-//     bar: {
-//       horizontal: false,
-//       columnWidth: '50%',
-//       endingShape: 'rounded'
-//     },
-//   },
-  grid: {
-    yaxis: {
-      lines: {
-        show: false,
-        offsetX: 0,
-        offsetY: 0
-      }
-    }
-  },
-  colors:['#4a32d4','#f7592d','#f7be2d','#3abc1d','#f72d66'],
-  xaxis: {
-      // type: 'datetime',
-      // categories: ['Dec 01', 'Dec 02','Dec 03','Dec 04','Dec 05','Dec 06','Dec 07','Dec 08','Dec 09 ','Dec 10','Dec 11','Dec 12','Dec 13','Dec 14','Dec 15 ','Dec 16','Dec 17'],
-      categories: ['31-11-2020'],
-      color: '#fff',
-       style: {
-          colors: ['#000'],
-       },
-  },
-//   yaxis : {
-//     max : 6
-//   },
-  tooltip: {
-      x: {
-          format: 'dd-mm-yyyy'
-      },
-  }
-}
-var chart_bar = new ApexCharts(document.querySelector("#live-chart"), options);
-chart_bar.render();
-
-
-var options_pie = {
-    chart: {
-        width: 380,
-        height:230,
-        type: 'donut',
-    },
-    dataLabels: {
-        enabled: false
-    },
-    series: [0,0,0,0,0],
-    colors:['#4a32d4','#f7592d','#f7be2d','#3abc1d','#f72d66'],
-    labels: [
-            "Mobil PNP",
-            "Bus",
-            "Mobil Penumpang",
-            "Sepeda Motor",
-            "Kendaraan Khusus"
-        ],
-    responsive: [{
-        breakpoint: 480,
-        options: {
-            chart: {
-                width: 200
-            },
-            legend: {
-                show: true,
-            }
-        }
-    }],
-}
-
-var chart_donat = new ApexCharts(
-    document.querySelector("#chart-pie"),
-    options_pie
-);
-
-chart_donat.render();
-
-
-	/* chartjs (#sales) */
-	var myCanvas = document.getElementById("sales");
-	
-	var myCanvasContext = myCanvas.getContext("2d");
-	var gradientStroke = myCanvasContext.createLinearGradient(0, 80, 0, 280);
-	var gradientStroke2 = myCanvasContext.createLinearGradient(0, 80, 0, 280);
-	var gradientStroke3 = myCanvasContext.createLinearGradient(0, 80, 0, 280);
-	
-	gradientStroke.addColorStop(0, 'rgb(251 28 82 / 58%)');
-	gradientStroke.addColorStop(1, 'rgb(251 28 82 / 87%)');
-
-	gradientStroke2.addColorStop(0, 'rgba(74, 50, 212, 0.8)');
-	gradientStroke2.addColorStop(1, 'rgba(74, 50, 212, 0.09)');
-
-	gradientStroke3.addColorStop(0, '#2393ff9e');
-	gradientStroke3.addColorStop(1, '#2393ff7d');
-	
-    var myChart = new Chart( myCanvas, {
-		type: 'line',
-		data: {
-            labels: ["Januari","Februari","Meret", "April","Mei", "Juni","Juli","Agustus","September","Oktober", "November", "Desember" ],
-            type: 'line',
-            datasets: [ {
-				label: 'Perpanjang SIM',
-				data: [0, 35, 24, 64, 93, 55, 39,60, 61, 54, 62, 63],
-				backgroundColor: gradientStroke,
-				borderColor: '#FFF',
-				pointBackgroundColor:'#fff',
-				pointHoverBackgroundColor:gradientStroke,
-				pointBorderColor :'#007adf',
-				pointHoverBorderColor :gradientStroke,
-				pointBorderWidth :0,
-				pointRadius :0,
-				pointHoverRadius :0,
-				lineTension: 0.2,
-				 borderWidth: 2,
-                    fill: 'origin'
-            },{
-				label: 'SIM Baru',
-				data: [90, 35, 24, 64, 43, 55, 39,60, 61, 54, 62, 63],
-				backgroundColor: gradientStroke2,
-				borderColor: '#FFF',
-				pointBackgroundColor:'#fff',
-				pointHoverBackgroundColor:gradientStroke2,
-				pointBorderColor :'#007adf',
-				pointHoverBorderColor :gradientStroke2,
-				pointBorderWidth :0,
-				pointRadius :0,
-				pointHoverRadius :0,
-				lineTension: 0.2,
-				 borderWidth: 2,
-                    fill: 'origin'
-            },{
-				label: 'DPS',
-				data: [30, 25, 20, 14, 33, 85, 79,90, 61, 54, 62, 63],
-				backgroundColor: gradientStroke3,
-				borderColor: '#FFF',
-				pointBackgroundColor:'#fff',
-				pointHoverBackgroundColor:gradientStroke3,
-				pointBorderColor :'#007adf',
-				pointHoverBorderColor :gradientStroke3,
-				pointBorderWidth :0,
-				pointRadius :0,
-				pointHoverRadius :0,
-				lineTension: 0.2,
-				 borderWidth: 2,
-                    fill: 'origin'
-            }, ]
-        },
-		options: {
-			responsive: true,
-			maintainAspectRatio: false,
-			tooltips: {
-				mode: 'index',
-				titleFontSize: 12,
-				titleFontColor: '#000',
-				bodyFontColor: '#000',
-				backgroundColor: '#fff',
-				cornerRadius: 3,
-				intersect: false,
-			},
-			 stepsize: 200,
-                min: 0,
-                max: 400,
-			legend: {
-				display: false,
-				labels: {
-					usePointStyle: false,
-				},
-			},
-			scales: {
-				xAxes: [{
-					
-					display: true,
-					gridLines: {
-						display: false,
-						drawBorder: false
-					},
-					ticks: {
-                            fontColor: '#b0bac9',
-                            autoSkip: true,
-                            maxTicksLimit: 9,
-                            maxRotation: 0,
-                            labelOffset: 10
-                        },
-					scaleLabel: {
-						display: false,
-						labelString: 'Month',
-						fontColor: 'transparent'
-					}
-				}],
-				yAxes: [{
-					ticks: {
-						fontColor: "#b0bac9",
-					 },
-					display: true,
-					gridLines: {
-						display: false,
-						drawBorder: false
-					},
-					scaleLabel: {
-						display: false,
-						labelString: 'sales',
-						fontColor: 'transparent'
-					}
-				}]
-			},
-			title: {
-				display: false,
-				text: 'Normal Legend'
-			}
-		}
-	});
-	/* chartjs (#sales) closed */
 
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -645,6 +420,62 @@ var locations2 = [
 
 
 function bar_eri() { 
+
+    var options = {
+        chart: {
+            height: 320,
+            type: 'area',
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'straight',
+            width:2
+        },
+        series: [],
+         fill: {
+         type:'solid',
+         opacity: [1, 1,1],
+      },
+    //   plotOptions: {
+    //     bar: {
+    //       horizontal: false,
+    //       columnWidth: '50%',
+    //       endingShape: 'rounded'
+    //     },
+    //   },
+      grid: {
+        yaxis: {
+          lines: {
+            show: false,
+            offsetX: 0,
+            offsetY: 0
+          }
+        }
+      },
+      colors:['#4a32d4','#f7592d','#f7be2d','#3abc1d','#f72d66'],
+      xaxis: {
+          // type: 'datetime',
+          // categories: ['Dec 01', 'Dec 02','Dec 03','Dec 04','Dec 05','Dec 06','Dec 07','Dec 08','Dec 09 ','Dec 10','Dec 11','Dec 12','Dec 13','Dec 14','Dec 15 ','Dec 16','Dec 17'],
+          categories: ['31-11-2020'],
+          color: '#fff',
+           style: {
+              colors: ['#000'],
+           },
+      },
+    //   yaxis : {
+    //     max : 6
+    //   },
+      tooltip: {
+          x: {
+              format: 'dd-mm-yyyy'
+          },
+      }
+    }
+    var chart_bar = new ApexCharts(document.querySelector("#live-chart"), options);
+    chart_bar.render();
+
     $.getJSON("../Grafik_api/bar_eri", function(response) {
         chart_bar.updateSeries(response.data);
         chart_bar.updateOptions({xaxis: {
@@ -654,7 +485,52 @@ function bar_eri() {
 }
 
 function donat_eri() { 
+
+    var optionss = {
+        redrawOnParentResize: true,
+        chart: {
+            width: 380,
+            type: 'donut',
+        },
+      colors:['#4a32d4','#f7592d','#f7be2d','#3abc1d','#f72d66'],
+      labels: [
+        "Mobil PNP",
+        "Bus",
+        "Mobil Barang",
+        "Sepeda Motor",
+        "Kendaraan Khusus"
+      ],
+      dataLabels: {
+        enabled: false
+      },
+      responsive: [{
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200
+          },
+          legend: {
+            show: false
+          }
+        }
+      }],
+      legend: {
+        position: 'right',
+        offsetY: 0,
+        height: 230,
+      },
+      series: [pnp,bus,brg,motor,khusus]
+    };
+
+    var chart_donat = new ApexCharts(document.querySelector("#chart-donat"),optionss);
+    chart_donat.render();
+
     $.getJSON("../Grafik_api/donat_eri", function(response) {
+        pnp = response.data[0];
+        bus = response.data[0];
+        brg = response.data[0];
+        motor = response.data[0];
+        khusus = response.data[0];
         chart_donat.updateSeries(response.data);
     });
 }
