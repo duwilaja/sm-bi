@@ -12,6 +12,98 @@ var options = {
         width:2
     },
     series: [{
+        name: 'Melakukan Aktifitas Lain',
+        type: 'bar',
+        data: [ 25,29,27,26,27, 24,26,28, 27,29]
+    }, 
+    {
+        name: 'Salah Memberi Isyarat',
+        type: 'bar',
+        data: [ 35,39,37,36,37, 34,36,38, 37,39]
+        // data: [50,25,50,25]
+    }, 
+    {
+        name: 'Gagal Memberi Tanda',
+        type: 'bar',
+        data: [37, 35, 36,34,32,39, 38,40, 43, 46]
+    },
+    {
+        name: 'Tertidur/Kelelahan',
+        type: 'bar',
+        data: [ 35,39,37,36,37, 34,36,38, 37,39]
+    },
+    {
+        name: 'Kerugian Materi',
+        type: 'bar',
+        data: [37, 35, 36,34,32,39, 38,40, 43, 46]
+    },
+    {
+        name: 'Menggunakan Gadget',
+        type: 'bar',
+        data: [ 25,29,27,26,27, 24,26,28, 27,29]
+    },
+    {
+        name: 'Berhenti Mendadak',
+        type: 'bar',
+        data: [ 35,39,37,36,37, 34,36,38, 37,39]
+    },
+    {
+        name: 'Mendadak Merubah Kecepatan',
+        type: 'bar',
+        data: [37, 35, 36,34,32,39, 38,40, 43, 46]
+    },
+    {
+        name: 'Ceroboh Saat Menyalip',
+        type: 'bar',
+        data: [ 25,29,27,26,27, 24,26,28, 27,29]
+    },
+    {
+        name: 'Tidak Waspada',
+        type: 'bar',
+        data: [ 25,35,27,26,27, 24,26,29, 17,19]
+    }],
+     fill: {
+     type:'solid',
+     opacity: [1, 1,1],
+  },
+    grid: {
+            show: true,
+            borderColor: 'rgba(142, 156, 173,0.2)',
+        },
+    colors: ['#fb1c52', '#ff8519','#fffb14','#44ff1f',' #fc0303','#f8fc05','#c2fc00','#5eff00','#05fce4','#ff00bf'],
+    xaxis: {
+        // type: 'datetime',
+        // categories: ['Dec 01', 'Dec 02','Dec 03','Dec 04','Dec 05','Dec 06','Dec 07','Dec 08','Dec 09 ','Dec 10','Dec 11','Dec 12','Dec 13','Dec 14','Dec 15 ','Dec 16','Dec 17'],
+        categories: ['2015','2016','2017','2018','2019'],
+        color: '#fff',
+         style: {
+            colors: ['#000'],
+         },
+        
+    },
+    tooltip: {
+        x: {
+            format: 'dd-mm-yyyy'
+        },
+    }
+}
+var chart = new ApexCharts(document.querySelector("#bar-perilaku"), options);
+chart.render();
+
+
+var options = {
+    chart: {
+        height: 320,
+        type: 'area',
+    },
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        curve: 'straight',
+        width:2
+    },
+    series: [{
         name: 'Meninggal',
         type: 'bar',
         // data: [ 25,29,27,26,27, 24,26,28, 27,29,28, 29,27, 25, 26,24, 20,]
