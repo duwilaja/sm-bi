@@ -50,6 +50,7 @@ if(count($farr)>0&&$session['nrp']!=''){
 		
 		<!-- datatables CSS-->
 		<!--link rel="stylesheet" href="my/vendor/datatables/datatables.min.css"-->
+		<link href="<?php echo $base_url;?>aronox//assets/plugins/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="<?php echo $base_url;?>my/vendor/datatables.net-bs4/dataTables.bootstrap4.css">
 		<link rel="stylesheet" href="<?php echo $base_url;?>my/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 		
@@ -261,7 +262,12 @@ if(count($farr)>0&&$session['nrp']!=''){
     <script src="<?php echo $base_url;?>my/vendor/datatables.net-bs4/dataTables.bootstrap4.js"></script>
     <script src="<?php echo $base_url;?>my/vendor/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <script src="<?php echo $base_url;?>my/vendor/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="<?php echo $base_url;?>my/vendor/datatables-buttons/js/buttons.html5.min.js"></script>
+	<script src="<?php echo $base_url;?>my/vendor/datatables-buttons/js/buttons.html5.min.js"></script>
+	
+	<script src="<?php echo $base_url;?>aronox/assets/plugins/datatable/jquery.dataTables.min.js"></script>
+	<script src="<?php echo $base_url;?>aronox/assets/plugins/datatable/dataTables.bootstrap4.min.js"></script>
+	<script src="<?php echo $base_url;?>aronox/assets/js/datatables.js"></script>
+
 	
     <script src="<?php echo $base_url;?>my/vendor/swal2/sweetalert.min.js"></script>
     <script src="<?php echo $base_url;?>my/vendor/jquery-validation/jquery.validate.min.js"></script>

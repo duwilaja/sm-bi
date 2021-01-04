@@ -1,9 +1,13 @@
 <style>
 	#map {
-		height: 277px;
+		height: 500px;
 	}
 	#map2 {
-		height: 277px;
+		height: 500px;
+	}
+
+	#map3 {
+		height: 500px;
 	}
 </style>
 
@@ -125,11 +129,11 @@
 </div>
 
 
-							<div class="row">
+<div class="row">
 								<div class="col">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Grafik Informasi Lalin</h3>
+										<h3 class="card-title">Informasi Lalin</h3>
 										<div class="card-options ">
 											<a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
 											<a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
@@ -139,158 +143,306 @@
 										<div class="panel panel-primary">
 											<div class="tab_wrapper first_tab">
 												<ul class="tab_list">
-													<li class="">Dasar Giat</li>
-													<li>Status</li>
-													<li>Detail Status</li>
-													<li>Sumber Info</li>
+													<li class="">Grafik</li>
 													<li>Maps</li>
-													<li>Data Table</li>
+													<li>Table</li>
 												</ul>
+												
 												<div class="content_wrapper">
 													<div class="tab_content active">
 														<!-- row -->
 														<div class="row">
-															<div class="col-xl-8 col-md-12 col-lg-12">
-																<!-- <div class="card"> -->
-																	<div class="overflow-hidden">
-																		<div id="dasar-giat" class="worldh h-276" ></div>
-																	</div>
-																<!-- </div> -->
-															</div> 
-															<div class="col-xl-4 col-md-12 col-lg-12">
-																<!-- <div class="card overflow-hidden"> -->
-																	<div class="card-header">
-																		<div class="mr-3">Dasar Giat</div>
-																	</div>
-																	<div class="card-body p-0">
-																		<div class="list-group list-group-flush ">
-																			<div class="list-group-item d-flex  align-items-center">
-																				<div class="mr-2">
-																					<img class="mr-3 avatar avatar-md brround"  src="<?php echo base_url();?>my/images/sm.png" alt="avatar">
-																				</div>
-																				<div class="">
-																					<div class=" h6 mb-0">Permintaan Masyarakat</div>
-																				</div>
-																				<div class="ml-auto">
-																					<a>100</a>
-																				</div>
-																			</div>
-																			<div class="list-group-item d-flex  align-items-center">
-																				<div class="mr-2">
-																					<img class="mr-3 rounded-circle avatar avatar-md brround" src="<?php echo base_url();?>my/images/sm.png" alt="avatar">
-																				</div>
-																				<div class="">
-																					<div class=" h6 mb-0">Laporan Pengaduan</div>
-																				</div>
-																				<div class="ml-auto">
-																					<a>50</a>
+															<div class="col-md-12">
+																<div class="">
+																	<div class="card-body">
+																		<div class="row">
+																			<div class="col-md-12">
+																				<div class="row">
+																					<div class="col-md-6">
+																						<div class="">
+																							<p>Kondisi Lalin</p>
+																						</div>
+																						<div class="overflow-hidden">
+																							<div id="status-lalin" class="worldh h-276" ></div>
+																						</div>
+																					</div>
+																					<div class="col-md-6">
+																					    <div class="">
+																							<p>Penyebab Kemacetan</p>
+																						</div>
+																						<div class="overflow-hidden">
+																							<div id="penyebab-lalin" class="worldh h-276" ></div>
+																						</div>
+																					</div>
 																				</div>
 																			</div>
-																			<div class="list-group-item d-flex  align-items-center">
-																				<div class="mr-2">
-																					<img class="mr-3 avatar avatar-md brround" src="<?php echo base_url();?>my/images/sm.png" alt="avatar">
-																				</div>
-																				<div class="">
-																					<div class=" h6 mb-0">Atensi Pimpinan</div>
-																				</div>
-																				<div class="ml-auto">
-																					<a>40</a>
-																				</div>
 																			</div>
-																			<div class="list-group-item d-flex  align-items-center">
-																				<div class="mr-2">
-																					<img class="mr-3 avatar avatar-md brround" src="<?php echo base_url();?>my/images/sm.png" alt="avatar">
-																				</div>
-																				<div class="">
-																					<div class=" h6 mb-0">Surat Perintah</div>
-																				</div>
-																				<div class="ml-auto">
-																					<a>30</a>
-																				</div>
-																			</div>
+																			
 																		</div>
 																	</div>
-																<!-- </div> -->
+																</div>
 															</div>
-														</div>
 														<!-- end row -->
 													</div>
 													<div class="tab_content">
 														<!-- row -->
 														<div class="row">
-															<div class="col-xl-8 col-md-12 col-lg-12">
-																<!-- <div class="card"> -->
-																	<div class="overflow-hidden">
-																		<div id="status" class="worldh h-276" ></div>
-																	</div>
-																<!-- </div> -->
-															</div> 
-															<div class="col-xl-4 col-md-12 col-lg-12">
-																<!-- <div class="card overflow-hidden"> -->
-																	<div class="card-header">
-																		<div class="mr-3">Status</div>
-																	</div>
-																	<div class="card-body p-0">
-																		<div class="list-group list-group-flush ">
-																			<div class="list-group-item d-flex  align-items-center">
-																				<div class="mr-2">
-																					<img class="mr-3 avatar avatar-md brround"  src="<?php echo base_url();?>my/images/sm.png" alt="avatar">
-																				</div>
-																				<div class="">
-																					<div class=" h6 mb-0">Lancar</div>
-																				</div>
-																				<div class="ml-auto">
-																					<a>100</a>
-																				</div>
-																			</div>
-																			<div class="list-group-item d-flex  align-items-center">
-																				<div class="mr-2">
-																					<img class="mr-3 rounded-circle avatar avatar-md brround" src="<?php echo base_url();?>my/images/sm.png" alt="avatar">
-																				</div>
-																				<div class="">
-																					<div class=" h6 mb-0">Padat</div>
-																				</div>
-																				<div class="ml-auto">
-																					<a>50</a>
-																				</div>
-																			</div>
-																			<div class="list-group-item d-flex  align-items-center">
-																				<div class="mr-2">
-																					<img class="mr-3 avatar avatar-md brround" src="<?php echo base_url();?>my/images/sm.png" alt="avatar">
-																				</div>
-																				<div class="">
-																					<div class=" h6 mb-0">Macet</div>
-																				</div>
-																				<div class="ml-auto">
-																					<a>40</a>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																<!-- </div> -->
+															<div class="col-md-12">
+																<div id="map2">
+																</div>
 															</div>
+
 														</div>
+
 														<!-- end row -->
 													</div>
 													<div class="tab_content">
 														<div class="row">
-															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
-														</div>		
+															<div class="col-md-12">
+																<div class="">
+																	<div class="card-header">
+																		<h3 class="card-title">Laporan Informasi Lalin TMC</h3>
+																		<div class="card-options">
+																		</div>
+																	</div>
+																	<div class="card-body">
+																		<div class="table-responsive">
+																			<table class="table" id="tabel_tmc">
+																				<thead>
+																					<tr>
+																						<!-- <th>Nomer</th> -->
+																						<th>Dasar</th>
+																						<th>Nama Jalan</th>
+																						<th>Lat</th>
+																						<th>Lng</th>
+																						<th>Waktu</th>
+																						<th>Mulai</th>
+																						<th>Selesai</th>
+																						<th>Status</th>
+																						<th>Sumber Info</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+																				</tbody>
+																			</table>
+																			<!-- <div class="tombol_detail">
+																				<a href="#"><button class="btn btn-default w-100 mt-3">Selengkapnya</button></a>
+																			</div> -->
+																		</div>
+																	</div>
+																</div>
+																
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							    </div>
+							</div>
+							<div class="row">
+								<div class="col">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Interaksi</h3>
+										<div class="card-options ">
+											<a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+											<a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+										</div>
+									</div>
+									<div class="card-body p-6">
+										<div class="panel panel-primary">
+											<div class="tab_wrapper first_tab">
+												<ul class="tab_list">
+													<li class="">Grafik</li>
+													<li>Maps</li>
+													<li>Table</li>
+												</ul>
+												
+												<div class="content_wrapper">
+													<div class="tab_content active">
+														<!-- row -->
+														<div class="row">
+															<div class="col-md-12">
+																<div class="">
+																	<div class="card-body">
+																		<div class="row">
+																			<div class="col-md-12">
+																				<div class="row">
+																					<div class="col-md-6">
+																						<div class="">
+																							<p>Dasar Giat</p>
+																						</div>
+																						<div class="overflow-hidden">
+																							<div id="interaksi-dasar-giat" class="worldh h-276" ></div>
+																						</div>
+																					</div>
+																					<div class="col-md-6">
+																					    <div class="">
+																							<p>Media</p>
+																						</div>
+																						<div class="overflow-hidden">
+																							<div id="interaksi-sosisal-media" class="worldh h-276" ></div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			</div>
+																			
+																		</div>
+																	</div>
+																</div>
+															</div>
+														<!-- end row -->
+													</div>
+													<div class="tab_content">
+														<!-- row -->
+														<div class="row">
+															<div class="col-md-12">
+																<div id="map">
+																</div>
+															</div>
+
+														</div>
+
+														<!-- end row -->
 													</div>
 													<div class="tab_content">
 														<div class="row">
-															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
-														</div>		
+															<div class="col-md-12">
+																<div class="">
+																	<div class="card-header">
+																		<h3 class="card-title">Laporan Interaksi TMC</h3>
+																		<div class="card-options">
+																		</div>
+																	</div>
+																	<div class="card-body">
+																		<div class="table-responsive">
+																			<table class="table" id="tabel_tmc_interaksi">
+																				<thead>
+																					<tr>
+																						<!-- <th>Nomer</th> -->
+																						<th>Dasar</th>
+																						<th>Media</th>
+																						<th>Jenis</th>
+																						<th>Waktu</th>
+																						<th>keterangan</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+																				</tbody>
+																			</table>
+																			<!-- <div class="tombol_detail">
+																				<a href="#"><button class="btn btn-default w-100 mt-3">Selengkapnya</button></a>
+																			</div> -->
+																		</div>
+																	</div>
+																</div>
+																
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							    </div>
+							</div>
+							<div class="row">
+								<div class="col">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Publikasi</h3>
+										<div class="card-options ">
+											<a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+											<a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+										</div>
+									</div>
+									<div class="card-body p-6">
+										<div class="panel panel-primary">
+											<div class="tab_wrapper first_tab">
+												<ul class="tab_list">
+													<li class="">Grafik</li>
+													<li>Maps</li>
+													<li>Table</li>
+												</ul>
+												
+												<div class="content_wrapper">
+													<div class="tab_content active">
+														<!-- row -->
+															<div class="row">
+																	<div class="col-md-12">
+																				<div class="row">
+																					<div class="col-md-6">
+																						<div class="">
+																							<p>Dasar Giat</p>
+																						</div>
+																						<div class="overflow-hidden">
+																							<div id="publikasi-dasar-giat" class="worldh h-276" ></div>
+																						</div>
+																					</div>
+																					<div class="col-md-6">
+																					    <div class="">
+																							<p>Media</p>
+																						</div>
+																						<div class="overflow-hidden">
+																							<div id="publikasi-sosisal-media" class="worldh h-276" ></div>
+																						</div>
+																					</div>
+																				</div>
+																	</div>
+															</div>
+														<!-- end row -->
+													</div>
+													<div class="tab_content">
+														<!-- row -->
+														<div class="row">
+															<div class="col-md-12">
+																<div id="map3">
+																</div>
+															</div>
+
+														</div>
+
+														<!-- end row -->
 													</div>
 													<div class="tab_content">
 														<div class="row">
-															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
-														</div>		
-													</div>
-													<div class="tab_content">
-														<div class="row">
-															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
-														</div>		
+															<div class="col-md-12">
+																<div class="">
+																	<div class="card-header">
+																		<h3 class="card-title">Laporan Publikasi TMC</h3>
+																		<div class="card-options">
+																		</div>
+																	</div>
+																	<div class="card-body">
+																		<div class="table-responsive">
+																			<table class="table" id="tabel_tmc_publikasi">
+																				<thead>
+																					<tr>
+																						<!-- <th>Nomer</th> -->
+																						<th>Dasar</th>
+																						<th>Media</th>
+																						<th>Jenis</th>
+																						<th>Waktu</th>
+																						<th>keterangan</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+																				</tbody>
+																			</table>
+																			<!-- <div class="tombol_detail">
+																				<a href="#"><button class="btn btn-default w-100 mt-3">Selengkapnya</button></a>
+																			</div> -->
+																		</div>
+																	</div>
+																</div>
+																
+															</div>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -299,5 +451,97 @@
 								</div>
 							</div>
 							</div>
+							<div class="row">
+								<div class="col">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Kordinasi</h3>
+										<div class="card-options ">
+											<a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+											<a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+										</div>
+									</div>
+									<div class="card-body p-6">
+										<div class="panel panel-primary">
+											<div class="tab_wrapper first_tab">
+												<ul class="tab_list">
+													<li class="">Grafik</li>
+													<li>Maps</li>
+													<li>Table</li>
+												</ul>
+												
+												<div class="content_wrapper">
+													<div class="tab_content active">
+														<!-- row -->
+														<div class="row">
+															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+														</div>
+														<!-- end row -->
+													</div>
+													<div class="tab_content">
+													<div class="row">
+															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+														</div>
+														<!-- end row -->
+													</div>
+													<div class="tab_content">
+															<div class="row">
+																<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+															</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							    </div>
+							</div>
+							<div class="row">
+								<div class="col">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Prasarana Publik</h3>
+										<div class="card-options ">
+											<a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+											<a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+										</div>
+									</div>
+									<div class="card-body p-6">
+										<div class="panel panel-primary">
+											<div class="tab_wrapper first_tab">
+												<ul class="tab_list">
+													<li class="">Grafik</li>
+													<li>Maps</li>
+													<li>Table</li>
+												</ul>
+												
+												<div class="content_wrapper">
+													<div class="tab_content active">
+														<!-- row -->
+														<div class="row">
+															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+														</div>
+														<!-- end row -->
+													</div>
+													<div class="tab_content">
+													<div class="row">
+															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+														</div>
+														<!-- end row -->
+													</div>
+													<div class="tab_content">
+															<div class="row">
+																<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+															</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							    </div>
+							</div>
+
+
 						
 
