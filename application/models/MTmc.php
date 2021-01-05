@@ -29,7 +29,7 @@ class Mtmc extends CI_Model {
         return $q;
     }
 
-    public function dt_tmc_info_lalin()
+    public function dt_tmc_info_lalin($awal='',$selesai='',$polda='',$polres='')
     {
          // Definisi
          $condition = [];
@@ -49,23 +49,34 @@ class Mtmc extends CI_Model {
          // Set default order
          $CI->dt->order = ['dtm' => 'desc'];
         //  $this->db->group_by('e.da');
-        
-        //  if ($status != '') {
-        //    $con1 = ['where','status',$status];
-        //    array_push($condition,$con1);
-        //   }
-          
-        //  if ($tgl_pelang != '') {
-        //    $con1t = ['where','date(tgl_pelang)',$tgl_pelang];
-        //    array_push($condition,$con1t);
-        //   }
+         
+        $awal = $this->input->post('awal');
+        $selesai = $this->input->post('selesai');
+        $polda = $this->input->post('polda');
+        $polres = $this->input->post('polres');
+       
+         
+        if ($awal != '') {
+           $con1t = ['where','date(tgl)',$awal];
+           array_push($condition,$con1t);
 
+          }
+
+        if ($polda != '') {
+            $con1t = ['where','polda',$polda];
+            array_push($condition,$con1t);
+           }
+
+        if ($polres != '') {
+            $con1t = ['where','polres',$polres];
+            array_push($condition,$con1t);
+           } 
+ 
         //  $cons = ['join','polda p','p.rowid = e.da','inner'];
         //  array_push($condition,$cons);
          
          // Fetch member's records
          $dataTabel = $this->dt->getRows($_POST, $condition);
-         
          $i = $this->input->post('start');
          foreach ($dataTabel as $dt) {
              $i++;
@@ -93,9 +104,7 @@ class Mtmc extends CI_Model {
          // Output to JSON format
          return json_encode($output);
     } 
-
-
-    public function dt_tmc_interaksi()
+    public function dt_tmc_interaksi($awal='',$selesai='',$polda='',$polres='')
     {
          // Definisi
          $condition = [];
@@ -115,6 +124,29 @@ class Mtmc extends CI_Model {
          // Set default order
          $CI->dt->order = ['dtm' => 'desc'];
         //  $this->db->group_by('e.da');
+
+        $awal = $this->input->post('awal');
+        $selesai = $this->input->post('selesai');
+        $polda = $this->input->post('polda');
+        $polres = $this->input->post('polres');
+       
+         
+        if ($awal != '') {
+           $con1t = ['where','date(tgl)',$awal];
+           array_push($condition,$con1t);
+
+          }
+
+        if ($polda != '') {
+            $con1t = ['where','polda',$polda];
+            array_push($condition,$con1t);
+           }
+
+        if ($polres != '') {
+            $con1t = ['where','polres',$polres];
+            array_push($condition,$con1t);
+           } 
+
         
         //  if ($status != '') {
         //    $con1 = ['where','status',$status];
@@ -156,7 +188,7 @@ class Mtmc extends CI_Model {
          return json_encode($output);
     } 
 
-    public function dt_tmc_publikasi()
+    public function dt_tmc_publikasi($awal='',$selesai='',$polda='',$polres='')
     {
          // Definisi
          $condition = [];
@@ -176,6 +208,29 @@ class Mtmc extends CI_Model {
          // Set default order
          $CI->dt->order = ['dtm' => 'desc'];
         //  $this->db->group_by('e.da');
+
+        $awal = $this->input->post('awal');
+        $selesai = $this->input->post('selesai');
+        $polda = $this->input->post('polda');
+        $polres = $this->input->post('polres');
+       
+         
+        if ($awal != '') {
+           $con1t = ['where','date(tgl)',$awal];
+           array_push($condition,$con1t);
+
+          }
+
+        if ($polda != '') {
+            $con1t = ['where','polda',$polda];
+            array_push($condition,$con1t);
+           }
+
+        if ($polres != '') {
+            $con1t = ['where','polres',$polres];
+            array_push($condition,$con1t);
+           } 
+
         
         //  if ($status != '') {
         //    $con1 = ['where','status',$status];
@@ -216,6 +271,295 @@ class Mtmc extends CI_Model {
          // Output to JSON format
          return json_encode($output);
     } 
+    public function dt_tmc_kordinasi($awal='',$selesai='',$polda='',$polres='')
+    {
+         // Definisi
+         $condition = [];
+         $data = [];
+         
+         $CI = &get_instance();
+         $CI->load->model('DataTable', 'dt');
+         
+         // Set table name
+         $CI->dt->table = 'tmc_koordinasi ';
+         // Set orderable column fields
+         $CI->dt->column_order = ['dasar','jenis','dtm','giat',null];
+         // Set searchable column fields
+         $CI->dt->column_search = ['dasar','giat','jenis'];
+         // Set select column fields
+         $CI->dt->select = 'dasar,jenis,dtm,giat';
+         // Set default order
+         $CI->dt->order = ['dtm' => 'desc'];
+        //  $this->db->group_by('e.da');
+
+        $awal = $this->input->post('awal');
+        $selesai = $this->input->post('selesai');
+        $polda = $this->input->post('polda');
+        $polres = $this->input->post('polres');
+       
+         
+        if ($awal != '') {
+           $con1t = ['where','date(tgl)',$awal];
+           array_push($condition,$con1t);
+
+          }
+
+        if ($polda != '') {
+            $con1t = ['where','polda',$polda];
+            array_push($condition,$con1t);
+           }
+
+        if ($polres != '') {
+            $con1t = ['where','polres',$polres];
+            array_push($condition,$con1t);
+           } 
+
+        //  if ($status != '') {
+        //    $con1 = ['where','status',$status];
+        //    array_push($condition,$con1);
+        //   }
+          
+        //  if ($tgl_pelang != '') {
+        //    $con1t = ['where','date(tgl_pelang)',$tgl_pelang];
+        //    array_push($condition,$con1t);
+        //   }
+
+        //  $cons = ['join','polda p','p.rowid = e.da','inner'];
+        //  array_push($condition,$cons);
+         
+         // Fetch member's records
+         $dataTabel = $this->dt->getRows($_POST, $condition);
+         
+         $i = $this->input->post('start');
+         foreach ($dataTabel as $dt) {
+             $i++;
+             $data[] = array(
+                //  $dt->nomor,
+                 $dt->dasar,
+                 $dt->jenis,
+                 tgl_indo($dt->dtm),
+                 $dt->giat
+             );
+         }
+         
+         $output = array(
+             "draw" =>  $this->input->post('draw'),
+             "recordsTotal" => $this->dt->countAll($condition),
+             "recordsFiltered" => $this->dt->countFiltered($_POST, $condition),
+             "data" => $data,
+         );
+         
+         // Output to JSON format
+         return json_encode($output);
+    }
+
+    public function dt_tmc_prasarana($awal='',$selesai='',$polda='',$polres='')
+    {
+         // Definisi
+         $condition = [];
+         $data = [];
+         
+         $CI = &get_instance();
+         $CI->load->model('DataTable', 'dt');
+         
+         // Set table name
+         $CI->dt->table = 'tmc_prasarana_publik ';
+         // Set orderable column fields
+         $CI->dt->column_order = ['prasarana','nama','parkir','tgl',null];
+         // Set searchable column fields
+         $CI->dt->column_search = ['prasarana','nama','parkir','tgl'];
+         // Set select column fields
+         $CI->dt->select = 'prasarana,nama,parkir,tgl';
+         // Set default order
+         $CI->dt->order = ['dtm' => 'desc'];
+        //  $this->db->group_by('e.da');
+
+        $awal = $this->input->post('awal');
+        $selesai = $this->input->post('selesai');
+        $polda = $this->input->post('polda');
+        $polres = $this->input->post('polres');
+       
+         
+        if ($awal != '') {
+           $con1t = ['where','date(tgl)',$awal];
+           array_push($condition,$con1t);
+
+          }
+
+        if ($polda != '') {
+            $con1t = ['where','polda',$polda];
+            array_push($condition,$con1t);
+           }
+
+        if ($polres != '') {
+            $con1t = ['where','polres',$polres];
+            array_push($condition,$con1t);
+           } 
+         
+         // Fetch member's records
+         $dataTabel = $this->dt->getRows($_POST, $condition);
+         
+         $i = $this->input->post('start');
+         foreach ($dataTabel as $dt) {
+             $i++;
+             $data[] = array(
+                //  $dt->nomor,
+                 $dt->prasarana,
+                 $dt->nama,
+                 $dt->parkir,
+                 tgl_indo($dt->tgl),
+             );
+         }
+         
+         $output = array(
+             "draw" =>  $this->input->post('draw'),
+             "recordsTotal" => $this->dt->countAll($condition),
+             "recordsFiltered" => $this->dt->countFiltered($_POST, $condition),
+             "data" => $data,
+         );
+         
+         // Output to JSON format
+         return json_encode($output);
+    }
+
+    function get_polda(){
+        $query = $this->db->get('polda');
+        return $query;  
+    }
+ 
+    function get_polres($polda){
+        $query = $this->db->get_where('polres', array('polda' => $polda));
+        return $query;
+    }
+
+
+    // total keseluruhan tmc
+    public function tmc_info_lalin($start='',$end='',$polda='',$polres='')
+    {
+        // $total = 0;
+        $this->db->select('count(*) as total');
+        $this->db->from('tmc_info_lalin');
+        
+        if ($start != '') {
+            $this->db->where('date(tgl) >=', $start);
+            $this->db->where('date(tgl) <=', $end);
+        }
+        if ($polda != '') {
+            $this->db->where('polda', $polda);
+        }
+        if ($polres != '') {
+            $this->db->where('polres', $polres);
+        }
+    
+        $dt = $this->db->get()->result();
+        foreach ($dt as $key) {
+            $total = $key->total;
+        }
+
+        return $total;
+
+
+    }
+    public function tmc_interaksi($start='',$end='',$polda='',$polres='')
+    {
+        // $total = 0;
+        $this->db->select('count(*) as total');
+        $this->db->from('tmc_interaksi');
+       if ($start != '') {
+            $this->db->where('date(tgl) >=', $start);
+            $this->db->where('date(tgl) <=', $end);
+        }
+        if ($polda != '') {
+            $this->db->where('polda', $polda);
+        }
+        if ($polres != '') {
+            $this->db->where('polres', $polres);
+        }
+        $dt = $this->db->get()->result();
+        foreach ($dt as $key) {
+            $total = $key->total;
+        }
+
+        return $total;
+
+
+    }
+    public function tmc_publikasi($start='',$end='',$polda='',$polres='')
+    {
+        // $total = 0;
+        $this->db->select('count(*) as total');
+        $this->db->from('tmc_publikasi');
+       if ($start != '') {
+            $this->db->where('date(tgl) >=', $start);
+            $this->db->where('date(tgl) <=', $end);
+        }
+        if ($polda != '') {
+            $this->db->where('polda', $polda);
+        }
+        if ($polres != '') {
+            $this->db->where('polres', $polres);
+        }
+        $dt = $this->db->get()->result();
+        foreach ($dt as $key) {
+            $total = $key->total;
+        }
+
+        return $total;
+
+
+    }
+    public function tmc_koordinasi($start='',$end='',$polda='',$polres='')
+    {
+        // $total = 0;
+        $this->db->select('count(*) as total');
+        $this->db->from('tmc_koordinasi');
+       if ($start != '') {
+            $this->db->where('date(tgl) >=', $start);
+            $this->db->where('date(tgl) <=', $end);
+        }
+        if ($polda != '') {
+            $this->db->where('polda', $polda);
+        }
+        if ($polres != '') {
+            $this->db->where('polres', $polres);
+        }
+        $dt = $this->db->get()->result();
+        foreach ($dt as $key) {
+            $total = $key->total;
+        }
+
+        return $total;
+
+
+    }
+    public function tmc_prasarana_publik($start='',$end='',$polda='',$polres='')
+    {
+        // $total = 0;
+        $this->db->select('count(*) as total');
+        $this->db->from('tmc_prasarana_publik');
+       if ($start != '') {
+            $this->db->where('date(tgl) >=', $start);
+            $this->db->where('date(tgl) <=', $end);
+        }
+        if ($polda != '') {
+            $this->db->where('polda', $polda);
+        }
+        if ($polres != '') {
+            $this->db->where('polres', $polres);
+        }
+        $dt = $this->db->get()->result();
+        foreach ($dt as $key) {
+            $total = $key->total;
+        }
+
+        return $total;
+
+
+    }
+    // end total
+
+
+    
     
 }
 

@@ -6,7 +6,8 @@ class Data extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-        // Your own constructor code
+		// Your own constructor code
+		$this->load->model('MTmc','tmc');
     }
     
     public function cybercop()
@@ -72,6 +73,7 @@ class Data extends CI_Controller {
         $data['js_local'] = 'data/tmc/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
+			$data['polda'] = $this->tmc->get_polda()->result();
 			$this->template->load("data/tmc/dashboard",$data);
 
 			// 404 page 
@@ -82,6 +84,7 @@ class Data extends CI_Controller {
 			$this->load->view('login',$data);
 		}
 	}
+	
 	public function intan()
 	{
         $user=$this->session->userdata('user_data');

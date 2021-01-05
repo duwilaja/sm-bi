@@ -143,7 +143,7 @@ if(count($farr)>0&&$session['nrp']!=''){
 								</li> -->
 								 <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-file-text"></i> Data <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
-										<!-- <li aria-haspopup="true"><a href="<?=site_url('data/cybercop')?>">Cybercop</a></li> -->
+										<li aria-haspopup="true"><a href="<?=site_url('data/cybercop')?>">Cybercop</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/eri')?>">ERI</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/sdc')?>">SDC</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/ssc')?>">SSC</a></li>
@@ -164,7 +164,7 @@ if(count($farr)>0&&$session['nrp']!=''){
 										<li aria-haspopup="true"><a href="#">Index Kemacetan</a></li>
 									</ul>
 								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-bullhorn"></i> Action <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<!-- <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-bullhorn"></i> Action <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="#">Rekomendasi</a></li>
 										<li aria-haspopup="true"><a href="#">RSPA</a></li>
@@ -172,7 +172,7 @@ if(count($farr)>0&&$session['nrp']!=''){
 										<li aria-haspopup="true"><a href="#">Literasi Road Safety</a></li>
 										<li aria-haspopup="true"><a href="#">Road Safety Program</a></li>
 									</ul>
-								</li>
+								</li> -->
 							</ul>
 						</nav>
 						<!--Nav end -->

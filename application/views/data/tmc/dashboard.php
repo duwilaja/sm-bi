@@ -9,6 +9,12 @@
 	#map3 {
 		height: 500px;
 	}
+	#map4 {
+		height: 500px;
+	}
+	#map5 {
+		height: 500px;
+	}
 </style>
 
 
@@ -40,8 +46,11 @@
 								<div class="col-md-2">
                                     <div class="form-group">
                                         <p>Polda</p>
-                                        <select class="form-control form-control-sm"  name="f_polda" id="f_polda">
-											<option value="">-- Pilih Polda --</option>
+										<select class="form-control form-control-sm" name="f_polda" id="f_polda">
+											<option value="">No Selected</option>
+											<?php foreach($polda as $row):?>
+											<option value="<?php echo $row->da_id;?>"><?php echo $row->da_nam;?></option>
+											<?php endforeach;?>
 										</select>
                                     </div>
                                 </div>
@@ -129,7 +138,7 @@
 </div>
 
 
-<div class="row">
+							<div class="row">
 								<div class="col">
 								<div class="card">
 									<div class="card-header">
@@ -242,6 +251,7 @@
 								</div>
 							    </div>
 							</div>
+
 							<div class="row">
 								<div class="col">
 								<div class="card">
@@ -351,6 +361,7 @@
 								</div>
 							    </div>
 							</div>
+
 							<div class="row">
 								<div class="col">
 								<div class="card">
@@ -451,6 +462,7 @@
 								</div>
 							</div>
 							</div>
+
 							<div class="row">
 								<div class="col">
 								<div class="card">
@@ -474,26 +486,77 @@
 													<div class="tab_content active">
 														<!-- row -->
 														<div class="row">
-															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+															<div class="col-md-12">
+																<div class="row">
+																		<div class="col-md-6">
+																			<div class="">
+																				<p>Dasar Giat</p>
+																			</div>
+																			<div class="overflow-hidden">
+																					<div id="kordinasi-dasar-giat" class="worldh h-276" ></div>
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="">
+																				<p>Media</p>
+																			</div>
+																			<div class="overflow-hidden">
+																					<div id="kordinasi-sosisal-media" class="worldh h-276" ></div>
+																			</div>
+																		</div>
+																</div>
+															</div>										
+														</div>
+														<!-- end row -->
+													</div>
+													<div class="tab_content">
+														<div class="row">
+															<div class="col-md-12">
+																<div id="map4">
+																</div>
+															</div>
 														</div>
 														<!-- end row -->
 													</div>
 													<div class="tab_content">
 													<div class="row">
-															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
-														</div>
-														<!-- end row -->
-													</div>
-													<div class="tab_content">
-															<div class="row">
-																<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+															<div class="col-md-12">
+																<div class="">
+																	<div class="card-header">
+																		<h3 class="card-title">Laporan Publikasi TMC</h3>
+																		<div class="card-options">
+																		</div>
+																	</div>
+																	<div class="card-body">
+																		<div class="table-responsive">
+																			<table class="table" id="tabel_tmc_kordinasi">
+																				<thead>
+																					<tr>
+																						<!-- <th>Nomer</th> -->
+																						<th>Dasar</th>
+																						<th>Jenis</th>
+																						<th>Waktu</th>
+																						<th>Giat</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+																				</tbody>
+																			</table>
+																			<!-- <div class="tombol_detail">
+																				<a href="#"><button class="btn btn-default w-100 mt-3">Selengkapnya</button></a>
+																			</div> -->
+																		</div>
+																	</div>
+																</div>
+																
 															</div>
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-									</div>
-								</div>
+									 	</div>
+								   	 </div>
+								   </div>
 							    </div>
 							</div>
 							<div class="row">
@@ -519,19 +582,70 @@
 													<div class="tab_content active">
 														<!-- row -->
 														<div class="row">
-															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+														<div class="col-md-12">
+																<div class="row">
+																		<div class="col-md-12">
+																			<div class="">
+																				<p>Dasar Giat</p>
+																			</div>
+																			<div class="overflow-hidden">
+																					<div id="prasarana-dasar-giat" class="worldh h-276" ></div>
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="">
+																				<p>Media</p>
+																			</div>
+																			<div class="overflow-hidden">
+																					<!-- <div id="prasarana-sosisal-media" class="worldh h-276" ></div> -->
+																			</div>
+																		</div>
+																</div>
+															</div>
 														</div>
 														<!-- end row -->
 													</div>
 													<div class="tab_content">
 													<div class="row">
-															<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+															<div class="col-md-12">
+																<div id="map5">
+																</div>
+															</div>
 														</div>
 														<!-- end row -->
 													</div>
 													<div class="tab_content">
 															<div class="row">
-																<center><h3>Maaf, Page Ini masih Dalam Tahap Pengembangan</h3></center>
+															<div class="col-md-12">
+																<div class="">
+																	<div class="card-header">
+																		<h3 class="card-title">Laporan Prasarana Publik TMC</h3>
+																		<div class="card-options">
+																		</div>
+																	</div>
+																	<div class="card-body">
+																		<div class="table-responsive">
+																			<table class="table" id="tabel_tmc_prasarana">
+																				<thead>
+																					<tr>
+																						<!-- <th>Nomer</th> -->
+																						<th>Prasarana</th>
+																						<th>Nama</th>
+																						<th>Kapasitas Parkir</th>
+																						<th>Tanggal</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+																				</tbody>
+																			</table>
+																			<!-- <div class="tombol_detail">
+																				<a href="#"><button class="btn btn-default w-100 mt-3">Selengkapnya</button></a>
+																			</div> -->
+																		</div>
+																	</div>
+																</div>
+																
+															</div>
 															</div>
 													</div>
 												</div>
@@ -541,6 +655,7 @@
 								</div>
 							    </div>
 							</div>
+						
 
 
 						
