@@ -8,10 +8,10 @@ class Grafik_api extends CI_Controller {
         parent::__construct();
         $this->load->model('MEri','eri');
         $this->load->model('MTmc','tmc');
+        $this->load->model('MCyb','cyb');
         
     }
     
-    // @ERI
     public function bar_eri()
     {
         $pnp = [];
@@ -653,6 +653,80 @@ class Grafik_api extends CI_Controller {
         echo json_encode($series);
     }
 
+    public function bar_cybercops_user_polda()
+    {
+
+        $data = [];
+        // $date = [];
+        // $this->tmc->see = 'dtm,status,count(*) as total ';
+        // $eri = $this->eri->get('','date(dtm) >= date("2020-12-28") && date(dtm) <= date("2020-12-30")','date(dtm)')->result();
+        // $tmc_lalin = $this->tmc->get('','','','status')->result();
+        $polda = $this->db->get('polda')->result();
+
+        $user_polda = $this->db->query('SELECT b.da_nam as polda,COUNT(*) as jumlah FROM persons as a inner join polda as b on b.da_id=a.polda  inner JOIN polres as c on c.res_id=a.polres GROUP BY a.polda order by b.da_nam asc')->result();
+            foreach ($user_polda as $key) {
+                   foreach ($polda as $p) {
+                      if ($key->polda == $p->da_nam) {
+                           $a = [
+                               'name'=> $key->polda,
+                               'type'=> 'bar',
+                               'data'=> [(int)$key->jumlah]
+                           ];
+
+                      }
+                   }
+
+                   array_push($data,$a);
+
+            }
+
+            $series =  [
+                'data' => $data,
+                'date' => ['polda']
+            ];
+            
+            echo json_encode($series);
+       
+    }
+
+    public function bar_cybercops_user_polres()
+    {
+
+        $data = [];
+        // $date = [];
+        // $this->tmc->see = 'dtm,status,count(*) as total ';
+        // $eri = $this->eri->get('','date(dtm) >= date("2020-12-28") && date(dtm) <= date("2020-12-30")','date(dtm)')->result();
+        // $tmc_lalin = $this->tmc->get('','','','status')->result();
+        $polres = $this->db->get('polres')->result();
+
+        $user_polres = $this->db->query('SELECT c.res_nam as polres,COUNT(*) as jumlah FROM persons as a inner join polda as b on b.da_id=a.polda inner JOIN polres as c on c.res_id=a.polres GROUP BY c.res_nam order by c.res_nam asc')->result();
+            foreach ($user_polres as $key) {
+                   foreach ($polres as $p) {
+                      if ($key->polres == $p->res_nam) {
+                           $a = [
+                               'name'=> $key->polres,
+                               'type'=> 'bar',
+                               'data'=> [(int)$key->jumlah]
+                           ];
+
+                      }
+                   }
+
+                   array_push($data,$a);
+
+            }
+
+            $series =  [
+                'data' => $data,
+                'date' => ['Polres']
+            ];
+            
+            echo json_encode($series);
+       
+    }
+
+    
+
     public function donat_eri_tabel()
     {
         $pnp = 0;
@@ -833,12 +907,19 @@ class Grafik_api extends CI_Controller {
         echo $this->tmc->dt_tmc_prasarana();
     }
 
+
+    // cybercops
+    public function dt_user_cybercops()
+    {
+        echo $this->cyb->dt_user_cybercops();
+    }
+    // end cybercops
+
     function get_polres(){
         $t = $this->input->post('id',TRUE);
         $data = $this->tmc->get_polres($t)->result();
         echo json_encode($data);
 	}
-
     public function jml_data_eri()
     {
         $total = 0;
