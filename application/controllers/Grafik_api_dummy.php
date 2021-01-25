@@ -367,4 +367,90 @@ class Grafik_api_dummy extends CI_Controller {
         
         echo json_encode($series);
     }
+
+    // AIS
+    public function tabel_penyebab_kecelakaan()
+    {
+        $tahun = [2019,2020,2021,2022];
+        $nama = [
+            'Jumlah Kejadian',
+            'Korban MD',
+            'Korban LB',
+            'Korban LR',
+        ];
+        $data = [
+            [1,2,3,4],
+            [5,6,7,8],
+            [3,4,5,5],
+            [3,4,5,5],
+        ];
+
+        $rsp = [
+            'tahun' => $tahun,
+            'nama' => $nama,
+            'data' => $data
+        ];
+
+        echo json_encode($rsp);
+    }
+
+    public function bar_ais()
+    {
+        $rsp = [[
+            'name' => 'Jumlah Kejadian',
+            'type' => 'bar',
+            'data' => [ 100,29,27,26]
+        ], 
+        [
+            'name' => 'Korban MD',
+            'type' => 'bar',
+            'data' => [ 35,39,37,36]
+        ], 
+        [
+            'name' => 'Korban LB',
+            'type' => 'bar',
+            'data' => [37, 35, 36,34]
+        ],
+        [
+            'name' => 'Korban LR',
+            'type' => 'bar',
+            'data' => [ 35,39,37,36]
+        ]];
+
+        echo json_encode($rsp);
+    }
+
+    public function pie_perilaku()
+    {
+        
+        $data = [12.4,11.4,21.12,1.2,15.4,17.4,20.4,11,13,14];
+        $label = [
+            'Tidak Waspada',
+            'Mendadak Merubah Kecepatan',
+            'Ceroboh Saat Menyalip',
+            'Berhenti Mendadak',
+        ];
+
+        $rsp = [
+            'data' => $data,
+            'label' => $label
+        ];
+
+        echo json_encode($rsp);
+    }
+
+    public function grafik_cfr()
+    {
+        
+        $real = [12.4,11.4,21.12,1.2,15.4,17.4,20.4,11,13,14];
+        $target = [12.4,11.4,21.12,1.2,15.4,17.4,20.4,11,13,14];
+        $rsp = [
+            'data' => [
+                'real' => $real,
+                'target' => $target
+            ]
+        ];
+
+        echo json_encode($rsp);
+    }
 }

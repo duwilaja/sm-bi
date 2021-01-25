@@ -157,7 +157,7 @@ if(count($farr)>0&&$session['nrp']!=''){
 								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-line-chart"></i> Statistic <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="#">Trend Data</a></li>
-										<li aria-haspopup="true"><a href="#">Case Fatality Rate</a></li>
+										<li aria-haspopup="true"><a href="<?=site_url('statistik/case_fatality_rate')?>">Case Fatality Rate</a></li>
 										<li aria-haspopup="true"><a href="#">Fatality Index</a></li>
 										<li aria-haspopup="true"><a href="#">Risk Exposure</a></li>
 										<li aria-haspopup="true"><a href="#">Ambang Gangguan</a></li>
@@ -283,6 +283,7 @@ if(count($farr)>0&&$session['nrp']!=''){
 
 	<!-- Owl  -->
 	<script src="<?= base_url('my/vendor/owl/owl.carousel.min.js')?>"></script>
+	
 	
 	<script src="https://unpkg.com/@google/markerclustererplus@5.1.0/dist/markerclustererplus.min.js"></script>
 	<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUFXBbjbdO3QWCZHn_HLR4DbTO878fT6E&callback=initMap"></script>

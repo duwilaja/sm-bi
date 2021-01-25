@@ -9,7 +9,7 @@ class Grafik_api extends CI_Controller {
         $this->load->model('MEri','eri');
         $this->load->model('MTmc','tmc');
         $this->load->model('MCyb','cyb');
-        
+        $this->load->model('MAis','ais');
     }
     
     public function bar_eri()
@@ -968,5 +968,79 @@ class Grafik_api extends CI_Controller {
         echo json_encode($series);
     }
 
+    // AIS
+
+    public function tabel_penyebab_kecelakaan()
+    {
+        $tahun = $this->ais->get_tahun_kec();
+        $nama = [
+            'Jumlah Kejadian',
+            'Korban MD',
+            'Korban LB',
+            'Korban LR',
+        ];
+        $data = [
+            $this->ais->get_nama_kec('jml'),
+            $this->ais->get_nama_kec('md'),
+            $this->ais->get_nama_kec('lb'),
+            $this->ais->get_nama_kec('lr'),
+        ];
+
+        $rsp = [
+            'tahun' => $tahun,
+            'nama' => $nama,
+            'data' => $data
+        ];
+
+        echo json_encode($rsp);
+    }
+
+    public function bar_ais()
+    {
+        $rsp = [[
+            'name' => 'Jumlah Kejadian',
+            'type' => 'bar',
+            'data' => $this->ais->get_nama_kec('jml')
+        ], 
+        [
+            'name' => 'Korban MD',
+            'type' => 'bar',
+            'data' => $this->ais->get_nama_kec('md')
+        ], 
+        [
+            'name' => 'Korban LB',
+            'type' => 'bar',
+            'data' => $this->ais->get_nama_kec('lb')
+        ],
+        [
+            'name' => 'Korban LR',
+            'type' => 'bar',
+            'data' => $this->ais->get_nama_kec('lr')
+        ]];
+
+        $data = [
+            'data' => $rsp,
+            'tahun' => $this->ais->get_tahun_kec()
+        ];
+
+        echo json_encode($data);
+    }
+
+    // Statistik CFR
+    public function grafik_cfr()
+    {
+        $tahun = $this->ais->get_tahun_kec();
+        $real = $this->ais->get_cfr();
+        $target = [12.4,11.4];
+        $rsp = [
+            'tahun' => $tahun,
+            'data' => [
+                'real' => $real,
+                'target' => $target
+            ]
+        ];
+
+        echo json_encode($rsp);
+    }
     
 }
