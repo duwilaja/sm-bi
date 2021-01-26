@@ -156,7 +156,7 @@ if(count($farr)>0&&$session['nrp']!=''){
 								</li>
 								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-line-chart"></i> Statistic <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="#">Trend Data</a></li>
+										<li aria-haspopup="true"><a href="<?=site_url('statistik/trend_data')?>">Trend Data</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('statistik/case_fatality_rate')?>">Case Fatality Rate</a></li>
 										<li aria-haspopup="true"><a href="#">Fatality Index</a></li>
 										<li aria-haspopup="true"><a href="#">Risk Exposure</a></li>
