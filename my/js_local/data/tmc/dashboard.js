@@ -132,13 +132,6 @@ var options = {
      type:'solid',
      opacity: [1, 1,1],
   },
-//   plotOptions: {
-//     bar: {
-//       horizontal: false,
-//       columnWidth: '50%',
-//       endingShape: 'rounded'
-//     },
-//   },
   grid: {
     yaxis: {
       lines: {
@@ -152,7 +145,7 @@ var options = {
   xaxis: {
       // type: 'datetime',
       // categories: ['Dec 01', 'Dec 02','Dec 03','Dec 04','Dec 05','Dec 06','Dec 07','Dec 08','Dec 09 ','Dec 10','Dec 11','Dec 12','Dec 13','Dec 14','Dec 15 ','Dec 16','Dec 17'],
-      categories: ['31-11-2020'],
+      categories: [],
       color: '#fff',
        style: {
           colors: ['#000'],
