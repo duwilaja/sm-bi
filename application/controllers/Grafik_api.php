@@ -1042,5 +1042,142 @@ class Grafik_api extends CI_Controller {
 
         echo json_encode($rsp);
     }
+
+    // Statistik Trend Data
+
+    public function grafik_trend_data()
+    {
+        $data = [];
+
+        $kondisi = [
+            "titik_macet" => 
+            [
+                "label" => "Titik Macet",
+                "fill" => false,
+                "lineTension" => 0.1,
+                "backgroundColor" => "rgb(255 255 255 / 0%)",
+                "borderColor" => "#ba5452", // The main line color
+                "borderCapStyle" => 'square',
+                "borderDash" => [], // try [5, 15] for instance
+                "borderDashOffset" => 0.0,
+                "borderJoinStyle" => 'miter',
+                "pointBorderColor" => "black",
+                "pointBackgroundColor" => "white",
+                "pointBorderWidth" => 1,
+                "pointHoverRadius" => 8,
+                "pointHoverBackgroundColor" => "yellow",
+                "pointHoverBorderColor" => "brown",
+                "pointHoverBorderWidth" => 2,
+                "pointRadius" => 4,
+                "pointHitRadius" => 10,
+                // notice the gap in the data and the "spanGaps" => true
+                "data" => $this->get_tmc_jml_bulan(),
+                "spanGaps" => true,
+            ],
+            "jumlah_ranmor" => 
+            [
+                "label" => "Jumlah Ranmor",
+                "fill" => false,
+                "lineTension" => 0.1,
+                "backgroundColor" => "rgb(255 255 255 / 0%)",
+                "borderColor" => "#617ea0", // The main line color
+                "borderCapStyle" => 'square',
+                "borderDash" => [], // try [5, 15] for instance
+                "borderDashOffset" => 0.0,
+                "borderJoinStyle" => 'miter',
+                "pointBorderColor" => "black",
+                "pointBackgroundColor" => "white",
+                "pointBorderWidth" => 1,
+                "pointHoverRadius" => 8,
+                "pointHoverBackgroundColor" => "yellow",
+                "pointHoverBorderColor" => "brown",
+                "pointHoverBorderWidth" => 2,
+                "pointRadius" => 4,
+                "pointHitRadius" => 10,
+                // notice the gap in the data and the "spanGaps" => true
+                "data" => $this->get_eri_jml_bulan(),
+                "spanGaps" => true,
+            ],
+            "jumlah_laka" => 
+            [
+                "label" => "Jumlah Laka",
+                "fill" => false,
+                "lineTension" => 0.1,
+                "backgroundColor" => "rgb(255 255 255 / 0%)",
+                "borderColor" => "#ec9858", // The main line color
+                "borderCapStyle" => 'square',
+                "borderDash" => [], // try [5, 15] for instance
+                "borderDashOffset" => 0.0,
+                "borderJoinStyle" => 'miter',
+                "pointBorderColor" => "black",
+                "pointBackgroundColor" => "white",
+                "pointBorderWidth" => 1,
+                "pointHoverRadius" => 8,
+                "pointHoverBackgroundColor" => "yellow",
+                "pointHoverBorderColor" => "brown",
+                "pointHoverBorderWidth" => 2,
+                "pointRadius" => 4,
+                "pointHitRadius" => 10,
+                // notice the gap in the data and the "spanGaps" => true
+                "data" => $this->get_ais_jml_bulan(),
+                "spanGaps" => true,
+            ],
+        ];
+
+       $data[] = $kondisi['titik_macet'];
+       $data[] = $kondisi['jumlah_ranmor'];
+       $data[] = $kondisi['jumlah_laka'];
+
+        $rsp = [
+            'data' => $data
+        ];
+
+        echo json_encode($rsp);
+    }
+
+    private function get_tmc_jml_bulan($d='',$status='')
+    {
+        for ($i=1; $i <= 12 ; $i++) { 
+            $bulan[$i] = 0;
+        }
+
+        if($d == '') $d = date('2020-01-01');
+        if($status == '') $status = "Macet";
+        $q = $this->tmc->get_jml_bulan($d,$status);
+        foreach ($q->result() as $v) {
+            @$bulan[(int)$v->bulan] = (int) $v->jml;
+        }
+        return array_values($bulan);
+    }
+
+    private function get_eri_jml_bulan($d='')
+    {
+        for ($i=1; $i <= 12 ; $i++) { 
+            $bulan[$i] = 0;
+        }
+
+        if($d == '') $d = date('2020-01-01');
+        $q = $this->eri->get_jml_bulan($d);
+        foreach ($q->result() as $v) {
+            @$bulan[(int)$v->bulan] = (int) $v->jml;
+        }
+
+        return array_values($bulan);
+    }
+
+    private function get_ais_jml_bulan($d='')
+    {
+        for ($i=1; $i <= 12 ; $i++) { 
+            $bulan[$i] = 0;
+        }
+
+        if($d == '') $d = date('2020-01-01');
+        $q = $this->ais->get_jml_bulan($d);
+        foreach ($q->result() as $v) {
+            @$bulan[(int)$v->bulan] = (int) $v->jml;
+        }
+
+        return array_values($bulan);
+    }
     
 }

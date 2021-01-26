@@ -29,6 +29,17 @@ class MEri extends CI_Model {
         return $q;
     }
 
+    public function get_jml_bulan($tgl=false)
+    {
+        if(!$tgl) return false;  
+        $this->db->select('(sum(pnp)+sum(bus)+sum(brg)+sum(motor)+sum(khusus)) as jml,month(tgl) as bulan,year(tgl) as tahun');
+        $this->db->where('YEAR(tgl) = YEAR("'.$tgl.'")');
+        $this->db->group_by('month(tgl)');
+        $this->db->order_by('month(tgl)', 'asc');
+        $q = $this->db->get($this->t);
+        return $q;
+    }
+
     public function dt_eri_polda()
     {
          // Definisi

@@ -29,6 +29,18 @@ class Mtmc extends CI_Model {
         return $q;
     }
 
+    public function get_jml_bulan($tgl=false,$status=false)
+    {
+        if(!$tgl) return false;  
+        $this->db->select('count(*) as jml,month(tgl) as bulan,year(tgl) as tahun');
+        $this->db->where('YEAR(tgl) = YEAR("'.$tgl.'")');
+        if($status) $this->db->where('status', $status);
+        $this->db->group_by('month(tgl)');
+        $this->db->order_by('month(tgl)', 'asc');
+        $q = $this->db->get($this->t);
+        return $q;
+    }
+
     public function dt_tmc_info_lalin($awal='',$selesai='',$polda='',$polres='')
     {
          // Definisi
