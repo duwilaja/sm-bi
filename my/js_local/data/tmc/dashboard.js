@@ -141,7 +141,7 @@ var options = {
       }
     }
   },
-  colors:['#4a32d4','#f7592d','#f7be2d','#3abc1d'],
+  colors:['#4a32d4','#f7be2d','#f7592d','#3abc1d'],
   xaxis: {
       // type: 'datetime',
       // categories: ['Dec 01', 'Dec 02','Dec 03','Dec 04','Dec 05','Dec 06','Dec 07','Dec 08','Dec 09 ','Dec 10','Dec 11','Dec 12','Dec 13','Dec 14','Dec 15 ','Dec 16','Dec 17'],

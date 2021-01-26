@@ -117,7 +117,7 @@ class Grafik_api extends CI_Controller {
                     'date' => $date,
                 ];
         }else{
-            $sql_data =  $this->db->query('select date(dtm) as tgl, status, Count(*) as jumlah from tmc_info_lalin group by date(dtm), status')->result();
+            $sql_data =  $this->db->query('select date(tgl) as tgl, status, Count(*) as jumlah from tmc_info_lalin group by date(tgl), status')->result();
             $sql_date = $this->db->query('SELECT tgl FROM `tmc_info_lalin` GROUP BY tgl')->result();
             foreach ($sql_data as $da) {
                 if ($da->tgl >= $start && $da->tgl <= $end) {
