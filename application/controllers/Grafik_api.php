@@ -1195,7 +1195,7 @@ class Grafik_api extends CI_Controller {
             $bulan[$i] = 0;
         }
 
-        if($d == '') $d = date('2020-01-01');
+        if($d == '') $d = date('Y-m-d');
         if($status == '') $status = "Macet";
         $q = $this->tmc->get_jml_bulan($d,$status);
         foreach ($q->result() as $v) {
@@ -1210,7 +1210,7 @@ class Grafik_api extends CI_Controller {
             $bulan[$i] = 0;
         }
 
-        if($d == '') $d = date('2020-01-01');
+        if($d == '') $d = date('Y-m-d');
         $q = $this->eri->get_jml_bulan($d);
         foreach ($q->result() as $v) {
             @$bulan[(int)$v->bulan] = (int) $v->jml;
@@ -1225,7 +1225,7 @@ class Grafik_api extends CI_Controller {
             $bulan[$i] = 0;
         }
 
-        if($d == '') $d = date('2020-01-01');
+        if($d == '') $d = date('Y-m-d');
         $q = $this->ais->get_jml_bulan($d);
         foreach ($q->result() as $v) {
             @$bulan[(int)$v->bulan] = (int) $v->jml;
