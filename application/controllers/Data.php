@@ -103,10 +103,16 @@ class Data extends CI_Controller {
 	}
 	public function ais()
 	{
+		$this->load->model('MAis','ais');
+		
         $user=$this->session->userdata('user_data');
         $data['js_local'] = 'data/ais/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
+			$data['md'] = $this->ais->get_jml('md');
+			$data['lb'] = $this->ais->get_jml('lb');
+			$data['lr'] = $this->ais->get_jml('lr');
+			$data['rumat'] = $this->ais->get_jml('rumat');
 			$this->template->load("data/ais/dashboard",$data);
 
 			// 404 page 
