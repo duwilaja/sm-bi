@@ -70,57 +70,111 @@ class Grafik_api extends CI_Controller {
 
     public function bar_tmc_kondisi_lalin()
     {
-       
+        
+        $start =$this->input->post('start');
+        $end =$this->input->post('end');
         $lancar = [];
         $padat = [];
         $macet = [];
         $date = [];
-        // $array= array();
 
-        // $this->tmc->see = 'dtm,status,count(*) as total ';
-        // $eri = $this->eri->get('','date(dtm) >= date("2020-12-28") && date(dtm) <= date("2020-12-30")','date(dtm)')->result();
-        // $tmc_lalin = $this->tmc->get('','','','status')->result();
-        $tmc_lalin = $this->db->query('SELECT tgl,status,count(*) as total FROM `tmc_info_lalin` WHERE date(tgl) = date(now()) GROUP BY tgl,status')->result();
-        foreach ($tmc_lalin as $v) {
-            if ($v->status == 'Lancar') {
-                array_push($lancar,$v->total);
+        if ($start == "") {
+            $tmc_lalin = $this->db->query('SELECT tgl,status,count(*) as total FROM `tmc_info_lalin` WHERE date(tgl) = date(now()) GROUP BY tgl,status')->result();
+                foreach ($tmc_lalin as $v) {
+                    if ($v->status == 'Lancar') {
+                        array_push($lancar,$v->total);
+                    }
+                    if ($v->status == 'Padat') {
+                        array_push($padat,$v->total);
+                    }
+                    if ($v->status == 'Macet') {
+                        array_push($macet,$v->total);
+                    }
+                    $tgl = array(
+                        tgl_indo($v->tgl)
+                    );     
+                    array_push($date,array_unique($tgl));   
+                }
+                
+            
+                $series =  [
+                    'data' => [
+                    [
+                        "name" => 'Lancar',
+                        "type" => 'bar',
+                        "data" => $lancar
+                    ], 
+                    [
+                        "name" => 'Padat',
+                        "type" => 'bar',
+                        "data" => $padat
+                    ], 
+                    [
+                        "name" => 'Macet',
+                        "type" => 'bar',
+                        "data" => $macet
+                    ]],
+                    'date' => $date,
+                ];
+        }else{
+            $sql_data =  $this->db->query('select date(tgl) as tgl, status, Count(*) as jumlah from tmc_info_lalin group by date(tgl), status')->result();
+            $sql_date = $this->db->query('SELECT tgl FROM `tmc_info_lalin` GROUP BY tgl')->result();
+            foreach ($sql_data as $da) {
+                if ($da->tgl >= $start && $da->tgl <= $end) {
+
+                    if ($da->status == 'Lancar') {
+                        $l = $da->jumlah;
+                        array_push($lancar,$l);
+                    }
+
+                    if ($da->status == 'Padat') {
+                        $p = $da->jumlah;
+                        array_push($padat,$p);
+                    }
+                    
+                    if ($da->status == 'Macet') {
+                        $m = $da->jumlah;
+                        array_push($macet,$m);
+                    }
+
+                }
+
+
             }
-            if ($v->status == 'Padat') {
-                array_push($padat,$v->total);
+            
+            foreach ($sql_date as $de) {
+                if ($de->tgl >= $start && $de->tgl <= $end) {
+                    array_push($date,tgl_indo($de->tgl));  
+                }    
             }
-            if ($v->status == 'Macet') {
-                array_push($macet,$v->total);
-            }
-            $tgl = array(
-                tgl_indo($v->tgl)
-            );     
-            array_push($date,array_unique($tgl));   
+       
+            $series =  [
+                'data' => [
+                [
+                    "name" => 'Lancar',
+                    "type" => 'bar',
+                    "data" => $lancar
+                ], 
+                [
+                    "name" => 'Padat',
+                    "type" => 'bar',
+                    "data" => $padat
+                ], 
+                [
+                    "name" => 'Macet',
+                    "type" => 'bar',
+                    "data" => $macet
+                ]],
+                'date' => $date,
+            ];
+
         }
         
-       
-        $series =  [
-            'data' => [
-            [
-                "name" => 'Lancar',
-                "type" => 'bar',
-                "data" => $lancar
-            ], 
-            [
-                "name" => 'Padat',
-                "type" => 'bar',
-                "data" => $padat
-            ], 
-            [
-                "name" => 'Macet',
-                "type" => 'bar',
-                "data" => $macet
-            ]],
-            'date' => $date
-        ];
-        
-        echo json_encode($series);
+         echo json_encode($series);
         // echo json_encode($eri);
     }
+
+
 
     public function bar_tmc_penyebab_lalin()
     {
