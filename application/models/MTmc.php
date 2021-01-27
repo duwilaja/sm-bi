@@ -41,13 +41,13 @@ class Mtmc extends CI_Model {
          // Set table name
          $CI->dt->table = $this->t;
          // Set orderable column fields
-         $CI->dt->column_order = ['nomor','dasar','namajalan','lat','lng','dtm','jammulai','jamsampai','status','sumber',null];
+         $CI->dt->column_order = ['nomor','dasar','namajalan','lat','lng','tgl','jammulai','jamsampai','status','sumber',null];
          // Set searchable column fields
          $CI->dt->column_search = ['dasar','status','sumber'];
          // Set select column fields
-         $CI->dt->select = 'nomor,dasar,namajalan,lat,lng,dtm,jammulai,jamsampai,status,sumber';
+         $CI->dt->select = 'nomor,dasar,namajalan,lat,lng,tgl,jammulai,jamsampai,status,sumber';
          // Set default order
-         $CI->dt->order = ['dtm' => 'desc'];
+         $CI->dt->order = ['tgl' => 'desc'];
         //  $this->db->group_by('e.da');
          
         $awal = $this->input->post('awal');
@@ -57,8 +57,11 @@ class Mtmc extends CI_Model {
        
          
         if ($awal != '') {
-           $con1t = ['where','date(tgl)',$awal];
-           array_push($condition,$con1t);
+            $con1t = ['where','date(tgl) >=',$awal];
+            array_push($condition,$con1t);
+
+            $con1t = ['where','date(tgl) <=',$selesai];
+            array_push($condition,$con1t);
 
           }
 
@@ -71,6 +74,7 @@ class Mtmc extends CI_Model {
             $con1t = ['where','polres',$polres];
             array_push($condition,$con1t);
            } 
+
  
         //  $cons = ['join','polda p','p.rowid = e.da','inner'];
         //  array_push($condition,$cons);
@@ -86,7 +90,7 @@ class Mtmc extends CI_Model {
                  $dt->namajalan,
                  $dt->lat,
                  $dt->lng,
-                 tgl_indo($dt->dtm),
+                 tgl_indo($dt->tgl),
                  $dt->jammulai,
                  $dt->jamsampai,
                  $dt->status,

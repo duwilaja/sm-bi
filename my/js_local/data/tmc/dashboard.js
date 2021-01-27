@@ -141,7 +141,8 @@ var options = {
       }
     }
   },
-  colors:['#4a32d4','#f7be2d','#f7592d','#3abc1d'],
+//   colors:['#4a32d4','#f7be2d','#f7592d','#3abc1d'],
+  colors:['#ff5454','#fcff52','#ceff52','#92ff4f','#4a32d4','#f7be2d','#f7592d','#3abc1d','#42fcbe'],
   xaxis: {
       // type: 'datetime',
       // categories: ['Dec 01', 'Dec 02','Dec 03','Dec 04','Dec 05','Dec 06','Dec 07','Dec 08','Dec 09 ','Dec 10','Dec 11','Dec 12','Dec 13','Dec 14','Dec 15 ','Dec 16','Dec 17'],
@@ -1149,12 +1150,25 @@ function bar_tmc_kondisi(start='',end='',polda='',polres='') {
 }
 
 function bar_tmc_penyebab() { 
-    $.getJSON("../Grafik_api/bar_tmc_penyebab_lalin", function(response) {
-        chart_bar_penyebab_lalin.updateSeries(response.data);
-        chart_bar_penyebab_lalin.updateOptions({xaxis: {
+    var start = $("#f_date_start").val();
+    var end = $("#f_date_end").val();
+    var polda = $("#f_polda").val();
+    var polres = $("#f_polres").val();
+
+    $.ajax({
+        url : "../Grafik_api/bar_tmc_penyebab_lalin",
+        method : "POST",
+        data : {start: start, end:end,polda:polda,polres:polres },
+        async : true,
+        dataType : 'json',
+        success: function(response){  
+            chart_bar_penyebab_lalin.updateSeries(response.data);
+            chart_bar_penyebab_lalin.updateOptions({xaxis: {
             categories: response.date
           }});  
+        }
     });
+
 }
 
 function bar_tmc_interaksi_giat() { 

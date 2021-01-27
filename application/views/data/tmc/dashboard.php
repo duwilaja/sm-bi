@@ -167,7 +167,7 @@
 																		<div class="row">
 																			<div class="col-md-12">
 																				<div class="row">
-																					<div class="col-md-12">
+																					<div class="col-md-6">
 																						<div class="">
 																							<p>Kondisi Lalin</p>
 																						</div>
@@ -175,14 +175,14 @@
 																							<div id="status-lalin" class="worldh h-276" ></div>
 																						</div>
 																					</div>
-																					<!-- <div class="col-md-6">
+																					<div class="col-md-6">
 																					    <div class="">
 																							<p>Penyebab Kemacetan</p>
 																						</div>
 																						<div class="overflow-hidden">
 																							<div id="penyebab-lalin" class="worldh h-276" ></div>
 																						</div>
-																					</div> -->
+																					</div>
 																				</div>
 																			</div>
 																			</div>
