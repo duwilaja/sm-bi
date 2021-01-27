@@ -29,12 +29,19 @@ class Mtmc extends CI_Model {
         return $q;
     }
 
-    public function get_jml_bulan($tgl=false,$status=false)
+    public function get_jml_bulan($tgl=false,$status=false,$polda=false,$polres=false)
     {
         if(!$tgl) return false;  
         $this->db->select('count(*) as jml,month(tgl) as bulan,year(tgl) as tahun');
         $this->db->where('YEAR(tgl) = YEAR("'.$tgl.'")');
         if($status) $this->db->where('status', $status);
+        if ($polda) {
+            $this->db->where('polda', $polda);
+        }
+
+        if ($polres) {
+            $this->db->where('polres', $polres);
+        }
         $this->db->group_by('month(tgl)');
         $this->db->order_by('month(tgl)', 'asc');
         $q = $this->db->get($this->t);
@@ -433,17 +440,6 @@ class Mtmc extends CI_Model {
          // Output to JSON format
          return json_encode($output);
     }
-
-    function get_polda(){
-        $query = $this->db->get('polda');
-        return $query;  
-    }
- 
-    function get_polres($polda){
-        $query = $this->db->get_where('polres', array('polda' => $polda));
-        return $query;
-    }
-
 
     // total keseluruhan tmc
     public function tmc_info_lalin($start='',$end='',$polda='',$polres='')

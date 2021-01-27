@@ -10,6 +10,7 @@ class Grafik_api extends CI_Controller {
         $this->load->model('MTmc','tmc');
         $this->load->model('MCyb','cyb');
         $this->load->model('MAis','ais');
+        $this->load->model('MDares','dares');
     }
     
     public function bar_eri()
@@ -971,7 +972,7 @@ class Grafik_api extends CI_Controller {
 
     function get_polres(){
         $t = $this->input->post('id',TRUE);
-        $data = $this->tmc->get_polres($t)->result();
+        $data = $this->dares->get_polres($t)->result();
         echo json_encode($data);
 	}
     public function jml_data_eri()
@@ -1102,6 +1103,11 @@ class Grafik_api extends CI_Controller {
     public function grafik_trend_data()
     {
         $data = [];
+        // Definis inputan
+        $data_pembanding = $this->input->post('f_data_pembanding');
+        $kategori = $this->input->post('f_kategori');
+        $polda = $this->input->post('f_polda');
+        $polres = $this->input->post('f_polres');
 
         $kondisi = [
             "titik_macet" => 
@@ -1125,7 +1131,7 @@ class Grafik_api extends CI_Controller {
                 "pointRadius" => 4,
                 "pointHitRadius" => 10,
                 // notice the gap in the data and the "spanGaps" => true
-                "data" => $this->get_tmc_jml_bulan(),
+                "data" => $this->get_tmc_jml_bulan('','',$polda,$polres),
                 "spanGaps" => true,
             ],
             "jumlah_ranmor" => 
@@ -1149,7 +1155,7 @@ class Grafik_api extends CI_Controller {
                 "pointRadius" => 4,
                 "pointHitRadius" => 10,
                 // notice the gap in the data and the "spanGaps" => true
-                "data" => $this->get_eri_jml_bulan(),
+                "data" => $this->get_eri_jml_bulan('',$polda,$polres),
                 "spanGaps" => true,
             ],
             "jumlah_laka" => 
@@ -1173,14 +1179,22 @@ class Grafik_api extends CI_Controller {
                 "pointRadius" => 4,
                 "pointHitRadius" => 10,
                 // notice the gap in the data and the "spanGaps" => true
-                "data" => $this->get_ais_jml_bulan(),
+                "data" => $this->get_ais_jml_bulan('',$polda,$polres),
                 "spanGaps" => true,
             ],
         ];
-
-       $data[] = $kondisi['titik_macet'];
-       $data[] = $kondisi['jumlah_ranmor'];
-       $data[] = $kondisi['jumlah_laka'];
+    
+       
+        
+        if(!empty($data_pembanding)){
+            foreach ($data_pembanding as $v) {
+                $data[] = $kondisi[$v];
+            }
+        }else{
+            $data[] = $kondisi['titik_macet'];
+            $data[] = $kondisi['jumlah_ranmor'];
+            $data[] = $kondisi['jumlah_laka'];
+        }
 
         $rsp = [
             'data' => $data
@@ -1189,7 +1203,7 @@ class Grafik_api extends CI_Controller {
         echo json_encode($rsp);
     }
 
-    private function get_tmc_jml_bulan($d='',$status='')
+    private function get_tmc_jml_bulan($d='',$status='',$polda,$polres)
     {
         for ($i=1; $i <= 12 ; $i++) { 
             $bulan[$i] = 0;
@@ -1197,21 +1211,21 @@ class Grafik_api extends CI_Controller {
 
         if($d == '') $d = date('Y-m-d');
         if($status == '') $status = "Macet";
-        $q = $this->tmc->get_jml_bulan($d,$status);
+        $q = $this->tmc->get_jml_bulan($d,$status,$polda,$polres);
         foreach ($q->result() as $v) {
             @$bulan[(int)$v->bulan] = (int) $v->jml;
         }
         return array_values($bulan);
     }
 
-    private function get_eri_jml_bulan($d='')
+    private function get_eri_jml_bulan($d='',$polda,$polres)
     {
         for ($i=1; $i <= 12 ; $i++) { 
             $bulan[$i] = 0;
         }
 
         if($d == '') $d = date('Y-m-d');
-        $q = $this->eri->get_jml_bulan($d);
+        $q = $this->eri->get_jml_bulan($d,$polda,$polres);
         foreach ($q->result() as $v) {
             @$bulan[(int)$v->bulan] = (int) $v->jml;
         }
@@ -1219,14 +1233,14 @@ class Grafik_api extends CI_Controller {
         return array_values($bulan);
     }
 
-    private function get_ais_jml_bulan($d='')
+    private function get_ais_jml_bulan($d='',$polda,$polres)
     {
         for ($i=1; $i <= 12 ; $i++) { 
             $bulan[$i] = 0;
         }
 
         if($d == '') $d = date('Y-m-d');
-        $q = $this->ais->get_jml_bulan($d);
+        $q = $this->ais->get_jml_bulan($d,$polda,$polres);
         foreach ($q->result() as $v) {
             @$bulan[(int)$v->bulan] = (int) $v->jml;
         }

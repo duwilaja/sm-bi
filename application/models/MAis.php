@@ -37,11 +37,20 @@ class MAis extends CI_Model {
         return $q;
     }
 
-    public function get_jml_bulan($tgl=false)
+    public function get_jml_bulan($tgl=false,$polda=false,$polres=false)
     {
         if(!$tgl) return false;  
         $this->db->select('sum(jml) as jml,month(tgl) as bulan,year(tgl) as tahun');
         $this->db->where('YEAR(tgl) = YEAR("'.$tgl.'")');
+       
+        if ($polda) {
+            $this->db->where('da', $polda);
+        }
+
+        if ($polres) {
+            $this->db->where('res', $polres);
+        }
+
         $this->db->group_by('month(tgl)');
         $this->db->order_by('month(tgl)', 'asc');
         $q = $this->db->get($this->t);
