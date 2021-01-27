@@ -177,42 +177,195 @@ class Grafik_api extends CI_Controller {
 
 
 
+    // public function bar_tmc_penyebab_lalin()
+    // {
+
+
+    //     $data = [];
+    //     $date = [];
+
+    //     // $this->tmc->see = 'dtm,status,count(*) as total ';
+    //     // $eri = $this->eri->get('','date(dtm) >= date("2020-12-28") && date(dtm) <= date("2020-12-30")','date(dtm)')->result();
+    //     // $tmc_lalin = $this->tmc->get('','','','status')->result();
+    //     $penyebab = $this->db->get('penyebab_macet')->result();
+
+    //     $tmc_penyebab = $this->db->query('SELECT dtm,penyebab,count(*) as total FROM `tmc_info_lalin` WHERE date(dtm) = date(now()) and status="macet" GROUP BY penyebab')->result();
+    //         foreach ($tmc_penyebab as $key) {
+    //                foreach ($penyebab as $p) {
+    //                   if ($key->penyebab == $p->sebab) {
+    //                        $a = [
+    //                            'name'=> $key->penyebab,
+    //                            'type'=> 'bar',
+    //                            'data'=> [(int)$key->total]
+    //                        ];
+    //                        $b = tgl_indo($key->dtm);
+
+    //                   }
+    //                }
+
+    //                array_push($data,$a);
+    //                array_push($date,$b);
+    //         }
+
+    //         $series =  [
+    //             'data' => $data,
+    //             'date' => $date
+    //         ];
+            
+    //         echo json_encode($series);
+
+    // }
+
     public function bar_tmc_penyebab_lalin()
     {
 
+        $start =$this->input->post('start');
+        $end =$this->input->post('end');
 
-        $data = [];
-        $date = [];
+        if ($start == "") {
+                $data = [];
+                $date = [];
 
-        // $this->tmc->see = 'dtm,status,count(*) as total ';
-        // $eri = $this->eri->get('','date(dtm) >= date("2020-12-28") && date(dtm) <= date("2020-12-30")','date(dtm)')->result();
-        // $tmc_lalin = $this->tmc->get('','','','status')->result();
-        $penyebab = $this->db->get('penyebab_macet')->result();
+                $penyebab = $this->db->get('penyebab_macet')->result();
 
-        $tmc_penyebab = $this->db->query('SELECT dtm,penyebab,count(*) as total FROM `tmc_info_lalin` WHERE date(dtm) = date(now()) and status="macet" GROUP BY penyebab')->result();
-            foreach ($tmc_penyebab as $key) {
-                   foreach ($penyebab as $p) {
-                      if ($key->penyebab == $p->sebab) {
-                           $a = [
-                               'name'=> $key->penyebab,
-                               'type'=> 'bar',
-                               'data'=> [(int)$key->total]
-                           ];
-                           $b = tgl_indo($key->dtm);
+                $tmc_penyebab = $this->db->query('SELECT dtm,penyebab,count(*) as total FROM `tmc_info_lalin` WHERE date(dtm) = date(now()) and status="macet" GROUP BY penyebab')->result();
+                    foreach ($tmc_penyebab as $key) {
+                        foreach ($penyebab as $p) {
+                            if ($key->penyebab == $p->sebab) {
+                                $a = [
+                                    'name'=> $key->penyebab,
+                                    'type'=> 'bar',
+                                    'data'=> [(int)$key->total]
+                                ];
+                                $b = tgl_indo($key->dtm);
 
-                      }
-                   }
+                            }
+                        }
 
-                   array_push($data,$a);
-                   array_push($date,$b);
-            }
+                        array_push($data,$a);
+                        array_push($date,$b);
+                    }
 
-            $series =  [
-                'data' => $data,
-                'date' => $date
-            ];
-            
-            echo json_encode($series);
+                    $series =  [
+                        'data' => $data,
+                        'date' => $date
+                    ];
+        }else{
+            $date=[];
+
+
+            $alam = [];
+            $jalan = [];
+            $kendaraan = [];
+            $peraturan = [];
+            $pengendara = [];
+            $infrastruktur = [];
+            $kegiatan_kenegaraan = [];
+            $kegiatan_masyarakat = [];
+            $prasarana_jalan = [];
+    
+                $tmc_penyebab = $this->db->query('SELECT tgl,penyebab,count(*) as total FROM tmc_info_lalin WHERE penyebab != ""  GROUP BY date(tgl), penyebab')->result();
+                $tmc_penyebab_date = $this->db->query('SELECT tgl,penyebab,count(*) as total FROM tmc_info_lalin WHERE penyebab != ""  GROUP BY date(tgl)')->result();
+                    foreach ($tmc_penyebab as $key) {
+                            if ($key->tgl >= $start && $key->tgl <= $end) {
+    
+                                if ($key->penyebab == "Alam") {
+                                     $satu = $key->total;
+                                     array_push($alam,$satu);                                
+                                }
+                                if ($key->penyebab == "Jalan") {
+                                    $dua = $key->total;
+                                    array_push($jalan,$dua);
+                                }
+                                if ($key->penyebab == "Kendaraan") {
+                                    $tiga = $key->total;
+                                    array_push($kendaraan,$tiga);          
+                                }
+                                if ($key->penyebab == "Peraturan") {
+                                    $empat = $key->total;
+                                    array_push($peraturan,$empat);
+                                }
+                                if ($key->penyebab == "Pengendara") {
+                                    $lima = $key->total;
+                                    array_push($pengendara,$lima);
+                                }
+                                if ($key->penyebab == "Infrastruktur") {
+                                    $enam = $key->total;
+                                    array_push($infrastruktur,$enam);
+                                }
+                                if ($key->penyebab == "Kegiatan Kenegaraan") {
+                                    $tujuh = $key->total;
+                                    array_push($kegiatan_kenegaraan,$tujuh);
+                                }
+                                if ($key->penyebab == "Kegiatan Masyarakat") {
+                                    $delapan = $key->total;
+                                    array_push($kegiatan_masyarakat,$delapan);
+                                }
+                                if ($key->penyebab == "Prasarana Jalan") {
+                                    $sembilan = $key->total;
+                                    array_push($prasarana_jalan,$sembilan);
+                                }
+                                
+                            }
+                    }
+                    foreach ($tmc_penyebab_date as $de) {
+                        if ($de->tgl >= $start && $de->tgl <= $end) {
+                            array_push($date,tgl_indo($de->tgl));  
+                        }    
+                    }
+                    $series =  [
+                        'data' => [
+                        [
+                            "name" => 'Alam',
+                            "type" => 'bar',
+                            "data" => $alam
+                        ], 
+                        [
+                            "name" => 'jalan',
+                            "type" => 'bar',
+                            "data" => $jalan
+                        ], 
+                        [
+                            "name" => 'kendaraan',
+                            "type" => 'bar',
+                            "data" => $kendaraan
+                        ],
+                        [
+                            "name" => 'peraturan',
+                            "type" => 'bar',
+                            "data" => $peraturan
+                        ],
+                        [
+                            "name" => 'pengendara',
+                            "type" => 'bar',
+                            "data" => $pengendara
+                        ],
+                        [
+                            "name" => 'infrastruktur',
+                            "type" => 'bar',
+                            "data" => $infrastruktur
+                        ],
+                        [
+                            "name" => 'kegiatan_kenegaraan',
+                            "type" => 'bar',
+                            "data" => $kegiatan_kenegaraan
+                        ],
+                        [
+                            "name" => 'kegiatan_masyarakat',
+                            "type" => 'bar',
+                            "data" => $kegiatan_masyarakat
+                        ],
+                        [
+                            "name" => 'prasarana_jalan',
+                            "type" => 'bar',
+                            "data" => $prasarana_jalan
+                        ]],
+                        'date' => $date,
+                    ];
+
+        }
+                       
+        echo json_encode($series);
 
     }
 
