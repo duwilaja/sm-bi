@@ -1,3 +1,4 @@
+var optional = $('#optional');
 var ctx = document.getElementById('td');
 ctx.height = 140;
 var toll = null;
@@ -57,6 +58,7 @@ var cfr = new Chart(ctx, {
 
 $(document).ready(function () {
     grafik_trend_data();
+    cek_jumlah_ranmor();
 });
 
 function grafik_trend_data(data) { 
@@ -84,6 +86,11 @@ $('#filter_td').submit(function (e) {
     grafik_trend_data(data);
 });
 
+function reset_form() { 
+    grafik_trend_data();
+    cek_jumlah_ranmor();
+}
+
 $('#f_polda').change(function(){ 
     var id=$(this).val();
     $.ajax({
@@ -106,3 +113,33 @@ $('#f_polda').change(function(){
     });
     // return false;
 });
+
+$('#data_pembanding').change(function (e) { 
+    e.preventDefault();
+    cek_jumlah_ranmor();
+});
+
+function cek_jumlah_ranmor() { 
+    $('#kategori_ranmor').remove();
+    var xx = $('#data_pembanding option:selected');
+    for (let i = 0; i < xx.length; i++) {
+        if(xx[i].value == "jumlah_ranmor"){
+            $.getJSON("../Grafik_api/td_kateg_ranmor", function(r) {
+                var ok = '';
+                ok += '<div class="col-md-2" id="kategori_ranmor">';
+                ok += '<div class="form-group">';
+                ok += '<p>Kategori Ranmor</p>';
+                ok += '<select class="form-control form-control-sm"  name="f_kategori_ranmor">';
+                ok += "<option value=''>-- Pilih Kategori --</option>";
+                $.each(r, function (i, v) { 
+                    ok += "<option value="+i+">"+v+"</option>" 
+                });
+                ok += '</select>';
+                ok += '</div>';
+                ok += '</div>';
+                optional.append(ok);
+                return false;
+            }); 
+        }
+    }
+}

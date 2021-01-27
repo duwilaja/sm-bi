@@ -1105,7 +1105,7 @@ class Grafik_api extends CI_Controller {
         $data = [];
         // Definis inputan
         $data_pembanding = $this->input->post('f_data_pembanding');
-        $kategori = $this->input->post('f_kategori');
+        $kategori_ranmor = $this->input->post('f_kategori_ranmor');
         $polda = $this->input->post('f_polda');
         $polres = $this->input->post('f_polres');
 
@@ -1155,7 +1155,7 @@ class Grafik_api extends CI_Controller {
                 "pointRadius" => 4,
                 "pointHitRadius" => 10,
                 // notice the gap in the data and the "spanGaps" => true
-                "data" => $this->get_eri_jml_bulan('',$polda,$polres),
+                "data" => $this->get_eri_jml_bulan('',$kategori_ranmor,$polda,$polres),
                 "spanGaps" => true,
             ],
             "jumlah_laka" => 
@@ -1218,14 +1218,14 @@ class Grafik_api extends CI_Controller {
         return array_values($bulan);
     }
 
-    private function get_eri_jml_bulan($d='',$polda,$polres)
+    private function get_eri_jml_bulan($d='',$kategori,$polda,$polres)
     {
         for ($i=1; $i <= 12 ; $i++) { 
             $bulan[$i] = 0;
         }
 
         if($d == '') $d = date('Y-m-d');
-        $q = $this->eri->get_jml_bulan($d,$polda,$polres);
+        $q = $this->eri->get_jml_bulan($d,$kategori,$polda,$polres);
         foreach ($q->result() as $v) {
             @$bulan[(int)$v->bulan] = (int) $v->jml;
         }
@@ -1246,6 +1246,19 @@ class Grafik_api extends CI_Controller {
         }
 
         return array_values($bulan);
+    }
+
+    public function td_kateg_ranmor()
+    {
+        $ranmor = [
+            'pnp' => "Mobil PNP",
+            'bus' => "Bus",
+            'brg' => "Mobil Barang",
+            'motor' => "Motor",
+            "khusus" => "Kend. Khusus"
+        ];
+        
+        echo json_encode($ranmor);
     }
     
 }
