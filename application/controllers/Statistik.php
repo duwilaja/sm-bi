@@ -38,6 +38,20 @@ class Statistik extends CI_Controller {
 			$data['retval']= $retval;
 			$this->load->view('login',$data);
 		}
+	}
+	
+	public function fatality_index()
+    {
+        $user=$this->session->userdata('user_data');
+        $data['js_local'] = 'statistik/fatality_index.js';
+		if(isset($user)){
+			$data['session'] = $user;
+			$this->template->load("statistik/fatality_index",$data);
+		}else{
+			$retval=array("403","Failed","Please login","error");
+			$data['retval']= $retval;
+			$this->load->view('login',$data);
+		}
     }
 
 }
