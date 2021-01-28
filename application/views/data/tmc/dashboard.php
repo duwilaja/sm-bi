@@ -219,16 +219,14 @@
 																			<table class="table" id="tabel_tmc">
 																				<thead>
 																					<tr>
-																						<!-- <th>Nomer</th> -->
-																						<th>Dasar</th>
-																						<th>Nama Jalan</th>
-																						<th>Lat</th>
-																						<th>Lng</th>
-																						<th>Waktu</th>
-																						<th>Mulai</th>
-																						<th>Selesai</th>
-																						<th>Status</th>
+																						<th>Nomor</th>
+																						<th>Polda</th>
+																						<th>Polres</th>
+																						<th>Tanggal</th>
 																						<th>Sumber Info</th>
+																						<th>Nama Jalan</th>
+																						<th>Status</th>
+																						<th>Detail</th>
 																					</tr>
 																				</thead>
 																				<tbody>
