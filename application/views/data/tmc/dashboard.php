@@ -280,19 +280,19 @@
 																			<div class="col-md-12">
 																				<div class="row">
 																					<div class="col-md-6">
-																						<div class="">
-																							<p>Dasar Giat</p>
-																						</div>
-																						<div class="overflow-hidden">
-																							<div id="interaksi-dasar-giat" class="worldh h-276" ></div>
-																						</div>
-																					</div>
-																					<div class="col-md-6">
 																					    <div class="">
 																							<p>Media</p>
 																						</div>
 																						<div class="overflow-hidden">
 																							<div id="interaksi-sosisal-media" class="worldh h-276" ></div>
+																						</div>
+																					</div>
+																					<div class="col-md-6">
+																						<div class="">
+																							<p>Dasar Giat</p>
+																						</div>
+																						<div class="overflow-hidden">
+																							<div id="interaksi-dasar-giat" class="worldh h-276" ></div>
 																						</div>
 																					</div>
 																				</div>
