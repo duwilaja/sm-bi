@@ -562,72 +562,133 @@ class Grafik_api extends CI_Controller {
 
     public function bar_tmc_publikasi_giat()
     {
+        $start =$this->input->post('start');
+        $end =$this->input->post('end');
         $pm = [];
         $lp = [];
         $ap = [];
         $sp = [];
         $date = [];
 
-    
-        $interaksi =$this->db->query('SELECT tgl,dasar,count(*) as total FROM tmc_publikasi WHERE date(tgl) = date(now())  GROUP BY dasar')->result();
+        if ($start == "") {
+            $publikasi =$this->db->query('SELECT tgl,dasar,count(*) as total FROM tmc_publikasi WHERE date(tgl) = date(now())  GROUP BY dasar')->result();
         
-        foreach ($interaksi as $v) {
-            if ($v->dasar == 'Permintaan Masyarakat') {
-                array_push($pm,$v->total);
+            foreach ($publikasi as $v) {
+                if ($v->dasar == 'Permintaan Masyarakat') {
+                    array_push($pm,$v->total);
+                }
+                if ($v->dasar == 'Laporan Pengaduan') {
+                    array_push($lp,$v->total);
+                }
+                if ($v->dasar == 'Atensi Pimpinan') {
+                    array_push($ap,$v->total);
+                }
+                if ($v->dasar == 'SPRINT') {
+                    array_push($sp,$v->total);
+                }
+            
             }
-            if ($v->dasar == 'Laporan Pengaduan') {
-                array_push($lp,$v->total);
-            }
-            if ($v->dasar == 'Atensi Pimpinan') {
-                array_push($ap,$v->total);
-            }
-            if ($v->dasar == 'SPRINT') {
-                array_push($sp,$v->total);
-            }
-        
             array_push($date,tgl_indo($v->tgl));
+    
+            $series =  [
+                'data' => [
+                [
+                    "name" => 'Permintaan Masyarakat',
+                    "type" => 'bar',
+                    "data" => $pm
+                ], 
+                [
+                    "name" => 'Laporan Pengaduan',
+                    "type" => 'bar',
+                    "data" => $lp
+                ], 
+                [
+                    "name" => 'Atensi Pimpinan',
+                    "type" => 'bar',
+                    "data" => $ap
+                ],
+                [
+                    "name" => 'Surat Perintah',
+                    "type" => 'bar',
+                    "data" => $sp
+                ]],
+                'date' => $date
+            ];
+           
+        }else{
+            $publikasi =$this->db->query('SELECT tgl,dasar,count(*) as total FROM tmc_publikasi GROUP BY date(tgl), dasar')->result();
+            $publikasi_date =$this->db->query('SELECT tgl,dasar,count(*) as total FROM tmc_publikasi GROUP BY date(tgl)')->result();
+        
+            foreach ($publikasi as $v) {
+                if ($v->tgl >= $start && $v->tgl <= $end) {
+                    if ($v->dasar == 'Permintaan Masyarakat') {
+                        array_push($pm,$v->total);
+                    }
+                    if ($v->dasar == 'Laporan Pengaduan') {
+                        array_push($lp,$v->total);
+                    }
+                    if ($v->dasar == 'Atensi Pimpinan') {
+                        array_push($ap,$v->total);
+                    }
+                    if ($v->dasar == 'SPRINT') {
+                        array_push($sp,$v->total);
+                    }                
+                }
+            }
+            foreach ($publikasi_date as $de) {
+                if ($de->tgl >= $start && $de->tgl <= $end) {
+                    array_push($date,tgl_indo($de->tgl));  
+                }    
+            }
+    
+            $series =  [
+                'data' => [
+                [
+                    "name" => 'Permintaan Masyarakat',
+                    "type" => 'bar',
+                    "data" => $pm
+                ], 
+                [
+                    "name" => 'Laporan Pengaduan',
+                    "type" => 'bar',
+                    "data" => $lp
+                ], 
+                [
+                    "name" => 'Atensi Pimpinan',
+                    "type" => 'bar',
+                    "data" => $ap
+                ],
+                [
+                    "name" => 'Surat Perintah',
+                    "type" => 'bar',
+                    "data" => $sp
+                ]],
+                'date' => $date
+            ];
+
+
         }
 
-        $series =  [
-            'data' => [
-            [
-                "name" => 'Permintaan Masyarakat',
-                "type" => 'bar',
-                "data" => $pm
-            ], 
-            [
-                "name" => 'Laporan Pengaduan',
-                "type" => 'bar',
-                "data" => $lp
-            ], 
-            [
-                "name" => 'Atensi Pimpinan',
-                "type" => 'bar',
-                "data" => $ap
-            ],
-            [
-                "name" => 'Surat Perintah',
-                "type" => 'bar',
-                "data" => $sp
-            ]],
-            'date' => $date
-        ];
+
         
         echo json_encode($series);
     }
 
     public function bar_tmc_publikasi_media()
     {
+        $start =$this->input->post('start');
+        $end =$this->input->post('end');
         $facebook = [];
         $twitter = [];
         $website = [];
         $center = [];
         $date = [];
 
-    
-        $interaksi =$this->db->query('SELECT tgl,media,count(*) as total FROM `tmc_publikasi` WHERE date(dtm) = date(now())  GROUP BY media')->result();
+        if ($start == "") {
+            
+        $publikasi =$this->db->query('SELECT tgl,media,count(*) as total FROM `tmc_publikasi` WHERE date(dtm) = date(now())  GROUP BY media')->result();
         
-        foreach ($interaksi as $v) {
+        foreach ($publikasi as $v) {
             if ($v->media == 'Facebook') {
                 array_push($facebook,$v->total);
             }
@@ -640,9 +701,8 @@ class Grafik_api extends CI_Controller {
             if ($v->media == 'Center') {
                 array_push($center,$v->total);
             }
-        
-            array_push($date,tgl_indo($v->tgl));
         }
+        array_push($date,tgl_indo($v->tgl));
 
         $series =  [
             'data' => [
@@ -669,19 +729,75 @@ class Grafik_api extends CI_Controller {
             'date' => $date
         ];
         
+    }else{
+        $publikasi =$this->db->query('SELECT tgl,media,count(*) as total FROM `tmc_publikasi` GROUP BY date(tgl), media')->result();
+        $publikasi_date =$this->db->query('SELECT tgl,media,count(*) as total FROM `tmc_publikasi`  GROUP BY date(tgl)')->result();
+        
+        foreach ($publikasi as $v) {
+            if ($v->tgl >= $start && $v->tgl <= $end) {
+                if ($v->media == 'Facebook') {
+                    array_push($facebook,$v->total);
+                }
+                if ($v->media == 'Tweeter') {
+                    array_push($twitter,$v->total);
+                }
+                if ($v->media == 'Website') {
+                    array_push($website,$v->total);
+                }
+                if ($v->media == 'Center') {
+                    array_push($center,$v->total);
+                }
+            }   
+    
+        }
+
+        foreach ($publikasi_date as $de) {
+            if ($de->tgl >= $start && $de->tgl <= $end) {
+                array_push($date,tgl_indo($de->tgl));  
+            }    
+        }
+
+
+        $series =  [
+            'data' => [
+            [
+                "name" => 'Facebook',
+                "type" => 'bar',
+                "data" => $facebook
+            ], 
+            [
+                "name" => 'Twitter',
+                "type" => 'bar',
+                "data" => $twitter
+            ], 
+            [
+                "name" => 'Website',
+                "type" => 'bar',
+                "data" => $website
+            ],
+            [
+                "name" => 'Center',
+                "type" => 'bar',
+                "data" => $center
+            ]],
+            'date' => $date
+        ];
+    }
         echo json_encode($series);
     }
 
     public function bar_tmc_kordinasi_giat()
     {
+        $start =$this->input->post('start');
+        $end =$this->input->post('end');
         $pm = [];
         $lp = [];
         $ap = [];
         $sp = [];
         $date = [];
 
-    
-        $kordinasi =$this->db->query('SELECT tgl,dasar,count(*) as total FROM `tmc_koordinasi` WHERE date(dtm) = date(now())  GROUP BY dasar')->result();
+        if ($start == "") {
+            $kordinasi =$this->db->query('SELECT tgl,dasar,count(*) as total FROM `tmc_koordinasi` WHERE date(dtm) = date(now())  GROUP BY dasar')->result();
         
         foreach ($kordinasi as $v) {
             if ($v->dasar == 'Permintaan Masyarakat') {
@@ -696,9 +812,8 @@ class Grafik_api extends CI_Controller {
             if ($v->dasar == 'SPRINT') {
                 array_push($sp,$v->total);
             }
-        
-            array_push($date,tgl_indo($v->tgl));
         }
+        array_push($date,tgl_indo($v->tgl));
 
         $series =  [
             'data' => [
@@ -724,36 +839,146 @@ class Grafik_api extends CI_Controller {
             ]],
             'date' => $date
         ];
+        }else{
+            $kordinasi =$this->db->query('SELECT tgl,dasar,count(*) as total FROM `tmc_koordinasi` GROUP BY date(tgl), dasar')->result();
+            $kordinasi_date =$this->db->query('SELECT tgl,dasar,count(*) as total FROM `tmc_koordinasi` GROUP BY date(tgl)')->result();
+        
+            foreach ($kordinasi as $v) {
+                if ($v->tgl >= $start && $v->tgl <= $end) {
+                    if ($v->dasar == 'Permintaan Masyarakat') {
+                        array_push($pm,$v->total);
+                    }
+                    if ($v->dasar == 'Laporan Pengaduan') {
+                        array_push($lp,$v->total);
+                    }
+                    if ($v->dasar == 'Atensi Pimpinan') {
+                        array_push($ap,$v->total);
+                    }
+                    if ($v->dasar == 'SPRINT') {
+                        array_push($sp,$v->total);
+                    }  
+                }   
+            }
+            foreach ($kordinasi_date as $de) {
+                if ($de->tgl >= $start && $de->tgl <= $end) {
+                    array_push($date,tgl_indo($de->tgl));  
+                }    
+            }
+    
+            $series =  [
+                'data' => [
+                [
+                    "name" => 'Permintaan Masyarakat',
+                    "type" => 'bar',
+                    "data" => $pm
+                ], 
+                [
+                    "name" => 'Laporan Pengaduan',
+                    "type" => 'bar',
+                    "data" => $lp
+                ], 
+                [
+                    "name" => 'Atensi Pimpinan',
+                    "type" => 'bar',
+                    "data" => $ap
+                ],
+                [
+                    "name" => 'Surat Perintah',
+                    "type" => 'bar',
+                    "data" => $sp
+                ]],
+                'date' => $date
+            ];
+
+        }
+
+    
+       
         
         echo json_encode($series);
     }
 
     public function bar_tmc_kordinasi_media()
     {
+        $start =$this->input->post('start');
+        $end =$this->input->post('end');
         $perijinan = [];
         $pemberitahuan = [];
         $info_kegiatan = [];
         $permohonan_pengawalan = [];
         $date = [];
 
+        if ($start == "") {
+            $kordinasi =$this->db->query('SELECT tgl,jenis,count(*) as total FROM `tmc_koordinasi` WHERE date(dtm) = date(now())  GROUP BY jenis')->result();
+        
+            foreach ($kordinasi as $v) {
+                if ($v->jenis == 'Perijinan') {
+                    array_push($perijinan,$v->total);
+                }
+                if ($v->jenis == 'Pemberitahuan') {
+                    array_push($pemberitahuan,$v->total);
+                }
+                if ($v->jenis == 'Info Kegiatan') {
+                    array_push($info_kegiatan,$v->total);
+                }
+                if ($v->jenis == 'Permohonan Pengawalan') {
+                    array_push($permohonan_pengawalan,$v->total);
+                }
+            
+                array_push($date,tgl_indo($v->tgl));
+            }
     
-        $kordinasi =$this->db->query('SELECT tgl,jenis,count(*) as total FROM `tmc_koordinasi` WHERE date(dtm) = date(now())  GROUP BY jenis')->result();
+            $series =  [
+                'data' => [
+                [
+                    "name" => 'Perijinan',
+                    "type" => 'bar',
+                    "data" => $perijinan
+                ], 
+                [
+                    "name" => 'Pemberitahuan',
+                    "type" => 'bar',
+                    "data" => $pemberitahuan
+                ], 
+                [
+                    "name" => 'Info Kegiatan',
+                    "type" => 'bar',
+                    "data" => $info_kegiatan
+                ],
+                [
+                    "name" => 'Permohonan Pengawalan',
+                    "type" => 'bar',
+                    "data" => $permohonan_pengawalan
+                ]],
+                'date' => $date
+            ];
+        }else{
+        
+        $kordinasi =$this->db->query('SELECT tgl,jenis,count(*) as total FROM `tmc_koordinasi` GROUP BY date(tgl), jenis')->result();
+        $kordinasi_date =$this->db->query('SELECT tgl,jenis,count(*) as total FROM `tmc_koordinasi` GROUP BY date(tgl)')->result();
         
         foreach ($kordinasi as $v) {
-            if ($v->jenis == 'Perijinan') {
-                array_push($perijinan,$v->total);
-            }
-            if ($v->jenis == 'Pemberitahuan') {
-                array_push($pemberitahuan,$v->total);
-            }
-            if ($v->jenis == 'Info Kegiatan') {
-                array_push($info_kegiatan,$v->total);
-            }
-            if ($v->jenis == 'Permohonan Pengawalan') {
-                array_push($permohonan_pengawalan,$v->total);
-            }
+            if ($v->tgl >= $start && $v->tgl <= $end) {
+                if ($v->jenis == 'Perijinan') {
+                    array_push($perijinan,$v->total);
+                }
+                if ($v->jenis == 'Pemberitahuan') {
+                    array_push($pemberitahuan,$v->total);
+                }
+                if ($v->jenis == 'Info Kegiatan') {
+                    array_push($info_kegiatan,$v->total);
+                }
+                if ($v->jenis == 'Permohonan Pengawalan') {
+                    array_push($permohonan_pengawalan,$v->total);
+                }
+            }     
         
-            array_push($date,tgl_indo($v->tgl));
+        }
+
+        foreach ($kordinasi_date as $de) {
+            if ($de->tgl >= $start && $de->tgl <= $end) {
+                array_push($date,tgl_indo($de->tgl));  
+            }    
         }
 
         $series =  [
@@ -780,7 +1005,9 @@ class Grafik_api extends CI_Controller {
             ]],
             'date' => $date
         ];
-        
+
+        }
+
         echo json_encode($series);
     }
 

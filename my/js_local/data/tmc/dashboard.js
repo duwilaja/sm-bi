@@ -1215,61 +1215,133 @@ function bar_tmc_interaksi_media(start='',end='',polda='',polres='') {
 }
 
 
-function bar_tmc_publikasi_giat() { 
-    $.getJSON("../Grafik_api/bar_tmc_publikasi_giat", function(response) {
-        chart_bar_publikasi_giat.updateSeries(response.data);
-        chart_bar_publikasi_giat.updateOptions({xaxis: {
+function bar_tmc_publikasi_giat(start='',end='',polda='',polres='') { 
+    var start = $("#f_date_start").val();
+    var end = $("#f_date_end").val();
+    var polda = $("#f_polda").val();
+    var polres = $("#f_polres").val();
+
+    $.ajax({
+        url : "../Grafik_api/bar_tmc_publikasi_giat",
+        method : "POST",
+        data : {start: start, end:end,polda:polda,polres:polres },
+        async : true,
+        dataType : 'json',
+        success: function(response){  
+            chart_bar_publikasi_giat.updateSeries(response.data);
+            chart_bar_publikasi_giat.updateOptions({xaxis: {
             categories: response.date
           }});  
+        }
+    });
+
+}
+
+function bar_tmc_publikasi_media(start='',end='',polda='',polres='') { 
+    var start = $("#f_date_start").val();
+    var end = $("#f_date_end").val();
+    var polda = $("#f_polda").val();
+    var polres = $("#f_polres").val();
+
+    $.ajax({
+        url : "../Grafik_api/bar_tmc_publikasi_media",
+        method : "POST",
+        data : {start: start, end:end,polda:polda,polres:polres },
+        async : true,
+        dataType : 'json',
+        success: function(response){  
+            chart_bar_publikasi_media.updateSeries(response.data);
+            chart_bar_publikasi_media.updateOptions({xaxis: {
+            categories: response.date
+          }});  
+        }
+    });
+
+}
+
+function bar_tmc_kordinasi_giat(start='',end='',polda='',polres='') { 
+    var start = $("#f_date_start").val();
+    var end = $("#f_date_end").val();
+    var polda = $("#f_polda").val();
+    var polres = $("#f_polres").val();
+    $.ajax({
+        url : "../Grafik_api/bar_tmc_kordinasi_giat",
+        method : "POST",
+        data : {start: start, end:end,polda:polda,polres:polres },
+        async : true,
+        dataType : 'json',
+        success: function(response){  
+            chart_bar_kordinasi_giat.updateSeries(response.data);
+            chart_bar_kordinasi_giat.updateOptions({xaxis: {
+                categories: response.date
+          }});  
+        }
     });
 }
 
-function bar_tmc_publikasi_media() { 
-    $.getJSON("../Grafik_api/bar_tmc_publikasi_media", function(response) {
-        chart_bar_publikasi_media.updateSeries(response.data);
-        chart_bar_publikasi_media.updateOptions({xaxis: {
+function bar_tmc_kordinasi_media(start='',end='',polda='',polres='') { 
+    var start = $("#f_date_start").val();
+    var end = $("#f_date_end").val();
+    var polda = $("#f_polda").val();
+    var polres = $("#f_polres").val();
+
+    $.ajax({
+        url : "../Grafik_api/bar_tmc_kordinasi_media",
+        method : "POST",
+        data : {start: start, end:end,polda:polda,polres:polres },
+        async : true,
+        dataType : 'json',
+        success: function(response){  
+            chart_bar_kordinasi_media.updateSeries(response.data);
+            chart_bar_kordinasi_media.updateOptions({xaxis: {
             categories: response.date
           }});  
+        }
+    });
+
+}
+
+function bar_tmc_prasarana_giat(start='',end='',polda='',polres='') { 
+    var start = $("#f_date_start").val();
+    var end = $("#f_date_end").val();
+    var polda = $("#f_polda").val();
+    var polres = $("#f_polres").val();
+
+    $.ajax({
+        url : "../Grafik_api/bar_tmc_prasarana_giat",
+        method : "POST",
+        data : {start: start, end:end,polda:polda,polres:polres },
+        async : true,
+        dataType : 'json',
+        success: function(response){  
+            chart_bar_prasarana_giat.updateSeries(response.data);
+            chart_bar_prasarana_giat.updateOptions({xaxis: {
+            categories: response.date
+          }});  
+        }
     });
 }
 
-function bar_tmc_kordinasi_giat() { 
-    $.getJSON("../Grafik_api/bar_tmc_kordinasi_giat", function(response) {
-        chart_bar_kordinasi_giat.updateSeries(response.data);
-        chart_bar_kordinasi_giat.updateOptions({xaxis: {
+function bar_tmc_prasarana_media(start='',end='',polda='',polres='') { 
+    var start = $("#f_date_start").val();
+    var end = $("#f_date_end").val();
+    var polda = $("#f_polda").val();
+    var polres = $("#f_polres").val();
+
+    $.ajax({
+        url : "../Grafik_api/bar_tmc_prasarana_media",
+        method : "POST",
+        data : {start: start, end:end,polda:polda,polres:polres },
+        async : true,
+        dataType : 'json',
+        success: function(response){  
+            chart_bar_prasarana_media.updateSeries(response.data);
+            chart_bar_prasarana_media.updateOptions({xaxis: {
             categories: response.date
           }});  
+        }
     });
 }
-
-function bar_tmc_kordinasi_media() { 
-    $.getJSON("../Grafik_api/bar_tmc_kordinasi_media", function(response) {
-        chart_bar_kordinasi_media.updateSeries(response.data);
-        chart_bar_kordinasi_media.updateOptions({xaxis: {
-            categories: response.date
-          }});  
-    });
-}
-
-function bar_tmc_prasarana_giat() { 
-    $.getJSON("../Grafik_api/bar_tmc_prasarana_giat", function(response) {
-        chart_bar_prasarana_giat.updateSeries(response.data);
-        chart_bar_prasarana_giat.updateOptions({xaxis: {
-            categories: response.date
-          }});  
-    });
-}
-
-function bar_tmc_prasarana_media() { 
-    $.getJSON("../Grafik_api/bar_tmc_prasarana_media", function(response) {
-        chart_bar_prasarana_media.updateSeries(response.data);
-        chart_bar_prasarana_media.updateOptions({xaxis: {
-            categories: response.date
-          }});  
-    });
-}
-
-
 
 function jml_data_tmc(start='',end='',polda='',polres='') {
     var start = $("#f_date_start").val();
