@@ -58,15 +58,15 @@ class Mtmc extends CI_Model {
          $CI->load->model('DataTable', 'dt');
          
          // Set table name
-         $CI->dt->table = $this->t;
+         $CI->dt->table = $this->t. ' as pk';
          // Set orderable column fields
-         $CI->dt->column_order = ['nomor','dasar','namajalan','lat','lng','tgl','jammulai','jamsampai','status','sumber',null];
+         $CI->dt->column_order = ['pk.nomor','pa.da_nam','ps.res_nam','pk.tgl','pk.sumber','pk.namajalan','pk.status',null];
          // Set searchable column fields
-         $CI->dt->column_search = ['dasar','status','sumber'];
+         $CI->dt->column_search = ['pk.nomor','pa.da_nam','ps.res_nam','pk.tgl','pk.sumber','pk.namajalan','pk.status'];
          // Set select column fields
-         $CI->dt->select = 'nomor,dasar,namajalan,lat,lng,tgl,jammulai,jamsampai,status,sumber';
+         $CI->dt->select = 'pk.rowid as rowid ,pk.nomor as nomor,pa.da_nam as da_nam,ps.res_nam as res_nam,pk.tgl as tgl,pk.sumber as sumber,pk.namajalan as namajalan,pk.status as status';
          // Set default order
-         $CI->dt->order = ['tgl' => 'desc'];
+         $CI->dt->order = ['pk.tgl' => 'desc'];
         //  $this->db->group_by('e.da');
          
         $awal = $this->input->post('awal');
@@ -76,27 +76,30 @@ class Mtmc extends CI_Model {
        
          
         if ($awal != '') {
-            $con1t = ['where','date(tgl) >=',$awal];
+            $con1t = ['where','date(pk.tgl) >=',$awal];
             array_push($condition,$con1t);
 
-            $con1t = ['where','date(tgl) <=',$selesai];
+            $con1t = ['where','date(pk.tgl) <=',$selesai];
             array_push($condition,$con1t);
 
           }
 
         if ($polda != '') {
-            $con1t = ['where','polda',$polda];
+            $con1t = ['where','pk.polda',$polda];
             array_push($condition,$con1t);
            }
 
         if ($polres != '') {
-            $con1t = ['where','polres',$polres];
+            $con1t = ['where','pk.polres',$polres];
             array_push($condition,$con1t);
            } 
 
- 
-        //  $cons = ['join','polda p','p.rowid = e.da','inner'];
-        //  array_push($condition,$cons);
+         
+           $cons = ['join','polda as pa','pa.da_id = pk.polda','inner'];
+           array_push($condition,$cons);
+           
+           $cons = ['join','polres as ps','ps.res_id = pk.polres','inner'];
+           array_push($condition,$cons);
          
          // Fetch member's records
          $dataTabel = $this->dt->getRows($_POST, $condition);
@@ -104,16 +107,14 @@ class Mtmc extends CI_Model {
          foreach ($dataTabel as $dt) {
              $i++;
              $data[] = array(
-                //  $dt->nomor,
-                 $dt->dasar,
-                 $dt->namajalan,
-                 $dt->lat,
-                 $dt->lng,
+                 $dt->nomor,
+                 $dt->da_nam,
+                 $dt->res_nam,
                  tgl_indo($dt->tgl),
-                 $dt->jammulai,
-                 $dt->jamsampai,
+                 $dt->sumber,
+                 $dt->namajalan,
                  $dt->status,
-                 $dt->sumber
+                 '<a data-toggle="tooltip3" title="Detail" class="btn btn-info" href="'.site_url('SCM/detail_peminjaman_mobil/').$dt->rowid.'"><i class="fa fa-info"></i></a>',
              );
          }
          
@@ -155,8 +156,11 @@ class Mtmc extends CI_Model {
        
          
         if ($awal != '') {
-           $con1t = ['where','date(tgl)',$awal];
-           array_push($condition,$con1t);
+            $con1t = ['where','date(dtm) >=',$awal];
+            array_push($condition,$con1t);
+
+            $con1t = ['where','date(dtm) <=',$selesai];
+            array_push($condition,$con1t);
 
           }
 
@@ -171,18 +175,6 @@ class Mtmc extends CI_Model {
            } 
 
         
-        //  if ($status != '') {
-        //    $con1 = ['where','status',$status];
-        //    array_push($condition,$con1);
-        //   }
-          
-        //  if ($tgl_pelang != '') {
-        //    $con1t = ['where','date(tgl_pelang)',$tgl_pelang];
-        //    array_push($condition,$con1t);
-        //   }
-
-        //  $cons = ['join','polda p','p.rowid = e.da','inner'];
-        //  array_push($condition,$cons);
          
          // Fetch member's records
          $dataTabel = $this->dt->getRows($_POST, $condition);
@@ -239,8 +231,11 @@ class Mtmc extends CI_Model {
        
          
         if ($awal != '') {
-           $con1t = ['where','date(tgl)',$awal];
-           array_push($condition,$con1t);
+            $con1t = ['where','date(dtm) >=',$awal];
+            array_push($condition,$con1t);
+
+            $con1t = ['where','date(dtm) <=',$selesai];
+            array_push($condition,$con1t);
 
           }
 
@@ -254,20 +249,7 @@ class Mtmc extends CI_Model {
             array_push($condition,$con1t);
            } 
 
-        
-        //  if ($status != '') {
-        //    $con1 = ['where','status',$status];
-        //    array_push($condition,$con1);
-        //   }
-          
-        //  if ($tgl_pelang != '') {
-        //    $con1t = ['where','date(tgl_pelang)',$tgl_pelang];
-        //    array_push($condition,$con1t);
-        //   }
-
-        //  $cons = ['join','polda p','p.rowid = e.da','inner'];
-        //  array_push($condition,$cons);
-         
+             
          // Fetch member's records
          $dataTabel = $this->dt->getRows($_POST, $condition);
          
@@ -322,8 +304,11 @@ class Mtmc extends CI_Model {
        
          
         if ($awal != '') {
-           $con1t = ['where','date(tgl)',$awal];
-           array_push($condition,$con1t);
+            $con1t = ['where','date(dtm) >=',$awal];
+            array_push($condition,$con1t);
+
+            $con1t = ['where','date(dtm) <=',$selesai];
+            array_push($condition,$con1t);
 
           }
 
@@ -336,19 +321,6 @@ class Mtmc extends CI_Model {
             $con1t = ['where','polres',$polres];
             array_push($condition,$con1t);
            } 
-
-        //  if ($status != '') {
-        //    $con1 = ['where','status',$status];
-        //    array_push($condition,$con1);
-        //   }
-          
-        //  if ($tgl_pelang != '') {
-        //    $con1t = ['where','date(tgl_pelang)',$tgl_pelang];
-        //    array_push($condition,$con1t);
-        //   }
-
-        //  $cons = ['join','polda p','p.rowid = e.da','inner'];
-        //  array_push($condition,$cons);
          
          // Fetch member's records
          $dataTabel = $this->dt->getRows($_POST, $condition);
@@ -388,11 +360,11 @@ class Mtmc extends CI_Model {
          // Set table name
          $CI->dt->table = 'tmc_prasarana_publik ';
          // Set orderable column fields
-         $CI->dt->column_order = ['prasarana','nama','parkir','tgl',null];
+         $CI->dt->column_order = ['prasarana','nama','parkir','dtm',null];
          // Set searchable column fields
-         $CI->dt->column_search = ['prasarana','nama','parkir','tgl'];
+         $CI->dt->column_search = ['prasarana','nama','parkir','dtm'];
          // Set select column fields
-         $CI->dt->select = 'prasarana,nama,parkir,tgl';
+         $CI->dt->select = 'prasarana,nama,parkir,dtm';
          // Set default order
          $CI->dt->order = ['dtm' => 'desc'];
         //  $this->db->group_by('e.da');
@@ -404,8 +376,11 @@ class Mtmc extends CI_Model {
        
          
         if ($awal != '') {
-           $con1t = ['where','date(tgl)',$awal];
-           array_push($condition,$con1t);
+            $con1t = ['where','date(dtm) >=',$awal];
+            array_push($condition,$con1t);
+
+            $con1t = ['where','date(dtm) <=',$selesai];
+            array_push($condition,$con1t);
 
           }
 
@@ -430,7 +405,7 @@ class Mtmc extends CI_Model {
                  $dt->prasarana,
                  $dt->nama,
                  $dt->parkir,
-                 tgl_indo($dt->tgl),
+                 tgl_indo($dt->dtm),
              );
          }
          

@@ -219,16 +219,14 @@
 																			<table class="table" id="tabel_tmc">
 																				<thead>
 																					<tr>
-																						<!-- <th>Nomer</th> -->
-																						<th>Dasar</th>
-																						<th>Nama Jalan</th>
-																						<th>Lat</th>
-																						<th>Lng</th>
-																						<th>Waktu</th>
-																						<th>Mulai</th>
-																						<th>Selesai</th>
-																						<th>Status</th>
+																						<th>Nomor</th>
+																						<th>Polda</th>
+																						<th>Polres</th>
+																						<th>Tanggal</th>
 																						<th>Sumber Info</th>
+																						<th>Nama Jalan</th>
+																						<th>Status</th>
+																						<th>Detail</th>
 																					</tr>
 																				</thead>
 																				<tbody>
@@ -282,19 +280,19 @@
 																			<div class="col-md-12">
 																				<div class="row">
 																					<div class="col-md-6">
-																						<div class="">
-																							<p>Dasar Giat</p>
-																						</div>
-																						<div class="overflow-hidden">
-																							<div id="interaksi-dasar-giat" class="worldh h-276" ></div>
-																						</div>
-																					</div>
-																					<div class="col-md-6">
 																					    <div class="">
 																							<p>Media</p>
 																						</div>
 																						<div class="overflow-hidden">
 																							<div id="interaksi-sosisal-media" class="worldh h-276" ></div>
+																						</div>
+																					</div>
+																					<div class="col-md-6">
+																						<div class="">
+																							<p>Dasar Giat</p>
+																						</div>
+																						<div class="overflow-hidden">
+																							<div id="interaksi-dasar-giat" class="worldh h-276" ></div>
 																						</div>
 																					</div>
 																				</div>
@@ -523,7 +521,7 @@
 															<div class="col-md-12">
 																<div class="">
 																	<div class="card-header">
-																		<h3 class="card-title">Laporan Publikasi TMC</h3>
+																		<h3 class="card-title">Laporan Kordinasi TMC</h3>
 																		<div class="card-options">
 																		</div>
 																	</div>
