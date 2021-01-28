@@ -521,7 +521,7 @@
 															<div class="col-md-12">
 																<div class="">
 																	<div class="card-header">
-																		<h3 class="card-title">Laporan Publikasi TMC</h3>
+																		<h3 class="card-title">Laporan Kordinasi TMC</h3>
 																		<div class="card-options">
 																		</div>
 																	</div>
