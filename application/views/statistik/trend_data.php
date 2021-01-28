@@ -10,21 +10,14 @@
                 <div class="card">
                     <form action="javascript:void(0);" method="post" id="filter_td">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row" id="optional">
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <p>Data Pebanding</p>
-                                        <select class="form-control form-control-sm" multiple name="f_data_pembanding[]">
+                                        <p>Data Pembanding</p>
+                                        <select class="form-control form-control-sm" id="data_pembanding" multiple name="f_data_pembanding[]">
                                             <option selected value="titik_macet">Titik Macet</option>
                                             <option selected value="jumlah_ranmor">Jumlah Ranmor</option>
                                             <option selected value="jumlah_laka">Jumlah Laka</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <p>Kategori</p>
-                                        <select class="form-control form-control-sm"  name="f_kategori">
                                         </select>
                                     </div>
                                 </div>
