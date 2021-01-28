@@ -156,8 +156,11 @@ class Mtmc extends CI_Model {
        
          
         if ($awal != '') {
-           $con1t = ['where','date(tgl)',$awal];
-           array_push($condition,$con1t);
+            $con1t = ['where','date(dtm) >=',$awal];
+            array_push($condition,$con1t);
+
+            $con1t = ['where','date(dtm) <=',$selesai];
+            array_push($condition,$con1t);
 
           }
 
@@ -172,18 +175,6 @@ class Mtmc extends CI_Model {
            } 
 
         
-        //  if ($status != '') {
-        //    $con1 = ['where','status',$status];
-        //    array_push($condition,$con1);
-        //   }
-          
-        //  if ($tgl_pelang != '') {
-        //    $con1t = ['where','date(tgl_pelang)',$tgl_pelang];
-        //    array_push($condition,$con1t);
-        //   }
-
-        //  $cons = ['join','polda p','p.rowid = e.da','inner'];
-        //  array_push($condition,$cons);
          
          // Fetch member's records
          $dataTabel = $this->dt->getRows($_POST, $condition);
