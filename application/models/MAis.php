@@ -87,6 +87,36 @@ class MAis extends CI_Model {
         return $hasil;
     }
 
+    // Get meninggal dunia
+    public function get_ais_jml_md($tahun=false)
+    {
+        $this->db->select('sum(md) as jml');
+        $this->db->where('thn',$tahun);
+        $q = $this->db->get($this->t)->row();
+        return $q->jml != "" ? $q->jml : 0;
+    }
+
+    // Get statitsik Fatality Index
+    public function get_fi($penduduk=false)
+    {
+        $hasil = [];
+
+        if($penduduk) {
+            $this->db->select('md');
+            $this->db->group_by('thn');
+            $q = $this->db->get($this->t);
+            $this->db->order_by('thn', 'asc');
+            foreach ($q->result() as $t) {
+                $cfr = round((($t->md/$penduduk)*100),2);
+                array_push($hasil,$cfr);
+            }
+            return $hasil;
+        }
+       
+        return false;
+
+    }
+
 
     public function get_nama_kec($field='',$value='')
     {

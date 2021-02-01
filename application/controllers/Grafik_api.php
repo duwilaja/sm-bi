@@ -11,6 +11,7 @@ class Grafik_api extends CI_Controller {
         $this->load->model('MCyb','cyb');
         $this->load->model('MAis','ais');
         $this->load->model('MDares','dares');
+        $this->load->model('MDPend','mdp');
     }
     
     public function bar_eri()
@@ -2058,5 +2059,49 @@ class Grafik_api extends CI_Controller {
         
         echo json_encode($ranmor);
     }
+
+     // Statistik Fatality Index
+
+     public function grafik_bar_fi()
+     {
+         $hasil = [];
+         $provinsi = [];
+         $tahun = '2016';
+         $md = $this->ais->get_ais_jml_md($tahun);
+         $q = $this->mdp->get_data_pend($tahun);
+         foreach ($q->result() as $t) {
+                $c = 0;
+                if($t->jml != 0){
+                     $c = round((($md/$t->jml)*100),2);
+                }
+                array_push($hasil,$c);
+                array_push($provinsi,$t->provinsi);
+         }
+ 
+         $rsp = [
+             'data' => [
+                 'label' => $provinsi,
+                 'jml' => $hasil
+             ]
+         ];
+         echo json_encode($rsp);
+     }
+
+     public function grafik_fi()
+     {
+         $penduduk = $this->input->post('penduduk');
+         if (!$penduduk) $penduduk = 100000;
+         $tahun = $this->ais->get_tahun_kec();
+         $real = $this->ais->get_fi($penduduk);
+         $rsp = [
+             'tahun' => $tahun,
+             'data' => [
+                 'real' => $real,
+                 'penduduk' => 'Fatalitiy Index '.$penduduk.' Populasi'
+             ]
+         ];
+ 
+         echo json_encode($rsp);
+     }
     
 }
