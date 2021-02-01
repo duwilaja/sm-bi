@@ -18,7 +18,9 @@ $(document).ready(function(){
     bar_tmc_kordinasi_giat();
     bar_tmc_kordinasi_media(); 
 
-    bar_tmc_prasarana_giat();
+    bar_tmc_prasarana_p_datang();
+    bar_tmc_prasarana_p_berangkat();
+    bar_tmc_prasarana_pengunjung();
     bar_tmc_prasarana_media(); 
     // donat_eri_tabel();
     // tabel_eri_bulan();
@@ -75,7 +77,9 @@ $(document).ready(function(){
                 bar_tmc_kordinasi_giat();
                 bar_tmc_kordinasi_media(); 
 
-                bar_tmc_prasarana_giat();
+                bar_tmc_prasarana_p_datang();
+                bar_tmc_prasarana_p_berangkat();
+                bar_tmc_prasarana_pengunjung();
                 bar_tmc_prasarana_media(); 
                 // donat_eri_tabel();
                 // tabel_eri_bulan();
@@ -175,7 +179,9 @@ var chart_bar_kordinasi_giat = new ApexCharts(document.querySelector("#kordinasi
 var chart_bar_kordinasi_media = new ApexCharts(document.querySelector("#kordinasi-sosisal-media"), options);
 
 
-var chart_bar_prasarana_giat = new ApexCharts(document.querySelector("#prasarana-dasar-giat"), options);
+var chart_bar_prasarana_p_datang = new ApexCharts(document.querySelector("#prasarana-p_datang"), options);
+var chart_bar_prasarana_p_berangkat = new ApexCharts(document.querySelector("#prasarana-p_berangkat"), options);
+var chart_bar_prasarana_pengunjung = new ApexCharts(document.querySelector("#prasarana-pengunjung"), options);
 var chart_bar_prasarana_media = new ApexCharts(document.querySelector("#prasarana-sosisal-media"), options);
 
 chart_bar_status_lalin.render();
@@ -191,7 +197,9 @@ chart_bar_publikasi_media.render();
 chart_bar_kordinasi_giat.render();
 chart_bar_kordinasi_media.render();
 
-chart_bar_prasarana_giat.render();
+chart_bar_prasarana_p_datang.render();
+chart_bar_prasarana_p_berangkat.render();
+chart_bar_prasarana_pengunjung.render();
 chart_bar_prasarana_media.render();
 
 
@@ -1078,48 +1086,48 @@ function initMap() {
     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 }
 var locations = [
-    {lat: -7.034920, lng: 107.526471},
-    {lat: -7.028424, lng: 107.521091},
-    {lat: -6.983111, lng: 107.436284},
-    {lat: -6.885647, lng: 107.537207},
-    {lat: -6.892210, lng: 107.536977},
-    {lat: -6.960185, lng: 107.376799},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
 ];
 
 var locations2 = [
-    {lat: -7.034920, lng: 107.526471},
-    {lat: -7.028424, lng: 107.521091},
-    {lat: -6.983111, lng: 107.436284},
-    {lat: -6.885647, lng: 107.537207},
-    {lat: -6.892210, lng: 107.536977},
-    {lat: -6.960185, lng: 107.376799},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
 ];
 
 var locations3 = [
-    {lat: -7.034920, lng: 107.526471},
-    {lat: -7.028424, lng: 107.521091},
-    {lat: -6.983111, lng: 107.436284},
-    {lat: -6.885647, lng: 107.537207},
-    {lat: -6.892210, lng: 107.536977},
-    {lat: -6.960185, lng: 107.376799},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
 ];
 
 var locations4 = [
-    {lat: -7.034920, lng: 107.526471},
-    {lat: -7.028424, lng: 107.521091},
-    {lat: -6.983111, lng: 107.436284},
-    {lat: -6.885647, lng: 107.537207},
-    {lat: -6.892210, lng: 107.536977},
-    {lat: -6.960185, lng: 107.376799},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
 ];
 
 var locations5 = [
-    {lat: -7.034920, lng: 107.526471},
-    {lat: -7.028424, lng: 107.521091},
-    {lat: -6.983111, lng: 107.436284},
-    {lat: -6.885647, lng: 107.537207},
-    {lat: -6.892210, lng: 107.536977},
-    {lat: -6.960185, lng: 107.376799},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
+    {lat: -6.130103, lng: 106.833034},
 ];
 
 
@@ -1301,21 +1309,63 @@ function bar_tmc_kordinasi_media(start='',end='',polda='',polres='') {
 
 }
 
-function bar_tmc_prasarana_giat(start='',end='',polda='',polres='') { 
+function bar_tmc_prasarana_p_datang(start='',end='',polda='',polres='') { 
     var start = $("#f_date_start").val();
     var end = $("#f_date_end").val();
     var polda = $("#f_polda").val();
     var polres = $("#f_polres").val();
 
     $.ajax({
-        url : "../Grafik_api/bar_tmc_prasarana_giat",
+        url : "../Grafik_api/bar_tmc_prasarana_p_datang",
         method : "POST",
         data : {start: start, end:end,polda:polda,polres:polres },
         async : true,
         dataType : 'json',
         success: function(response){  
-            chart_bar_prasarana_giat.updateSeries(response.data);
-            chart_bar_prasarana_giat.updateOptions({xaxis: {
+            chart_bar_prasarana_p_datang.updateSeries(response.data);
+            chart_bar_prasarana_p_datang.updateOptions({xaxis: {
+            categories: response.date
+          }});  
+        }
+    });
+}
+
+function bar_tmc_prasarana_p_berangkat(start='',end='',polda='',polres='') { 
+    var start = $("#f_date_start").val();
+    var end = $("#f_date_end").val();
+    var polda = $("#f_polda").val();
+    var polres = $("#f_polres").val();
+
+    $.ajax({
+        url : "../Grafik_api/bar_tmc_prasarana_p_berangkat",
+        method : "POST",
+        data : {start: start, end:end,polda:polda,polres:polres },
+        async : true,
+        dataType : 'json',
+        success: function(response){  
+            chart_bar_prasarana_p_berangkat.updateSeries(response.data);
+            chart_bar_prasarana_p_berangkat.updateOptions({xaxis: {
+            categories: response.date
+          }});  
+        }
+    });
+}
+
+function bar_tmc_prasarana_pengunjung(start='',end='',polda='',polres='') { 
+    var start = $("#f_date_start").val();
+    var end = $("#f_date_end").val();
+    var polda = $("#f_polda").val();
+    var polres = $("#f_polres").val();
+
+    $.ajax({
+        url : "../Grafik_api/bar_tmc_prasarana_pengunjung",
+        method : "POST",
+        data : {start: start, end:end,polda:polda,polres:polres },
+        async : true,
+        dataType : 'json',
+        success: function(response){  
+            chart_bar_prasarana_pengunjung.updateSeries(response.data);
+            chart_bar_prasarana_pengunjung.updateOptions({xaxis: {
             categories: response.date
           }});  
         }

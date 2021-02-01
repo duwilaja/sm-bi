@@ -582,20 +582,28 @@
 														<div class="row">
 														<div class="col-md-12">
 																<div class="row">
-																		<div class="col-md-12">
+																		<div class="col-md-6">
 																			<div class="">
-																				<p>Dasar Giat</p>
+																				<p>Grafik Penumpang Datang</p>
 																			</div>
 																			<div class="overflow-hidden">
-																					<div id="prasarana-dasar-giat" class="worldh h-276" ></div>
+																					<div id="prasarana-p_datang" class="worldh h-276" ></div>
 																			</div>
 																		</div>
 																		<div class="col-md-6">
 																			<div class="">
-																				<p>Media</p>
+																				<p>Grafik Penumpang Berangkat</p>
 																			</div>
 																			<div class="overflow-hidden">
-																					<!-- <div id="prasarana-sosisal-media" class="worldh h-276" ></div> -->
+																					<div id="prasarana-p_berangkat" class="worldh h-276" ></div>
+																			</div>
+																		</div>
+																		<div class="col-md-12">
+																			<div class="">
+																				<p>Grafik Pengunjung </p>
+																			</div>
+																			<div class="overflow-hidden">
+																					<div id="prasarana-pengunjung" class="worldh h-276" ></div>
 																			</div>
 																		</div>
 																</div>
