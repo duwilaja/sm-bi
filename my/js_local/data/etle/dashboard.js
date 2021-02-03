@@ -109,4 +109,95 @@ function jml_data_tmc(start='',end='',polda='',polres='') {
         }
     });
 }
+var grafik_line = c3.generate({
+    bindto: '#grafik_line', // id of chart wrapper
+    data: {
+        columns: [
+            // each columns data
+            ['data1', 100, 90, 80, 130, 150],
+            ['data2', 150, 70, 50, 150, 250],
+            ['data3', 100, 120, 100, 130, 320],
+            ['data4', 170, 50, 130, 170, 215],
+            ['data5', 300, 171, 200, 300, 125],
+            ['data6', 250, 132, 100, 150, 135],
+            ['data7', 120, 270, 200, 170, 115]
+        ],
+        type: 'line', // default type of chart
+        colors: {
+            data1: '#4a32d4',
+            data2:'#f72d66',
+            data3:'#f7be2d'
+        },
+        names: {
+            // name of each serie
+            'data1': 'Total Pelanggaran',
+            'data2': 'Tervalidasi',
+            'data3': 'Terberkas',
+            'data4': 'Terkirim',
+            'data5': 'Terkonfirmasi',
+            'data6': 'Terbayar',
+            'data7': 'Blokir',
+        }
+    },
+    axis: {
+        x: {
+            type: 'category',
+            // name of each category
+            categories: ['Okt 2019', 'Nov 2019', 'Des 2019', 'Jan 2020', 'Feb 2020']
+        },
+    },
+    legend: {
+          show: false, //hide legend
+    },
+    padding: {
+        bottom: 0,
+        top: 0
+    },
+});
+
+var grafik_bar = c3.generate({
+    bindto: '#grafik_bar', // id of chart wrapper
+    data: {
+        columns: [
+            // each columns data
+            ['data1', 100, 90, 80, 130, 150],
+            ['data2', 150, 70, 50, 150, 250],
+            ['data3', 100, 120, 100, 130, 320],
+            ['data4', 170, 50, 130, 170, 215],
+            ['data5', 300, 171, 200, 300, 125],
+            ['data6', 250, 132, 100, 150, 135],
+            ['data7', 120, 270, 200, 170, 115]
+        ],
+        type: 'bar', // default type of chart
+        colors: {
+            data1: '#4a32d4',
+            data2:'#f72d66',
+            data3:'#f7be2d'
+        },
+        names: {
+            // name of each serie
+            'data1': 'Total Pelanggaran',
+            'data2': 'Tervalidasi',
+            'data3': 'Terberkas',
+            'data4': 'Terkirim',
+            'data5': 'Terkonfirmasi',
+            'data6': 'Terbayar',
+            'data7': 'Blokir',
+        }
+    },
+    axis: {
+        x: {
+            type: 'category',
+            // name of each category
+            categories: ['Okt 2019', 'Nov 2019', 'Des 2019', 'Jan 2020', 'Feb 2020']
+        },
+    },
+    legend: {
+          show: false, //hide legend
+    },
+    padding: {
+        bottom: 0,
+        top: 0
+    },
+});
 

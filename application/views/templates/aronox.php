@@ -75,6 +75,9 @@ if(count($farr)>0&&$session['nrp']!=''){
 		<!-- Tabs css-->
 		<link href="<?php echo $base_url;?>aronox/assets/plugins/tabs/style.css" rel="stylesheet" />
 
+
+		<link href="<?php echo $base_url;?>aronox/assets/plugins/charts-c3/c3-chart.css" rel="stylesheet" />
+
 	</head>
 
 	<body class="app"><!-- Start Switcher -->
@@ -252,6 +255,10 @@ if(count($farr)>0&&$session['nrp']!=''){
 
 		<script src="<?php echo $base_url;?>aronox/assets/plugins/tabs/jquery.multipurpose_tabcontent.js"></script>
 		<script src="<?php echo $base_url;?>aronox/assets/js/tabs.js"></script>
+
+
+		<script src="<?php echo $base_url;?>aronox/assets/plugins/charts-c3/d3.v5.min.js"></script>
+		<script src="<?php echo $base_url;?>aronox/assets/plugins/charts-c3/c3-chart.js"></script>
 
 					
 	<script src="<?php echo $base_url;?>my/vendor/bootstrap/js/moment.min.js"></script>
