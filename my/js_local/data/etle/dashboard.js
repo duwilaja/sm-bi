@@ -16,7 +16,7 @@ $(document).ready(function(){
             dataType : 'json',
             success: function(data){
                  
-                var html = '';
+                var html = '<option value=""></option>';
                 var i;
                 for(i=0; i<data.length; i++){
                     html += '<option value='+data[i].res_id+'>'+data[i].res_nam+'</option>';
@@ -91,13 +91,20 @@ function jml_data_tmc(start='',end='',polda='',polres='') {
             $('#terkonfirmasi').text(r[4]);
             $('#terbayar').text(r[5]);
             $('#blokir').text(r[6]);
-            $('#daerah1').text(r[7]);
-            $('#daerah2').text(r[8]);
-            $('#daerah3').text(r[9]);
-            $('#daerah4').text(r[10]);
-            $('#daerah5').text(r[11]);
-            $('#daerah6').text(r[12]);
-            $('#daerah7').text(r[13]);
+            $('#polda1').text(r[7]);
+            $('#polda2').text(r[8]);
+            $('#polda3').text(r[9]);
+            $('#polda4').text(r[10]);
+            $('#polda5').text(r[11]);
+            $('#polda6').text(r[12]);
+            $('#polda7').text(r[13]);
+            $('#polres1').text(r[14]);
+            $('#polres2').text(r[15]);
+            $('#polres3').text(r[16]);
+            $('#polres4').text(r[17]);
+            $('#polres5').text(r[18]);
+            $('#polres6').text(r[19]);
+            $('#polres7').text(r[20]);
 
         }
     });

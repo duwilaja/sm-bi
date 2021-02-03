@@ -1837,35 +1837,57 @@ class Grafik_api extends CI_Controller {
         $terkonfirmasi = 0;
         $terbayar = 0;
         $blokir = 0;
-        $daerah1 = "Seluruh Indonesia";
-        $daerah2 = "Seluruh Indonesia";
-        $daerah3 = "Seluruh Indonesia";
-        $daerah4 = "Seluruh Indonesia";
-        $daerah5 = "Seluruh Indonesia";
-        $daerah6 = "Seluruh Indonesia";
-        $daerah7 = "Seluruh Indonesia";
+        $polda1 = "Seluruh Indonesia";
+        $polda2 = "Seluruh Indonesia";
+        $polda3 = "Seluruh Indonesia";
+        $polda4 = "Seluruh Indonesia";
+        $polda5 = "Seluruh Indonesia";
+        $polda6 = "Seluruh Indonesia";
+        $polda7 = "Seluruh Indonesia";
+
+        $polres1 = "";
+        $polres2 = "";
+        $polres3 = "";
+        $polres4 = "";
+        $polres5 = "";
+        $polres6 = "";
+        $polres7 = "";
 
         $data = $this->etle->jml_data_etle($start,$end,$polda,$polres);
         foreach ($data as $key) {
-            $total = torp($key->total);
-            $tervalidasi = $key->tervalidasi;
-            $terberkas = $key->terberkas;
-            $terkirim = $key->terkirim;
-            $terkonfirmasi = $key->terkonfirmasi;
-            $terbayar = $key->terbayar;
-            $blokir = $key->blokir;
-            if ($polda != "") {
-                $daerah1 = "polda ".$key->da_nam;
-                $daerah2 = "polda ".$key->da_nam;
-                $daerah3 = "polda ".$key->da_nam;
-                $daerah4 = "polda ".$key->da_nam;
-                $daerah5 = "polda ".$key->da_nam;
-                $daerah6 = "polda ".$key->da_nam;
-                $daerah7 = "polda ".$key->da_nam;
+
+            if ($key->total != "") {
+                $total = $key->total;
+                $tervalidasi = $key->tervalidasi;
+                $terberkas = $key->terberkas;
+                $terkirim = $key->terkirim;
+                $terkonfirmasi = $key->terkonfirmasi;
+                $terbayar = $key->terbayar;
+                $blokir = $key->blokir;
             }
+            if ($polda != "") {
+                $polda1 = "polda ".$this->etle->cek_polda($polda);
+                $polda2 = "polda ".$this->etle->cek_polda($polda);
+                $polda3 = "polda ".$this->etle->cek_polda($polda);
+                $polda4 = "polda ".$this->etle->cek_polda($polda);
+                $polda5 = "polda ".$this->etle->cek_polda($polda);
+                $polda6 = "polda ".$this->etle->cek_polda($polda);
+                $polda7 = "polda ".$this->etle->cek_polda($polda);
+            }
+            if ($polres != "") {
+                $polres1 = "polres ".$this->etle->cek_polres($polres);
+                $polres2 = "polres ".$this->etle->cek_polres($polres);
+                $polres3 = "polres ".$this->etle->cek_polres($polres);
+                $polres4 = "polres ".$this->etle->cek_polres($polres);
+                $polres5 = "polres ".$this->etle->cek_polres($polres);
+                $polres6 = "polres ".$this->etle->cek_polres($polres);
+                $polres7 = "polres ".$this->etle->cek_polres($polres);
+            }
+
+                       
             
         }
-        $series =  [$total,$tervalidasi,$terberkas,$terkirim,$terkonfirmasi,$terbayar,$blokir,$daerah1,$daerah2,$daerah3,$daerah4,$daerah5,$daerah6,$daerah7];
+        $series =  [$total,$tervalidasi,$terberkas,$terkirim,$terkonfirmasi,$terbayar,$blokir,$polda1,$polda2,$polda3,$polda4,$polda5,$polda6,$polda7,$polres1,$polres2,$polres3,$polres4,$polres5,$polres6,$polres7];
         echo json_encode($series);
     }
 

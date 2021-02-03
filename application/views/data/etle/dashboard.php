@@ -57,9 +57,9 @@
 								<div class="col-md-2">
                                     <div class="form-group">
                                         <p>Polres</p>
-                                        <select class="form-control form-control-sm"  name="f_polres" id="f_polres">
-											<option value="">-- Pilih Polres --</option>
-										</select>
+                             <select class="form-control form-control-sm"  name="f_polres" id="f_polres">
+								<opn value="">-- Pilih Polres --</option>
+							</select>
                                     </div>
                                 </div>
                             </div>
@@ -83,12 +83,13 @@
 						<div class="owl-carousel">
 							<div class="item d-flex">
 								<div class="feature">
-									<i class="fa fa-dollar primary feature-icon bg-primary"></i>
+									<i class="fa fa-list-alt primary feature-icon bg-primary"></i>
 								</div>
 								<div class="ml-3">
-									<small class=" mb-0" style="font-weight:bold;">Total</small><br>
+									<small class=" mb-0" style="font-weight:bold;">Total Pelanggaran</small><br>
 									<h3 class="font-weight-semibold mb-0" id="total">0</h3>
-									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="daerah1">Seluruh Indonesia</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="polda1">Seluruh Indonesia</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="polres1"></span></small>
 								</div>
 							</div>
 							<div class="item d-flex">
@@ -97,7 +98,8 @@
 								</div>
 								<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Tervalidasi</small>
 									<h3 class="font-weight-semibold mb-0" id="tervalidasi">0</h3>
-									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="daerah2">Seluruh Indonesia</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="polda2">Seluruh Indonesia</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="polres2"></span></small>
 								</div>
 							</div>
 							<div class="item d-flex">
@@ -106,7 +108,8 @@
 								</div>
 								<div class=" d-flex flex-column ml-3"> <small class=" mb-0" style="font-weight:bold;">Terberkas</small>
 									<h3 class="font-weight-semibold mb-0" id="terberkas">0</h3>
-									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="daerah3">Seluruh Indonesia</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="polda3">Seluruh Indonesia</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="polres3"></span></small>
 								</div>
 							</div>
 							<div class="item d-flex">
@@ -115,7 +118,8 @@
 								</div>
 								<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Terkirim</small>
 									<h3 class="font-weight-semibold mb-0" id="terkirim">0</h3>
-									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="daerah4">Seluruh Indonesia</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="polda4">Seluruh Indonesia</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="polres4"></span></small>
 								</div>
 							</div>
 							<div class="item d-flex">
@@ -126,7 +130,8 @@
 									</div>
 									<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Terkonfirmasi</small>
 										<h3 class="font-weight-semibold mb-0" id="terkonfirmasi">0</h3>
-										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="daerah5">Seluruh Indonesia</span></small>
+										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="polda5">Seluruh Indonesia</span></small>
+										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="polres5"></span></small>
 									</div>
 							</div>
 							<div class="item d-flex">
@@ -137,7 +142,8 @@
 									</div>
 									<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Terbayar</small>
 										<h3 class="font-weight-semibold mb-0" id="terbayar">0</h3>
-										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="daerah6">Seluruh Indonesia</span></small>
+										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="polda6">Seluruh Indonesia</span></small>
+										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="polres6"></span></small>
 									</div>
 							</div>
 							<div class="item d-flex">
@@ -148,7 +154,8 @@
 									</div>
 									<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Blokir Stnk</small>
 										<h3 class="font-weight-semibold mb-0" id="blokir">0</h3>
-										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="daerah7">Seluruh Indonesia</span></small>
+										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="polda7">Seluruh Indonesia</span></small>
+										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="polres7"></span></small>
 									</div>
 							</div>
 						</div>

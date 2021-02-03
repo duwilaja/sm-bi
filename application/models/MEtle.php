@@ -28,24 +28,38 @@ class MEtle extends CI_Model {
     //     }
     //     return $q;
     // }
+    public function cek_polda($polda)
+    {
+       
+        $query = $this->db->get_where('polda', array('da_id' => $polda));
+        $row = $query->row();
+        return $row->da_nam;
+    }
+    public function cek_polres($polres)
+    {
+        $query = $this->db->get_where('polres', array('res_id' => $polres));
+        $row = $query->row();
+        return $row->res_nam;
+    }
 
     // total keseluruhan tmc
     public function jml_data_etle($start='',$end='',$polda='',$polres='')
     {
         // $total = 0;
-        $this->db->select('fk.da_nam as da_nam,tgl,sum(total) as total , sum(tervalidasi) as tervalidasi, sum(terberkas) as terberkas, sum(terkirim) as terkirim, sum(terkonfirmasi) as terkonfirmasi, sum(terbayar) as terbayar, sum(blokir) as blokir');
+        $this->db->select('fk.da_nam as da_nam,fn.res_nam as res_nam,tgl,sum(total) as total , sum(tervalidasi) as tervalidasi, sum(terberkas) as terberkas, sum(terkirim) as terkirim, sum(terkonfirmasi) as terkonfirmasi, sum(terbayar) as terbayar, sum(blokir) as blokir');
         $this->db->from('etle_sum as pk');
         $this->db->join('polda as fk','fk.da_id=pk.polda','left');
+        $this->db->join('polres as fn','fn.res_id=pk.polres','left');
         
         if ($start != '') {
             $this->db->where('date(tgl) >=', $start);
             $this->db->where('date(tgl) <=', $end);
         }
         if ($polda != '') {
-            $this->db->where('polda', $polda);
+            $this->db->where('pk.polda', $polda);
         }
         if ($polres != '') {
-            $this->db->where('polres', $polres);
+            $this->db->where('pk.polres', $polres);
         }
     
        return $dt = $this->db->get()->result();
