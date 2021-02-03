@@ -1721,32 +1721,6 @@ class Grafik_api extends CI_Controller {
     }
 
      // Statistik Fatality Index
-
-     public function grafik_bar_fi()
-     {
-         $hasil = [];
-         $provinsi = [];
-         $tahun = '2016';
-         $md = $this->ais->get_ais_jml_md($tahun);
-         $q = $this->mdp->get_data_pend($tahun);
-         foreach ($q->result() as $t) {
-                $c = 0;
-                if($t->jml != 0){
-                     $c = round((($md/$t->jml)*100),2);
-                }
-                array_push($hasil,$c);
-                array_push($provinsi,$t->provinsi);
-         }
- 
-         $rsp = [
-             'data' => [
-                 'label' => $provinsi,
-                 'jml' => $hasil
-             ]
-         ];
-         echo json_encode($rsp);
-     }
-
      public function grafik_fi()
      {
          $penduduk = $this->input->post('penduduk');
@@ -1763,5 +1737,56 @@ class Grafik_api extends CI_Controller {
  
          echo json_encode($rsp);
      }
+
+     public function grafik_bar_fi()
+     {
+         $hasil = [];
+         $provinsi = [];
+         $tahun = '2016';
+         $q = $this->mdp->get_data_pend($tahun);
+         foreach ($q->result() as $t) {
+                // if ($t->da == '31') {
+                //  echo $t->jml.'<br>';
+                //  $md = $this->ais->get_ais_jml_md($tahun,$t->da);
+                //  echo round((($md/$t->jml)*100),2);
+                // }
+                $md = $this->ais->get_ais_jml_md($tahun,$t->da);
+                $c = 0;
+                if($t->jml != 0){
+                     $c = round((($md/$t->jml)*100),3);
+                }
+                array_push($hasil,$c);
+                array_push($provinsi,$t->provinsi);
+         }
+ 
+         $rsp = [
+             'data' => [
+                 'label' => $provinsi,
+                 'jml' => $hasil
+             ]
+         ];
+
+         echo json_encode($rsp);
+     }
+
+    //  public function polda($provinsi)
+    //  {
+    //     $this->db->like('p.da_nam',$provinsi);
+    //     $x = $this->db->get('polda p')->row();
+    //     return $x;
+    //  }
+
+    //  public function cek()
+    //  {
+    //     $q = $this->mdp->get_data_pend();
+    //     foreach ($q->result() as $v) {
+    //         $x = $this->polda($v->provinsi);
+    //         $this->db->update('data_penduduk', ['da' => @$x->da_id],['provinsi_id' => $v->provinsi_id]);
+    //         $c[] = $x;
+    //         $c[] = $v;
+    //     }
+
+    //     echo json_encode($c);
+    //  }
     
 }
