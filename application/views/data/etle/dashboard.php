@@ -167,7 +167,7 @@
 </div>
 
 						<div class="row">
-							<div class="col-lg-12 col-md-12">
+							<div class="col-lg-6 col-md-6">
 								<div class="card">
 									<div class="card-header">
 										<h3 class="card-title">Grafik  Line Etle</h3>
@@ -181,10 +181,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-lg-12 col-md-12">
+							<div class="col-lg-6 col-md-6">
 								<div class="card">
 									<div class="card-header">
 										<h3 class="card-title">Grafik Bar Etle</h3>
@@ -199,6 +196,7 @@
 								</div>
 							</div>
 						</div>
+
 
 
 

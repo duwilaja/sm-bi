@@ -114,13 +114,13 @@ var grafik_line = c3.generate({
     data: {
         columns: [
             // each columns data
-            ['data1', 100, 90, 80, 130, 150],
-            ['data2', 150, 70, 50, 150, 250],
-            ['data3', 100, 120, 100, 130, 320],
-            ['data4', 170, 50, 130, 170, 215],
-            ['data5', 300, 171, 200, 300, 125],
-            ['data6', 250, 132, 100, 150, 135],
-            ['data7', 120, 270, 200, 170, 115]
+            ['data1', 100, 130, 150],
+            ['data2', 150, 100, 200],
+            ['data3', 100, 150, 210],
+            ['data4', 140, 170, 215],
+            ['data5', 200, 120, 155],
+            ['data6', 250, 150, 135],
+            ['data7', 120, 170, 115]
         ],
         type: 'line', // default type of chart
         colors: {
@@ -143,7 +143,7 @@ var grafik_line = c3.generate({
         x: {
             type: 'category',
             // name of each category
-            categories: ['Okt 2019', 'Nov 2019', 'Des 2019', 'Jan 2020', 'Feb 2020']
+            categories: ['Des 2019', 'Jan 2020', 'Feb 2020']
         },
     },
     legend: {
@@ -160,13 +160,13 @@ var grafik_bar = c3.generate({
     data: {
         columns: [
             // each columns data
-            ['data1', 100, 90, 80, 130, 150],
-            ['data2', 150, 70, 50, 150, 250],
-            ['data3', 100, 120, 100, 130, 320],
-            ['data4', 170, 50, 130, 170, 215],
-            ['data5', 300, 171, 200, 300, 125],
-            ['data6', 250, 132, 100, 150, 135],
-            ['data7', 120, 270, 200, 170, 115]
+            ['data1', 100, 130, 150],
+            ['data2', 150, 100, 200],
+            ['data3', 100, 150, 210],
+            ['data4', 140, 170, 215],
+            ['data5', 200, 120, 155],
+            ['data6', 250, 150, 135],
+            ['data7', 120, 170, 115]
         ],
         type: 'bar', // default type of chart
         colors: {
@@ -189,7 +189,7 @@ var grafik_bar = c3.generate({
         x: {
             type: 'category',
             // name of each category
-            categories: ['Okt 2019', 'Nov 2019', 'Des 2019', 'Jan 2020', 'Feb 2020']
+            categories: ['Des 2019', 'Jan 2020', 'Feb 2020']
         },
     },
     legend: {
