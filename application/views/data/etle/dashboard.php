@@ -88,7 +88,7 @@
 								<div class="ml-3">
 									<small class=" mb-0" style="font-weight:bold;">Total</small><br>
 									<h3 class="font-weight-semibold mb-0" id="total">0</h3>
-									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="daerah1">Seluruh Indonesia</span></small>
 								</div>
 							</div>
 							<div class="item d-flex">
@@ -97,7 +97,7 @@
 								</div>
 								<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Tervalidasi</small>
 									<h3 class="font-weight-semibold mb-0" id="tervalidasi">0</h3>
-									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="daerah2">Seluruh Indonesia</span></small>
 								</div>
 							</div>
 							<div class="item d-flex">
@@ -106,7 +106,7 @@
 								</div>
 								<div class=" d-flex flex-column ml-3"> <small class=" mb-0" style="font-weight:bold;">Terberkas</small>
 									<h3 class="font-weight-semibold mb-0" id="terberkas">0</h3>
-									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="daerah3">Seluruh Indonesia</span></small>
 								</div>
 							</div>
 							<div class="item d-flex">
@@ -115,18 +115,29 @@
 								</div>
 								<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Terkirim</small>
 									<h3 class="font-weight-semibold mb-0" id="terkirim">0</h3>
-									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="daerah4">Seluruh Indonesia</span></small>
 								</div>
 							</div>
 							<div class="item d-flex">
 									<div class="feature">
-										<i class="fa fa-building feature-icon bg-success" style="box-shadow: 0 20px 20px -10px rgb(255 193 7 / 52%), 0px 5px 10px 0px rgb(154 103 11 / 15%);
+										<i class="fa fa-users feature-icon bg-success" style="box-shadow: 0 20px 20px -10px rgb(255 193 7 / 52%), 0px 5px 10px 0px rgb(154 103 11 / 15%);
 										transition: box-shadow .2s ease;
 										background-image: linear-gradient(to right,#FFC107,#FF9800);"></i>
 									</div>
 									<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Terkonfirmasi</small>
 										<h3 class="font-weight-semibold mb-0" id="terkonfirmasi">0</h3>
-										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
+										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="daerah5">Seluruh Indonesia</span></small>
+									</div>
+							</div>
+							<div class="item d-flex">
+									<div class="feature">
+										<i class="fa fa-bank feature-icon bg-success" style="box-shadow: 0 20px 20px -10px rgb(255 193 7 / 52%), 0px 5px 10px 0px rgb(154 103 11 / 15%);
+										transition: box-shadow .2s ease;
+										background-image: linear-gradient(to right,#fc19e6,#ed09d7);"></i>
+									</div>
+									<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Terbayar</small>
+										<h3 class="font-weight-semibold mb-0" id="terbayar">0</h3>
+										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="daerah6">Seluruh Indonesia</span></small>
 									</div>
 							</div>
 							<div class="item d-flex">
@@ -137,7 +148,7 @@
 									</div>
 									<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Blokir Stnk</small>
 										<h3 class="font-weight-semibold mb-0" id="blokir">0</h3>
-										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
+										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="daerah7">Seluruh Indonesia</span></small>
 									</div>
 							</div>
 						</div>

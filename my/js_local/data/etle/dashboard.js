@@ -77,7 +77,7 @@ function jml_data_tmc(start='',end='',polda='',polres='') {
     var polres = $("#f_polres").val();
     $.ajax({
         // url : "../Grafik_api/jml_data_tmc",
-        url: "",
+        url: "../Grafik_api/jml_data_etle",
         method : "POST",
         data : {start: start, end:end,polda:polda,polres:polres },
         async : true,
@@ -89,7 +89,16 @@ function jml_data_tmc(start='',end='',polda='',polres='') {
             $('#terberkas').text(r[2]);
             $('#terkirim').text(r[3]);
             $('#terkonfirmasi').text(r[4]);
-            $('#blokir').text(r[5]);
+            $('#terbayar').text(r[5]);
+            $('#blokir').text(r[6]);
+            $('#daerah1').text(r[7]);
+            $('#daerah2').text(r[8]);
+            $('#daerah3').text(r[9]);
+            $('#daerah4').text(r[10]);
+            $('#daerah5').text(r[11]);
+            $('#daerah6').text(r[12]);
+            $('#daerah7').text(r[13]);
+
         }
     });
 }

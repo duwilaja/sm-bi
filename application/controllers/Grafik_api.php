@@ -12,6 +12,7 @@ class Grafik_api extends CI_Controller {
         $this->load->model('MAis','ais');
         $this->load->model('MDares','dares');
         $this->load->model('MDPend','mdp');
+        $this->load->model('MEtle','etle');
     }
     
     public function bar_eri()
@@ -1819,6 +1820,52 @@ class Grafik_api extends CI_Controller {
         $prasarana_public = $this->tmc->tmc_prasarana_publik($start,$end,$polda,$polres);
 
         $series =  [$info_lalin,$interaksi,$publikasi,$kordinasi,$prasarana_public];
+        echo json_encode($series);
+    }
+
+    public function jml_data_etle($start='',$end='',$polda='',$polres='')
+    {
+    
+        $start =$this->input->post('start');
+        $end =$this->input->post('end');
+        $polda =$this->input->post('polda');
+        $polres =$this->input->post('polres');
+        $total= 0;
+        $tervalidasi = 0;
+        $terberkas = 0;
+        $terkirim = 0;
+        $terkonfirmasi = 0;
+        $terbayar = 0;
+        $blokir = 0;
+        $daerah1 = "Seluruh Indonesia";
+        $daerah2 = "Seluruh Indonesia";
+        $daerah3 = "Seluruh Indonesia";
+        $daerah4 = "Seluruh Indonesia";
+        $daerah5 = "Seluruh Indonesia";
+        $daerah6 = "Seluruh Indonesia";
+        $daerah7 = "Seluruh Indonesia";
+
+        $data = $this->etle->jml_data_etle($start,$end,$polda,$polres);
+        foreach ($data as $key) {
+            $total = torp($key->total);
+            $tervalidasi = $key->tervalidasi;
+            $terberkas = $key->terberkas;
+            $terkirim = $key->terkirim;
+            $terkonfirmasi = $key->terkonfirmasi;
+            $terbayar = $key->terbayar;
+            $blokir = $key->blokir;
+            if ($polda != "") {
+                $daerah1 = "polda ".$key->da_nam;
+                $daerah2 = "polda ".$key->da_nam;
+                $daerah3 = "polda ".$key->da_nam;
+                $daerah4 = "polda ".$key->da_nam;
+                $daerah5 = "polda ".$key->da_nam;
+                $daerah6 = "polda ".$key->da_nam;
+                $daerah7 = "polda ".$key->da_nam;
+            }
+            
+        }
+        $series =  [$total,$tervalidasi,$terberkas,$terkirim,$terkonfirmasi,$terbayar,$blokir,$daerah1,$daerah2,$daerah3,$daerah4,$daerah5,$daerah6,$daerah7];
         echo json_encode($series);
     }
 

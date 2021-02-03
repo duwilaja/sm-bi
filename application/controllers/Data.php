@@ -163,6 +163,7 @@ class Data extends CI_Controller {
         $data['js_local'] = 'data/etle/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
+			$data['polda'] = $this->dares->get_polda()->result();
 			$this->template->load("data/etle/dashboard",$data);
 		}else{
 			$retval=array("403","Failed","Please login","error");
