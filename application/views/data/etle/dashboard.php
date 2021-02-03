@@ -87,7 +87,7 @@
 								</div>
 								<div class="ml-3">
 									<small class=" mb-0" style="font-weight:bold;">Total</small><br>
-									<h3 class="font-weight-semibold mb-0" id="t_pnp">0</h3>
+									<h3 class="font-weight-semibold mb-0" id="total">0</h3>
 									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
 								</div>
 							</div>
@@ -96,7 +96,7 @@
 									<i class="fa fa-check danger feature-icon bg-danger"></i>
 								</div>
 								<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Tervalidasi</small>
-									<h3 class="font-weight-semibold mb-0" id="t_bus">0</h3>
+									<h3 class="font-weight-semibold mb-0" id="tervalidasi">0</h3>
 									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
 								</div>
 							</div>
@@ -105,7 +105,7 @@
 									<i class="fa fa-book secondary feature-icon bg-secondary"></i>
 								</div>
 								<div class=" d-flex flex-column ml-3"> <small class=" mb-0" style="font-weight:bold;">Terberkas</small>
-									<h3 class="font-weight-semibold mb-0" id="t_brg">0</h3>
+									<h3 class="font-weight-semibold mb-0" id="terberkas">0</h3>
 									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
 								</div>
 							</div>
@@ -114,7 +114,7 @@
 									<i class="fa fa-paper-plane success feature-icon bg-success"></i>
 								</div>
 								<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Terkirim</small>
-									<h3 class="font-weight-semibold mb-0" id="t_motor">0</h3>
+									<h3 class="font-weight-semibold mb-0" id="terkirim">0</h3>
 									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
 								</div>
 							</div>
@@ -125,7 +125,7 @@
 										background-image: linear-gradient(to right,#FFC107,#FF9800);"></i>
 									</div>
 									<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Terkonfirmasi</small>
-										<h3 class="font-weight-semibold mb-0" id="t_khusus">0</h3>
+										<h3 class="font-weight-semibold mb-0" id="terkonfirmasi">0</h3>
 										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
 									</div>
 							</div>
@@ -136,7 +136,7 @@
 										"></i>
 									</div>
 									<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Blokir Stnk</small>
-										<h3 class="font-weight-semibold mb-0" id="t_khusus">0</h3>
+										<h3 class="font-weight-semibold mb-0" id="blokir">0</h3>
 										<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
 									</div>
 							</div>

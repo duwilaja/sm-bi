@@ -76,19 +76,20 @@ function jml_data_tmc(start='',end='',polda='',polres='') {
     var polda = $("#f_polda").val();
     var polres = $("#f_polres").val();
     $.ajax({
-        url : "../Grafik_api/jml_data_tmc",
+        // url : "../Grafik_api/jml_data_tmc",
+        url: "",
         method : "POST",
         data : {start: start, end:end,polda:polda,polres:polres },
         async : true,
         dataType : 'json',
         success: function(r){
 
-            $('#t_pnp').text(r[0]);
-            $('#t_bus').text(r[1]);
-            $('#t_brg').text(r[2]);
-            $('#t_motor').text(r[3]);
-            $('#t_khusus').text(r[4]);
-            $('#t_total').text(r[5]);
+            $('#total').text(r[0]);
+            $('#tervalidasi').text(r[1]);
+            $('#terberkas').text(r[2]);
+            $('#terkirim').text(r[3]);
+            $('#terkonfirmasi').text(r[4]);
+            $('#blokir').text(r[5]);
         }
     });
 }
