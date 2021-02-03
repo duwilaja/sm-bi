@@ -1012,7 +1012,7 @@ class Grafik_api extends CI_Controller {
         echo json_encode($series);
     }
 
-    public function bar_tmc_prasarana_giat()
+    public function bar_tmc_prasarana_giat_ori()
     {
         $a1=[];
         $a2=[];
@@ -1107,6 +1107,346 @@ class Grafik_api extends CI_Controller {
             ]],
             'date' => $date
         ];
+        
+        echo json_encode($series);
+    }
+
+    public function bar_tmc_prasarana_p_datang()
+    {
+        $start =$this->input->post('start');
+        $end =$this->input->post('end');
+        $terminal=[];
+        $pelabuhan=[];
+        $bandara=[];
+        $stasiun=[];
+        $date = [];
+
+        if ($start == "") {
+            $penumpang =$this->db->query('SELECT tgl,prasarana,sum(p_datang) as total FROM tmc_prasarana_publik where p_datang > 0 and date(dtm) = date(now()) GROUP by tgl, prasarana')->result();
+            $penumpang_date =$this->db->query('SELECT tgl,prasarana,sum(p_datang) as total FROM tmc_prasarana_publik where p_datang > 0 and date(dtm) = date(now()) GROUP by tgl')->result();
+            foreach ($penumpang as $v) {
+                        if ($v->prasarana == 'Terminal') {
+                            array_push($terminal,$v->total);
+                        }
+                        if ($v->prasarana == 'Pelabuhan') {
+                            array_push($pelabuhan,$v->total);
+                        }
+                        if ($v->prasarana == 'Bandara') {
+                            array_push($bandara,$v->total);
+                        }
+                        if ($v->prasarana == 'Stasiun') {
+                            array_push($stasiun,$v->total);
+                        }   
+            }
+            foreach ($penumpang_date as $de) {
+                    array_push($date,tgl_indo($de->tgl));      
+            }
+    
+            $series =  [
+                'data' => [
+                [
+                    "name" => 'Terminal',
+                    "type" => 'bar',
+                    "data" => $terminal
+                ], 
+                [
+                    "name" => 'Pelabuhan',
+                    "type" => 'bar',
+                    "data" => $pelabuhan
+                ], 
+                [
+                    "name" => 'Bandara',
+                    "type" => 'bar',
+                    "data" => $bandara
+                ],
+                [
+                    "name" => 'Stasiun',
+                    "type" => 'bar',
+                    "data" => $stasiun
+                ]],
+                'date' => $date
+            ];
+
+        }else{
+            $penumpang =$this->db->query('SELECT tgl,prasarana,sum(p_datang) as total FROM tmc_prasarana_publik where p_datang > 0 GROUP by tgl, prasarana')->result();
+            $penumpang_date =$this->db->query('SELECT tgl,prasarana,sum(p_datang) as total FROM tmc_prasarana_publik where p_datang > 0 GROUP by tgl')->result();
+            foreach ($penumpang as $v) {
+                    if ($v->tgl >= $start && $v->tgl <= $end) {
+                        if ($v->prasarana == 'Terminal') {
+                            array_push($terminal,$v->total);
+                        }
+                        if ($v->prasarana == 'Pelabuhan') {
+                            array_push($pelabuhan,$v->total);
+                        }
+                        if ($v->prasarana == 'Bandara') {
+                            array_push($bandara,$v->total);
+                        }
+                        if ($v->prasarana == 'Stasiun') {
+                            array_push($stasiun,$v->total);
+                        }  
+                        
+                    }  
+            }
+            foreach ($penumpang_date as $de) {
+                if ($de->tgl >= $start && $de->tgl <= $end) {
+                    array_push($date,tgl_indo($de->tgl));  
+                }    
+            }
+    
+            $series =  [
+                'data' => [
+                [
+                    "name" => 'Terminal',
+                    "type" => 'bar',
+                    "data" => $terminal
+                ], 
+                [
+                    "name" => 'Pelabuhan',
+                    "type" => 'bar',
+                    "data" => $pelabuhan
+                ], 
+                [
+                    "name" => 'Bandara',
+                    "type" => 'bar',
+                    "data" => $bandara
+                ],
+                [
+                    "name" => 'Stasiun',
+                    "type" => 'bar',
+                    "data" => $stasiun
+                ]],
+                'date' => $date
+            ];
+            
+        }
+        
+        echo json_encode($series);
+    }
+
+    public function bar_tmc_prasarana_p_berangkat()
+    {
+        $start =$this->input->post('start');
+        $end =$this->input->post('end');
+        $terminal=[];
+        $pelabuhan=[];
+        $bandara=[];
+        $stasiun=[];
+        $date = [];
+
+        if ($start == "") {
+            $penumpang =$this->db->query('SELECT tgl,prasarana,sum(p_berangkat) as total FROM tmc_prasarana_publik where p_berangkat > 0 and date(dtm) = date(now()) GROUP by tgl, prasarana')->result();
+            $penumpang_date =$this->db->query('SELECT tgl,prasarana,sum(p_berangkat) as total FROM tmc_prasarana_publik where p_berangkat > 0 and date(dtm) = date(now())  GROUP by tgl')->result();
+            foreach ($penumpang as $v) {
+                    
+                        if ($v->prasarana == 'Terminal') {
+                            array_push($terminal,$v->total);
+                        }
+                        if ($v->prasarana == 'Pelabuhan') {
+                            array_push($pelabuhan,$v->total);
+                        }
+                        if ($v->prasarana == 'Bandara') {
+                            array_push($bandara,$v->total);
+                        }
+                        if ($v->prasarana == 'Stasiun') {
+                            array_push($stasiun,$v->total);
+                        }  
+                        
+            }
+            foreach ($penumpang_date as $de) {
+                
+                    array_push($date,tgl_indo($de->tgl));   
+            }
+    
+            $series =  [
+                'data' => [
+                [
+                    "name" => 'Terminal',
+                    "type" => 'bar',
+                    "data" => $terminal
+                ], 
+                [
+                    "name" => 'Pelabuhan',
+                    "type" => 'bar',
+                    "data" => $pelabuhan
+                ], 
+                [
+                    "name" => 'Bandara',
+                    "type" => 'bar',
+                    "data" => $bandara
+                ],
+                [
+                    "name" => 'Stasiun',
+                    "type" => 'bar',
+                    "data" => $stasiun
+                ]],
+                'date' => $date
+            ];
+        }else{
+            $penumpang =$this->db->query('SELECT tgl,prasarana,sum(p_berangkat) as total FROM tmc_prasarana_publik where p_berangkat > 0 GROUP by tgl, prasarana')->result();
+            $penumpang_date =$this->db->query('SELECT tgl,prasarana,sum(p_berangkat) as total FROM tmc_prasarana_publik where p_berangkat > 0 GROUP by tgl')->result();
+            foreach ($penumpang as $v) {
+                    if ($v->tgl >= $start && $v->tgl <= $end) {
+                        if ($v->prasarana == 'Terminal') {
+                            array_push($terminal,$v->total);
+                        }
+                        if ($v->prasarana == 'Pelabuhan') {
+                            array_push($pelabuhan,$v->total);
+                        }
+                        if ($v->prasarana == 'Bandara') {
+                            array_push($bandara,$v->total);
+                        }
+                        if ($v->prasarana == 'Stasiun') {
+                            array_push($stasiun,$v->total);
+                        }  
+                        
+                    }  
+            }
+            foreach ($penumpang_date as $de) {
+                if ($de->tgl >= $start && $de->tgl <= $end) {
+                    array_push($date,tgl_indo($de->tgl));  
+                }    
+            }
+    
+            $series =  [
+                'data' => [
+                [
+                    "name" => 'Terminal',
+                    "type" => 'bar',
+                    "data" => $terminal
+                ], 
+                [
+                    "name" => 'Pelabuhan',
+                    "type" => 'bar',
+                    "data" => $pelabuhan
+                ], 
+                [
+                    "name" => 'Bandara',
+                    "type" => 'bar',
+                    "data" => $bandara
+                ],
+                [
+                    "name" => 'Stasiun',
+                    "type" => 'bar',
+                    "data" => $stasiun
+                ]],
+                'date' => $date
+            ];
+
+        }
+
+        
+        echo json_encode($series);
+    }
+
+    public function bar_tmc_prasarana_pengunjung()
+    {
+        $start =$this->input->post('start');
+        $end =$this->input->post('end');
+        $tempat_wisata=[];
+        $gedung=[];
+        $pusat_perbelanjaan=[];
+        $sarana_olahraga=[];
+        $date = [];
+        if ($start == "") {
+            $pengunjung =$this->db->query('SELECT tgl,prasarana,sum(pengunjung) as total FROM tmc_prasarana_publik where pengunjung > 0  and date(dtm) = date(now())  GROUP by tgl, prasarana')->result();
+            $pengunjung_date =$this->db->query('SELECT tgl,prasarana,sum(pengunjung) as total FROM tmc_prasarana_publik where pengunjung > 0 and date(dtm) = date(now()) GROUP by tgl')->result();
+            foreach ($pengunjung as $v) {
+                        if ($v->prasarana == 'Tempat Wisata') {
+                            array_push($tempat_wisata,$v->total);
+                        }
+                        if ($v->prasarana == 'Gedung') {
+                            array_push($gedung,$v->total);
+                        }
+                        if ($v->prasarana == 'Pusat Perbelanjaan') {
+                            array_push($pusat_perbelanjaan,$v->total);
+                        }
+                        if ($v->prasarana == 'Sarana Olahraga') {
+                            array_push($sarana_olahraga,$v->total);
+                        }                  
+            }
+            foreach ($pengunjung_date as $de) {
+                    array_push($date,tgl_indo($de->tgl));  
+                
+            }
+    
+            $series =  [
+                'data' => [
+                [
+                    "name" => 'Tempat Wisata',
+                    "type" => 'bar',
+                    "data" => $tempat_wisata
+                ], 
+                [
+                    "name" => 'Gedung',
+                    "type" => 'bar',
+                    "data" => $gedung
+                ], 
+                [
+                    "name" => 'Pusat Perbelanjaan',
+                    "type" => 'bar',
+                    "data" => $pusat_perbelanjaan
+                ],
+                [
+                    "name" => 'Sarana Olahraga',
+                    "type" => 'bar',
+                    "data" => $sarana_olahraga
+                ]],
+                'date' => $date
+            ];
+        }else{
+            $pengunjung =$this->db->query('SELECT tgl,prasarana,sum(pengunjung) as total FROM tmc_prasarana_publik where pengunjung > 0 GROUP by tgl, prasarana')->result();
+            $pengunjung_date =$this->db->query('SELECT tgl,prasarana,sum(pengunjung) as total FROM tmc_prasarana_publik where pengunjung > 0 GROUP by tgl')->result();
+            foreach ($pengunjung as $v) {
+                    if ($v->tgl >= $start && $v->tgl <= $end) {
+                        if ($v->prasarana == 'Tempat Wisata') {
+                            array_push($tempat_wisata,$v->total);
+                        }
+                        if ($v->prasarana == 'Gedung') {
+                            array_push($gedung,$v->total);
+                        }
+                        if ($v->prasarana == 'Pusat Perbelanjaan') {
+                            array_push($pusat_perbelanjaan,$v->total);
+                        }
+                        if ($v->prasarana == 'Sarana Olahraga') {
+                            array_push($sarana_olahraga,$v->total);
+                        }  
+                        
+                    }  
+            }
+            foreach ($pengunjung_date as $de) {
+                if ($de->tgl >= $start && $de->tgl <= $end) {
+                    array_push($date,tgl_indo($de->tgl));  
+                }    
+            }
+    
+            $series =  [
+                'data' => [
+                [
+                    "name" => 'Tempat Wisata',
+                    "type" => 'bar',
+                    "data" => $tempat_wisata
+                ], 
+                [
+                    "name" => 'Gedung',
+                    "type" => 'bar',
+                    "data" => $gedung
+                ], 
+                [
+                    "name" => 'Pusat Perbelanjaan',
+                    "type" => 'bar',
+                    "data" => $pusat_perbelanjaan
+                ],
+                [
+                    "name" => 'Sarana Olahraga',
+                    "type" => 'bar',
+                    "data" => $sarana_olahraga
+                ]],
+                'date' => $date
+            ];
+
+        }
+    
+
         
         echo json_encode($series);
     }
