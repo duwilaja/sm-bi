@@ -88,10 +88,11 @@ class MAis extends CI_Model {
     }
 
     // Get meninggal dunia
-    public function get_ais_jml_md($tahun=false)
+    public function get_ais_jml_md($tahun=false,$polda=false)
     {
         $this->db->select('sum(md) as jml');
         $this->db->where('thn',$tahun);
+        $this->db->where('da', $polda);
         $q = $this->db->get($this->t)->row();
         return $q->jml != "" ? $q->jml : 0;
     }
