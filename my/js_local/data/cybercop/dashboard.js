@@ -521,4 +521,42 @@ function dt_tabel_user_cybercops() {
 
 }
 
+var ctx = document.getElementById("ikc").getContext('2d');
 
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Ali",	"Rudi",	"Joseph",	"Singgih",	"Almer"],
+        datasets: [{
+            label: 'Target', // Name the series
+            data: [120,	130,145,110,140], // Specify the data values array
+            fill: false,
+            type : 'line',
+            borderColor: '#2196f3', // Add custom color border (Line)
+            backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+            borderWidth: 1 // Specify bar border width
+        },
+        {
+            label: 'Real', // Name the series
+            data: [90,	100,80,	75,	68], // Specify the data values array
+            fill: false,
+            type : 'line',
+            borderColor: '#4CAF50', // Add custom color border (Line)
+            backgroundColor: '#4CAF50', // Add custom color background (Points and Fill)
+            borderWidth: 1 // Specify bar border width
+        },
+        {
+            label: 'Persentase', // Name the series
+            data: [75,76,55,68,	48], // Specify the data values array
+            fill: false,
+            borderColor: '#ff9800', // Add custom color border (Line)
+            backgroundColor: '#ffc107', // Add custom color background (Points and Fill)
+            borderWidth: 1 // Specify bar border width
+        },
+    ],
+    },
+    options: {
+      responsive: true, // Instruct chart js to respond nicely.
+      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+    }
+});
