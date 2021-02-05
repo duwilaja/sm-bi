@@ -12,6 +12,7 @@ class Grafik_api extends CI_Controller {
         $this->load->model('MAis','ais');
         $this->load->model('MDares','dares');
         $this->load->model('MDPend','mdp');
+        $this->load->model('MEtle','etle');
     }
     
     public function bar_eri()
@@ -1819,6 +1820,74 @@ class Grafik_api extends CI_Controller {
         $prasarana_public = $this->tmc->tmc_prasarana_publik($start,$end,$polda,$polres);
 
         $series =  [$info_lalin,$interaksi,$publikasi,$kordinasi,$prasarana_public];
+        echo json_encode($series);
+    }
+
+    public function jml_data_etle($start='',$end='',$polda='',$polres='')
+    {
+    
+        $start =$this->input->post('start');
+        $end =$this->input->post('end');
+        $polda =$this->input->post('polda');
+        $polres =$this->input->post('polres');
+        $total= 0;
+        $tervalidasi = 0;
+        $terberkas = 0;
+        $terkirim = 0;
+        $terkonfirmasi = 0;
+        $terbayar = 0;
+        $blokir = 0;
+        $polda1 = "Seluruh Indonesia";
+        $polda2 = "Seluruh Indonesia";
+        $polda3 = "Seluruh Indonesia";
+        $polda4 = "Seluruh Indonesia";
+        $polda5 = "Seluruh Indonesia";
+        $polda6 = "Seluruh Indonesia";
+        $polda7 = "Seluruh Indonesia";
+
+        $polres1 = "";
+        $polres2 = "";
+        $polres3 = "";
+        $polres4 = "";
+        $polres5 = "";
+        $polres6 = "";
+        $polres7 = "";
+
+        $data = $this->etle->jml_data_etle($start,$end,$polda,$polres);
+        foreach ($data as $key) {
+
+            if ($key->total != "") {
+                $total = $key->total;
+                $tervalidasi = $key->tervalidasi;
+                $terberkas = $key->terberkas;
+                $terkirim = $key->terkirim;
+                $terkonfirmasi = $key->terkonfirmasi;
+                $terbayar = $key->terbayar;
+                $blokir = $key->blokir;
+            }
+            if ($polda != "") {
+                $polda1 = "polda ".$this->etle->cek_polda($polda);
+                $polda2 = "polda ".$this->etle->cek_polda($polda);
+                $polda3 = "polda ".$this->etle->cek_polda($polda);
+                $polda4 = "polda ".$this->etle->cek_polda($polda);
+                $polda5 = "polda ".$this->etle->cek_polda($polda);
+                $polda6 = "polda ".$this->etle->cek_polda($polda);
+                $polda7 = "polda ".$this->etle->cek_polda($polda);
+            }
+            if ($polres != "") {
+                $polres1 = "polres ".$this->etle->cek_polres($polres);
+                $polres2 = "polres ".$this->etle->cek_polres($polres);
+                $polres3 = "polres ".$this->etle->cek_polres($polres);
+                $polres4 = "polres ".$this->etle->cek_polres($polres);
+                $polres5 = "polres ".$this->etle->cek_polres($polres);
+                $polres6 = "polres ".$this->etle->cek_polres($polres);
+                $polres7 = "polres ".$this->etle->cek_polres($polres);
+            }
+
+                       
+            
+        }
+        $series =  [$total,$tervalidasi,$terberkas,$terkirim,$terkonfirmasi,$terbayar,$blokir,$polda1,$polda2,$polda3,$polda4,$polda5,$polda6,$polda7,$polres1,$polres2,$polres3,$polres4,$polres5,$polres6,$polres7];
         echo json_encode($series);
     }
 
