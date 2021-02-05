@@ -143,7 +143,7 @@ var grafik_line = c3.generate({
         x: {
             type: 'category',
             // name of each category
-            categories: ['Des 2019', 'Jan 2020', 'Feb 2020']
+            categories: ['3 Feb 2021', '4 Feb 2021', '5 Feb 2021']
         },
     },
     legend: {
@@ -189,7 +189,7 @@ var grafik_bar = c3.generate({
         x: {
             type: 'category',
             // name of each category
-            categories: ['Des 2019', 'Jan 2020', 'Feb 2020']
+            categories: ['3 Feb 2021', '4 Feb 2021', '5 Feb 2021']
         },
     },
     legend: {
@@ -200,4 +200,40 @@ var grafik_bar = c3.generate({
         top: 0
     },
 });
+
+var options = {
+    series: [{
+      name: "Desktops",
+      data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+  }],
+    chart: {
+    height: 350,
+    type: 'line',
+    zoom: {
+      enabled: false
+    }
+  },
+  dataLabels: {
+    enabled: false
+  },
+  stroke: {
+    curve: 'straight'
+  },
+  title: {
+    text: 'Product Trends by Month',
+    align: 'left'
+  },
+  grid: {
+    row: {
+      colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+      opacity: 0.5
+    },
+  },
+  xaxis: {
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+  }
+  };
+
+  var chart = new ApexCharts(document.querySelector("#chart"), options);
+  chart.render();
 
