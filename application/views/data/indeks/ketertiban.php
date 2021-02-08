@@ -88,19 +88,6 @@
 		</div>
 	</div>
 </div>	
-
-<div class="row">
-	<div class="col-md-12">
-		<div class="card">
-			<div class="card-header">Indesk fatalitas korban kecelakaan , <span style="position:relative;left:8px;"><b>Polda Jabar  - Januari 2021</b></span></div>
-            <center><span><b>Jumlah Korban Meninggal Dunia</b></span></center>
-			<div class="card-body">
-				<canvas id="ifakl" width="400" height="400"></canvas>
-			</div>
-		</div>
-	</div>
-</div>	
-
 				
 
 

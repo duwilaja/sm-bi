@@ -111,56 +111,6 @@ function jml_data_tmc(start='',end='',polda='',polres='') {
 }
 
 
-
-
-//   var ctx1 = document.getElementById("ikc1").getContext('2d');
-//   var myChart = new Chart(ctx1, {
-//       type: 'bar',
-//       data: {
-//           labels: ["Pengguna SIM", "Pelanggaran ",	"Penindakan"],
-//           datasets: [{
-//               label: 'SIM A', // Name the series
-//               data: [100,80,100], // Specify the data values array
-//               fill: false,
-//               type : 'line',
-//               borderColor: '#2196f3', // Add custom color border (Line)
-//               backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
-//               borderWidth: 1 // Specify bar border width
-//           },
-//           {
-//               label: 'SIM B ', // Name the series
-//               data: [50,40,10], // Specify the data values array
-//               fill: false,
-//               type : 'line',
-//               borderColor: '#4CAF50', // Add custom color border (Line)
-//               backgroundColor: '#4CAF50', // Add custom color background (Points and Fill)
-//               borderWidth: 1 // Specify bar border width
-//           },
-//           {
-//               label: 'SIM C', // Name the series
-//               data: [150,100,150], // Specify the data values array
-//               fill: false,
-//               type : 'line',
-//               borderColor: '#ff9800', // Add custom color border (Line)
-//               backgroundColor: '#ffc107', // Add custom color background (Points and Fill)
-//               borderWidth: 1 // Specify bar border width
-//           },
-//           {
-//             label: 'SIM D', // Name the series
-//             data: [80,60,20], // Specify the data values array
-//             fill: false,
-//             type : 'line',
-//             borderColor: '#ff443b', // Add custom color border (Line)
-//             backgroundColor: '#ff6861', // Add custom color background (Points and Fill)
-//             borderWidth: 1 // Specify bar border width
-//         },
-//       ],
-//       },
-//       options: {
-//         responsive: true, // Instruct chart js to respond nicely.
-//         maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
-//       }
-//   });  
 var ctx2 = document.getElementById("ikc2").getContext('2d');
 var myChart = new Chart(ctx2, {
     type: 'bar',
@@ -202,35 +152,5 @@ var myChart = new Chart(ctx2, {
 });  
 
 
-var ifakl = document.getElementById("ifakl").getContext('2d');
-var myChart = new Chart(ifakl, {
-    type: 'bar',
-    data: {
-        labels: ["2017","2018","2019","2020"],
-        datasets: [{
-            label: 'Target', // Name the series
-            data: [100,80,70,30], // Specify the data values array
-            fill: false,
-            type : 'line',
-            borderColor: '#ff1f14', // Add custom color border (Line)
-            backgroundColor: '#ff4e45', // Add custom color background (Points and Fill)
-            borderWidth: 1 // Specify bar border width
-        },
-        {
-            label: 'Real', // Name the series
-            data: [115,90,65,50], // Specify the data values array
-            fill: false,
-            type : 'line',
-            borderColor: '#4050ff', // Add custom color border (Line)
-            backgroundColor: '#5462ff', // Add custom color background (Points and Fill)
-            borderWidth: 1 // Specify bar border width
-        },
-    ],
-    },
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
-    }
-});  
 
 
