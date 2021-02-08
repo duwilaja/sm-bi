@@ -202,3 +202,35 @@ var myChart = new Chart(ctx2, {
 });  
 
 
+var ifakl = document.getElementById("ifakl").getContext('2d');
+var myChart = new Chart(ifakl, {
+    type: 'bar',
+    data: {
+        labels: ["2017","2018","2019","2020"],
+        datasets: [{
+            label: 'Target', // Name the series
+            data: [100,80,70,30], // Specify the data values array
+            fill: false,
+            type : 'line',
+            borderColor: '#ff1f14', // Add custom color border (Line)
+            backgroundColor: '#ff4e45', // Add custom color background (Points and Fill)
+            borderWidth: 1 // Specify bar border width
+        },
+        {
+            label: 'Real', // Name the series
+            data: [115,90,65,50], // Specify the data values array
+            fill: false,
+            type : 'line',
+            borderColor: '#4050ff', // Add custom color border (Line)
+            backgroundColor: '#5462ff', // Add custom color background (Points and Fill)
+            borderWidth: 1 // Specify bar border width
+        },
+    ],
+    },
+    options: {
+      responsive: true, // Instruct chart js to respond nicely.
+      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+    }
+});  
+
+
