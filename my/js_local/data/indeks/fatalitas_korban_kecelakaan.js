@@ -121,8 +121,8 @@ var myChart = new Chart(ifakl, {
             data: [100,80,70,30], // Specify the data values array
             fill: false,
             type : 'line',
-            borderColor: '#ff1f14', // Add custom color border (Line)
-            backgroundColor: '#ff4e45', // Add custom color background (Points and Fill)
+            borderColor: '#38c0ff', // Add custom color border (Line)
+            backgroundColor: '#38c0ff', // Add custom color background (Points and Fill)
             borderWidth: 1 // Specify bar border width
         },
         {
@@ -130,8 +130,8 @@ var myChart = new Chart(ifakl, {
             data: [115,90,65,50], // Specify the data values array
             fill: false,
             type : 'line',
-            borderColor: '#4050ff', // Add custom color border (Line)
-            backgroundColor: '#5462ff', // Add custom color background (Points and Fill)
+            borderColor: '#ffcd36', // Add custom color border (Line)
+            backgroundColor: '#ffcd36', // Add custom color background (Points and Fill)
             borderWidth: 1 // Specify bar border width
         },
     ],
@@ -141,5 +141,207 @@ var myChart = new Chart(ifakl, {
       maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
     }
 });  
+
+
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+var per_jml_kec = document.getElementById("per_jml_kec").getContext('2d');
+// var horizontalBarChart = new Chart(per_jml_kec, {
+//    type: 'horizontalBar',
+//    data: {
+//       labels: ["BABEL","MALUT","GORONTALO","BENGKULU","KALTIM","MALUKU","KALSEL","KEPRI","PAPUA","JAMBI","KALTENG","SUMSEL","SULTARA","NTT"],
+//     //   datasets: [{
+//     //     //  data: [2000, 4000, 6000, 8000, 10000, 12000, 14000],
+//     //     //  backgroundColor: ["#73BFB8", "#73BFB8", "#73BFB8", "#73BFB8", "#73BFB8", "#73BFB8", "#73BFB8"], 
+//     //   }]
+//          datasets:[
+//                 {
+//                     label: "Jumlah Korban",
+//                     backgroundColor: "orange",
+//                     data: [3,7,6,3,4,9,8,7,2,4,6,8,9,5]
+//                 },
+//                 {
+//                     label: "Jumlah Laka",
+//                     backgroundColor: "red",
+//                     data: [4,3,1,4,6,8,5,9,4,7,8,2,4,6]
+//                 }
+//          ]
+//    },
+
+//    options: {
+//     responsive: true, // Instruct chart js to respond nicely.
+//     maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+//   }
+// });
+var horizontalBarChart = new Chart(per_jml_kec, {
+    type: 'horizontalBar',
+    data: {
+       labels: ["BABEL","MALUT","GORONTALO","BENGKULU","KALTIM","MALUKU","KALSEL","KEPRI","PAPUA","JAMBI","KALTENG","SUMSEL","SULTARA","NTT"],
+          datasets:[
+                 {
+                     label: "Jumlah Korban",
+                     backgroundColor: "#38c0ff",
+                     data: [3,7,6,3,4,9,8,7,2,4,6,8,9,5]
+                 },
+                 {
+                     label: "Jumlah Laka",
+                     backgroundColor: "#ffcd36",
+                     data: [4,3,1,4,6,8,5,9,4,7,8,2,4,6]
+                 }
+          ]
+    },
+ 
+    options: {
+     responsive: true, // Instruct chart js to respond nicely.
+     maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+     scales: {
+        xAxes: [{
+            stacked: true,
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 20
+          }
+        }],
+        yAxes: [{
+            stacked: true,
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 20
+          }
+        }]
+    }
+   }
+ });
+var data = {
+    datasets: [{
+        data: [
+            11,
+            16,
+            7,
+            3,
+            14
+        ],
+        backgroundColor: [
+            "red",
+            "green",
+            "blue",
+            "orange",
+            "purple"
+        ],
+        label: 'My dataset' // for legend
+    }],
+    labels: [
+        "Ceroboh terhadap lalu lintas dari depan",
+        "Gagal menjaga jarak aman",
+        "Ceroboh saat belok",
+        "Ceroboh saat menyalip",
+        "Melampaui batas kecepatan"
+    ]
+};
+var options = {
+    responsive: true, // Instruct chart js to respond nicely.
+    // maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+    plugins: {
+        datalabels: {
+            formatter: (value, ctx) => {
+                let sum = 0;
+                let dataArr = ctx.chart.data.datasets[0].data;
+                dataArr.map(data => {
+                    sum += data;
+                });
+                let percentage = (value*100 / sum).toFixed(2)+"%";
+                return percentage;
+            },
+            color: '#fff',
+        }
+    }
+};
+var indeks_penyebab_kecelakaan = $("#indeks_penyebab_kecelakaan");
+new Chart(indeks_penyebab_kecelakaan, {
+    data: data,
+    type: 'polarArea',
+    options: options
+});
+
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+var grafik_kecelakaan = document.getElementById("grafik_kecelakaan").getContext('2d');
+var horizontalBarChart = new Chart(grafik_kecelakaan, {
+    type: 'bar',
+    data: {
+       labels: ["TAKSI","BUS SEKOLAH","BUS PARIWISATA","RENTAL","OJEK","ANGKOT","ANGKUTAN BARANG","PRIBADI"],
+          datasets:[
+                 {
+                     label: "Jumlah Korban",
+                     backgroundColor: "#38c0ff",
+                     data: [3,7,6,3,4,9,8,7]
+                 },
+                 {
+                     label: "Jumlah Laka",
+                     backgroundColor: "#ffcd36",
+                     data: [4,3,1,4,6,8,5,9]
+                 }
+          ]
+    },
+ 
+    options: {
+     responsive: true, // Instruct chart js to respond nicely.
+     maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+     scales: {
+        xAxes: [{
+            stacked: true,
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 20
+          }
+        }],
+        yAxes: [{
+            stacked: true,
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 20
+          }
+        }]
+    }
+   }
+ });
+
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+var ifak2 = document.getElementById("ifak2").getContext('2d');
+var horizontalBarChart = new Chart(ifak2, {
+     type: 'horizontalBar',
+     data: {
+        labels: ["BABEL","MALUT","GORONTALO","BENGKULU","KALTIM","MALUKU","KALSEL","KEPRI","PAPUA","JAMBI","KALTENG","SUMSEL","SULTARA","NTT"],
+           datasets:[
+                  {
+                      label: "Jumlah Korban",
+                      backgroundColor: "#38c0ff",
+                      data: [3,7,6,3,4,9,8,7,2,4,6,8,9,5]
+                  }
+           ]
+     },
+  
+     options: {
+      responsive: true, // Instruct chart js to respond nicely.
+      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+      scales: {
+          xAxes: [{
+              stacked: true,
+              ticks: {
+                suggestedMin: 0,
+                suggestedMax: 20
+            }
+          }],
+          yAxes: [{
+              stacked: true,
+              ticks: {
+                suggestedMin: 0,
+                suggestedMax: 20
+            }
+          }]
+      }
+    }
+  }); 
 
 

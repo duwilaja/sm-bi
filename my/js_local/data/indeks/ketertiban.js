@@ -113,7 +113,7 @@ function jml_data_tmc(start='',end='',polda='',polres='') {
 
 var ctx2 = document.getElementById("ikc2").getContext('2d');
 var myChart = new Chart(ctx2, {
-    type: 'bar',
+    type: 'bar', 
     data: {
         labels: ["SIM A","SIM B", "SIM C","NON SIM"],
         datasets: [{
