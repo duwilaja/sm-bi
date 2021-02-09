@@ -214,20 +214,8 @@ var horizontalBarChart = new Chart(per_jml_kec, {
  });
 var data = {
     datasets: [{
-        data: [
-            11,
-            16,
-            7,
-            3,
-            14
-        ],
-        backgroundColor: [
-            "red",
-            "green",
-            "blue",
-            "orange",
-            "purple"
-        ],
+        data: [100,100,100,100,150],
+        backgroundColor: ["red","green","blue","orange","purple"],
         label: 'My dataset' // for legend
     }],
     labels: [
