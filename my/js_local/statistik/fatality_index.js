@@ -120,7 +120,6 @@ function grafik_bar_fi() {
     $.getJSON("../Grafik_api/grafik_bar_fi", function(r) {
         bar_fi.data.labels = r.data.label;
         bar_fi.data.datasets[0].data = r.data.jml;
-        debugger;
         bar_fi.update();  
     });
 }
