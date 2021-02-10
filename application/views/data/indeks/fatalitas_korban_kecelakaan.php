@@ -81,25 +81,66 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="card">
-			<div class="card-header">Index Ketertiban<span style="position:relative;left:8px;"><b>Polda Jabar  - Januari 2021</b></span></div>
+			<div class="card-header">Indesk fatalitas korban kecelakaan <span style="position:relative;left:8px;"><b>Data Pertahun</b></span></div>
+            <center><span><b>Jumlah Korban Meninggal Dunia</b></span></center>
 			<div class="card-body">
-				<canvas id="ikc1" width="400" height="400"></canvas>
+				<canvas id="ifakl" width="400" height="400"></canvas>
 			</div>
 		</div>
 	</div>
 </div>	
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">Indesk fatalitas korban kecelakaan lalu lintas <span style="position:relative;left:8px;"><b>Terhadap 100.000  populasi penduduk</b></span></div>
+            <center><span><b>Jumlah Korban Meninggal Dunia</b></span></center>
+			<div class="card-body">
+				<canvas id="ifak2" width="400" height="400"></canvas>
+			</div>
+		</div>
+	</div>
+</div>	
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">Perbandingan Jumlah Kecelakaan Dan Jumlah Korban  <span style="position:relative;left:8px;"><b>(Data 2019-2020),</b></span></div>
+            <!-- <center><span><b>Jumlah Korban Meninggal Dunia</b></span></center> -->
+			<div class="card-body">
+				<canvas id="per_jml_kec" width="400" height="400"></canvas>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">Grafik Kecelakaan  <span style="position:relative;left:8px;"><b>(Data 2019-2020),</b></span></div>
+            <!-- <center><span><b>Jumlah Korban Meninggal Dunia</b></span></center> -->
+			<div class="card-body">
+				<canvas id="grafik_kecelakaan" width="400" height="400"></canvas>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 <div class="row">
 	<div class="col-md-12">
 		<div class="card">
-			<div class="card-header">Index Ketertiban<span style="position:relative;left:8px;"><b>Polda Jabar  - Januari 2021</b></span></div>
+			<div class="card-header">Kecelakaan Disebabkan Perilaku Pengemudi <span style="position:relative;left:8px;"><b>(Data 2019-2020),</b></span></div>
+            <!-- <center><span><b>Jumlah Korban Meninggal Dunia</b></span></center> -->
 			<div class="card-body">
-				<canvas id="ikc2" width="400" height="400"></canvas>
+				<canvas id="indeks_penyebab_kecelakaan" width="400" height="200"></canvas>
 			</div>
 		</div>
 	</div>
-</div>	
+</div>
+
+
+
 
 				
 
