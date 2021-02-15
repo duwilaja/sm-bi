@@ -185,14 +185,28 @@ class Data extends CI_Controller {
 			$this->load->view('login',$data);
 		}
 	}
-	public function fatalitas_kecelakaan() // index ketertiban
+	public function kecelakaan() // index ketertiban
 	{
         $user=$this->session->userdata('user_data');
-        $data['js_local'] = 'data/indeks/fatalitas_korban_kecelakaan.js';
+        $data['js_local'] = 'data/indeks/kecelakaan.js';
 		if(isset($user)){
 			$data['session'] = $user;
 			$data['polda'] = $this->dares->get_polda()->result();
-			$this->template->load("data/indeks/fatalitas_korban_kecelakaan",$data);
+			$this->template->load("data/indeks/kecelakaan",$data);
+		}else{
+			$retval=array("403","Failed","Please login","error");
+			$data['retval']= $retval;
+			$this->load->view('login',$data);
+		}
+	}
+	public function keamanan() // index keamanan
+	{
+        $user=$this->session->userdata('user_data');
+        $data['js_local'] = 'data/indeks/keamanan.js';
+		if(isset($user)){
+			$data['session'] = $user;
+			$data['polda'] = $this->dares->get_polda()->result();
+			$this->template->load("data/indeks/keamanan",$data);
 		}else{
 			$retval=array("403","Failed","Please login","error");
 			$data['retval']= $retval;

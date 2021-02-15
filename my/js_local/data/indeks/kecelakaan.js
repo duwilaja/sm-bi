@@ -227,8 +227,8 @@ var data = {
     ]
 };
 var options = {
-    responsive: true, // Instruct chart js to respond nicely.
-    // maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+    responsive: true, 
+    // maintainAspectRatio: false,
     plugins: {
         datalabels: {
             formatter: (value, ctx) => {
