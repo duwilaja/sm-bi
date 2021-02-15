@@ -111,75 +111,36 @@ function jml_data_tmc(start='',end='',polda='',polres='') {
 }
 
 
-var ctx1 = document.getElementById("ikc1").getContext('2d');
-var myChart = new Chart(ctx1, {
-    type: 'bar', 
-    data: {
-        labels: ["SIM A","SIM B", "SIM C","NON SIM"],
-        datasets: [{
-            label: 'Pelanggaran', // Name the series
-            data: [200,100,250,150], // Specify the data values array
-            fill: false,
-            type : 'line',
-            borderColor: '#ff1f14', // Add custom color border (Line)
-            backgroundColor: '#ff4e45', // Add custom color background (Points and Fill)
-            borderWidth: 1 // Specify bar border width
-        },
-        {
-            label: 'Penindakan', // Name the series
-            data: [130,80,200,70], // Specify the data values array
-            fill: false,
-            type : 'line',
-            borderColor: '#4050ff', // Add custom color border (Line)
-            backgroundColor: '#5462ff', // Add custom color background (Points and Fill)
-            borderWidth: 1 // Specify bar border width
-        },
-        {
-            label: 'Pengguna', // Name the series
-            data: [70,20,50,80], // Specify the data values array
-            fill: false,
-            type : 'bar',
-            borderColor: '#5462ff', // Add custom color border (Line)
-            backgroundColor: '#f8ff24', // Add custom color background (Points and Fill)
-            borderWidth: 1 // Specify bar border width
-        },
-    ],
-    },
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
-    }
-});  
 
 
 var ctx2 = document.getElementById("ikc2").getContext('2d');
 var myChart = new Chart(ctx2, {
     type: 'bar', 
     data: {
-        labels: ["Ketertiban","lampu utama", "Jalur / lajur lalu lintas","Belokan / simpangan","Kecepatan","Berhenti","Parkir","Kendaraan tidak bermotor"],
+        labels: ["Jan","Feb", "Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"],
         datasets: [{
-            label: 'Selalu', // Name the series
-            data: [372,70,116,104,217,107,42,38], // Specify the data values array
+            label: 'Black Spot', // Name the series
+            data: [16,18,15,17,25,15,17,16,22,20,12,22], // Specify the data values array
             fill: false,
-            type : 'bar',
+            type : 'line',
             borderColor: '#ff1f14', // Add custom color border (Line)
             backgroundColor: '#ff4e45', // Add custom color background (Points and Fill)
             borderWidth: 1 // Specify bar border width
         },
         {
-            label: 'Kadang-Kadang', // Name the series
-            data: [225,34,54,14,79,58,16,22], // Specify the data values array
+            label: 'Trouble Spot', // Name the series
+            data: [17,16,21,15,20,13,20,13,23,15,15,14], // Specify the data values array
             fill: false,
-            type : 'bar',
+            type : 'line',
             borderColor: '#4050ff', // Add custom color border (Line)
             backgroundColor: '#5462ff', // Add custom color background (Points and Fill)
             borderWidth: 1 // Specify bar border width
         },
         {
-            label: 'Tidak Pernah', // Name the series
-            data: [63,16,10,2,4,15,2,10], // Specify the data values array
+            label: 'Tindak Pidana', // Name the series
+            data: [18,20,22,14,22,18,15,18,20,18,20,18], // Specify the data values array
             fill: false,
-            type : 'bar',
+            type : 'line',
             borderColor: '#5462ff', // Add custom color border (Line)
             backgroundColor: '#f8ff24', // Add custom color background (Points and Fill)
             borderWidth: 1 // Specify bar border width

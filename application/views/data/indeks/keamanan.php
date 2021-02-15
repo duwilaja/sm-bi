@@ -81,18 +81,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="card">
-			<div class="card-header">Indesk Ketertiban<span style="position:relative;left:8px;"><b>Polda Jabar  - Januari 2021</b></span></div>
-			<div class="card-body">
-				<canvas id="ikc1" width="400" height="400"></canvas>
-			</div>
-		</div>
-	</div>
-</div>	
-
-<div class="row">
-	<div class="col-md-12">
-		<div class="card">
-			<div class="card-header">Indesk Kepatuhan Remaja terhadap tata cara tertib berlalu lintas<span style="position:relative;left:8px;"><b>Polda Jabar  - Januari 2021</b></span></div>
+			<div class="card-header">Indesk Keamanan<span style="position:relative;left:8px;"><b>Polda Jabar  - Januari 2021</b></span></div>
 			<div class="card-body">
 				<canvas id="ikc2" width="400" height="400"></canvas>
 			</div>
