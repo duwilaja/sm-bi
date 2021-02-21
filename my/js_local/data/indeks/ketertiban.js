@@ -156,7 +156,7 @@ var ctx2 = document.getElementById("ikc2").getContext('2d');
 var myChart = new Chart(ctx2, {
     type: 'bar', 
     data: {
-        labels: ["Ketertiban","lampu utama", "Jalur / lajur lalu lintas","Belokan / simpangan","Kecepatan","Berhenti","Parkir","Kendaraan tidak bermotor"],
+        labels: ["Kamtibmas","lampu utama", "Jalur / lajur lalu lintas","Belokan / simpangan","Kecepatan","Berhenti","Parkir","Kendaraan tidak bermotor"],
         datasets: [{
             label: 'Selalu', // Name the series
             data: [372,70,116,104,217,107,42,38], // Specify the data values array

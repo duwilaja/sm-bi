@@ -3,7 +3,7 @@ var no = 1;
 
 
 $(document).ready(function(){
-    jml_data_tmc
+    jml_data_tmc();
     bar_tmc_kondisi();
     bar_tmc_penyebab(); 
     
