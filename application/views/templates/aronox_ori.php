@@ -43,14 +43,11 @@ if(count($farr)>0&&$session['nrp']!=''){
 		<!-- Select2 css -->
 		<link href="<?php echo $base_url;?>aronox/assets/plugins/select2/select2.min.css" rel="stylesheet" />
 
-		<link href="<?php echo $base_url;?>aronox/assets/css/apexcharts.css" rel="stylesheet" />
-
 		<!-- Skin css-->
 		<link id="theme" rel="stylesheet" type="text/css" media="all" href="<?php echo $base_url;?>aronox/assets/skins/hor-skin/hor-skin1.css" />
 		
 		<!-- datatables CSS-->
 		<!--link rel="stylesheet" href="my/vendor/datatables/datatables.min.css"-->
-		<link href="<?php echo $base_url;?>aronox//assets/plugins/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="<?php echo $base_url;?>my/vendor/datatables.net-bs4/dataTables.bootstrap4.css">
 		<link rel="stylesheet" href="<?php echo $base_url;?>my/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 		
@@ -66,17 +63,6 @@ if(count($farr)>0&&$session['nrp']!=''){
 		
 		<!-- overwrite css -->
 		<link href="<?php echo $base_url;?>my/css/custom.css" rel="stylesheet" />
-
-		<!-- Owl -->
-		<link rel="stylesheet" href="<?=base_url('my/vendor/owl/')?>owl.carousel.min.css">
-		<link rel="stylesheet" href="<?=base_url('my/vendor/owl/')?>owl.theme.default.min.css">
-
-
-		<!-- Tabs css-->
-		<link href="<?php echo $base_url;?>aronox/assets/plugins/tabs/style.css" rel="stylesheet" />
-
-
-		<link href="<?php echo $base_url;?>aronox/assets/plugins/charts-c3/c3-chart.css" rel="stylesheet" />
 
 	</head>
 
@@ -136,39 +122,38 @@ if(count($farr)>0&&$session['nrp']!=''){
 							<ul class="horizontalMenu-list">
 								<li aria-haspopup="true"><a href="<?php echo $base_url?>home" class=""><i class="fa fa-at"></i> Home</a>
 								</li>
-								<!-- <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-map-o"></i> Laporan <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-map-o"></i> Laporan <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="#">Standard</a></li>
 										<li aria-haspopup="true"><a href="#">Bulanan</a></li>
 										<li aria-haspopup="true"><a href="#">Periodic</a></li>
 										<li aria-haspopup="true"><a href="#">Tabulasi Silang</a></li>
 									</ul>
-								</li> -->
-								 <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-file-text"></i> Data <i class="fa fa-angle-down horizontal-icon"></i></a>
+								</li>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-file-text"></i> Data <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="<?=site_url('data/cybercop')?>">Cybercop</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/eri')?>">ERI</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/sdc')?>">SDC</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/ssc')?>">SSC</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/tmc')?>">TMC</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/etle')?>">ETLE</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/intan')?>">INTAN</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/ais')?>">AIS</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/taa')?>">TAA</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/tarc')?>">TARC</a></li>
+										<li aria-haspopup="true"><a href="#">Cybercop</a></li>
+										<li aria-haspopup="true"><a href="#">ERI</a></li>
+										<li aria-haspopup="true"><a href="#">SDC</a></li>
+										<li aria-haspopup="true"><a href="#">SSC</a></li>
+										<li aria-haspopup="true"><a href="#">TMC</a></li>
+										<li aria-haspopup="true"><a href="#">INTAN</a></li>
+										<li aria-haspopup="true"><a href="#">AIS</a></li>
+										<li aria-haspopup="true"><a href="#">TAA</a></li>
+										<li aria-haspopup="true"><a href="#">TARC</a></li>
 									</ul>
 								</li>
 								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-line-chart"></i> Statistic <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="<?=site_url('statistik/trend_data')?>">Trend Data</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('statistik/case_fatality_rate')?>">Case Fatality Rate</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('statistik/fatality_index')?>">Fatality Index</a></li>
+										<li aria-haspopup="true"><a href="#">Trend Data</a></li>
+										<li aria-haspopup="true"><a href="#">Case Fatality Rate</a></li>
+										<li aria-haspopup="true"><a href="#">Fatality Index</a></li>
 										<li aria-haspopup="true"><a href="#">Risk Exposure</a></li>
 										<li aria-haspopup="true"><a href="#">Ambang Gangguan</a></li>
 										<li aria-haspopup="true"><a href="#">Index Kemacetan</a></li>
 									</ul>
 								</li>
-								<!-- <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-bullhorn"></i> Action <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-bullhorn"></i> Action <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="#">Rekomendasi</a></li>
 										<li aria-haspopup="true"><a href="#">RSPA</a></li>
@@ -176,7 +161,7 @@ if(count($farr)>0&&$session['nrp']!=''){
 										<li aria-haspopup="true"><a href="#">Literasi Road Safety</a></li>
 										<li aria-haspopup="true"><a href="#">Road Safety Program</a></li>
 									</ul>
-								</li> -->
+								</li>
 							</ul>
 						</nav>
 						<!--Nav end -->
@@ -254,13 +239,6 @@ if(count($farr)>0&&$session['nrp']!=''){
 		<!--Select2 js -->
 		<script src="<?php echo $base_url;?>aronox/assets/plugins/select2/select2.full.min.js"></script>
 
-		<script src="<?php echo $base_url;?>aronox/assets/plugins/tabs/jquery.multipurpose_tabcontent.js"></script>
-		<script src="<?php echo $base_url;?>aronox/assets/js/tabs.js"></script>
-
-
-		<script src="<?php echo $base_url;?>aronox/assets/plugins/charts-c3/d3.v5.min.js"></script>
-		<script src="<?php echo $base_url;?>aronox/assets/plugins/charts-c3/c3-chart.js"></script>
-
 					
 	<script src="<?php echo $base_url;?>my/vendor/bootstrap/js/moment.min.js"></script>
     <script src="<?php echo $base_url;?>my/vendor/bootstrap/js/bootstrap-select.min.js"></script>
@@ -270,12 +248,7 @@ if(count($farr)>0&&$session['nrp']!=''){
     <script src="<?php echo $base_url;?>my/vendor/datatables.net-bs4/dataTables.bootstrap4.js"></script>
     <script src="<?php echo $base_url;?>my/vendor/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <script src="<?php echo $base_url;?>my/vendor/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-	<script src="<?php echo $base_url;?>my/vendor/datatables-buttons/js/buttons.html5.min.js"></script>
-	
-	<script src="<?php echo $base_url;?>aronox/assets/plugins/datatable/jquery.dataTables.min.js"></script>
-	<script src="<?php echo $base_url;?>aronox/assets/plugins/datatable/dataTables.bootstrap4.min.js"></script>
-	<script src="<?php echo $base_url;?>aronox/assets/js/datatables.js"></script>
-
+    <script src="<?php echo $base_url;?>my/vendor/datatables-buttons/js/buttons.html5.min.js"></script>
 	
     <script src="<?php echo $base_url;?>my/vendor/swal2/sweetalert.min.js"></script>
     <script src="<?php echo $base_url;?>my/vendor/jquery-validation/jquery.validate.min.js"></script>
@@ -283,21 +256,9 @@ if(count($farr)>0&&$session['nrp']!=''){
     <script src="<?php echo $base_url;?>my/vendor/chart.js/Chart.min.js"></script>
 	<script src="<?php echo $base_url;?>my/vendor/leaflet/leaflet.js"></script>
 
-	<script src="<?php echo $base_url;?>aronox/assets/js/apexcharts.js"></script>
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
-
 	<?php if(@$js_local){ ?>
 		<script src="<?= base_url('my/js_local/'.$js_local);?>"></script>
 	<?php } ?>
-
-	<!-- Owl  -->
-	<script src="<?= base_url('my/vendor/owl/owl.carousel.min.js')?>"></script>
-	
-	
-	<script src="https://unpkg.com/@google/markerclustererplus@5.1.0/dist/markerclustererplus.min.js"></script>
-	<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUFXBbjbdO3QWCZHn_HLR4DbTO878fT6E&callback=initMap"></script>
     
 	<!-- global vars -->
 	<script>
