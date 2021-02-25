@@ -174,19 +174,19 @@ var per_jml_kec = document.getElementById("per_jml_kec").getContext('2d');
 //   }
 // });
 var horizontalBarChart = new Chart(per_jml_kec, {
-    type: 'horizontalBar',
+    type: 'bar',
     data: {
-       labels: ["BABEL","MALUT","GORONTALO","BENGKULU","KALTIM","MALUKU","KALSEL","KEPRI","PAPUA","JAMBI","KALTENG","SUMSEL","SULTARA","NTT"],
+        labels: ["Laweyan","Serengan","Pasar Kliwon","Jebres","Banjarsari","Kota Surakarta"],
           datasets:[
                  {
                      label: "Jumlah Korban",
                      backgroundColor: "#38c0ff",
-                     data: [3,7,6,3,4,9,8,7,2,4,6,8,9,5]
+                     data: [50000,25000,40000,80000,50000,200000]
                  },
                  {
                      label: "Jumlah Laka",
                      backgroundColor: "#ffcd36",
-                     data: [4,3,1,4,6,8,5,9,4,7,8,2,4,6]
+                     data: [70000,50000,80000,100000,70000,250000]
                  }
           ]
     },
@@ -196,17 +196,17 @@ var horizontalBarChart = new Chart(per_jml_kec, {
      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
      scales: {
         xAxes: [{
-            stacked: true,
+            // stacked: true,
             ticks: {
               suggestedMin: 0,
-              suggestedMax: 20
+              suggestedMax: 350000
           }
         }],
         yAxes: [{
-            stacked: true,
+            // stacked: true,
             ticks: {
               suggestedMin: 0,
-              suggestedMax: 20
+              suggestedMax: 350000
           }
         }]
     }
@@ -262,12 +262,12 @@ var horizontalBarChart = new Chart(grafik_kecelakaan, {
                  {
                      label: "Jumlah Korban",
                      backgroundColor: "#38c0ff",
-                     data: [3,7,6,3,4,9,8,7]
+                     data: [200,150,300,50,200,150,100,175]
                  },
                  {
                      label: "Jumlah Laka",
                      backgroundColor: "#ffcd36",
-                     data: [4,3,1,4,6,8,5,9]
+                     data: [400,450,150,90,300,250,120,200]
                  }
           ]
     },
@@ -277,17 +277,17 @@ var horizontalBarChart = new Chart(grafik_kecelakaan, {
      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
      scales: {
         xAxes: [{
-            stacked: true,
+            // stacked: true,
             ticks: {
               suggestedMin: 0,
-              suggestedMax: 20
+              suggestedMax: 1000
           }
         }],
         yAxes: [{
-            stacked: true,
+            // stacked: true,
             ticks: {
               suggestedMin: 0,
-              suggestedMax: 20
+              suggestedMax: 1000
           }
         }]
     }
@@ -298,15 +298,21 @@ var horizontalBarChart = new Chart(grafik_kecelakaan, {
 Chart.defaults.global.defaultFontFamily = "Lato";
 var ifak2 = document.getElementById("ifak2").getContext('2d');
 var horizontalBarChart = new Chart(ifak2, {
-     type: 'horizontalBar',
+     type: 'bar',
      data: {
-        labels: ["BABEL","MALUT","GORONTALO","BENGKULU","KALTIM","MALUKU","KALSEL","KEPRI","PAPUA","JAMBI","KALTENG","SUMSEL","SULTARA","NTT"],
+        labels: ["Laweyan","Serengan","Pasar Kliwon","Jebres","Banjarsari","Kota Surakarta"],
            datasets:[
                   {
                       label: "Jumlah Korban",
                       backgroundColor: "#38c0ff",
-                      data: [3,7,6,3,4,9,8,7,2,4,6,8,9,5]
-                  }
+                      data: [50000,25000,40000,80000,50000,200000]
+                  },
+                  {
+                      label: "Jumlah Penduduk",
+                      backgroundColor: "#ffcd36",
+                      data: [100000,50000,80000,150000,180000,550000]
+                }
+
            ]
      },
   
@@ -315,17 +321,17 @@ var horizontalBarChart = new Chart(ifak2, {
       maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
       scales: {
           xAxes: [{
-              stacked: true,
+            //   stacked: true,
               ticks: {
                 suggestedMin: 0,
-                suggestedMax: 20
+                suggestedMax: 350000
             }
           }],
           yAxes: [{
-              stacked: true,
+            //   stacked: true,
               ticks: {
                 suggestedMin: 0,
-                suggestedMax: 20
+                suggestedMax: 350000
             }
           }]
       }
