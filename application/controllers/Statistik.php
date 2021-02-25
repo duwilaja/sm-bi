@@ -54,6 +54,20 @@ class Statistik extends CI_Controller {
 		}
     }
 
+	public function index_kinerja()
+    {
+        $user=$this->session->userdata('user_data');
+        $data['js_local'] = 'statistik/index_kinerja.js';
+		if(isset($user)){
+			$data['session'] = $user;
+			$this->template->load("statistik/index_kinerja",$data);
+		}else{
+			$retval=array("403","Failed","Please login","error");
+			$data['retval']= $retval;
+			$this->load->view('login',$data);
+		}
+    }
+
 }
 
 /* End of file Statistik.php */
