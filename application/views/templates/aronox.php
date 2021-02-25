@@ -163,8 +163,9 @@ if(count($farr)>0&&$session['nrp']!=''){
 										<li aria-haspopup="true"><a href="<?=site_url('statistik/trend_data')?>">Trend Data</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('statistik/case_fatality_rate')?>">Case Fatality Rate</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('statistik/fatality_index')?>">Fatality Index</a></li>
-										<li aria-haspopup="true"><a href="#">Risk Exposure</a></li>
-										<li aria-haspopup="true"><a href="#">Ambang Gangguan</a></li>
+										<li aria-haspopup="true"><a href="<?=site_url('statistik/index_kinerja')?>">Indek Kinerja</a></li>
+										<!-- <li aria-haspopup="true"><a href="#">Risk Exposure</a></li>
+										<li aria-haspopup="true"><a href="#">Ambang Gangguan</a></li> -->
 										<li aria-haspopup="true"><a href="<?=site_url('data/ketertiban')?>">Index Ketertiban</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/kecelakaan')?>">Index Kecelakaan</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/keamanan')?>">Index Keamanan</a></li>
