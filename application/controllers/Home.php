@@ -14,6 +14,7 @@ class Home extends CI_Controller {
 		$user=$this->session->userdata('user_data');
 		if(isset($user)){
 			$data['session'] = $user;
+			
 			$this->template->load("home",$data);
 		}else{
 			$retval=array("403","Failed","Please login","error");
@@ -21,7 +22,22 @@ class Home extends CI_Controller {
 			$this->load->view('login',$data);
 		}
 	}
-		public function dash_eri()
+	
+	public function home_data(){
+		
+		$today=date('Y-m-d');
+		
+		// 
+		
+		$data['kemacetan']=$this->db->select("penyebab as label,count(*) as value")->where(array("status"=>"Macet","tgl"=>$today))-> group_by("label")->get("tmc_info_lalin")->result();
+		$data['kepadatan']=$this->db->select("penyebab as label,count(*) as value")->where(array("status"=>"Padat","tgl"=>$today))->group_by("label")->get("tmc_info_lalin")->result();
+		$data['gangguan']=$this->db->select("giat as label,count(*) as value")->where(array("tgl"=>$today))->group_by("label")->get("tmc_koordinasi")->result_array();
+		
+		$out=array("code"=>"200","msgs"=>$data);
+		echo json_encode($out);
+	}
+	
+	public function dash_eri()
 	{
 		$user=$this->session->userdata('user_data');
 		if(isset($user)){
