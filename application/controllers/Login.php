@@ -49,7 +49,7 @@ class Login extends CI_Controller {
 		session_destroy();
 		$retval=array("200","OK","Logged out","success");
 		$data['retval']=$retval;
-		$data['pangkat'] = comboopts($this->db->select('pang_id as v,pang_nam as t')->get('pangkat')->result());
+		//$data['pangkat'] = comboopts($this->db->select('pang_id as v,pang_nam as t')->get('pangkat')->result());
 		$this->load->view("login",$data);
 	}
 	
