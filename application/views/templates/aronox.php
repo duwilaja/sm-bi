@@ -146,16 +146,16 @@ if(count($farr)>0&&$session['nrp']!=''){
 								</li> -->
 								 <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-file-text"></i> Data <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="<?=site_url('data/cybercop')?>">Cybercop</a></li>
+										<!-- <li aria-haspopup="true"><a href="<?=site_url('data/cybercop')?>">Cybercop</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/eri')?>">ERI</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/sdc')?>">SDC</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/ssc')?>">SSC</a></li>
+										<li aria-haspopup="true"><a href="<?=site_url('data/ssc')?>">SSC</a></li> -->
 										<li aria-haspopup="true"><a href="<?=site_url('data/tmc')?>">TMC</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/etle')?>">ETLE</a></li>
+										<!-- <li aria-haspopup="true"><a href="<?=site_url('data/etle')?>">ETLE</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/intan')?>">INTAN</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/ais')?>">AIS</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/taa')?>">TAA</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/tarc')?>">TARC</a></li>
+										<li aria-haspopup="true"><a href="<?=site_url('data/tarc')?>">TARC</a></li> -->
 									</ul>
 								</li>
 								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-line-chart"></i> Statistic <i class="fa fa-angle-down horizontal-icon"></i></a>
@@ -165,7 +165,10 @@ if(count($farr)>0&&$session['nrp']!=''){
 										<li aria-haspopup="true"><a href="<?=site_url('statistik/fatality_index')?>">Fatality Index</a></li>
 										<li aria-haspopup="true"><a href="#">Risk Exposure</a></li>
 										<li aria-haspopup="true"><a href="#">Ambang Gangguan</a></li>
-										<li aria-haspopup="true"><a href="#">Index Kemacetan</a></li>
+										<li aria-haspopup="true"><a href="<?=site_url('data/ketertiban')?>">Index Ketertiban</a></li>
+										<li aria-haspopup="true"><a href="<?=site_url('data/kecelakaan')?>">Index Kecelakaan</a></li>
+										<li aria-haspopup="true"><a href="<?=site_url('data/keamanan')?>">Index Keamanan</a></li>
+										<li aria-haspopup="true"><a href="<?=site_url('data/keselamatan')?>">Index Keselamatan</a></li>
 									</ul>
 								</li>
 								<!-- <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-bullhorn"></i> Action <i class="fa fa-angle-down horizontal-icon"></i></a>
