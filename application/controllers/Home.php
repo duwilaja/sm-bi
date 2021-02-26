@@ -29,9 +29,14 @@ class Home extends CI_Controller {
 		
 		// 
 		
-		$data['kemacetan']=$this->db->select("penyebab as label,count(*) as value")->where(array("status"=>"Macet","tgl"=>$today))-> group_by("label")->get("tmc_info_lalin")->result();
+		$data['kemacetan']=$this->db->select("penyebab as label,count(*) as value")->where(array("status"=>"Macet","tgl"=>$today))->group_by("label")->get("tmc_info_lalin")->result();
 		$data['kepadatan']=$this->db->select("penyebab as label,count(*) as value")->where(array("status"=>"Padat","tgl"=>$today))->group_by("label")->get("tmc_info_lalin")->result();
-		$data['gangguan']=$this->db->select("giat as label,count(*) as value")->where(array("tgl"=>$today))->group_by("label")->get("tmc_koordinasi")->result_array();
+		$data['gangguan']=$this->db->select("giat as label,count(*) as value")->where(array("tgl"=>$today))->group_by("label")->get("tmc_koordinasi")->result();
+		
+		$qmacet=$this->db->select("lat,lng,'orange' as color,concat(status,'/',penyebab,'/',penyebabd) as txt,'exclamation-triangle' as icon")->where(array("status"=>"Macet","tgl"=>$today))->get_compiled_select("tmc_info_lalin");
+		$qpadat=$this->db->select("lat,lng,'blue' as color,concat(status,'/',penyebab,'/',penyebabd) as txt,'exclamation-circle' as icon")->where(array("status"=>"Padat","tgl"=>$today))->get_compiled_select("tmc_info_lalin");
+		$qganggu=$this->db->select("lat,lng,'green' as color,giat as txt, 'exclamation' as icon")->where(array("tgl"=>$today))->get_compiled_select("tmc_koordinasi");
+		$data['maps']=$this->db->query("$qmacet UNION $qpadat UNION $qganggu")->result();
 		
 		$out=array("code"=>"200","msgs"=>$data);
 		echo json_encode($out);
