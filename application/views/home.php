@@ -14,7 +14,7 @@
 					<div class="card-body text-center">
 						<div class="d-flex justify-content-center">
 							<div class="mt-3">
-								<i class="fe fe-shuffle fs-30 text-primary mr-5"></i>
+								<i class="fe fe-shuffle fs-30 text-orange mr-5"></i>
 							</div>
 							<div class=" text-center text-left">
 								<p class="mb-1 text-left">Kemacetan</p>
@@ -139,13 +139,18 @@
 </div>
 
 <script>
+var map, markers, marker;
 
 function my_map(){
 	map = L.map('map').setView([-2, 118], 5);
-
+	
 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
+	
+	markers = L.markerClusterGroup();
+	
+	home_data();
 	
 	//L.geoJSON(indonesia).addTo(map);
 //	get_loc();
@@ -282,7 +287,7 @@ function randomColor(){
 function thispage_ready(){
 //	my_chart();
 	my_map();
-	home_data();
+	//home_data();
 	//donat();
 	//barbar();
 }
@@ -329,6 +334,8 @@ function home_data(){
 				dmact=donat("#pie_macet","pie",json['msgs']['kemacetan'],".kemacetan",true);
 				if(dpadt!=null) {dpadt.destroy();}
 				dpadt=donat("#pie_padat","pie",json['msgs']['kepadatan'],".kepadatan");
+				
+				drawMarkers(json['msgs']['maps']);
 			}else{
 				log(json['msgs']);
 			}
@@ -340,4 +347,22 @@ function home_data(){
 	
 	setTimeout(home_data,30*1000);
 }
+
+function drawMarkers(datas){
+  map.removeLayer(markers);
+  markers.clearLayers();
+  //console.log(datas);
+	  var data, color, txt;
+	  var br='<br />';
+	  for(var i=0;i<datas.length;i++){
+		  data=datas[i];
+		  color=data['color'];
+		  txt=data['txt'];
+		  icon = L.AwesomeMarkers.icon({icon: data['icon'], prefix: 'fa', markerColor: color});//, className: 'awesome-marker awesome-marker-square'});
+		  marker = L.marker([data['lat'], data['lng']], {icon: icon }).bindPopup(txt,{autoClose:false});
+		  markers.addLayer(marker);
+	  }
+	  map.addLayer(markers);
+}
+
 </script>
