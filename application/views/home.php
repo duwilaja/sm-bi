@@ -334,7 +334,8 @@ function home_data(){
 				dmact=donat("#pie_macet","pie",json['msgs']['kemacetan'],".kemacetan",true);
 				if(dpadt!=null) {dpadt.destroy();}
 				dpadt=donat("#pie_padat","pie",json['msgs']['kepadatan'],".kepadatan");
-				
+				var celaka=json['msgs']['kecelakaan'].length>0?json['msgs']['kecelakaan'][0]['value']:0;
+				$(".kecelakaan").html(celaka);
 				drawMarkers(json['msgs']['maps']);
 			}else{
 				log(json['msgs']);
