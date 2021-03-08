@@ -43,7 +43,11 @@ class Home extends CI_Controller {
 		$qpadat=$this->db->select("lat,lng,'blue' as color,concat(status,'/',penyebab,'/',penyebabd) as txt,'exclamation-circle' as icon")->where(array("status"=>"Padat","tgl"=>$today))->get_compiled_select("tmc_info_lalin");
 		$qganggu=$this->db->select("lat,lng,'green' as color,giat as txt, 'exclamation' as icon")->where(array("tgl"=>$today))->get_compiled_select("tmc_koordinasi");
 		$qcelaka=$this->db->select("lat,lng,'red' as color,kasus as txt, 'fire' as icon")->where(array("kasus"=>"Kecelakaan","tgl"=>$today))->get_compiled_select("intan_analytic");
-		$data['maps']=$this->db->query("$qmacet UNION $qpadat UNION $qganggu UNION $qcelaka")->result();
+		$qbencana=$this->db->select("lat,lng,'red' as color,kasus as txt, 'cloud' as icon")->where(array("kasus"=>"Bencana Alam","tgl"=>$today))->get_compiled_select("intan_analytic");
+		$qsscdar=$this->db->select("lat,lng,'darkpurple' as color,yan as txt, 'flash' as icon")->where(array("tgl"=>$today))->get_compiled_select("ssc_yan_darurat");
+		$qsscjln=$this->db->select("lat,lng,'purple' as color,pos as txt, 'taxi' as icon")->where(array("tgl"=>$today))->get_compiled_select("ssc_jalan");
+		
+		$data['maps']=$this->db->query("$qmacet UNION $qpadat UNION $qganggu UNION $qcelaka UNION $qbencana UNION $qsscdar UNION $qsscjln")->result();
 		
 		$out=array("code"=>"200","msgs"=>$data);
 		echo json_encode($out);
