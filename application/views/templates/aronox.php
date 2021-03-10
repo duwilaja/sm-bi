@@ -287,7 +287,6 @@ if(count($farr)>0&&$session['nrp']!=''){
 	<script src="<?php echo $base_url;?>my/vendor/leaflet/leaflet.js"></script>
 	<script src="<?php echo $base_url;?>my/vendor/leaflet/leaflet.awesome-markers.min.js"></script>
 	<script src="<?php echo $base_url;?>my/vendor/leaflet/leaflet.markercluster.js"></script>
-	
 	<script src="<?php echo $base_url;?>aronox/assets/js/apexcharts.js"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
@@ -301,9 +300,12 @@ if(count($farr)>0&&$session['nrp']!=''){
 	<script src="<?= base_url('my/vendor/owl/owl.carousel.min.js')?>"></script>
 	
 	
-	<script src="https://unpkg.com/@google/markerclustererplus@5.1.0/dist/markerclustererplus.min.js"></script>
-	<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUFXBbjbdO3QWCZHn_HLR4DbTO878fT6E&callback=initMap"></script>
-    
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuUVO-e2zvXVWuIHvRPFMFZOfLwsF98W4&callback=initMap"></script>
+    <!--script src="https://unpkg.com/@google/markerclustererplus@5.1.0/dist/markerclustererplus.min.js"></script-->
+	<script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
+
+	<script src="<?php echo $base_url;?>my/vendor/mfi/map-font-icons.js"></script>
+	
 	<!-- global vars -->
 	<script>
 	var ext='';
