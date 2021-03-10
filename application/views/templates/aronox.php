@@ -71,8 +71,8 @@ if(count($farr)>0&&$session['nrp']!=''){
 		<link href="<?php echo $base_url;?>my/css/custom.css" rel="stylesheet" />
 
 		<!-- Owl -->
-		<link rel="stylesheet" href="<?=base_url('my/vendor/owl/')?>owl.carousel.min.css">
-		<link rel="stylesheet" href="<?=base_url('my/vendor/owl/')?>owl.theme.default.min.css">
+		<link rel="stylesheet" href="<?php echo base_url('my/vendor/owl/')?>owl.carousel.min.css">
+		<link rel="stylesheet" href="<?php echo base_url('my/vendor/owl/')?>owl.theme.default.min.css">
 
 
 		<!-- Tabs css-->
@@ -149,23 +149,23 @@ if(count($farr)>0&&$session['nrp']!=''){
 								</li> -->
 								 <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-file-text"></i> Data <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="<?=site_url('data/cybercop')?>">Cybercop</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/eri')?>">ERI</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/sdc')?>">SDC</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/ssc')?>">SSC</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/tmc')?>">TMC</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/etle')?>">ETLE</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/intan')?>">INTAN</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/ais')?>">AIS</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/taa')?>">TAA</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/tarc')?>">TARC</a></li>
+										<li aria-haspopup="true"><a href="<?php echo site_url('data/cybercop')?>">Cybercop</a></li>
+										<li aria-haspopup="true"><a href="<?php echo site_url('data/eri')?>">ERI</a></li>
+										<li aria-haspopup="true"><a href="<?php echo site_url('data/sdc')?>">SDC</a></li>
+										<li aria-haspopup="true"><a href="<?php echo site_url('data/ssc')?>">SSC</a></li>
+										<li aria-haspopup="true"><a href="<?php echo site_url('data/tmc')?>">TMC</a></li>
+										<li aria-haspopup="true"><a href="<?php echo site_url('data/etle')?>">ETLE</a></li>
+										<li aria-haspopup="true"><a href="<?php echo site_url('data/intan')?>">INTAN</a></li>
+										<li aria-haspopup="true"><a href="<?php echo site_url('data/ais')?>">AIS</a></li>
+										<li aria-haspopup="true"><a href="<?php echo site_url('data/taa')?>">TAA</a></li>
+										<li aria-haspopup="true"><a href="<?php echo site_url('data/tarc')?>">TARC</a></li>
 									</ul>
 								</li>
 								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fa fa-line-chart"></i> Statistic <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="<?=site_url('statistik/trend_data')?>">Trend Data</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('statistik/case_fatality_rate')?>">Case Fatality Rate</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('statistik/fatality_index')?>">Fatality Index</a></li>
+										<li aria-haspopup="true"><a href="<?php echo site_url('statistik/trend_data')?>">Trend Data</a></li>
+										<li aria-haspopup="true"><a href="<?php echo site_url('statistik/case_fatality_rate')?>">Case Fatality Rate</a></li>
+										<li aria-haspopup="true"><a href="<?php echo site_url('statistik/fatality_index')?>">Fatality Index</a></li>
 										<li aria-haspopup="true"><a href="#">Risk Exposure</a></li>
 										<li aria-haspopup="true"><a href="#">Ambang Gangguan</a></li>
 										<li aria-haspopup="true"><a href="#">Index Kemacetan</a></li>
@@ -293,11 +293,11 @@ if(count($farr)>0&&$session['nrp']!=''){
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
 
 	<?php if(@$js_local){ ?>
-		<script src="<?= base_url('my/js_local/'.$js_local);?>"></script>
+		<script src="<?php echo  base_url('my/js_local/'.$js_local);?>"></script>
 	<?php } ?>
 
 	<!-- Owl  -->
-	<script src="<?= base_url('my/vendor/owl/owl.carousel.min.js')?>"></script>
+	<script src="<?php echo  base_url('my/vendor/owl/owl.carousel.min.js')?>"></script>
 	
 	
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuUVO-e2zvXVWuIHvRPFMFZOfLwsF98W4&callback=initMap"></script>
