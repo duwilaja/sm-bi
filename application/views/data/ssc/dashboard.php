@@ -72,13 +72,8 @@
 						</div>
 						<div class="ml-3">
 							<small class=" mb-0">Ambulan</small><br>
-<<<<<<< HEAD
-							<h3 class="font-weight-semibold mb-0" id="jml_ambulan">0</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Polrestabes Surakarta</span></small>
-=======
 							<h3 class="font-weight-semibold mb-0">5,643</h3>
 							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Surakarta</span></small>
->>>>>>> 397c9f7c740c6091d04c47ee08b8a6d9177be3ca
 						</div>
 					</div>
 					<div class=" col-xl-3 col-sm-6 d-flex mb-5 mb-xl-0">
@@ -86,13 +81,8 @@
 							<i class="fa fa-home danger feature-icon bg-danger"></i>
 						</div>
 						<div class=" d-flex flex-column  ml-3"> <small class=" mb-0">Pos Pol</small>
-<<<<<<< HEAD
-							<h3 class="font-weight-semibold mb-0" id="jml_pospol">0</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Polrestabes Surakarta</span></small>
-=======
 							<h3 class="font-weight-semibold mb-0">2,536</h3>
 							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Surakarta</span></small>
->>>>>>> 397c9f7c740c6091d04c47ee08b8a6d9177be3ca
 						</div>
 					</div>
 					<div class=" col-xl-3 col-sm-6 d-flex  mb-5 mb-sm-0">
@@ -100,13 +90,8 @@
 							<i class="fa fa-search secondary feature-icon bg-secondary"></i>
 						</div>
 						<div class=" d-flex flex-column ml-3"> <small class=" mb-0">Patrol</small>
-<<<<<<< HEAD
-							<h3 class="font-weight-semibold mb-0" id="jml_postrol">0</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Polrestabes Surakarta</span></small>
-=======
 							<h3 class="font-weight-semibold mb-0">12,863</h3>
 							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Surakarta</span></small>
->>>>>>> 397c9f7c740c6091d04c47ee08b8a6d9177be3ca
 						</div>
 					</div>
 					<div class=" col-xl-3 col-sm-6 d-flex">
@@ -114,13 +99,8 @@
 							<i class="fa fa-hospital-o success feature-icon bg-success"></i>
 						</div>
 						<div class=" d-flex flex-column  ml-3"> <small class=" mb-0">Faskes</small>
-<<<<<<< HEAD
-							<h3 class="font-weight-semibold mb-0" id="jml_fasakes">0</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Polrestabes Surakarta</span></small>
-=======
 							<h3 class="font-weight-semibold mb-0">7,836</h3>
 							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Surakarta</span></small>
->>>>>>> 397c9f7c740c6091d04c47ee08b8a6d9177be3ca
 						</div>
 					</div>
 				</div>
