@@ -115,10 +115,10 @@ var ifakl = document.getElementById("ifakl").getContext('2d');
 var myChart = new Chart(ifakl, {
     type: 'bar',
     data: {
-        labels: ["2017","2018","2019","2020"],
+        labels: ["2016","2017","2018","2019","2020"],
         datasets: [{
             label: 'Target', // Name the series
-            data: [100,80,70,30], // Specify the data values array
+            data: [50000,40000,30000,20000,10000], // Specify the data values array
             fill: false,
             type : 'line',
             borderColor: '#38c0ff', // Add custom color border (Line)
@@ -127,7 +127,7 @@ var myChart = new Chart(ifakl, {
         },
         {
             label: 'Real', // Name the series
-            data: [115,90,65,50], // Specify the data values array
+            data: [75000,28000,35000,15000,5000], // Specify the data values array
             fill: false,
             type : 'line',
             borderColor: '#ffcd36', // Add custom color border (Line)
