@@ -27,6 +27,13 @@ if (!function_exists('persen_nt')) {
   }
 }
 
+if (!function_exists('kordinat')) {
+	function kordinat($kordinat=''){ //persen naik/turun
+		$k = explode(',',$kordinat);
+		return  [@(float)$k[0],@(float)$k[1]];
+  	}
+}
+
 if (!function_exists('tgl_indo')) {
 	function tgl_indo($tanggal){
         $bulan = array (

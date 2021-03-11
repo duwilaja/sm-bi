@@ -44,6 +44,7 @@ $(document).ready(function(){
     });
 });
 
+<<<<<<< HEAD
 function slide() {
     $('.owl-carousel').owlCarousel({
         margin:10,
@@ -668,3 +669,15 @@ function jml_data_ssc(start='',end='',polda='',polres='') {
 //             {lat: -6.892210, lng: 107.536977},
 //             {lat: -6.960185, lng: 107.376799},
 //         ];
+=======
+require(["esri/Map", "esri/views/MapView"], function(Map, MapView) {
+    var map = new Map({
+      basemap: "topo-vector"
+    });
+  
+    var view = new MapView({
+      container: "map", // Reference to the DOM node that will contain the view
+      map: map // References the map object created in step 3
+    });
+  });
+>>>>>>> 397c9f7c740c6091d04c47ee08b8a6d9177be3ca
