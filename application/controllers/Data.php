@@ -68,6 +68,23 @@ class Data extends CI_Controller {
 			$this->load->view('login',$data);
 		}
 	}
+	public function ssc2()
+	{
+        $user=$this->session->userdata('user_data');
+        $data['js_local'] = 'data/ssc/dashboard2.js';
+		if(isset($user)){
+			$data['session'] = $user;
+			$data['ssc'] = true;
+			$this->template->load("data/ssc/dashboard2",$data);
+
+			// 404 page 
+			// $this->load->view("error/404",$data);
+		}else{
+			$retval=array("403","Failed","Please login","error");
+			$data['retval']= $retval;
+			$this->load->view('login',$data);
+		}
+	}
 	public function tmc()
 	{
         $user=$this->session->userdata('user_data');
