@@ -35,6 +35,9 @@
                                         <p>Polda</p>
                                         <select class="form-control form-control-sm"  name="f_polda" id="f_polda">
 											<option value="">-- Pilih Polda --</option>
+											<?php foreach($polda as $row):?>
+											<option value="<?php echo $row->da_id;?>"><?php echo $row->da_nam;?></option>
+											<?php endforeach;?>
 										</select>
                                     </div>
                                 </div>
@@ -69,8 +72,8 @@
 						</div>
 						<div class="ml-3">
 							<small class=" mb-0">Ambulan</small><br>
-							<h3 class="font-weight-semibold mb-0">5,643</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
+							<h3 class="font-weight-semibold mb-0" id="jml_ambulan">0</h3>
+							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Polrestabes Surakarta</span></small>
 						</div>
 					</div>
 					<div class=" col-xl-3 col-sm-6 d-flex mb-5 mb-xl-0">
@@ -78,8 +81,8 @@
 							<i class="fa fa-home danger feature-icon bg-danger"></i>
 						</div>
 						<div class=" d-flex flex-column  ml-3"> <small class=" mb-0">Pos Pol</small>
-							<h3 class="font-weight-semibold mb-0">2,536</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
+							<h3 class="font-weight-semibold mb-0" id="jml_pospol">0</h3>
+							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Polrestabes Surakarta</span></small>
 						</div>
 					</div>
 					<div class=" col-xl-3 col-sm-6 d-flex  mb-5 mb-sm-0">
@@ -87,8 +90,8 @@
 							<i class="fa fa-search secondary feature-icon bg-secondary"></i>
 						</div>
 						<div class=" d-flex flex-column ml-3"> <small class=" mb-0">Patrol</small>
-							<h3 class="font-weight-semibold mb-0">12,863</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
+							<h3 class="font-weight-semibold mb-0" id="jml_postrol">0</h3>
+							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Polrestabes Surakarta</span></small>
 						</div>
 					</div>
 					<div class=" col-xl-3 col-sm-6 d-flex">
@@ -96,8 +99,8 @@
 							<i class="fa fa-hospital-o success feature-icon bg-success"></i>
 						</div>
 						<div class=" d-flex flex-column  ml-3"> <small class=" mb-0">Faskes</small>
-							<h3 class="font-weight-semibold mb-0">7,836</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
+							<h3 class="font-weight-semibold mb-0" id="jml_fasakes">0</h3>
+							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Polrestabes Surakarta</span></small>
 						</div>
 					</div>
 				</div>
@@ -108,7 +111,7 @@
 <!--End row-->
 
 <!-- Row -->	
-<div class="row">
+<div class="row" style="display: none;">
 	<div class="col-xl-8 col-md-12 col-lg-12">
 		<div class="card">
 			<div class="overflow-hidden">
@@ -116,11 +119,11 @@
 			</div>
 		</div>
 	</div> 
-	<div class="col-xl-4 col-md-12 col-lg-12">
+	<!-- <div class="col-xl-4 col-md-12 col-lg-12">
 		<div class="card overflow-hidden">
 			<div class="card-header">
                 <div class="mr-3">Kondisi Jalan</div>
-                <!-- <div style="margin-left: auto;display:inherit;">
+                	<div style="margin-left: auto;display:inherit;">
                     <select class="form-control form-control-sm" name="penindakan">
                         <option value="">-- Pilh --</option>
                         <option value="1">Manual E-Tilang</option>
@@ -128,7 +131,7 @@
                         <option value="3">Olah TKP</option>
                     </select>
                     <a href="#"><button class="btn btn-default btn-sm ml-2">Detail</button></a>
-				</div> -->
+				</div> 
 				<div class="card-options">
                         <form >
                             <div class="input-group">
@@ -186,12 +189,73 @@
 				</div>
 			</div>
 		</div>
+	</div> -->
+	<div class="col-xl-4 col-md-12 col-lg-12">
+		<div class="card overflow-hidden">
+			<div class="card-header">
+                <div class="mr-3">Kondisi Jalan</div>
+                	<div style="margin-left: auto;display:inherit;">
+                    <select class="form-control form-control-sm" name="penindakan">
+                        <option value="">-- Pilh --</option>
+                        <option value="1">Jalan Nasional</option>
+                        <option value="2">Jalan Provinsi</option>
+                        <option value="3">Jalan Kabupaten</option>
+						<option value="4">Jalan Tol</option>
+                    </select>
+                    <a href="#"><button class="btn btn-default btn-sm ml-2">Detail</button></a>
+				</div> 
+				<!-- <div class="card-options">
+                        <form >
+                            <div class="input-group">
+                                <input type="date">
+                            </div>
+                        </form>
+				</div> -->
+			</div>
+			<div class="card-body p-0">
+				<div class="list-group list-group-flush ">
+					<div class="list-group-item d-flex  align-items-center">
+						<div class="mr-2">
+							<img class="mr-3 avatar avatar-md brround"  src="<?php echo base_url();?>my/images/sm.png" alt="avatar">
+						</div>
+						<div class="">
+							<div class=" h6 mb-0">Black Spot</div>
+						</div>
+						<div class="ml-auto">
+							<a>100.000</a>
+						</div>
+					</div>
+					<div class="list-group-item d-flex  align-items-center">
+						<div class="mr-2">
+							<img class="mr-3 rounded-circle avatar avatar-md brround" src="<?php echo base_url();?>my/images/sm.png" alt="avatar">
+						</div>
+						<div class="">
+							<div class=" h6 mb-0">Trouble Spot</div>
+						</div>
+						<div class="ml-auto">
+							<a>50.000</a>
+						</div>
+					</div>
+					<div class="list-group-item d-flex  align-items-center">
+						<div class="mr-2">
+							<img class="mr-3 avatar avatar-md brround" src="<?php echo base_url();?>my/images/sm.png" alt="avatar">
+						</div>
+						<div class="">
+							<div class=" h6 mb-0">Tindak Pidana</div>
+						</div>
+						<div class="ml-auto">
+							<a>40.000</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <!-- End Row -->
 
 <!--Row-->
-<div class="row">
+<div class="row" style="display: none;">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
