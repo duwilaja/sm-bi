@@ -12,6 +12,7 @@
   }
 
   #floating-panel {
+    box-shadow: 0px 4px 10px 0px #0000003b;
     position: absolute;
     opacity:0.9;
     top: 30px;

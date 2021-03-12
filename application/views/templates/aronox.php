@@ -63,13 +63,16 @@ if(count($farr)>0&&$session['nrp']!=''){
 		
 		<!-- leaflet CSS-->
 		<link rel="stylesheet" href="<?php echo $base_url;?>my/vendor/leaflet/leaflet.css">
+		<link rel="stylesheet" href="<?php echo $base_url;?>my/vendor/leaflet/MarkerCluster.css">
+		<link rel="stylesheet" href="<?php echo $base_url;?>my/vendor/leaflet/MarkerCluster.Default.css">
+		<link rel="stylesheet" href="<?php echo $base_url;?>my/vendor/leaflet/leaflet.awesome-markers.css">
 		
 		<!-- overwrite css -->
 		<link href="<?php echo $base_url;?>my/css/custom.css" rel="stylesheet" />
 
 		<!-- Owl -->
-		<link rel="stylesheet" href="<?=base_url('my/vendor/owl/')?>owl.carousel.min.css">
-		<link rel="stylesheet" href="<?=base_url('my/vendor/owl/')?>owl.theme.default.min.css">
+		<link rel="stylesheet" href="<?php echo base_url('my/vendor/owl/')?>owl.carousel.min.css">
+		<link rel="stylesheet" href="<?php echo base_url('my/vendor/owl/')?>owl.theme.default.min.css">
 
 
 		<!-- Tabs css-->
@@ -111,7 +114,7 @@ if(count($farr)>0&&$session['nrp']!=''){
 									<a class="nav-link pr-0 leading-none" href="#" data-toggle="dropdown" aria-expanded="false">
 									    <div class="profile-details mt-2">
 											<span class="mr-3 font-weight-semibold"><?php echo isset($session)?$session['nrp']:""?></span>
-											<small class="text-muted mr-3"><?php echo isset($session)?$session['unit']:""?></small>
+											<small class="text-muted mr-3"><?php echo isset($session)?$session['dinas']:""?></small>
 										</div>
 										<img class="avatar avatar-md brround" src="<?php echo $avatar?>" alt="image">
 									 </a>
@@ -292,18 +295,19 @@ if(count($farr)>0&&$session['nrp']!=''){
     <script src="<?php echo $base_url;?>my/vendor/jquery-fancybox/jquery.fancybox.min.js"></script>
     <script src="<?php echo $base_url;?>my/vendor/chart.js/Chart.min.js"></script>
 	<script src="<?php echo $base_url;?>my/vendor/leaflet/leaflet.js"></script>
-
+	<script src="<?php echo $base_url;?>my/vendor/leaflet/leaflet.awesome-markers.min.js"></script>
+	<script src="<?php echo $base_url;?>my/vendor/leaflet/leaflet.markercluster.js"></script>
 	<script src="<?php echo $base_url;?>aronox/assets/js/apexcharts.js"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
 
 	<?php if(@$js_local){ ?>
-		<script src="<?= base_url('my/js_local/'.$js_local);?>"></script>
+		<script src="<?php echo  base_url('my/js_local/'.$js_local);?>"></script>
 	<?php } ?>
 
 	<!-- Owl  -->
-	<script src="<?= base_url('my/vendor/owl/owl.carousel.min.js')?>"></script>
+	<script src="<?php echo  base_url('my/vendor/owl/owl.carousel.min.js')?>"></script>
 	
 	
 	<script src="https://unpkg.com/@google/markerclustererplus@5.1.0/dist/markerclustererplus.min.js"></script>
