@@ -15,7 +15,7 @@
     position: absolute;
     opacity:0.9;
     top: 30px;
-    left:30px;
+    right:30px;
     z-index: 1;
     background-color: #fff;
     /* padding: 5px; */
@@ -29,7 +29,7 @@
   ul.wokrek {
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 10px;
     width: 200px;
     background-color: #f1f1f1;
   }
@@ -42,12 +42,14 @@
   }
 
   .wokrek li a.active {
-    background-color: #795548;
+    background-color: blue;
+    border-radius:5px;
     color: white;
   }
 
   .wokrek li a:hover:not(.active) {
-    background-color: #795548;
+    background-color: blue;
+    border-radius:5px;
     color: white;
   }
 
