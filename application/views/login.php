@@ -208,7 +208,7 @@ $base_url = base_url();
 				<div class="container">
 					<div class="row align-items-center flex-row-reverse">
 						<div class="col-md-12 col-sm-12 mt-3 mt-lg-0 text-center">
-							Copyright ©2020 <a target="_blank" href="http://www.matrik.co.id">Matrik</a>. All rights reserved.
+							Copyright ©2020 <a target="_blank" href="http://www. .co.id"> </a>. All rights reserved.
 						</div>
 					</div>
 				</div>

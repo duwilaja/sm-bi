@@ -15,7 +15,7 @@ function initMap() {
   // const directionsService = new google.maps.DirectionsService();
    map = new google.maps.Map(document.getElementById("map"), {
     zoom: 13,
-    disableDefaultUI : true,
+    disableDefaultUI : false,
     center: { lat: -7.559669364640486, lng: 110.81963842699129 },
   });
 
@@ -134,13 +134,13 @@ function create_cctv(varr,img) {
       position: myLatLng,
       map: map,
       icon : img,
-      label: {
-        text: 'Under Construction',
-        fontWeight: 'bold',
-        fontSize: '9px',
-        fontFamily: '"Courier New", Courier,Monospace',
-        color: 'white',
-      }
+      // label: {
+      //   text: 'Under Construction',
+      //   fontWeight: 'bold',
+      //   fontSize: '9px',
+      //   fontFamily: '"Courier New", Courier,Monospace',
+      //   color: 'white',
+      // }
     });
     
     markers.push(marker);
@@ -149,6 +149,7 @@ function create_cctv(varr,img) {
 
 // Sets the map on all markers in the array.
 function setMapOnAll(n_titik='') {
+  const infoWindow = new google.maps.InfoWindow();
   for (let i = 0; i < markers.length; i++) {
     markers[i].setMap(map);
     google.maps.event.addListener(markers[i], 'click', function() {
@@ -157,25 +158,111 @@ function setMapOnAll(n_titik='') {
       map.setZoom(15);
 
       if (n_titik=='CCTV') {
-        $('#cctv').modal('show');
-        $('#fcctv').attr("src", "http://127.0.0.1:5000/?u="+cctv[i].rtsp);
-        $('#cctv').attr('data-id', cctv[i].id);
-        $('#cctv_nama').html(n_titik);
-        
+        // $('#cctv').modal('show');
+        // $('#cctv').attr('data-id', titik[i].id);
+        // $('#cctv_nama').html(n_titik);
+        console.log(cctv[i]);
+        infoWindow.setContent(`<div><p><b>${n_titik}</b></p>
+          <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
+          <div class="embed-responsive embed-responsive-16by9" style="width:500px;">
+            <iframe class="embed-responsive-item" src="${"http://127.0.0.1:5000/?u="+cctv[i].rtsp}" allowfullscreen></iframe>
+          </div>
+          <div class="mt-3">
+            <table class="w-100">
+              <tr>
+                <td><b>Nama</b></td>
+                <td>:</td>
+                <td>${cctv[i].nama}</td>
+              </tr>
+              <tr>
+                <td><b>Kordinat</b></td>
+                <td>:</td>
+                <td>${cctv[i].kordinat}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="row" style="margin-right:0 !important;">
+            <div class="ml-auto">
+              <a href="#" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+          `,
+        );
+        infoWindow.open(map,markers[i]);
       }else{
-        $('#tmc').modal('show');
-        $('#tmc').attr('data-id', titik[i].id);
-        $('#tmc_nama').html(n_titik);
-        $('#tmc_nama_jalan').html(titik[i].namajalan);
-        $('#tmc_kordinat').html(titik[i].lat+','+titik[i].lng);
-        $('#tmc_tanggal').html(titik[i].dtm);
-        $('#tmc_status').html(titik[i].status);
-        $('#tmc_jam_mulai').html(titik[i].jammulai);
-        $('#tmc_sampai').html(titik[i].jamsampai);
-        $('#tmc_penyebab').html(titik[i].penyebab);
-        $('#tmc_detail').html(titik[i].penyebabd);
-        $('#tmc_sumber_info').html(titik[i].sumber);
-        $('#tmc_petugas_lapangan').html(titik[i].petugas);
+        infoWindow.setContent(`<div><p><b>${n_titik}</b></p>
+          <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
+          <table class="w-100">
+          <tr>
+            <td><b>Nama Jalan</b></td>
+            <td>:</td>
+            <td>${titik[i].namajalan}</td>
+          </tr>
+          <tr>
+            <td><b>Kordinat</b></td>
+            <td>:</td>
+            <td>${titik[i].lat+','+titik[i].lng}</td>
+          </tr>
+          <tr>
+            <td><b>Status</b></td>
+            <td>:</td>
+            <td>${titik[i].dtm}</td>
+          </tr>
+          <tr>
+            <td><b>Tanggal</b></td>
+            <td>:</td>
+            <td>${titik[i].status}</td>
+          </tr>
+          <tr>
+            <td><b>Jam Mulai</b></td>
+            <td>:</td>
+            <td>${titik[i].jammulai}</td>
+          </tr>
+          <tr>
+            <td><b>Sampai</b></td>
+            <td>:</td>
+            <td>${titik[i].jamsampai}</td>
+          </tr>
+          <tr>
+            <td><b>Penyebab</b></td>
+            <td>:</td>
+            <td>${titik[i].penyebab}</td>
+          </tr>
+          <tr>
+            <td><b>Detail</b></td>
+            <td>:</td>
+            <td>${titik[i].penyebabd}</td>
+          </tr>
+          <tr>
+            <td><b>Sumber Info</b></td>
+            <td>:</td>
+            <td>${titik[i].sumber}</td>
+          </tr>
+          <tr>
+            <td><b>Petugas Lapangan</b></td>
+            <td>:</td>
+            <td>${titik[i].petugas}</td>
+          </tr>
+        </table>
+        </div>
+          `,
+        );
+        infoWindow.open(map,markers[i]);
+        // $('#tmc').modal('show');
+        // $('#tmc22').html(titik[i].id);
+        // $('#tmc_nama').html(n_titik);
+        // $('#tmc_nama_jalan').html(titik[i].namajalan);
+        // $('#tmc_kordinat').html(titik[i].lat+','+titik[i].lng);
+        // $('#tmc_tanggal').html(titik[i].dtm);
+        // $('#tmc_status').html(titik[i].status);
+        // $('#tmc_jam_mulai').html(titik[i].jammulai);
+        // $('#tmc_sampai').html(titik[i].jamsampai);
+        // $('#tmc_penyebab').html(titik[i].penyebab);
+        // $('#tmc_detail').html(titik[i].penyebabd);
+        // $('#tmc_sumber_info').html(titik[i].sumber);
+        // $('#tmc_petugas_lapangan').html(titik[i].petugas);
+
       }
       
 

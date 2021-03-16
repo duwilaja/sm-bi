@@ -152,8 +152,8 @@ if(count($farr)>0&&$session['nrp']!=''){
 									<ul class="sub-menu">
 										<!-- <li aria-haspopup="true"><a href="<?=site_url('data/cybercop')?>">Cybercop</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/eri')?>">ERI</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/sdc')?>">SDC</a></li>
-										<li aria-haspopup="true"><a href="<?=site_url('data/ssc')?>">SSC</a></li> -->
+										<li aria-haspopup="true"><a href="<?=site_url('data/sdc')?>">SDC</a></li> -->
+										<li aria-haspopup="true"><a href="<?=site_url('data/ssc')?>">SSC</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/tmc')?>">TMC</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/ssc2')?>">SSC</a></li>
 										<!-- <li aria-haspopup="true"><a href="<?=site_url('data/etle')?>">ETLE</a></li>
@@ -224,7 +224,7 @@ if(count($farr)>0&&$session['nrp']!=''){
 				<div class="container">
 					<div class="row align-items-center flex-row-reverse">
 						<div class="col-md-12 col-sm-12 mt-3 mt-lg-0 text-center">
-							Copyright ©2020 <a target="_blank" href="http://www.matrik.co.id">Matrik</a>. All rights reserved.
+							Copyright ©2020 <a target="_blank" href="http://www. .co.id"> </a>. All rights reserved.
 						</div>
 					</div>
 				</div>

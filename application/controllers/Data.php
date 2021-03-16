@@ -58,6 +58,7 @@ class Data extends CI_Controller {
         $data['js_local'] = 'data/ssc/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
+			$data['polda'] = $this->dares->get_polda()->result();
 			$this->template->load("data/ssc/dashboard",$data);
 
 			// 404 page 
