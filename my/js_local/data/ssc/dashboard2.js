@@ -316,17 +316,19 @@ function create_cctv(varr,img) {
 
     // var place = cctv[i];
     var myLatLng = new google.maps.LatLng(cctv[i].kordinat[0], cctv[i].kordinat[1]);
+    const tes = cctv[i].id;
     marker = new google.maps.Marker({
       position: myLatLng,
       map: map,
       icon : img,
-      // label: {
-      //   text: 'Under Construction',
-      //   fontWeight: 'bold',
-      //   fontSize: '9px',
-      //   fontFamily: '"Courier New", Courier,Monospace',
-      //   color: 'white',
-      // }
+      Label: {
+        className:'my-custom-class-for-label',
+        text: `${tes}`,
+        // fontWeight: 'bold',
+        // fontSize: '9px',
+        // fontFamily: '"Courier New", Courier,Monospace',
+        // color: 'white',
+      }
     });
     
     markers.push(marker);
@@ -347,7 +349,6 @@ function setMapOnAll(n_titik='') {
         // $('#cctv').modal('show');
         // $('#cctv').attr('data-id', titik[i].id);
         // $('#cctv_nama').html(n_titik);
-        console.log(cctv[i]);
         infoWindow.setContent(`<div><p><b>${n_titik}</b></p>
           <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
           <div class="embed-responsive embed-responsive-16by9" style="width:500px;">
@@ -557,3 +558,9 @@ function vvip() {
       }
     });
   }
+
+  $(".wokrek li a").on('click', function(e){
+    $(".wokrek .active").removeClass('active');
+    $(this).addClass('active'); 
+    e.preventDefault();
+  });

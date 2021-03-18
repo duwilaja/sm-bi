@@ -293,6 +293,8 @@ if(count($farr)>0&&$session['nrp']!=''){
     <script src="<?php echo $base_url;?>my/vendor/chart.js/Chart.min.js"></script>
 	<script src="<?php echo $base_url;?>my/vendor/leaflet/leaflet.js"></script>
 
+	<script src="<?php echo $base_url;?>aronox/assets/plugins/echarts/echarts.js"></script>
+
 	<script src="<?php echo $base_url;?>aronox/assets/js/apexcharts.js"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>

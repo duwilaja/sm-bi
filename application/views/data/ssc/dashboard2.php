@@ -57,6 +57,12 @@
     position: relative;
     top: 100px;
   }
+
+  .my-custom-class-for-label {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
 </style>
 
 
@@ -66,7 +72,7 @@
 <div class="col-md-12">
 <div id="floating-panel">
       <ul class="wokrek">
-        <li><a class="active" href="#home" onclick="show_marker('vvip')">VVIP</a></li>
+        <li><a href="#home" onclick="show_marker('vvip')">VVIP</a></li>
         <li><a href="#black_spot" onclick="show_marker('black_spot')">Black Spot</a></li>
         <li><a href="#trouble_spot" onclick="show_marker('trouble_spot')">Trouble Spot</a></li>
         <li><a href="#ambang_gangguan" onclick="show_marker('ambang_gangguan')">Ambang Gangguan</a></li>
