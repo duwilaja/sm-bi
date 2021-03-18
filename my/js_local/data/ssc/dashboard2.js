@@ -130,14 +130,14 @@ function create_cctv(varr,img) {
 
     // var place = cctv[i];
     var myLatLng = new google.maps.LatLng(cctv[i].kordinat[0], cctv[i].kordinat[1]);
-    const tes = cctv[i].id;
+    const total = cctv[i].total;
     marker = new google.maps.Marker({
       position: myLatLng,
       map: map,
       icon : img,
       Label: {
         className:'my-custom-class-for-label',
-        text: `${tes}`,
+        text: `${total}`,
         // fontWeight: 'bold',
         // fontSize: '9px',
         // fontFamily: '"Courier New", Courier,Monospace',
