@@ -5,7 +5,15 @@
 		Welcome <?php echo $session['nama']?> @ <?php echo $session['unit']?></div>
 	</div>
 </div-->
-
+<style>
+	.map-icon-label i {
+		font-size: 20px;
+		color: #FFFFFF;
+		line-height: 55px;
+		text-align: center;
+		white-space: nowrap;
+	}
+</style>
 <div class="row">
 	<div class="col-md-12">
 		<div class="card ">
@@ -139,21 +147,47 @@
 </div>
 
 <script>
-var map, markers, marker;
+var map, markers, cluster, infowindow;
 
 function my_map(){
-	map = L.map('map').setView([-2, 118], 5);
+	markers=[];
+	cluster=null;
+	//map = L.map('map').setView([-2, 118], 5);
+	var options = {
+        zoom:5,
+        center:{lat:-2, lng:118}
+        }
+	map = new google.maps.Map(document.getElementById('map'),options);
+	infowindow = new google.maps.InfoWindow();
 	
-	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-	}).addTo(map);
+	setTimeout(home_data(),5*1000);
 	
-	markers = L.markerClusterGroup();
+}
+
+function makeInfoWindowEvent(map, infowindow, contentString, marker) {
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.setContent(contentString);
+    infowindow.open(map, marker);
+  });
+}
+
+function addMarker(data){
+	var marker = new Marker({
+		map: data.map,
+		position: new google.maps.LatLng(data.lat, data.lng),
+		icon: {
+			path: MAP_PIN,
+			fillColor: data.color,
+			fillOpacity: 1,
+			strokeColor: '',
+			strokeWeight: 0
+		},
+		map_icon_label: '<i class="'+data.icon+'"></i>'
+	});
 	
-	home_data();
+	makeInfoWindowEvent(map, infowindow, data.txt, marker);
 	
-	//L.geoJSON(indonesia).addTo(map);
-//	get_loc();
+	return marker;
 }
 
 function dttbl(tbl,tname,cols){
@@ -350,20 +384,36 @@ function home_data(){
 }
 
 function drawMarkers(datas){
-  map.removeLayer(markers);
-  markers.clearLayers();
+	if(cluster!=null) {cluster.clearMarkers(); cluster.setMap(null);}
+	clearMarkers();
   //console.log(datas);
 	  var data, color, txt;
 	  var br='<br />';
 	  for(var i=0;i<datas.length;i++){
 		  data=datas[i];
-		  color=data['color'];
-		  txt=data['txt'];
-		  icon = L.AwesomeMarkers.icon({icon: data['icon'], prefix: 'fa', markerColor: color});//, className: 'awesome-marker awesome-marker-square'});
-		  marker = L.marker([data['lat'], data['lng']], {icon: icon }).bindPopup(txt,{autoClose:false});
-		  markers.addLayer(marker);
+		  
+		  var mark = addMarker({
+					map     : map,
+					lat     : data['lat'],
+					lng     : data['lng'],
+					color   : data['color'],
+					icon    : 'fa fa-'+data['icon'],
+					txt		: data['txt']
+				});
+				
+		  markers.push(mark);
 	  }
-	  map.addLayer(markers);
+	  cluster = new MarkerClusterer(map, markers, {
+    imagePath:
+      "<?php echo base_url()?>my/vendor/gmapcluster/images/m",
+  });
+}
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  for (let i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
+  markers=[];
 }
 
 </script>

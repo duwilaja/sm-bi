@@ -17,192 +17,6 @@ function initMap() {
     zoom: 13,
     disableDefaultUI : false,
     center: { lat: -7.559669364640486, lng: 110.81963842699129 },
-//     styles: [
-//   {
-//     "elementType": "geometry",
-//     "stylers": [
-//       {
-//         "color": "#212121"
-//       }
-//     ]
-//   },
-//   {
-//     "elementType": "labels.icon",
-//     "stylers": [
-//       {
-//         "visibility": "off"
-//       }
-//     ]
-//   },
-//   {
-//     "elementType": "labels.text.fill",
-//     "stylers": [
-//       {
-//         "color": "#757575"
-//       }
-//     ]
-//   },
-//   {
-//     "elementType": "labels.text.stroke",
-//     "stylers": [
-//       {
-//         "color": "#212121"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "administrative",
-//     "elementType": "geometry",
-//     "stylers": [
-//       {
-//         "color": "#757575"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "administrative.country",
-//     "elementType": "labels.text.fill",
-//     "stylers": [
-//       {
-//         "color": "#9e9e9e"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "administrative.land_parcel",
-//     "stylers": [
-//       {
-//         "visibility": "off"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "administrative.locality",
-//     "elementType": "labels.text.fill",
-//     "stylers": [
-//       {
-//         "color": "#bdbdbd"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "poi",
-//     "elementType": "labels.text.fill",
-//     "stylers": [
-//       {
-//         "color": "#757575"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "poi.park",
-//     "elementType": "geometry",
-//     "stylers": [
-//       {
-//         "color": "#181818"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "poi.park",
-//     "elementType": "labels.text.fill",
-//     "stylers": [
-//       {
-//         "color": "#616161"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "poi.park",
-//     "elementType": "labels.text.stroke",
-//     "stylers": [
-//       {
-//         "color": "#1b1b1b"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "road",
-//     "elementType": "geometry.fill",
-//     "stylers": [
-//       {
-//         "color": "#2c2c2c"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "road",
-//     "elementType": "labels.text.fill",
-//     "stylers": [
-//       {
-//         "color": "#8a8a8a"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "road.arterial",
-//     "elementType": "geometry",
-//     "stylers": [
-//       {
-//         "color": "#373737"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "road.highway",
-//     "elementType": "geometry",
-//     "stylers": [
-//       {
-//         "color": "#3c3c3c"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "road.highway.controlled_access",
-//     "elementType": "geometry",
-//     "stylers": [
-//       {
-//         "color": "#4e4e4e"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "road.local",
-//     "elementType": "labels.text.fill",
-//     "stylers": [
-//       {
-//         "color": "#616161"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "transit",
-//     "elementType": "labels.text.fill",
-//     "stylers": [
-//       {
-//         "color": "#757575"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "water",
-//     "elementType": "geometry",
-//     "stylers": [
-//       {
-//         "color": "#000000"
-//       }
-//     ]
-//   },
-//   {
-//     "featureType": "water",
-//     "elementType": "labels.text.fill",
-//     "stylers": [
-//       {
-//         "color": "#3d3d3d"
-//       }
-//     ]
-//   }
-// ]
   });
 
 
@@ -218,10 +32,10 @@ function initMap() {
 
 }
 
-function show_marker(item='cctv') { 
+function show_marker(item='cctv',item2='') { 
   setTimeout(() => {
     var varr;
-  var icon = {
+   var icon = {
         url: "../my/images/cctv.png", // url
         scaledSize: new google.maps.Size(20, 20), // scaled size
         origin: new google.maps.Point(0,0), // origin
@@ -229,7 +43,7 @@ function show_marker(item='cctv') {
     };
   if (item == 'cctv') {
     deleteMarkers()
-    get_cctv('CCTV');
+    get_cctv('CCTV',item2);
     setTimeout(() => {
       create_cctv('',icon);
       setMapOnAll('CCTV');
@@ -352,7 +166,7 @@ function setMapOnAll(n_titik='') {
         infoWindow.setContent(`<div><p><b>${n_titik}</b></p>
           <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
           <div class="embed-responsive embed-responsive-16by9" style="width:500px;">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+            <iframe class="embed-responsive-item" src="${"http://127.0.0.1:5000/?u="+cctv[i].rtsp}" allowfullscreen></iframe>
           </div>
           <div class="mt-3">
             <table class="w-100">
@@ -546,12 +360,15 @@ function vvip() {
     });
   }
 
-  function get_cctv(s='') { 
+  function get_cctv(s='',item='') { 
     cctv = [];
     $.ajax({
-      type: "GET",
+      type: "POST",
       url: "../welcome/get_cctv",
       dataType: "json",
+      data : {
+        a : item
+      },
       success: function (r) {
         cctv = r;
         $('#n_titik').text(s);

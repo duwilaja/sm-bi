@@ -121,12 +121,16 @@ class Welcome extends CI_Controller {
 	public function get_cctv()
 	{
 		$data = [];
-
+		$this->load->model('MData_analytic','mda');
+		
 		$q = $this->db->get('cctv c');
 		foreach ($q->result() as $k => $v) {
+			
 			array_push($data,[
 				'id' =>  $v->id,
 				'nama' =>  $v->nama_cctv,
+				'rtsp' =>  $v->rtsp_cctv,
+				'total' => $this->mda->api_total_kendaraan($v->channel_id)['jml'],
 				'kordinat' => kordinat($v->kordinat),
 			]);
 		}
