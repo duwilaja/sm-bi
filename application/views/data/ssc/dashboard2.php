@@ -71,8 +71,8 @@
         <li><a href="#black_spot" onclick="show_marker('black_spot')">Black Spot</a></li>
         <li><a href="#trouble_spot" onclick="show_marker('trouble_spot')">Trouble Spot</a></li>
         <li><a href="#ambang_gangguan" onclick="show_marker('ambang_gangguan')">Ambang Gangguan</a></li>
-        <li><a href="#about" onclick="show_marker('cctv')">Traffic Counting</a></li>
-        <li><a href="#about" onclick="show_marker('cctv')">Traffic Kategori</a></li>
+        <li><a href="#about" onclick="show_marker('cctv','traffic_counting')">Traffic Counting</a></li>
+        <li><a href="#about" onclick="show_marker('cctv','traffic_category')">Traffic Category</a></li>
         <li><a href="#about" onclick="show_marker('cctv')">Average Speed</a></li>
         <li><a href="#about" onclick="show_marker('cctv')">Length Ocupantion</a></li>
         <li><a href="#about" data-toggle="modal" data-target="#cctv">Face Recognation</a></li>

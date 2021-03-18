@@ -32,10 +32,10 @@ function initMap() {
 
 }
 
-function show_marker(item='cctv') { 
+function show_marker(item='cctv',item2='') { 
   setTimeout(() => {
     var varr;
-  var icon = {
+   var icon = {
         url: "../my/images/cctv.png", // url
         scaledSize: new google.maps.Size(20, 20), // scaled size
         origin: new google.maps.Point(0,0), // origin
@@ -43,7 +43,7 @@ function show_marker(item='cctv') {
     };
   if (item == 'cctv') {
     deleteMarkers()
-    get_cctv('CCTV');
+    get_cctv('CCTV',item2);
     setTimeout(() => {
       create_cctv('',icon);
       setMapOnAll('CCTV');
@@ -359,12 +359,15 @@ function vvip() {
     });
   }
 
-  function get_cctv(s='') { 
+  function get_cctv(s='',item='') { 
     cctv = [];
     $.ajax({
-      type: "GET",
+      type: "POST",
       url: "../welcome/get_cctv",
       dataType: "json",
+      data : {
+        a : item
+      },
       success: function (r) {
         cctv = r;
         $('#n_titik').text(s);

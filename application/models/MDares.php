@@ -19,7 +19,4 @@ class MDares extends CI_Model {
         return $query;
     }
 }
-
-
-
 /* End of file MDares.php */
