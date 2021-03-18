@@ -150,4 +150,39 @@ class Welcome extends CI_Controller {
 		$this->load->view('test2');
 		
 	}
+
+	public function share_lokasi()
+	{
+		$q1 = $this->db->get_where('lokasi_online', ['kode_online' => $this->input->post('x')]);
+		if ($q1->num_rows() > 0) {
+			$this->db->update('lokasi_online', [
+				'lat' => $this->input->post('lat'),
+				'lng' => $this->input->post('lng')
+			],['kode_online' => $this->input->post('x')]);
+		}else{
+			$this->db->insert('lokasi_online', [
+				'kode_online' => $this->input->post('x'),
+				'lat' => $this->input->post('lat'),
+				'lng' => $this->input->post('lng'),
+				'show' => 1
+			]);
+		}
+
+		echo "sukses aja lah";
+		
+	}
+
+	public function share_all_lokasi_online()
+	{
+		$test = [];
+		$q = $this->db->get_where('lokasi_online',['show' => 1]);
+		foreach ($q->result() as $key => $value) {
+			$value->lat = (float) $value->lat;
+			$value->lng = (float) $value->lng;
+
+			$test[$key] = $value;
+		}
+
+		echo json_encode($test);
+	}
 }
