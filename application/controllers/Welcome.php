@@ -130,7 +130,7 @@ class Welcome extends CI_Controller {
 				'id' =>  $v->id,
 				'nama' =>  $v->nama_cctv,
 				'rtsp' =>  $v->rtsp_cctv,
-				'total' => $this->mda->api_total_kendaraan($v->channel_id)['jml'],
+				'total' => $this->mda->total_kendaraan($v->channel_id)['jml'],
 				'kordinat' => kordinat($v->kordinat),
 			]);
 		}

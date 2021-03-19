@@ -12,7 +12,33 @@ class Data_analytic extends CI_Controller {
     public function api_total_kendaraan()
     {
         $channel_id  = $this->input->get('channel_id');
-        $data = $this->mda->api_total_kendaraan($channel_id);
+        $data = $this->mda->total_kendaraan($channel_id);
+        echo json_encode($data);
+    }
+    
+    public function api_detail_analytic_cctv()
+    {
+        $id  = $this->input->get('id');
+        $f  = $this->input->get('f');
+        
+        $filter = $this->mda->detail_analytic_cctv([
+            'id' => $id,
+            'filter' => $f,
+            'ctddate' => date('Y-m-d')
+        ]);
+      
+        $total = $this->mda->detail_analytic_cctv([
+            'id' => $id,
+        ]);
+
+        $data = [
+            'filter' => [
+                'by' => $f,
+                'data' => $filter['jml']
+            ],
+            'total' => $total['jml']
+        ];
+
         echo json_encode($data);
     }
 
