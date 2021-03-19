@@ -2,6 +2,16 @@
   #map {
     height: 100%;
   }
+
+  .info {
+    padding: 1rem;
+    margin: 0;
+}
+
+.info.error {
+    color: #fff;
+    background: #dc3545;
+}
   
   /* Optional: Makes the sample page fill the window. */
   html,
@@ -16,7 +26,7 @@
     position: absolute;
     opacity:0.9;
     top: 30px;
-    right:30px;
+    right:70px;
     z-index: 1;
     background-color: #fff;
     /* padding: 5px; */
@@ -68,10 +78,11 @@
 
 
 <!--Row-->
-
+<input type="hidden"  id="ids" value="<?=$session['rowid'];?>">
 <div class="row" style="min-height:600px;margin-top:20px;">
   <div class="col-md-12">
     <div id="floating-panel">
+      <button onclick="share_lokasi()" class="btn btn-danger w-100">Share Lokasi</button>
       <ul class="wokrek">
         <li><a href="#home" onclick="show_marker('vvip')">VVIP</a></li>
         <li><a href="#black_spot" onclick="show_marker('black_spot')">Black Spot</a></li>
@@ -86,6 +97,8 @@
       </ul>
     </div>
     <div id="map"></div>
+    <!-- For displaying user's coordinate or error message. -->
+    <div id="info" class="info"></div>
   </div>
 </div>
 <!-- End Row -->
