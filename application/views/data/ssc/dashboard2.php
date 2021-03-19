@@ -53,13 +53,13 @@
   }
   
   .wokrek li a.active {
-    background-color: blue;
+    background-color: #f44336;
     border-radius:5px;
     color: white;
   }
   
   .wokrek li a:hover:not(.active) {
-    background-color: blue;
+    background-color: #f44336;
     border-radius:5px;
     color: white;
   }
@@ -82,7 +82,7 @@
 <div class="row" style="min-height:600px;margin-top:20px;">
   <div class="col-md-12">
     <div id="floating-panel">
-      <button onclick="share_lokasi()" class="btn btn-danger w-100">Share Lokasi</button>
+      <!-- <button onclick="share_lokasi()" class="btn btn-danger w-100">Share Lokasi</button> -->
       <ul class="wokrek">
         <li><a href="#home" onclick="show_marker('vvip')">VVIP</a></li>
         <li><a href="#black_spot" onclick="show_marker('black_spot')">Black Spot</a></li>

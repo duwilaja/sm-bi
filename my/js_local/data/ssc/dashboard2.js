@@ -63,29 +63,29 @@ const trackLocation = ({ onSuccess, onError = () => { } }) => {
 
 function initMap() {
   const map = createMap(initialPosition);
-  const marker = createMarker({ map, position: initialPosition });
-  const $info = document.getElementById('info');
+  // const marker = createMarker({ map, position: initialPosition });
+  // const $info = document.getElementById('info');
 
-  all_share_lokasi(map);
+  // all_share_lokasi(map);
 
-  trackLocation({
-    onSuccess: ({ coords: { latitude: lat, longitude: lng } }) => {
-      marker.setPosition({ lat, lng });
-      map.panTo({ lat, lng });
-      all_share_lokasi(map);
-      share_lokasi(lat,lng);
-      // Print out the user's location.
-      $info.textContent = `Lat: ${lat} Lng: ${lng}`;
-      // Don't forget to remove any error class name.
-      $info.classList.remove('error');
-    },
-    onError: err => {
-      // Print out the error message.
-      $info.textContent = `Error: ${getPositionErrorMessage(err.code) || err.message}`;
-      // Add error class name.
-      $info.classList.add('error');
-    }
-  });
+  // trackLocation({
+  //   onSuccess: ({ coords: { latitude: lat, longitude: lng } }) => {
+  //     marker.setPosition({ lat, lng });
+  //     map.panTo({ lat, lng });
+  //     all_share_lokasi(map);
+  //     share_lokasi(lat,lng);
+  //     // Print out the user's location.
+  //     $info.textContent = `Lat: ${lat} Lng: ${lng}`;
+  //     // Don't forget to remove any error class name.
+  //     $info.classList.remove('error');
+  //   },
+  //   onError: err => {
+  //     // Print out the error message.
+  //     $info.textContent = `Error: ${getPositionErrorMessage(err.code) || err.message}`;
+  //     // Add error class name.
+  //     $info.classList.add('error');
+  //   }
+  // });
 
 
 }

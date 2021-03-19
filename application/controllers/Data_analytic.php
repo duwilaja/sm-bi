@@ -15,5 +15,24 @@ class Data_analytic extends CI_Controller {
         $data = $this->mda->api_total_kendaraan($channel_id);
         echo json_encode($data);
     }
+
+    public function detail_analytic_cctv($id='')
+	{
+		$this->load->model('MData_analytic','mda');
+        $user=$this->session->userdata('user_data');
+        $q = $this->input->get('q');
+        $data['js_local'] = 'data/ssc/detail.js';
+		if(isset($user)){
+			$data['session'] = $user;
+			$this->template->load("data/ssc/detail",$data);
+
+			// 404 page 
+			// $this->load->view("error/404",$data);
+		}else{
+			$retval=array("403","Failed","Please login","error");
+			$data['retval']= $retval;
+			$this->load->view('login',$data);
+		}
+	}
 	
 }
