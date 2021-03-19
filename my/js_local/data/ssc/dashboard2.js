@@ -41,12 +41,39 @@ function show_marker(item='cctv',item2='') {
         origin: new google.maps.Point(0,0), // origin
         anchor: new google.maps.Point(0,0) // anchor
     };
-  if (item == 'cctv') {
+  if (item == 'cctv' && item2 == 'traffic_counting') {
     deleteMarkers()
     get_cctv('CCTV',item2);
     setTimeout(() => {
-      create_cctv('',icon);
-      setMapOnAll('CCTV');
+      create_cctv(item2,icon);
+      setMapOnAll('CCTV',item2);
+    }, 200);
+  }
+
+  if (item == 'cctv' && item2 == 'traffic_category') {
+    deleteMarkers()
+    get_cctv('CCTV',item2);
+    setTimeout(() => {
+      create_cctv(item2,icon);
+      setMapOnAll('CCTV',item2);
+    }, 200);
+  }
+
+  if (item == 'cctv' && item2 == 'average_speed') {
+    deleteMarkers()
+    get_cctv('CCTV',item2);
+    setTimeout(() => {
+      create_cctv(item2,icon);
+      setMapOnAll('CCTV',item2);
+    }, 200);
+  }
+
+  if (item == 'cctv' && item2 == 'length_ocupantion') {
+    deleteMarkers()
+    get_cctv('CCTV',item2);
+    setTimeout(() => {
+      create_cctv(item2,icon);
+      setMapOnAll('CCTV',item2);
     }, 200);
   }
   
@@ -137,7 +164,7 @@ function create_cctv(varr,img) {
       icon : img,
       Label: {
         className:'my-custom-class-for-label',
-        text: `${total}`,
+        text:  varr == 'traffic_counting' ? `${total}` : ( varr == 'average_speed' ? `100 km/h` : (varr == 'length_ocupantion' ? `2 m` : ` `)) ,
         // fontWeight: 'bold',
         // fontSize: '9px',
         // fontFamily: '"Courier New", Courier,Monospace',
@@ -150,7 +177,7 @@ function create_cctv(varr,img) {
 }
 
 // Sets the map on all markers in the array.
-function setMapOnAll(n_titik='') {
+function setMapOnAll(n_titik='',item2='') {
   const infoWindow = new google.maps.InfoWindow();
   for (let i = 0; i < markers.length; i++) {
     markers[i].setMap(map);
@@ -158,12 +185,44 @@ function setMapOnAll(n_titik='') {
       // window.location.href = this.url;
       map.setCenter(markers[i].getPosition());
       map.setZoom(15);
-
-      if (n_titik=='CCTV') {
-        // $('#cctv').modal('show');
-        // $('#cctv').attr('data-id', titik[i].id);
-        // $('#cctv_nama').html(n_titik);
-        infoWindow.setContent(`<div><p><b>${n_titik}</b></p>
+      if (n_titik=='CCTV' && item2=='traffic_counting') {
+        const item2 = 'Traffic Counting'; 
+        infoWindow.setContent(`<div><p><b>${n_titik} - ${item2}</b></p>
+          <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
+          <div class="embed-responsive embed-responsive-16by9" style="width:500px;">
+            <iframe class="embed-responsive-item" src="${"http://127.0.0.1:5000/?u="+cctv[i].rtsp}" allowfullscreen></iframe>
+          </div>
+          <div class="mt-3">
+            <table class="w-100">
+              <tr>
+                <td><b>Nama</b></td>
+                <td>:</td>
+                <td>${cctv[i].nama}</td>
+              </tr>
+              <tr>
+                <td><b>Kordinat</b></td>
+                <td>:</td>
+                <td>${cctv[i].kordinat}</td>
+              </tr>
+              <tr>
+                <td><b>Total Kendaraan</b></td>
+                <td>:</td>
+                <td>${cctv[i].total}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="row" style="margin-right:0 !important;">
+            <div class="ml-auto">
+              <a href="detail/${cctv[i].id}" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+          `,
+        );
+        infoWindow.open(map,markers[i]);
+      }else if (n_titik=='CCTV' && item2=='traffic_category') {
+        const item2 = 'Traffic Category'; 
+        infoWindow.setContent(`<div><p><b>${n_titik} - ${item2}</b></p>
           <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
           <div class="embed-responsive embed-responsive-16by9" style="width:500px;">
             <iframe class="embed-responsive-item" src="${"http://127.0.0.1:5000/?u="+cctv[i].rtsp}" allowfullscreen></iframe>
@@ -181,10 +240,94 @@ function setMapOnAll(n_titik='') {
                 <td>${cctv[i].kordinat}</td>
               </tr>
             </table>
+            <table class="table table-bordered mt-3">
+              <thead>
+                <tr>
+                  <th>Kendaraan</th>
+                  <th>Jumlah</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mobil</td>
+                  <td>100</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="row" style="margin-right:0 !important;">
             <div class="ml-auto">
-              <a href="#" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
+              <a href="detail/${cctv[i].id}" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+          `,
+        );
+        infoWindow.open(map,markers[i]);
+      }else if (n_titik=='CCTV' && item2=='average_speed') {
+        const item2 = 'Average Speed'; 
+        infoWindow.setContent(`<div><p><b>${n_titik} - ${item2}</b></p>
+          <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
+          <div class="embed-responsive embed-responsive-16by9" style="width:500px;">
+            <iframe class="embed-responsive-item" src="${"http://127.0.0.1:5000/?u="+cctv[i].rtsp}" allowfullscreen></iframe>
+          </div>
+          <div class="mt-3">
+            <table class="w-100">
+              <tr>
+                <td><b>Nama</b></td>
+                <td>:</td>
+                <td>${cctv[i].nama}</td>
+              </tr>
+              <tr>
+                <td><b>Kordinat</b></td>
+                <td>:</td>
+                <td>${cctv[i].kordinat}</td>
+              </tr>
+              <tr>
+                <td><b>Kecepatan Rata Rata</b></td>
+                <td>:</td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+          <div class="row" style="margin-right:0 !important;">
+            <div class="ml-auto">
+              <a href="detail/${cctv[i].id}" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+          `,
+        );
+        infoWindow.open(map,markers[i]);
+      }else if (n_titik=='CCTV' && item2=='length_ocupantion') {
+        const item2 = 'Length Ocupation'; 
+        infoWindow.setContent(`<div><p><b>${n_titik} - ${item2}</b></p>
+          <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
+          <div class="embed-responsive embed-responsive-16by9" style="width:500px;">
+            <iframe class="embed-responsive-item" src="${"http://127.0.0.1:5000/?u="+cctv[i].rtsp}" allowfullscreen></iframe>
+          </div>
+          <div class="mt-3">
+            <table class="w-100">
+              <tr>
+                <td><b>Nama</b></td>
+                <td>:</td>
+                <td>${cctv[i].nama}</td>
+              </tr>
+              <tr>
+                <td><b>Kordinat</b></td>
+                <td>:</td>
+                <td>${cctv[i].kordinat}</td>
+              </tr>
+              <tr>
+                <td><b>Panjang Kemacetan</b></td>
+                <td>:</td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+          <div class="row" style="margin-right:0 !important;">
+            <div class="ml-auto">
+              <a href="detail/${cctv[i].id}" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>

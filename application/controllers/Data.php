@@ -86,8 +86,9 @@ class Data extends CI_Controller {
 			$this->load->view('login',$data);
 		}
 	}
-	public function detail()
+	public function detail($id='')
 	{
+		$this->load->model('MData_analytic','mda');
         $user=$this->session->userdata('user_data');
         $data['js_local'] = 'data/ssc/detail.js';
 		if(isset($user)){
