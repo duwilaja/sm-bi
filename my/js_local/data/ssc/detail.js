@@ -1,4 +1,16 @@
 /* echart (#echartArea3) open */
+$(".sparkline_bar").sparkline([2,5,4,3,4,3,3,4,5,6,4, 4, 3, 4, 5, 4], {
+  type: 'bar',
+  height: 50,
+  width:250,
+  barWidth: 2,
+  barSpacing: 9,
+  colorMap: {
+    '9': '#a1a1a1'
+  },
+  barColor: 'rgb(58, 188, 29,0.9)'
+});
+
 var areaData3 = [
     {
       name: 'Profit',
