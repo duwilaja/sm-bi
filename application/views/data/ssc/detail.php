@@ -15,11 +15,11 @@
                 </div>
             </div>
             <div class="">
-                <select name="" id="" class="btn btn-primary btn-icon-text">
-                    <option value="">Harian</option>
-                    <option value="">Mingguan</option>
-                    <option value="">Bulanan</option>
-                    <option value="">Tahunan</option>
+                <select name="filter" id="filter" onchange="filter()" class="btn btn-primary btn-icon-text">
+                    <option value="day">Harian</option>
+                    <option value="week">Mingguan</option>
+                    <option value="month">Bulanan</option>
+                    <option value="year">Tahunan</option>
                 </select>
             </div>
         </div>
@@ -37,7 +37,7 @@
             </div>
             <div class="card-body">
                 <div class="embed-responsive embed-responsive-16by9" style="width:100%;">
-                    <iframe class="embed-responsive-item" src="http://127.0.0.1:5000/?u=rtsp://10.100.100.2/live.sdp" allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item" src="" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Status Volume Kendaraan</h3>
                         <h3 style="margin-bottom:2px !important;"><b>Padat</b> <span class="sparkline_bar float-right"></span></h3>
-                        <p class="text-muted">Lonjakan peningkatan jumlah kendaraan perdetik</p>
+                        <p class="text-muted">Lonjakan peningkatan jumlah kendaraan perhari</p>
                     </div>
                 </div>
             </div>
