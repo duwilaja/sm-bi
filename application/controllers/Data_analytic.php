@@ -17,10 +17,8 @@ class Data_analytic extends CI_Controller {
         $data['js_local'] = 'data/ssc/detail.js';
 		if(isset($user)){
 			$data['session'] = $user;
+			$data['q'] = $this->input->get('q');
 			$this->template->load("data/ssc/detail",$data);
-
-			// 404 page 
-			// $this->load->view("error/404",$data);
 		}else{
 			$retval=array("403","Failed","Please login","error");
 			$data['retval']= $retval;
@@ -66,6 +64,25 @@ class Data_analytic extends CI_Controller {
     {
         $q = $this->mda->analitik_bar_counting('','tahun');
         echo json_encode($q);
+    }
+
+    public function api_analitik_bar_sparkline_counting()
+    {
+        $d = [];
+		$filter = [
+			'ctdby' => '',
+			'ctddate' => $this->input->post('ctddate'),
+			'lokasi' => $this->input->post('lokasi'),
+		];
+
+		$x = $this->input->post('x');
+		$d = $this->mda->counting_bar_sparkline();
+
+		$data = [
+			'data' => $d
+		];
+
+		echo json_encode($data);
     }
 
     public function api_analitik_bar_echart_counting()

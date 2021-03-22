@@ -271,7 +271,7 @@ function setMapOnAll(n_titik='',item2='') {
           </div>
           <div class="row" style="margin-right:0 !important;">
             <div class="ml-auto">
-              <a href="detail/${cctv[i].id}" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
+              <a href="../data_analytic/detail_analytic_cctv?id=${cctv[i].id}&q=traffic_counting" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -315,7 +315,7 @@ function setMapOnAll(n_titik='',item2='') {
           </div>
           <div class="row" style="margin-right:0 !important;">
             <div class="ml-auto">
-              <a href="detail/${cctv[i].id}" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
+              <a href="../data_analytic/detail_analytic_cctv/${cctv[i].id}?q=traffic_category" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -350,7 +350,7 @@ function setMapOnAll(n_titik='',item2='') {
           </div>
           <div class="row" style="margin-right:0 !important;">
             <div class="ml-auto">
-              <a href="detail/${cctv[i].id}" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
+              <a href="../data_analytic/detail_analytic_cctv/${cctv[i].id}?q=average_speed" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -385,7 +385,7 @@ function setMapOnAll(n_titik='',item2='') {
           </div>
           <div class="row" style="margin-right:0 !important;">
             <div class="ml-auto">
-              <a href="detail/${cctv[i].id}" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
+              <a href="../data_analytic/detail_analytic_cctv/${cctv[i].id}?q=length_ocupantion" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
