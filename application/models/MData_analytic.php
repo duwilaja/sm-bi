@@ -47,7 +47,17 @@ class MData_analytic extends CI_Model {
         }
 
         if (!empty($arr['ctddate']) && $arr['ctddate'] != '') {
-            $this->db->where('ctddate', $arr['ctddate']);
+            if ($arr['filter'] == 'hari') {
+                $this->db->where('ctddate', $arr['ctddate']);
+            }else if ($arr['filter'] == 'minggu'){
+                $this->db->where('WEEK(ctddate) = WEEK("'.$arr['ctddate'].'")');
+            }else if ($arr['filter'] == 'bulan'){
+                $this->db->where('MONTH(ctddate) = MONTH("'.$arr['ctddate'].'")');
+            }else if ($arr['filter'] == 'tahun'){
+                $this->db->where('YEAR(ctddate) = YEAR("'.$arr['ctddate'].'")');
+            }else{
+                $this->db->where('ctddate', $arr['ctddate']);
+            }
         }
 
         if (!empty($arr['kendaraan']) && $arr['kendaraan'] != '') {
@@ -55,13 +65,34 @@ class MData_analytic extends CI_Model {
         }
 
         $this->db->group_by($group);
-
        
-       $q = $this->db->get('analytic_kend');
-       return $q;
+        $q = $this->db->get('analytic_kend');
+        return $q;
     }
 
-    public function api_total_kendaraan($channel_id='')
+    public function detail_analytic_cctv($arr=[])
+    {
+        $data = [
+            'jml' => 0
+        ];
+
+        if (empty($arr)) return $data;
+
+        $cctv = $this->db->get_where('cctv', ['id' => $arr['id']]);
+        $cctv1 = $cctv->row();
+        if ($cctv->num_rows() == 0 || $cctv1->channel_id == '') return $data;
+
+        // Kendaraan berdasarkan filter hari ini
+        if (!empty($arr['filter'])) {
+            $data['jml'] = (float)$this->get_kendaraan_group('count(*) as jml',['ctddate' => $arr['ctddate'],'channel_id' => $cctv1->channel_id,'filter' => $arr['filter']],'channel_id')->row_array()['jml'];
+        }else{
+            $data['jml'] = (float)$this->get_kendaraan_group('count(*) as jml',['channel_id' => $cctv1->channel_id],'channel_id')->row_array()['jml'];
+        }
+
+        return $data;
+    }
+
+    public function total_kendaraan($channel_id='')
     {
         if ($channel_id == '') {
             return ['jml' => "0"];
