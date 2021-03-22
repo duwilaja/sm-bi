@@ -40,7 +40,8 @@
                     <iframe class="embed-responsive-item" src="http://127.0.0.1:5000/?u=rtsp://10.100.100.2/live.sdp" allowfullscreen></iframe>
                 </div>
             </div>
-        </div><!-- COL END -->
+        </div>
+    </div><!-- COL END -->
 
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
 <?php if($q == "traffic_counting"){?>      

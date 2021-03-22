@@ -1,14 +1,21 @@
-$(".sparkline_bar").sparkline([2,5,4,3,4,3,3,4,5,6,4, 4, 3, 4, 5, 4], {
-  type: 'bar',
-  height: 50,
-  width:250,
-  barWidth: 2,
-  barSpacing: 9,
-  colorMap: {
-    '9': '#a1a1a1'
-  },
-  barColor: 'rgb(58, 188, 29,0.9)'
+$(document).ready(function () {
+  analytic_data();
+  bar()
 });
+
+function bar() {
+  $(".sparkline_bar").sparkline([2,5,4,3,4,3,3,4,5,6,4, 4, 3, 4, 5, 4], {
+    type: 'bar',
+    height: 50,
+    width:250,
+    barWidth: 2,
+    barSpacing: 9,
+    colorMap: {
+      '9': '#a1a1a1'
+    },
+    barColor: 'rgb(58, 188, 29,0.9)'
+  });
+}
 
 var chartCounting = document.getElementById('chartCounting');
 var chartCategory = document.getElementById('chartCategory');
@@ -431,4 +438,23 @@ if (chartLength != null) {
     
     var areaLength = echarts.init(chartLength);
     areaLength.setOption(optionLengthArea);
+}
+
+function analytic_data() { 
+  $.ajax({
+    type: "POST",
+    url: "../api_total_kendaraan",
+    // data: "",
+    dataType: "json",
+    success: function (r) {
+      areaChart3.setOption({
+        'xAxis' : {
+          data : ['Seninx', 'Selasax', 'Rabux', 'Kamis', 'Jumat','Sabtu','Minggu']
+        },
+        'series': {
+          data: [0,140, 101, 37, 129, 144, 176, 135, 148, 216],
+        }, 
+      });
+    }
+  });
 }
