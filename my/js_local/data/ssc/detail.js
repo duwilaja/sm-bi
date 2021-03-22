@@ -118,18 +118,24 @@ var areaData3 = [
     function analytic_data() { 
       $.ajax({
         type: "POST",
-        url: "../api_total_kendaraan",
-        // data: "",
+        url: "../../Data_analytic/api_analitik_bar_echart_counting",
+        data: {
+          x : $('#filter').val()
+        },
         dataType: "json",
         success: function (r) {
           areaChart3.setOption({
             'xAxis' : {
-              data : ['Seninx', 'Selasax', 'Rabux', 'Kamis', 'Jumat','Sabtu','Minggu']
+              data : r.data.name
             },
             'series': {
-              data: [0,140, 101, 37, 129, 144, 176, 135, 148, 216],
+              data: r.data.jml,
             }, 
           });
         }
       });
+    }
+
+    function filter() { 
+      analytic_data();
     }

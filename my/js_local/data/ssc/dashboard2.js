@@ -525,6 +525,7 @@ function vvip() {
         }
       }
     );
+
   }
   
   function get_route() { 
