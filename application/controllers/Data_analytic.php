@@ -24,6 +24,7 @@ class Data_analytic extends CI_Controller {
         $data['js_local'] = 'data/ssc/detail.js';
 		if(isset($user)){
 			$data['session'] = $user;
+			$data['q'] = $this->input->get('q');
 			$this->template->load("data/ssc/detail",$data);
 
 			// 404 page 
