@@ -248,7 +248,7 @@ function setMapOnAll(n_titik='',item2='') {
         infoWindow.setContent(`<div><p><b>${n_titik} - ${item2}</b></p>
           <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
           <div class="embed-responsive embed-responsive-16by9" style="width:500px;">
-            <iframe class="embed-responsive-item" src="${"http://172.16.59.10:5000/?u="+cctv[i].rtsp}" allowfullscreen></iframe>
+            <iframe class="embed-responsive-item" src="${"http://"+window.location.hostname+":5000/?u="+cctv[i].rtsp}" allowfullscreen></iframe>
           </div>
           <div class="mt-3">
             <table class="w-100">
@@ -283,7 +283,7 @@ function setMapOnAll(n_titik='',item2='') {
         infoWindow.setContent(`<div><p><b>${n_titik} - ${item2}</b></p>
           <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
           <div class="embed-responsive embed-responsive-16by9" style="width:500px;">
-            <iframe class="embed-responsive-item" src="${"http://172.16.59.10:5000/?u="+cctv[i].rtsp}" allowfullscreen></iframe>
+            <iframe class="embed-responsive-item" src="${"http://"+window.location.hostname+":5000/?u="+cctv[i].rtsp}" allowfullscreen></iframe>
           </div>
           <div class="mt-3">
             <table class="w-100">
@@ -327,7 +327,7 @@ function setMapOnAll(n_titik='',item2='') {
         infoWindow.setContent(`<div><p><b>${n_titik} - ${item2}</b></p>
           <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
           <div class="embed-responsive embed-responsive-16by9" style="width:500px;">
-            <iframe class="embed-responsive-item" src="${"http://172.16.59.10:5000/?u="+cctv[i].rtsp}" allowfullscreen></iframe>
+            <iframe class="embed-responsive-item" src="${"http://"+window.location.hostname+":5000/?u="+cctv[i].rtsp}" allowfullscreen></iframe>
           </div>
           <div class="mt-3">
             <table class="w-100">
@@ -362,7 +362,7 @@ function setMapOnAll(n_titik='',item2='') {
         infoWindow.setContent(`<div><p><b>${n_titik} - ${item2}</b></p>
           <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
           <div class="embed-responsive embed-responsive-16by9" style="width:500px;">
-            <iframe class="embed-responsive-item" src="${"http://172.16.59.10:5000/?u="+cctv[i].rtsp}" allowfullscreen></iframe>
+            <iframe class="embed-responsive-item" src="${"http://"+window.location.hostname+":5000/?u="+cctv[i].rtsp}" allowfullscreen></iframe>
           </div>
           <div class="mt-3">
             <table class="w-100">

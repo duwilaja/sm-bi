@@ -10,7 +10,7 @@ class Api_cctv extends CI_Controller {
 	private $rdmkey = "";
 	private $publicKey = "";
 	private $mac = "";
-	private $url = "https://36.91.103.46";
+	private $url = "https://172.16.59.27";
 	private $token = "";
 	private $signiture = "";
 	private $cert = "";
