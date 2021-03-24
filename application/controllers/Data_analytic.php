@@ -9,10 +9,11 @@ class Data_analytic extends CI_Controller {
 		$this->load->model('MData_analytic','mda');
     }
 
-    public function detail_analytic_cctv($id='')
+    public function detail_analytic_cctv()
 	{
         $rtsp = '';
 		$this->load->model('MData_analytic','mda');
+        $id= $this->input->get('id');
         $cctv = $this->db->get_where('cctv',['id' => $id]);
         if ($cctv->num_rows() > 0 ) {
             $rtsp = $cctv->row()->rtsp_cctv;
