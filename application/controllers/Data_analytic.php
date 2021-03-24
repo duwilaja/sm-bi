@@ -23,7 +23,7 @@ class Data_analytic extends CI_Controller {
         $data['js_local'] = 'data/ssc/detail.js';
 		if(isset($user)){
 			$data['session'] = $user;
-			$data['rtsp'] = $rtsp;
+			$data['rtsp'] = "http://172.16.59.10:5000/?u=".$rtsp;
 			$data['q'] = $this->input->get('q');
 			$this->template->load("data/ssc/detail",$data);
 		}else{
