@@ -1,6 +1,5 @@
 $(document).ready(function () {
-  // analytic_data();
-  // bar()
+  cek_detail();
 });
 
 var chartCounting = document.getElementById('chartCounting');
@@ -12,6 +11,18 @@ var chartCountingData = [];
 var ajx_counting = [];
 var arr_spark_bar = [];
 
+function cek_detail() { 
+  var o = $('#cek_detail_q').val();
+  if(o == 'traffic_counting'){
+    analytic_data();
+    get_total();
+    analytic_bar_sparkline();
+  }else if(o == 'traffic_category'){
+    get_list_traffic_category();
+    analytic_data_traffic_category();
+  }
+}
+
 
 if (chartCounting != null) {
   
@@ -20,7 +31,7 @@ if (chartCounting != null) {
       name: 'Profit',
       type: 'bar',
       smooth: true,
-      data: [0,120, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4],
+      data: [],
       symbolSize:20,
       barWidth: 20,
       itemStyle: {
@@ -45,7 +56,7 @@ if (chartCounting != null) {
         left: '25',
       },
       xAxis: {
-        data: ['0','Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat','Sabtu','Minggu' ],
+        data: [],
         boundaryGap: false,
         axisLine: {
           lineStyle: { color: 'rgba(142, 156, 173, 0.2)' }
@@ -153,16 +164,10 @@ if (chartCounting != null) {
   if (chartCategory != null) {
     var chartCategoryData = [
       {
-        name: 'sales',
+        name: 'Category',
         type: 'bar',
         stack: 'Stack',
         data: [14, 18, 20, 14, 29, 21, 25, 14, 24]
-      },
-      {
-        name: 'Profit',
-        type: 'bar',
-        stack: 'Stack',
-        data: [12, 14, 15, 50, 24, 24, 10, 20 ,30]
       }
     ];
     
@@ -411,8 +416,7 @@ if (chartCounting != null) {
           }
           
           function filter(){
-            analytic_data();
-            analytic_bar_sparkline();
+            cek_detail();
           }
           
           function analytic_data() { 
@@ -420,23 +424,137 @@ if (chartCounting != null) {
               type: "POST",
               url: "../Data_analytic/api_analitik_bar_echart_counting",
               data: {
-                x : $('#filter').val()
+                x : $('#filter').val(),
+                id : $('#ids').val()
               },
               dataType: "json",
               success: function (r) {
-                ajx_counting = {
-                  'xAxis' : {
-                    data : r.data.name
-                  },
-                  'series': {
-                    data: r.data.jml,
-                  }, 
+                ajx_counting= [];
+                if ($('#filter').val() == 'day') {
+                    ajx_counting = {
+                      color: ["#009C95","#21ba45"],
+                      grid: {
+                        top: '6',
+                        right: '25',
+                        bottom: '25',
+                        left: '25',
+                      },
+                      title : {
+                          textStyle: {
+                              fontFamily: 'lato'
+                          }
+                      },
+                      tooltip : {
+                          trigger: 'axis'
+                      },
+                      calculable : true,
+                      xAxis : [
+                          {
+                              type: 'time',
+                              boundaryGap:false,
+                              axisLabel: {
+                                  formatter: (function(value){
+                                      return moment(value).format('HH:mm');
+                                  })
+                              }
+                          }
+                      ],
+                      yAxis : [
+                          {
+                              type : 'value'
+                          }
+                      ],
+                      series : [
+                          {
+                              backgroundColor: '#4D86FF',
+                              name:'Traffic Counting',
+                              type:'line',
+                              smooth:true,
+                              itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                              data: r.data.time
+                          }
+                         
+                      ]
+                  }
+                }else{
+                  areaCounting.clear();
+                  ajx_counting = {
+                    grid: {
+                      top: '6',
+                      right: '25',
+                      bottom: '17',
+                      left: '25',
+                    },
+                    xAxis: {
+                      data:  r.data.name,
+                      boundaryGap: false,
+                      axisLine: {
+                        lineStyle: { color: 'rgba(142, 156, 173, 0.2)' }
+                      },
+                      axisLabel: {
+                        fontSize: 10,
+                        color: '#8e9cad ',
+                        display:'false'
+                      }
+                    },
+                    tooltip: {
+                      show: true,
+                      showContent: true,
+                      alwaysShowContent: true,
+                      triggerOn: 'mousemove',
+                      trigger: 'axis',
+                      axisPointer:
+                      {
+                        label: {
+                          show: false,
+                        }
+                      }
+                      
+                    },
+                    yAxis: {
+                      splitLine: {
+                        lineStyle: { color: 'rgba(142, 156, 173, 0.2)' },
+                        display:false
+                      },
+                      axisLine: {
+                        lineStyle: { color: 'rgba(142, 156, 173, 0.2)' },
+                        display:false
+                      },
+                      axisLabel: {
+                        fontSize: 10,
+                        color: '#8e9cad '
+                      }
+                    },
+                    series: {
+                      name: 'Profit',
+                      type: 'bar',
+                      smooth: true,
+                      data: r.data.jml,
+                      symbolSize:20,
+                      barWidth: 20,
+                      itemStyle: {
+                        normal: { barBorderRadius: [50 ,50, 0 ,0],
+                          color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                              {offset: 0, color: '#2575fc'},
+                              {offset: 1, color: '#4a32d4'}
+                            ]
+                            )
+                          }
+                        },
+                      },
+                    color:[ '#32cafe']
+                  };
                 }
+               
+
               }
               
             });
             
             setTimeout(() => {
+              console.log(ajx_counting);
               areaCounting.setOption(ajx_counting);
             }, 1000);
           }
@@ -447,7 +565,8 @@ if (chartCounting != null) {
               type: "POST",
               url: "../Data_analytic/api_analitik_bar_sparkline_counting",
               data: {
-                x : $('#filter').val()
+                x : $('#filter').val(),
+                id : $('#ids').val()
               },
               dataType: "json",
               success: function (r) {
@@ -472,3 +591,121 @@ if (chartCounting != null) {
             }, 1000);
 
           }
+
+          function  get_total() {
+            $.ajax({
+              type: "POST",
+              url: "../Data_analytic/api_total_counting",
+              data: {
+                id : $('#ids').val()
+              },
+              dataType: "json",
+              success: function (r) {
+                $('#counting_total').text(r.total_all.sekarang);
+                if (r.total_all.persen[1] == 'naik') {
+                  $('#p_counting_total').html(`<span class="mb-0 text-success fs-13 "><i class="fe fe-arrow-up"></i>${r.total_all.persen[0]}%</span> vs hari sebelumnya`);
+                }else{
+                  $('#p_counting_total').html(`<span class="mb-0 text-danger fs-13 "><i class="fe fe-arrow-down "></i>${r.total_all.persen[0]}%</span> vs hari sebelumnya`);
+                }
+
+                $('#counting_total_hari').text(r.total_hari.sekarang);
+                if (r.total_hari.persen[1] == 'naik') {
+                  $('#p_counting_total_hari').html(`<span class="mb-0 text-success fs-13 "><i class="fe fe-arrow-up"></i>${r.total_hari.persen[0]}%</span> vs hari sebelumnya`);
+                }else{
+                  $('#p_counting_total_hari').html(`<span class="mb-0 text-danger fs-13 "><i class="fe fe-arrow-down "></i>${r.total_hari.persen[0]}%</span> vs hari sebelumnya`);
+                }
+
+              }
+              
+            });
+            
+          }
+
+          // Traffic Category
+          function get_list_traffic_category() {
+            $.ajax({
+              type: "POST",
+              url: "../Data_analytic/get_list_traffic_category",
+              data: {
+                id : $('#ids').val(),
+                x : $('#filter').val()
+              },
+              dataType: "json",
+              success: function (r) {
+                $('#tcategory').html('');
+                r.forEach(e => {
+                  $('#tcategory').append('<tr><td>'+e.type_kend+'</td><td>'+e.jml+'</td></tr>');
+                });
+              }
+            });
+          }
+
+          function analytic_data_traffic_category() { 
+            $.ajax({
+              type: "POST",
+              url: "../Data_analytic/api_analitik_bar_echart_category",
+              data: {
+                x : $('#filter').val(),
+                id : $('#ids').val()
+              },
+              dataType: "json",
+              success: function (r) {
+               
+
+                ajx_counting= [];
+                ajx_counting = {
+                  grid: {
+                    top: '6',
+                    right: '10',
+                    bottom: '17',
+                    left: '100',
+                  },
+                  xAxis: {
+                    type: 'value',
+                    axisLine: {
+                      lineStyle: {
+                        color: 'rgba(67, 87, 133, .09)'
+                      }
+                    },
+                    axisLabel: {
+                      fontSize: 10,
+                      color: '#8e9cad'
+                    }
+                  },
+                  yAxis: {
+                    type: 'category',
+                    data: r.data.name,
+                    splitLine: {
+                      lineStyle: {
+                        color: 'rgba(67, 87, 133, .09)'
+                      }
+                    },
+                    axisLine: {
+                      lineStyle: {
+                        color: 'rgba(67, 87, 133, .09)'
+                      }
+                    },
+                    axisLabel: {
+                      fontSize: 10,
+                      color: '#8e9cad'
+                    }
+                  },
+                  series: [
+                    {
+                      name: 'Category',
+                      type: 'bar',
+                      stack: 'Stack',
+                      data: r.data.jml
+                    }
+                  ],
+                  color:[ '#4a32d4', '#cedbfd']
+                };
+              }
+            });
+            
+            setTimeout(() => {
+              console.log(ajx_counting);
+              areaCategory.setOption(ajx_counting);
+            }, 1000);
+          }
+

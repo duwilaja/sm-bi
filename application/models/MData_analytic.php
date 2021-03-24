@@ -146,8 +146,68 @@ class MData_analytic extends CI_Model {
         return $jml;
     }
 
-    // baRU
+    public function total_counting($arr=[])
+    {
+        $jml = [];
+        $data = [
+            'jml' => $jml
+        ];
 
+        if (isset($arr['cctv_id'])) {
+            $cctv =  $this->db->get_where('cctv', ['id' => $arr['cctv_id']]);
+            $arr['channel_id'] = $cctv->row()->channel_id;
+        }
+
+        $date = new DateTime($arr['ctddate']);
+        $date->modify('-1 day');
+        $d = $date->format('Y-m-d');
+
+       
+
+        $this->db->where('channel_id', $arr['channel_id']);
+
+        if (!empty($arr['filter']) && $arr['filter']  == "today") {
+            $this->db->where('date(ctddate) = date("'.$arr['ctddate'].'")');
+        }else if (!empty($arr['filter']) && $arr['filter']  == "yesterday") {
+            $this->db->where('date(ctddate) = date("'.$d.'")');
+        }else if (!empty($arr['filter']) && $arr['filter']  == "total_all_without_today") {
+            $this->db->where('date(ctddate) != date("'.$arr['ctddate'].'")');
+        }
+
+        $this->db->select('count(*) as jml');
+        $q = $this->db->get('analytic_kend');
+        return $q;
+    }
+
+    public function counting_bar_sparkline($arr=[])
+    {
+        $jml = [];
+        $data = [
+            'jml' => $jml
+        ];
+
+        if (isset($arr['cctv_id'])) {
+            $cctv =  $this->db->get_where('cctv', ['id' => $arr['cctv_id']]);
+            $arr['channel_id'] = $cctv->row()->channel_id;
+         }
+
+
+        $this->db->where('channel_id', $arr['channel_id']);
+
+        $this->db->select('count(*) as jml');
+        $this->db->group_by('ctddate');
+        $this->db->order_by('ctddate', 'desc');
+        
+        $q = $this->db->get('analytic_kend');
+        foreach ($q->result() as $k => $v) {
+            $jml[$k] = (float)$v->jml;
+        }
+
+        $data['jml'] = $jml;
+
+        return $data;
+    }
+    
     public function counting_bar_year($arr=[])
     {
         for ($i=1; $i <= 12 ; $i++) { 
@@ -167,6 +227,14 @@ class MData_analytic extends CI_Model {
             'Nov',
             'Dec'
         ];
+
+        if (isset($arr['cctv_id'])) {
+            $cctv =  $this->db->get_where('cctv', ['id' => $arr['cctv_id']]);
+            $arr['channel_id'] = $cctv->row()->channel_id;
+         }
+
+
+        $this->db->where('channel_id', $arr['channel_id']);
 
         $arr['ctddate'] = !empty($arr['ctddate']) && $arr['ctddate'] != ''  ? $arr['ctddate'] : $arr['ctddate'] = date('Y-m-d');
 
@@ -195,6 +263,13 @@ class MData_analytic extends CI_Model {
     {
         $week_name = [];
         $week = [];
+        if (isset($arr['cctv_id'])) {
+            $cctv =  $this->db->get_where('cctv', ['id' => $arr['cctv_id']]);
+            $arr['channel_id'] = $cctv->row()->channel_id;
+         }
+
+
+        $this->db->where('channel_id', $arr['channel_id']);
         $arr['ctddate'] = !empty($arr['ctddate']) && $arr['ctddate'] != ''  ? $arr['ctddate'] : $arr['ctddate'] = date('Y-m-d');
 
         // if (isset($arr['lokasi']) && $arr['lokasi'] != '') {
@@ -236,6 +311,15 @@ class MData_analytic extends CI_Model {
             5 => 'Sabtu',
             6 => 'Minggu'
         ];
+
+        if (isset($arr['cctv_id'])) {
+            $cctv =  $this->db->get_where('cctv', ['id' => $arr['cctv_id']]);
+            $arr['channel_id'] = $cctv->row()->channel_id;
+         }
+
+
+        $this->db->where('channel_id', $arr['channel_id']);
+
         $arr['ctddate'] = !empty($arr['ctddate']) && $arr['ctddate'] != ''  ? $arr['ctddate'] : $arr['ctddate'] = date('Y-m-d');
 
         // if (isset($arr['lokasi']) && $arr['lokasi'] != '') {
@@ -261,6 +345,119 @@ class MData_analytic extends CI_Model {
         $data = [
             'name' => $day_name,
             'jml' => array_values($day)
+        ];
+        
+        return $data;
+    }
+
+    public function counting_bar_day($arr=[])
+    {
+        $time = [];
+       
+        if (isset($arr['cctv_id'])) {
+            $cctv =  $this->db->get_where('cctv', ['id' => $arr['cctv_id']]);
+            $arr['channel_id'] = $cctv->row()->channel_id;
+         }
+
+
+        $this->db->where('channel_id', $arr['channel_id']);
+
+        $arr['ctddate'] = !empty($arr['ctddate']) && $arr['ctddate'] != ''  ? $arr['ctddate'] : $arr['ctddate'] = date('Y-m-d');
+
+        // if (isset($arr['lokasi']) && $arr['lokasi'] != '') {
+        //     $this->db->where('lokasi_id', $arr['lokasi']);
+        // }
+
+        $this->db->select('count(*) as jml,date(ctddate) as date,ctdtime');
+        $this->db->where('YEAR(ctddate) = YEAR("'.$arr['ctddate'].'")');
+        $this->db->where('MONTH(ctddate) = MONTH("'.$arr['ctddate'].'")');
+        $this->db->where('WEEK(ctddate) = WEEK("'.$arr['ctddate'].'")');
+        $this->db->group_by('ctdtime');
+        $q = $this->db->get('analytic_kend');
+        foreach ($q->result() as $v) {
+            array_push($time,[
+                $v->date.' '.$v->ctdtime,
+                $v->jml
+            ]);
+        }
+
+        $data = [
+            'time' => $time,
+        ];
+        
+        return $data;
+    }
+
+    // Traffic Category
+
+    public function get_traffic_category($arr=[])
+    {
+        if (isset($arr['cctv_id'])) {
+           $cctv =  $this->db->get_where('cctv', ['id' => $arr['cctv_id']]);
+           $arr['channel_id'] = $cctv->row()->channel_id;
+        }
+
+        if (isset($arr['filter']) && $arr['filter'] == 'today') {
+            $this->db->where('DATE(ctddate)',$arr['ctddate']);
+        }else if(isset($arr['filter']) && $arr['filter'] == 'week'){
+            $this->db->where('YEAR(ctddate) = YEAR("'.$arr['ctddate'].'")');
+            $this->db->where('MONTH(ctddate) = MONTH("'.$arr['ctddate'].'")');
+            $this->db->where('WEEK(ctddate) = WEEK("'.$arr['ctddate'].'")');
+        }else if(isset($arr['filter']) && $arr['filter'] == 'month'){
+            $this->db->where('YEAR(ctddate) = YEAR("'.$arr['ctddate'].'")');
+            $this->db->where('MONTH(ctddate) = MONTH("'.$arr['ctddate'].'")');
+        }else if(isset($arr['filter']) && $arr['filter'] == 'year'){
+            $this->db->where('YEAR(ctddate) = YEAR("'.$arr['ctddate'].'")');
+        }
+
+        $this->db->select('count(*) as jml,type_kend,ctddate');
+        $this->db->group_by('type_kend');
+        $this->db->order_by('type_kend', 'asc');
+        $x = $this->db->get_where('analytic_kend',['channel_id' => $arr['channel_id']]);
+        return $x;
+    }
+
+    public function analitik_bar_echart_category($arr=[])
+    {
+        $name = [];
+        $jml = [];
+
+        if (isset($arr['cctv_id'])) {
+            $cctv =  $this->db->get_where('cctv', ['id' => $arr['cctv_id']]);
+            $arr['channel_id'] = $cctv->row()->channel_id;
+         }
+
+
+        $this->db->where('channel_id', $arr['channel_id']);
+        $arr['ctddate'] = !empty($arr['ctddate']) && $arr['ctddate'] != ''  ? $arr['ctddate'] : $arr['ctddate'] = date('Y-m-d');
+
+        if (isset($arr['filter']) && $arr['filter'] == 'today') {
+            $this->db->where('DATE(ctddate) = DATE("'.$arr['ctddate'].'")');
+        }else if(isset($arr['filter']) && $arr['filter'] == 'week'){
+            $this->db->where('YEAR(ctddate) = YEAR("'.$arr['ctddate'].'")');
+            $this->db->where('MONTH(ctddate) = MONTH("'.$arr['ctddate'].'")');
+            $this->db->where('WEEK(ctddate) = WEEK("'.$arr['ctddate'].'")');
+        }else if(isset($arr['filter']) && $arr['filter'] == 'month'){
+            $this->db->where('YEAR(ctddate) = YEAR("'.$arr['ctddate'].'")');
+            $this->db->where('MONTH(ctddate) = MONTH("'.$arr['ctddate'].'")');
+        }else if(isset($arr['filter']) && $arr['filter'] == 'year'){
+            $this->db->where('YEAR(ctddate) = YEAR("'.$arr['ctddate'].'")');
+        }
+
+        $this->db->select('count(*) as jml,type_kend,weekday(ctddate) as weekday,month(ctddate) as bulan,year(ctddate) as tahun');
+       
+        $this->db->group_by('type_kend');
+        $this->db->order_by('type_kend', 'asc');
+        $q = $this->db->get('analytic_kend');
+        
+        foreach ($q->result() as $k => $v) {
+            @$name[$k] = $v->type_kend;
+            @$jml[$k] = (float) $v->jml;
+        }
+
+        $data = [
+            'name' => $name,
+            'jml' => $jml
         ];
         
         return $data;

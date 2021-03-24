@@ -305,23 +305,23 @@ function setMapOnAll(n_titik='',item2='') {
                   <th>Jumlah</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Mobil</td>
-                  <td>100</td>
-                </tr>
+              <tbody id="t${cctv[i].id}">
               </tbody>
             </table>
           </div>
           <div class="row" style="margin-right:0 !important;">
             <div class="ml-auto">
-              <a href="../data_analytic/detail_analytic_cctv/${cctv[i].id}?q=traffic_category" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
+              <a href="../data_analytic/detail_analytic_cctv?id=${cctv[i].id}&q=traffic_category" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
           `,
         );
+        
         infoWindow.open(map,markers[i]);
+        setTimeout(() => {
+          to_table_traffic_category('#t'+cctv[i].id,cctv[i].kategori);
+        }, 1000);
       }else if (n_titik=='CCTV' && item2=='average_speed') {
         const item2 = 'Average Speed'; 
         infoWindow.setContent(`<div><p><b>${n_titik} - ${item2}</b></p>
@@ -350,7 +350,7 @@ function setMapOnAll(n_titik='',item2='') {
           </div>
           <div class="row" style="margin-right:0 !important;">
             <div class="ml-auto">
-              <a href="../data_analytic/detail_analytic_cctv/${cctv[i].id}?q=average_speed" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
+              <a href="../data_analytic/detail_analytic_cctv?id=${cctv[i].id}&q=average_speed" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -385,7 +385,7 @@ function setMapOnAll(n_titik='',item2='') {
           </div>
           <div class="row" style="margin-right:0 !important;">
             <div class="ml-auto">
-              <a href="../data_analytic/detail_analytic_cctv/${cctv[i].id}?q=length_ocupantion" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
+              <a href="../data_analytic/detail_analytic_cctv?id=${cctv[i].id}&q=length_ocupantion" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -622,6 +622,14 @@ function vvip() {
           console.log(point);
         });
       }
+    });
+  }
+
+  function to_table_traffic_category(table='',data='') { 
+    console.log(table,data);
+    $(table).html('');
+    data.forEach(e => {
+      $(table).append('<tr><td>'+e.type_kend+'</td><td>'+e.jml+'</td></tr>');
     });
   }
 

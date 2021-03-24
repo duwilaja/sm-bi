@@ -121,16 +121,24 @@ class Welcome extends CI_Controller {
 	public function get_cctv()
 	{
 		$data = [];
+		$kategori = [];
+		$total = '';
+
 		$this->load->model('MData_analytic','mda');
+		$a = $this->input->post('a');
 		
 		$q = $this->db->get('cctv c');
 		foreach ($q->result() as $k => $v) {
-			
+			$total = $this->mda->total_kendaraan($v->channel_id)['jml'];
 			array_push($data,[
 				'id' =>  $v->id,
 				'nama' =>  $v->nama_cctv,
 				'rtsp' =>  $v->rtsp_cctv,
-				'total' => $this->mda->total_kendaraan($v->channel_id)['jml'],
+				'total' => $total,
+				'kategori' => $this->mda->get_traffic_category([
+					'channel_id' => $v->channel_id,
+					'ctddate' => date('Y-m-d')
+				])->result(),
 				'kordinat' => kordinat($v->kordinat),
 			]);
 		}
@@ -141,7 +149,6 @@ class Welcome extends CI_Controller {
 	{
 		$data['title'] = "Blank Page";
 		$this->load->view('test');
-		
 	}
 	
 	public function test2()
