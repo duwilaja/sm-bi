@@ -10,7 +10,7 @@ class Api_cctv extends CI_Controller {
 	private $rdmkey = "";
 	private $publicKey = "";
 	private $mac = "";
-	private $url = "https://172.16.59.27";
+	private $url = "https://172.16.59.10";
 	private $token = "";
 	private $signiture = "";
 	private $cert = "";
@@ -159,6 +159,52 @@ class Api_cctv extends CI_Controller {
 		}
 	}
 
+	public function api_camera()
+	{
+		$curl = curl_init();
+
+		$opt = [
+			"userName" => $this->username, 
+			"ipAddress" => "",
+			'client_type' => "WINPC_V1"
+		];
+
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => $this->url."/admin/API/accounts/",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 30,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "POST",
+		CURLOPT_POSTFIELDS => json_encode($opt),
+		CURLOPT_HTTPHEADER => array(
+			"cache-control: no-cache",
+			"content-type: application/json",
+		),
+		));
+
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+		
+		curl_close($curl);
+
+		if ($err) {
+			echo "cURL Error #:" . $err;
+		} else {
+			$r = json_decode($response);
+			$realm = $r->realm;
+			$randomkey = $r->randomKey;
+
+			// $s = $this->signiture($this->config->item('password_dss'),$this->config->item('username_dss'),$r->realm,$r->randomKey);
+			$s = $this->signiture($this->password,$this->username,$realm,$randomkey);
+
+			$this->second_login($s,$randomkey,'camera');
+		}
+	}
+
 	public function second_login($signiture,$rdm,$kend)
 	{
 		$curl = curl_init();
@@ -200,6 +246,8 @@ class Api_cctv extends CI_Controller {
             $this->get_kendaraan();
         }else if ($kend == 'motor') {
             $this->get_kendaraan_motor();
+        }else if ($kend == 'camera') {
+            $this->cek_camera();
         }
 	}
 
@@ -218,7 +266,7 @@ class Api_cctv extends CI_Controller {
 		CURLOPT_CUSTOMREQUEST => 'POST',
 		CURLOPT_POSTFIELDS =>'{
 			"pageInfo": {
-				"pageSize": "100",
+				"pageSize": "50",
 				"pageNo": "1"
 			},
 			"searchInfo": {
@@ -227,8 +275,9 @@ class Api_cctv extends CI_Controller {
 				"carType": [],
 				"plate": [],
 				"channelIds": [
-				"1000000$1$0$0",
-				"1000000$1$0$1"
+				"1000007$1$0$2",
+				"1000002$1$0$0",
+				"1000000$1$0$9
 				],
 				"carColor": []
 			}
@@ -290,16 +339,18 @@ class Api_cctv extends CI_Controller {
 		CURLOPT_CUSTOMREQUEST => 'POST',
 		CURLOPT_POSTFIELDS =>'{
 			"pageInfo": {
-			"pageSize": "100",
+			"pageSize": "50",
 			"pageNo": "1"
 			},
 			"searchInfo": {
-				"startTime": "1615510465",
-				"endTime": "1615942465",
+				"startTime": "1616605200",
+				"endTime": "1616778000",
 				"riderNum": "",
 				"carType": [],
 				"channelIds": [
-					"1000000$1$0$0"
+					"1000007$1$0$2",
+					"1000002$1$0$0",
+					"1000000$1$0$9"
 				],
 				"carColor": []
 			}
