@@ -107,7 +107,7 @@
 <!--End row-->
 
 <!-- Row -->	
-<div class="row">
+<!-- <div class="row">
 	<div class="col-xl-8 col-md-12 col-lg-12">
 		<div class="card">
 			<div class="overflow-hidden">
@@ -172,7 +172,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 <!-- End Row -->
 
 <!--Row-->
@@ -210,22 +210,22 @@
 								<tr height="50" style="background-color:turquoise;">
 									<td align="center" width="150" rowspan="2">Case</td>
 									<td align="center" width="150" rowspan="2">Lokasi</td>
-									<td align="center" width="300" colspan="2">Kordinat</td>
+									<!-- <td align="center" width="300" colspan="2">Kordinat</td> -->
 									<td align="center" width="150" rowspan="2">Time Call</td>
 									<td align="center" width="150" rowspan="2">Respons Time</td>
 									<td align="center" width="150" rowspan="2">durasi</td>
 								</tr>
-								<tr height="50" style="background-color:wheat;">
+								<!-- <tr height="50" style="background-color:wheat;">
 									<td align="center" width="200">Latitude</td>
 									<td align="center" width="200">Longitude</td>
-								</tr>
+								</tr> -->
 								</thead>
 								<tbody>
 								<tr height="50" style="background-color:whitesmoke;">
 									<td align="center" width="150"><a href="#" class="badge badge-pill badge-warning">Kemacetan</a></td>
 									<td align="center" width="150">Bandung</td>
-									<td align="center" width="150">-6.115607757159791</td>
-									<td align="center" width="150">106.78673766775614</td>
+									<!-- <td align="center" width="150">-6.115607757159791</td>
+									<td align="center" width="150">106.78673766775614</td> -->
 									<td align="center" width="150">15.30</td>
 									<td align="center" width="150">15.40</td>
 									<td align="center" width="150">10 Menit</td>
@@ -233,8 +233,8 @@
 								<tr height="50" style="background-color:whitesmoke;">
 									<td align="center" width="150"><a href="#" class="badge badge-pill badge-danger">Kecelakaan</a></td>
 									<td align="center" width="150">Jakarta</td>
-									<td align="center" width="150">-7.115607757159791</td>
-									<td align="center" width="150">107.78673766775614</td>
+									<!-- <td align="center" width="150">-7.115607757159791</td>
+									<td align="center" width="150">107.78673766775614</td> -->
 									<td align="center" width="150">17.30</td>
 									<td align="center" width="150">17.35</td>
 									<td align="center" width="150">5 Menit</td>
@@ -242,8 +242,8 @@
 								<tr height="50" style="background-color:whitesmoke;">
 									<td align="center" width="150"><a href="#" class="badge badge-pill badge-warning">Kemacetan</a></td>
 									<td align="center" width="150">Bandung</td>
-									<td align="center" width="150">-6.115607757159791</td>
-									<td align="center" width="150">106.78673766775614</td>
+									<!-- <td align="center" width="150">-6.115607757159791</td>
+									<td align="center" width="150">106.78673766775614</td> -->
 									<td align="center" width="150">15.30</td>
 									<td align="center" width="150">15.40</td>
 									<td align="center" width="150">10 Menit</td>
@@ -251,8 +251,8 @@
 								<tr height="50" style="background-color:whitesmoke;">
 									<td align="center" width="150"><a href="#" class="badge badge-pill badge-danger">Kecelakaan</a></td>
 									<td align="center" width="150">Jakarta</td>
-									<td align="center" width="150">-7.115607757159791</td>
-									<td align="center" width="150">107.78673766775614</td>
+									<!-- <td align="center" width="150">-7.115607757159791</td>
+									<td align="center" width="150">107.78673766775614</td> -->
 									<td align="center" width="150">17.30</td>
 									<td align="center" width="150">17.35</td>
 									<td align="center" width="150">5 Menit</td>
@@ -260,8 +260,8 @@
 								<tr height="50" style="background-color:whitesmoke;">
 									<td align="center" width="150"><a href="#" class="badge badge-pill badge-warning">Kemacetan</a></td>
 									<td align="center" width="150">Bandung</td>
-									<td align="center" width="150">-6.115607757159791</td>
-									<td align="center" width="150">106.78673766775614</td>
+									<!-- <td align="center" width="150">-6.115607757159791</td>
+									<td align="center" width="150">106.78673766775614</td> -->
 									<td align="center" width="150">15.30</td>
 									<td align="center" width="150">15.40</td>
 									<td align="center" width="150">10 Menit</td>

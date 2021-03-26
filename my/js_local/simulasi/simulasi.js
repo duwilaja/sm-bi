@@ -10,8 +10,9 @@ function initMap() {
     center: { lat: -7.5592506525457, lng: 110.8228297937785 },
     zoom: 15,
     mapTypeId: "satellite",
-    heading: 90,
+    // heading: 90,
     tilt: 45,
+    disableDefaultUI: true
   });
   setTimeout(() => {
     rumah_sakit();
