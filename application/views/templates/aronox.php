@@ -153,9 +153,9 @@ if(count($farr)>0&&$session['nrp']!=''){
 										<!-- <li aria-haspopup="true"><a href="<?=site_url('data/cybercop')?>">Cybercop</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/eri')?>">ERI</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/sdc')?>">SDC</a></li> -->
-										<li aria-haspopup="true"><a href="<?=site_url('data/ssc')?>">SSC</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/tmc')?>">TMC</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/ssc2')?>">SSC</a></li>
+										<li aria-haspopup="true"><a href="<?=site_url('data/intan')?>">INTAN</a></li>
 										<!-- <li aria-haspopup="true"><a href="<?=site_url('data/etle')?>">ETLE</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/intan')?>">INTAN</a></li>
 										<li aria-haspopup="true"><a href="<?=site_url('data/ais')?>">AIS</a></li>
@@ -295,6 +295,7 @@ if(count($farr)>0&&$session['nrp']!=''){
     <script src="<?php echo $base_url;?>my/vendor/jquery-fancybox/jquery.fancybox.min.js"></script>
     <script src="<?php echo $base_url;?>my/vendor/chart.js/Chart.min.js"></script>
 	<script src="<?php echo $base_url;?>my/vendor/leaflet/leaflet.js"></script>
+	<script src="<?php echo $base_url;?>my/vendor/moment/moment.js"></script>
 
 	<script src="<?php echo $base_url;?>aronox/assets/plugins/echarts/echarts.js"></script>
 
@@ -313,6 +314,7 @@ if(count($farr)>0&&$session['nrp']!=''){
 	
 	<script src="https://unpkg.com/@google/markerclustererplus@5.1.0/dist/markerclustererplus.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuUVO-e2zvXVWuIHvRPFMFZOfLwsF98W4&callback=initMap&libraries=&v=weekly" async></script>
+	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuUVO-e2zvXVWuIHvRPFMFZOfLwsF981W4&callback=initMap&libraries=&v=weekly" async></script> -->
     <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
 	<!-- <script src="https://js.arcgis.com/4.18/"></script> -->
 	

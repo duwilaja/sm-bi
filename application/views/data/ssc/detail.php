@@ -1,3 +1,5 @@
+<input type="hidden" id="cek_detail_q" value="<?=$this->input->get('q');?>">
+<input type="hidden" id="ids" value="<?=$this->input->get('id');?>">
 <div class="page-header">
     <div class="page-leftheader">
         <h4 class="page-title">Detail CCTV</h4>
@@ -15,11 +17,11 @@
                 </div>
             </div>
             <div class="">
-                <select name="" id="" class="btn btn-primary btn-icon-text">
-                    <option value="">Harian</option>
-                    <option value="">Mingguan</option>
-                    <option value="">Bulanan</option>
-                    <option value="">Tahunan</option>
+                <select name="filter" id="filter" onchange="filter()" class="btn btn-primary btn-icon-text">
+                    <option value="day">Harian</option>
+                    <option value="week">Mingguan</option>
+                    <option value="month">Bulanan</option>
+                    <option value="year">Tahunan</option>
                 </select>
             </div>
         </div>
@@ -28,16 +30,16 @@
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-5">
         <div class="card overflow-hidden work-progress">
-            <div class="card-header">
+            <!-- <div class="card-header">
                 <h3 class="card-title">Pantauan CCTV</h3>
                 <div class="card-options ">
                     <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
                     <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
                 </div>
-            </div>
+            </div> -->
             <div class="card-body p-0">
                 <div class="embed-responsive embed-responsive-16by9" style="width:100%;">
-                    <iframe class="embed-responsive-item" src="http://127.0.0.1:5000/?u=rtsp://10.100.100.2/live.sdp" allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item" src="<?=$rtsp;?>" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -52,8 +54,8 @@
                         <div class="d-flex clearfix">
                             <div class="text-left ">
                                 <p class="card-text mb-1"><b>Total Kendaraan</b></p>
-                                <h2 class="mb-1 font-weight-semibold mainvalue">80,956</h2>
-                                <p class="mb-0 text-muted"><span class="mb-0 text-success fs-13 "><i class="fe fe-arrow-up "></i> 22%</span> vs hari sebelumnya</p>
+                                <h2 class="mb-1 font-weight-semibold mainvalue" id="counting_total"></h2>
+                                <p class="mb-0 text-muted" id="p_counting_total"></p>
                             </div>
                             <div class="ml-auto">
                                 <span class="bg-primary-transparent icon-service text-primary ">
@@ -70,8 +72,8 @@
                         <div class="d-flex clearfix">
                             <div class="text-left ">
                                 <p class="card-text mb-1"><b>Kendaraan Hari Ini</b></p>
-                                <h2 class="mb-1 font-weight-semibold mainvalue">99,459</h2>
-                                <p class="mb-0 text-muted"><span class="mb-0 text-success fs-13 "><i class="fe fe-arrow-up "></i> 22%</span> vs hari sebelumnya</p>
+                                <h2 class="mb-1 font-weight-semibold mainvalue" id="counting_total_hari"></h2>
+                                <p class="mb-0 text-muted" id="p_counting_total_hari"></p>
                             </div>
                             <div class="ml-auto">
                                 <span class="bg-success-transparent icon-service text-success">
@@ -87,7 +89,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Status Volume Kendaraan</h3>
                         <h3 style="margin-bottom:2px !important;"><b>Padat</b> <span class="sparkline_bar float-right"></span></h3>
-                        <p class="text-muted">Lonjakan peningkatan jumlah kendaraan perdetik</p>
+                        <p class="text-muted">Lonjakan peningkatan jumlah kendaraan perhari</p>
                     </div>
                 </div>
             </div>
@@ -125,7 +127,7 @@
                             <th>Jumlah</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tcategory">
                         <tr>
                             <td>Mobil</td>
                             <td>100</td>
@@ -219,10 +221,6 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Statistik Traffic Counting</h3>
-            <div class="card-options ">
-                <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
-            </div>
         </div>
         <div class="card-body">
             <div id="chartCounting" class="chartsh h-290"></div>
@@ -234,10 +232,6 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Statistik Traffic Category</h3>
-            <div class="card-options ">
-                <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
-            </div>
         </div>
         <div class="card-body">
             <div id="chartCategory" class="chartsh h-290"></div>

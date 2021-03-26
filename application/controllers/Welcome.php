@@ -3,14 +3,107 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
 
-	
+	private $p_name = '';
+	private $num = '';
+
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('');
 		
 	}
-	
+
+	// public function contoh()
+	// {
+	// 	$d = [];
+
+	// 	$arr = [[
+	// 		'product' => 'Fashion 3542',
+	// 		'warna' => 'Black',
+	// 		'qty' => 7 
+	// 	],[
+	// 		'product' => 'Fashion 3542',
+	// 		'warna' => 'White',
+	// 		'qty' => 2 
+	// 	],[
+	// 		'product' => 'Fashion 3542',
+	// 		'warna' => 'Pink',
+	// 		'qty' => 2 
+	// 	],
+	// 	[
+	// 		'product' => 'Fashion Goks',
+	// 		'warna' => 'Pink',
+	// 		'qty' => 2 
+	// 	],
+	// 	[
+	// 		'product' => 'Fashion Goks',
+	// 		'warna' => 'Merah',
+	// 		'qty' => 4
+	// 	],
+	// 	[
+	// 		'product' => 'Fashion Kill',
+	// 		'warna' => 'Merah',
+	// 		'qty' => 4
+	// 	],
+	// 	[
+	// 		'product' => 'Fashion Kill',
+	// 		'warna' => 'Merah',
+	// 		'qty' => 4
+	// 	],
+	// 	[
+	// 		'product' => 'Fashion Kills',
+	// 		'warna' => 'Merah',
+	// 		'qty' => 4
+	// 	]
+	// 	];
+
+	// 	$p_name = '';
+	// 	$num = 0;
+	// 	$num_final = "";
+
+	// 	foreach ($arr as $k => $v) {
+	// 		if ($this->p_name == '' || $this->p_name != $v['product']) {
+	// 			if($this->p_name != $v['product']) $num = $this->count($arr, $v['product']);
+	// 			$this->p_name = $v['product'];
+	// 			$p_name = $v['product'];
+	// 		}else{
+	// 			$p_name = '';
+	// 			$num = '';
+	// 		}
+
+	// 		array_push($d, [
+	// 			'product' => $p_name,
+	// 			'num' => $num, 
+	// 			'warna' => $v['warna'],
+	// 			'qty' => $v['qty']
+	// 		]);
+			
+	// 	}
+
+	// 	// echo json_encode($d);
+	// 	// die;
+	// 	$data['data'] = $d;
+	// 	$this->load->view('welcome_message', $data, FALSE);
+		
+	// }
+
+	// public function count($arr,$p_name)
+	// {
+	// 	$n = 0; 
+	// 	foreach ($arr as $v) {
+	// 		if($v['product'] == $p_name){
+	// 			$n++;
+	// 		};
+	// 	}
+
+	// 	return $n;
+	// }
+
+	public function simulasi()
+	{
+        $data['js_local'] = 'simulasi/simulasi.js';
+		$this->load->view('simulasi/simulasi',$data);
+	}
+
 	public function get_api_cctv()
 	{
 		$curl = curl_init();
@@ -121,16 +214,25 @@ class Welcome extends CI_Controller {
 	public function get_cctv()
 	{
 		$data = [];
+		$kategori = [];
+		$total = '';
+
 		$this->load->model('MData_analytic','mda');
+		$a = $this->input->post('a');
 		
 		$q = $this->db->get('cctv c');
 		foreach ($q->result() as $k => $v) {
-			
+			$total = $this->mda->total_kendaraan($v->channel_id,'hari')['jml'];
 			array_push($data,[
 				'id' =>  $v->id,
 				'nama' =>  $v->nama_cctv,
 				'rtsp' =>  $v->rtsp_cctv,
-				'total' => $this->mda->total_kendaraan($v->channel_id)['jml'],
+				'total' => $total,
+				'kategori' => $this->mda->get_traffic_category([
+					'channel_id' => $v->channel_id,
+					'ctddate' => date('Y-m-d'),
+					'filter' => 'today'
+				])->result(),
 				'kordinat' => kordinat($v->kordinat),
 			]);
 		}
@@ -141,7 +243,6 @@ class Welcome extends CI_Controller {
 	{
 		$data['title'] = "Blank Page";
 		$this->load->view('test');
-		
 	}
 	
 	public function test2()
