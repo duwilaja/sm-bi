@@ -103,8 +103,13 @@ function show_marker(item='cctv',item2='') {
     deleteMarkers()
     get_cctv('CCTV',item2);
     setTimeout(() => {
-      create_cctv(item2,icon);
-      setMapOnAll('CCTV',item2);
+      setTimeout(() => {
+        create_cctv(item2,icon);
+      }, 1000);
+
+      setTimeout(() => {
+        setMapOnAll('CCTV',item2);
+      }, 1100);
     }, 200);
   }
 
@@ -112,8 +117,13 @@ function show_marker(item='cctv',item2='') {
     deleteMarkers()
     get_cctv('CCTV',item2);
     setTimeout(() => {
-      create_cctv(item2,icon);
-      setMapOnAll('CCTV',item2);
+      setTimeout(() => {
+        create_cctv(item2,icon);
+      }, 1000);
+
+      setTimeout(() => {
+        setMapOnAll('CCTV',item2);
+      }, 1100);
     }, 200);
   }
 
@@ -164,7 +174,7 @@ function show_marker(item='cctv',item2='') {
     get_titik('Ambang Gangguan');
     setTimeout(() => {
       create_marker(varr,icon);
-    setMapOnAll('Ambang Gangguan');
+      setMapOnAll('Ambang Gangguan');
     }, 200);
   }
 
@@ -175,7 +185,7 @@ function show_marker(item='cctv',item2='') {
     get_titik('Kegiatan Masyarakat');
     setTimeout(() => {
       create_marker(varr,icon);
-    setMapOnAll('Kegiatan Masyarakat');
+      setMapOnAll('Kegiatan Masyarakat');
     }, 200);
   }
   
@@ -245,6 +255,7 @@ function setMapOnAll(n_titik='',item2='') {
       map.setZoom(15);
       if (n_titik=='CCTV' && item2=='traffic_counting') {
         const item2 = 'Traffic Counting'; 
+        console.log(cctv[i]);
         infoWindow.setContent(`<div><p><b>${n_titik} - ${item2}</b></p>
           <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
           <div class="embed-responsive embed-responsive-16by9" style="width:500px;">
@@ -277,7 +288,7 @@ function setMapOnAll(n_titik='',item2='') {
         </div>
           `,
         );
-        infoWindow.open(map,markers[i]);
+          infoWindow.open(map,markers[i]);
       }else if (n_titik=='CCTV' && item2=='traffic_category') {
         const item2 = 'Traffic Category'; 
         infoWindow.setContent(`<div><p><b>${n_titik} - ${item2}</b></p>
