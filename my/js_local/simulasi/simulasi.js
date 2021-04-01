@@ -303,7 +303,7 @@ function jalankan(x) {
       $('#modal_progress').modal('hide');
     }, 3000);
   }else if(x == 'ambulan'){
-    $('#modal_progress').modal('show');
+     $('#modal_progress').modal('show');
     setTimeout(() => {
       $('#modal_progress').modal('hide');
     }, 3000);
