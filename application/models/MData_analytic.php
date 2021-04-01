@@ -114,14 +114,18 @@ class MData_analytic extends CI_Model {
         return $data;
     }
 
-    public function total_kendaraan($channel_id='')
+    public function total_kendaraan($channel_id='',$filter="")
     {
         if ($channel_id == '') {
             return ['jml' => "0"];
         }
+        $date = '';
+        if($filter != '') $date = date('Y-m-d');
 
         $mda = $this->get_kendaraan_group('count(*) as jml',[
-            'channel_id' => $channel_id
+            'channel_id' => $channel_id,
+            'filter' => $filter,
+            'ctddate' => $date
         ],'channel_id');
         
         $data = [];
