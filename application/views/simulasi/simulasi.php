@@ -106,8 +106,9 @@ body {
     background-color: #fff;
     padding: 5px;
     font-family: "Roboto", "sans-serif";
-    height: 100%;
-    width: 100%;
+    height: auto;
+    width: 180%;
+    border-radius:10px ;
     /* line-height: 30px; */
     /* padding-left: 10px; */
   }
@@ -123,6 +124,30 @@ body {
     font-size:30px!important;
   }
 
+  .iconss {
+    display: inline-flex!important;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border-radius: 50% !important;
+    align-items: center;
+    justify-content: center;
+    font-size:15px!important;
+  }
+
+  a:link {
+    text-decoration:none!important;
+  }
+
+  iframe {
+	height: 100%;
+	min-height: 40px;
+}
+
+.popover {
+    max-width: 400px;
+}
+
   </style>
   <body>
     <!-- <div id="floating-panel">
@@ -131,43 +156,234 @@ body {
     <div id="map"></div>
     <div class="floating-panel">
       <div class="row">
-        <!-- <a href="#" class="bg-danger icon-service text-white mr-2">
-          <i class="fa fa-map-marker"></i>
-        </a>
-        <a href="#" class="bg-warning icon-service text-white mr-2 ">
-          <i class="fa fa-camera"></i>
-        </a>
-        <a href="#" class="bg-success icon-service text-white mr-2 ">
-          <i class="fa fa-car"></i>
-        </a> -->
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
           <li class="nav-item" role="presentation">
-            <a class="nav-link bg-primary icons text-white mx-1" id="pills-maps-tab" data-toggle="pill" href="#pills-maps" role="tab" aria-controls="pills-maps" aria-selected="true"><i class="fa fa-map-marker"></i></a>
+            <a class="nav-link active bg-primary icons text-white mx-1" id="pills-maps-tab" data-toggle="pill" href="#pills-maps" role="tab" aria-controls="pills-maps" aria-selected="false"><i class="fa fa-map-marker"></i></a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link bg-warning icons text-white mx-1" id="pills-cctv-tab" data-toggle="pill" href="#pills-cctv" role="tab" aria-controls="pills-cctv" aria-selected="false"><i class="fa fa-camera"></i></a>
+            <a class="nav-link active bg-warning icons text-white mx-1" id="pills-cctv-tab" data-toggle="pill" href="#pills-cctv" role="tab" aria-controls="pills-cctv" aria-selected="false"><i class="fa fa-video-camera"></i></a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link bg-success icons text-white mx-1" id="pills-car-tab" data-toggle="pill" href="#pills-car" role="tab" aria-controls="pills-car" aria-selected="false"><i class="fa fa-car"></i></a>
+            <a class="nav-link active bg-success icons text-white mx-1" id="pills-car-tab" data-toggle="pill" href="#pills-car" role="tab" aria-controls="pills-car" aria-selected="false"><i class="fa fa-car"></i></a>
           </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
-          <div class="tab-pane panel2 fade show active" id="pills-maps" role="tabpanel" aria-labelledby="pills-maps-tab">
+          <div class="tab-pane panel2 fade" id="pills-maps" role="tabpanel" aria-labelledby="pills-maps-tab">
             <div class="row">
-              <div class="col">maps</div>
-              <div class="col">testing maps</div>
+              <div class="col-md-4 pr-1">
+                  <a href="#" class="list d-flex align-items-center border-bottom border-right py-3">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/polri.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">
+                      Polisi</p>
+                    </div>
+                  </a>
+                  <a href="#" class="list d-flex align-items-center border-bottom border-right py-3">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/ambulan.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">
+                      Ambulance</p>
+                    </div>
+                  </a>
+                  <a href="#" class="list d-flex align-items-center border-bottom border-right py-3">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/damkar.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">
+                      Damkar</p>
+                    </div>
+                  </a>
+                  <a href="#" class="list d-flex align-items-center border-bottom border-right py-3">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/dishub.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">
+                      Dishub</p>
+                    </div>
+                  </a>
+              </div>
+              <div class="col-md-8 pl-0">
+                  <div class="mb-2">
+                    <div class="row" style="margin-right:0!important;margin-left:0!important;">
+                      <div class="col">
+                        <select name="" id="" class="btn btn-info">
+                          <option value="">Filter</option>
+                          <option value="">All</option>
+                        </select>
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control" placeholder="">
+                      </div>
+                      <span class="col-auto">
+                        <button class="btn btn-secondary" type="button"><i class="fe fe-search"></i></button>
+                      </span>
+                    </div> 
+                  </div>
+                  <div class="border-top pt-2">
+                  <ul class="list-group">
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                    <li class="list-group-item">A fourth item</li>
+                    <li class="list-group-item">And a fifth one</li>
+                  </ul>
+                  </div>
+              </div>
             </div>
           </div>
-          <div class="tab-pane panel2 fade show active" id="pills-cctv" role="tabpanel" aria-labelledby="pills-cctv-tab">
-            <div class="row">
-              <div class="col">cctv</div>
-              <div class="col">testing cctv</div>
+          <div class="tab-pane panel2 fade" id="pills-cctv" role="tabpanel" aria-labelledby="pills-cctv-tab">
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/korlantas.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">
+                      Korlantas</p>
+                    </div>
+                </a>
+                <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/dishub.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">
+                      Dishub</p>
+                    </div>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-8 pl-0">
+              <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">Lorem</div>
+                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">lorem</div>
+              </div>
             </div>
           </div>
-          <div class="tab-pane panel2 fade show active" id="pills-car" role="tabpanel" aria-labelledby="pills-car-tab">
+          </div>
+          <div class="tab-pane panel2 fade" id="pills-car" role="tabpanel" aria-labelledby="pills-car-tab">
             <div class="row">
-              <div class="col">car</div>
-              <div class="col">testing car</div>
+              <div class="col-md-4 pr-1">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-car-police-tab" data-toggle="pill" href="#v-car-police" role="tab" aria-controls="v-car-police" aria-selected="false">
+                      <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/polri.png" alt="image" style="background-color:white!important;">
+                      <div class="wrapper ml-3">
+                        <p class="mb-0">
+                        Polisi</p>
+                      </div>
+                  </a>
+                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-car-ambulan-tab" data-toggle="pill" href="#v-car-ambulan" role="tab" aria-controls="v-car-ambulan" aria-selected="false">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/ambulan.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">
+                      Ambulance</p>
+                    </div>
+                  </a>
+                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-car-damkar-tab" data-toggle="pill" href="#v-car-damkar" role="tab" aria-controls="v-car-damkar" aria-selected="false">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/damkar.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">
+                      Damkar</p>
+                    </div>
+                  </a>
+                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-car-dishub-tab" data-toggle="pill" href="#v-car-dishub" role="tab" aria-controls="v-car-dishub" aria-selected="false">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/dishub.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">
+                      Dishub</p>
+                    </div>
+                  </a>
+                </div>
+                  <!-- <a href="#" class="list d-flex align-items-center border-bottom border-right py-3">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/polri.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">
+                      Polisi</p>
+                    </div>
+                  </a>
+                  <a href="#" class="list d-flex align-items-center border-bottom border-right py-3">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/ambulan.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">
+                      Ambulance</p>
+                    </div>
+                  </a>
+                  <a href="#" class="list d-flex align-items-center border-bottom border-right py-3">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/damkar.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">
+                      Damkar</p>
+                    </div>
+                  </a>
+                  <a href="#" class="list d-flex align-items-center border-bottom border-right py-3">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/dishub.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">
+                      Dishub</p>
+                    </div>
+                  </a> -->
+              </div>
+              <div class="col-md-8 pl-0">
+                <div class="tab-content" id="v-pills-tabContent">
+                  <div class="tab-pane fade" id="v-car-police" role="tabpanel" aria-labelledby="v-car-police-tab">
+                    <div class="owl-carousel owl-theme mb-4">
+                        <div class="item"><a href="#" onclick="tes(1)"><img class="avatar brround w-80" src="<?= base_url();?>aronox/assets/images/users/1.jpg" alt="image" style="height:3rem!important;"></a></div>
+                        <div class="item"><a href="#" onclick="tes(2)"><img class="avatar brround w-80" src="<?= base_url();?>aronox/assets/images/users/1.jpg" alt="image" style="height:3rem!important;"></a></div>
+                    </div>
+                    <div class="border-top pt-2">
+                      <div class="text-center d-none" id="profil">
+                        <img src="<?= base_url();?>aronox/assets/images/users/16.jpg" class="avatar avatar-xxl brround" alt="">
+                        <h4 class="h4 mb-0 mt-3" id="nama"></h4>
+                        <p class="card-text" id="ket"></p>
+                        <a href="#" class="iconss bg-success text-white"><i class="fa fa-phone"></i></a>
+                        <a href="#" class="iconss bg-warning text-white"><i class="fa fa-commenting-o"></i></a>
+                        <a href="#" class="iconss bg-primary text-white bot-popover"><i class="fa fa-video-camera"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="v-car-ambulan" role="tabpanel" aria-labelledby="v-car-ambulan-tab">
+                    <div class="owl-carousel owl-theme mb-4">
+                        <div class="item"><a href="#"><img class="avatar brround w-80" src="<?= base_url();?>aronox/assets/images/users/1.jpg" alt="image" style="height:3rem!important;"></a></div>
+                    </div>
+                    <div class="border-top pt-2">
+                      <div class="text-center">
+                        <img src="<?= base_url();?>aronox/assets/images/users/16.jpg" class="avatar avatar-xxl brround" alt="">
+                        <h4 class="h4 mb-0 mt-3">James</h4>
+                        <p class="card-text">Ambulan 1</p>
+                        <a href="#" class="iconss bg-success text-white"><i class="fa fa-phone"></i></a>
+                        <a href="#" class="iconss bg-warning text-white"><i class="fa fa-commenting-o"></i></a>
+                        <a href="#" class="iconss bg-primary text-white bot-popover"><i class="fa fa-video-camera"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="v-car-damkar" role="tabpanel" aria-labelledby="v-car-damkar-tab">
+                    <div class="owl-carousel owl-theme mb-4">
+                        <div class="item"><a href="#"><img class="avatar brround w-80" src="<?= base_url();?>aronox/assets/images/users/1.jpg" alt="image" style="height:3rem!important;"></a></div>
+                    </div>
+                    <div class="border-top pt-2">
+                      <div class="text-center">
+                        <img src="<?= base_url();?>aronox/assets/images/users/16.jpg" class="avatar avatar-xxl brround" alt="">
+                        <h4 class="h4 mb-0 mt-3">Jhon</h4>
+                        <p class="card-text">Damkar 1</p>
+                        <a href="#" class="iconss bg-success text-white"><i class="fa fa-phone"></i></a>
+                        <a href="#" class="iconss bg-warning text-white"><i class="fa fa-commenting-o"></i></a>
+                        <a href="#" class="iconss bg-primary text-white bot-popover"><i class="fa fa-video-camera"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="v-car-dishub" role="tabpanel" aria-labelledby="v-car-dishub-tab">
+                    <div class="owl-carousel owl-theme mb-4">
+                        <div class="item"><a href="#"><img class="avatar brround w-80" src="<?= base_url();?>aronox/assets/images/users/1.jpg" alt="image" style="height:3rem!important;"></a></div>
+                    </div>
+                    <div class="border-top pt-2">
+                      <div class="text-center">
+                        <img src="<?= base_url();?>aronox/assets/images/users/16.jpg" class="avatar avatar-xxl brround" alt="">
+                        <h4 class="h4 mb-0 mt-3">Jhon James</h4>
+                        <p class="card-text">Dishub 1</p>
+                        <a href="#" class="iconss bg-success text-white"><i class="fa fa-phone"></i></a>
+                        <a href="#" class="iconss bg-warning text-white"><i class="fa fa-commenting-o"></i></a>
+                        <a href="#" class="iconss bg-primary text-white bot-popover"><i class="fa fa-video-camera"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  
+              </div>
             </div>
           </div>
         </div>
@@ -186,6 +402,63 @@ body {
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuUVO-e2zvXVWuIHvRPFMFZOfLwsF98W4&callback=initMap&libraries=&v=weekly"
       async
     ></script>
+    <!-- Owl  -->
+	  <script src="<?= base_url('my/vendor/owl/owl.carousel.min.js')?>"></script>
+    <script src="<?= base_url()?>aronox/assets/js/popover.js"></script>
     <script src="<?=base_url('my/js_local/simulasi/simulasi.js')?>"></script>
+    <script>
+      $(function(){
+            // Enables popover
+            $(".bot-popover").popover({
+                trigger: 'focus',
+                html : true, 
+                sanitize: false,
+                placement: 'bottom',
+                content: function() {
+                return '<iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen style="border:none">'+
+                        '</iframe>';    
+                },
+                title: function() {
+                  return `Camera`;
+                }
+            });
+        });
+
+      $('.owl-carousel').owlCarousel({
+          // loop:true,
+          margin:10,
+          nav:false,
+          dots:false,
+          responsive:{
+              0:{
+                  items:1
+              },
+              600:{
+                  items:3
+              },
+              1000:{
+                  items:5
+              }
+          }
+      })
+      $(document).ready(function(){
+          $(".nav-link").click(function(){
+              if ($(this).hasClass('active')){
+                  $('#' + this.hash.substr(1).toLowerCase()).toggleClass('active');
+              }
+          });
+      });
+      function tes(id){
+        if (id == 1) {
+          $('#profil').removeClass('d-none');
+          $('#nama').html('Diva');
+          $('#ket').html('Polisi 1');
+        } else {
+          $('#profil').removeClass('d-none');
+          $('#nama').html('Wardana');
+          $('#ket').html('Polisi 2');
+        }
+      }
+    </script>
   </body>
 </html>
