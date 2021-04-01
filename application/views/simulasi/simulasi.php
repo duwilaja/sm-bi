@@ -103,6 +103,7 @@
         padding: 5px;
         text-align: center;
         font-family: "Roboto", "sans-serif";
+        opacity: 0.9;
         /* line-height: 30px; */
         /* padding-left: 10px; */
     }
@@ -636,28 +637,28 @@
             <div class="row">
               <div class="col-md-4 pr-1">
                   <a href="#" class="list d-flex align-items-center border-bottom border-right py-3">
-                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/polri.png" alt="image" style="background-color:white!important;">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/polri.png" alt="image" style="background-color:white!important;">
                     <div class="wrapper ml-3">
                       <p class="mb-0">
                       Polisi</p>
                     </div>
                   </a>
                   <a href="#" class="list d-flex align-items-center border-bottom border-right py-3">
-                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/ambulan.png" alt="image" style="background-color:white!important;">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/ambulan.png" alt="image" style="background-color:white!important;">
                     <div class="wrapper ml-3">
                       <p class="mb-0">
                       Ambulance</p>
                     </div>
                   </a>
                   <a href="#" class="list d-flex align-items-center border-bottom border-right py-3">
-                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/damkar.png" alt="image" style="background-color:white!important;">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/damkar.png" alt="image" style="background-color:white!important;">
                     <div class="wrapper ml-3">
                       <p class="mb-0">
                       Damkar</p>
                     </div>
                   </a>
                   <a href="#" class="list d-flex align-items-center border-bottom border-right py-3">
-                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/dishub.png" alt="image" style="background-color:white!important;">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/dishubb.png" alt="image" style="background-color:white!important;">
                     <div class="wrapper ml-3">
                       <p class="mb-0">
                       Dishub</p>
@@ -697,14 +698,14 @@
             <div class="col-md-4 pr-1">
               <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false">
-                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/korlantas.png" alt="image" style="background-color:white!important;">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/korlantas.png" alt="image" style="background-color:white!important;">
                     <div class="wrapper ml-3">
                       <p class="mb-0">
                       Korlantas</p>
                     </div>
                 </a>
                 <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
-                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/dishub.png" alt="image" style="background-color:white!important;">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/dishubb.png" alt="image" style="background-color:white!important;">
                     <div class="wrapper ml-3">
                       <p class="mb-0">
                       Dishub</p>
@@ -725,28 +726,28 @@
               <div class="col-md-4 pr-1">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                   <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-car-police-tab" data-toggle="pill" href="#v-car-police" role="tab" aria-controls="v-car-police" aria-selected="false">
-                      <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/polri.png" alt="image" style="background-color:white!important;">
+                      <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/polri.png" alt="image" style="background-color:white!important;">
                       <div class="wrapper ml-3">
                         <p class="mb-0">
                         Polisi</p>
                       </div>
                   </a>
                   <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-car-ambulan-tab" data-toggle="pill" href="#v-car-ambulan" role="tab" aria-controls="v-car-ambulan" aria-selected="false">
-                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/ambulan.png" alt="image" style="background-color:white!important;">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/ambulan.png" alt="image" style="background-color:white!important;">
                     <div class="wrapper ml-3">
                       <p class="mb-0">
                       Ambulance</p>
                     </div>
                   </a>
                   <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-car-damkar-tab" data-toggle="pill" href="#v-car-damkar" role="tab" aria-controls="v-car-damkar" aria-selected="false">
-                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/damkar.png" alt="image" style="background-color:white!important;">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/damkar.png" alt="image" style="background-color:white!important;">
                     <div class="wrapper ml-3">
                       <p class="mb-0">
                       Damkar</p>
                     </div>
                   </a>
                   <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-car-dishub-tab" data-toggle="pill" href="#v-car-dishub" role="tab" aria-controls="v-car-dishub" aria-selected="false">
-                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/dishub.png" alt="image" style="background-color:white!important;">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/dishubb.png" alt="image" style="background-color:white!important;">
                     <div class="wrapper ml-3">
                       <p class="mb-0">
                       Dishub</p>
@@ -775,7 +776,7 @@
                     </div>
                   </a>
                   <a href="#" class="list d-flex align-items-center border-bottom border-right py-3">
-                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/dishub.png" alt="image" style="background-color:white!important;">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>aronox/simulasi/dishubb.png" alt="image" style="background-color:white!important;">
                     <div class="wrapper ml-3">
                       <p class="mb-0">
                       Dishub</p>
