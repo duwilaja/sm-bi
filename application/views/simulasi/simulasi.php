@@ -623,13 +623,13 @@
       <div class="row">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
           <li class="nav-item" role="presentation">
-            <a class="nav-link active bg-primary icons text-white mx-1" id="pills-maps-tab" data-toggle="pill" href="#pills-maps" role="tab" aria-controls="pills-maps" aria-selected="false"><i class="fa fa-map-marker"></i></a>
+            <a class="nav-link active icons mx-1" id="pills-maps-tab" data-toggle="pill" href="#pills-maps" role="tab" aria-controls="pills-maps" aria-selected="false"><img src="<?=base_url()?>my/simulasi/location1.png" alt="" style="width:70px;"></a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link active bg-warning icons text-white mx-1" id="pills-cctv-tab" data-toggle="pill" href="#pills-cctv" role="tab" aria-controls="pills-cctv" aria-selected="false"><i class="fa fa-video-camera"></i></a>
+            <a class="nav-link active bg-warning icons text-white mx-1" id="pills-cctv-tab" data-toggle="pill" href="#pills-cctv" role="tab" aria-controls="pills-cctv" aria-selected="false"><img src="<?=base_url()?>my/simulasi/cctv1.png" alt="" style="width:70px;"></a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link active bg-success icons text-white mx-1" id="pills-car-tab" data-toggle="pill" href="#pills-car" role="tab" aria-controls="pills-car" aria-selected="false"><i class="fa fa-car"></i></a>
+            <a class="nav-link active bg-success icons text-white mx-1" id="pills-car-tab" data-toggle="pill" href="#pills-car" role="tab" aria-controls="pills-car" aria-selected="false"><img src="<?=base_url()?>my/simulasi/car1.png" alt="" style="width:70px;"></a>
           </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
