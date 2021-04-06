@@ -364,8 +364,8 @@
                                         <div class="tab_1 mt-3">
                                             <div id="exTab2">	
                                                 <ul class="nav nav-tabs">
-                                                    <li class="active"><a href="#polisi" data-toggle="tab" aria-expanded="true">Polisi</a></li>
-                                                    <li class=""><a href="#ambulan" data-toggle="tab" aria-expanded="false">Ambulan</a></li>
+                                                    <li class="active"><a href="#polisi" data-toggle="tab" aria-expanded="true">Pos Polisi</a></li>
+                                                    <li class=""><a href="#ambulan" data-toggle="tab" aria-expanded="false">Rumah Sakit</a></li>
                                                     <li class=""><a href="#dishub" data-toggle="tab" aria-expanded="false">Dishub</a></li>
                                                 </ul>
                                                 <div class="tab-content ">
