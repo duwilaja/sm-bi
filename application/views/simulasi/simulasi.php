@@ -681,19 +681,6 @@
                           <span class="">Kantor Polisi 3</span>
                       </div>
                     </div>
-                    <nav aria-label="" style="text-align:right!important;">
-                      <ul class="pagination pagination-sm">
-                        <li class="page-item disabled">
-                          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">&raquo;</a>
-                        </li>
-                      </ul>
-                    </nav>
                   </div>
                   <div class="tab-pane fade" id="v-maps-damkar" role="tabpanel" aria-labelledby="v-maps-damkar-tab">
                   <div class="ml-2 row mx-0" style="text-align:left!important;">
@@ -721,19 +708,6 @@
                           <span class="">CKantor Damkar3</span>
                       </div>
                     </div>
-                    <nav aria-label="" style="text-align:right!important;">
-                      <ul class="pagination pagination-sm">
-                        <li class="page-item disabled">
-                          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">&raquo;</a>
-                        </li>
-                      </ul>
-                    </nav>
                   </div>
                 </div>
               </div>
@@ -787,19 +761,6 @@
                           <span class="">CCTV Korlantas 3</span>
                       </div>
                     </div>
-                    <nav aria-label="" style="text-align:right!important;">
-                      <ul class="pagination pagination-sm">
-                        <li class="page-item disabled">
-                          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">&raquo;</a>
-                        </li>
-                      </ul>
-                    </nav>
                   </div>
                   <div class="tab-pane fade" id="v-cctv-dishub" role="tabpanel" aria-labelledby="v-cctv-dishub-tab">
                     <div class="ml-2 row mx-0" style="text-align:left!important;">
@@ -827,19 +788,6 @@
                           <span class="">CCTV Dishub 3</span>
                       </div>
                     </div>
-                    <nav aria-label="" style="text-align:right!important;">
-                      <ul class="pagination pagination-sm">
-                        <li class="page-item disabled">
-                          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">&raquo;</a>
-                        </li>
-                      </ul>
-                    </nav>
                   </div>
                 </div>
               </div>
