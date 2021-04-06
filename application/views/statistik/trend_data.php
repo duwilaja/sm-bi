@@ -1,4 +1,5 @@
 <div class="container">
+    <?php if($this->input->get('kode') == '') { ?>
     <div class="row">
         <div class="col-md-12">
             <p>
@@ -54,6 +55,8 @@
             </div>
         </div>
     </div>
+    <?php } ?>
+    
     <div class="card">
         <div class="card-header">Trend Data - Polrestabes Surakarta</div>
         <div class="card-body">
