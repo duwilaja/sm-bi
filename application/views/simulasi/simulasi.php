@@ -311,15 +311,54 @@ min-height: 40px;
   top: 100px;
   right: 0;
   z-index: 5;
-  /* background-color: #fff; */
-  padding: 5px;
   font-family: "Roboto", "sans-serif";
-  height: auto;
-  width: 50px;
-  border-radius:10px ;
-  /* line-height: 30px; */
-  /* padding-left: 10px; */
 }
+
+.button_wrap{
+    position: relative;
+    width: 200px;
+    height:40px;
+    overflow:hidden;
+    font-weight:bold;
+    font-size:11px;
+    margin:10px;
+}
+.button_aLeft{
+    width:40px;
+    height:40px;
+    -moz-border-radius:20px;
+	-webkit-border-radius:20px;
+    background-color:#fff;
+    color:black;
+    top:0px;
+    right:0px;
+    position:absolute;
+    line-height:36px;
+    text-align:left;
+}
+.button_aLeft span{
+    display:none;
+    padding-left:20px;
+}
+.button_bLeft{
+    width:40px;
+    /* height:30px; */
+    background-color:#fff;
+    -moz-border-radius:20px;
+	-webkit-border-radius:20px;
+    color:#000;
+    position:absolute;
+    top:0px;
+    right:0px;
+    text-transform:uppercase;
+    line-height:30px;
+    text-align:center;
+    cursor:pointer;
+}
+.button_bLeft span{
+    color:#008ddd;
+}
+
 
 </style>
 <body>
@@ -928,16 +967,46 @@ min-height: 40px;
         </div>
         <div class="tab-pane fade" id="pills-more" role="tabpanel" aria-labelledby="pills-more-tab">
           <div class="panel3">
-            <img src="<?=base_url()?>my/simulasi/vvip.png" alt="" class="mb-3">
-            <img src="<?=base_url()?>my/simulasi/blackspot.png" alt="" class="mb-3">
-            <img src="<?=base_url()?>my/simulasi/ambanggangguan.png" alt="" class="mb-3">
-            <img src="<?=base_url()?>my/simulasi/troublespot.png" alt="" class="mb-3">
-            <img src="<?=base_url()?>my/simulasi/trafficcounting.png" alt="" class="mb-3">
-            <img src="<?=base_url()?>my/simulasi/trafficcategory.png" alt="" class="mb-3">
-            <img src="<?=base_url()?>my/simulasi/avgspeed.png" alt="" class="mb-3">
-            <img src="<?=base_url()?>my/simulasi/lengthocc.png" alt="" class="mb-3">
-            <img src="<?=base_url()?>my/simulasi/facerecog.png" alt="" class="mb-3">
-            <img src="<?=base_url()?>my/simulasi/giatmasyarakat.png" alt="" class="mb-3">
+            <div class="button_wrap mb-3">
+              <a class="button_aLeft"><span>VVIP</span></a>
+              <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/vvip.png" alt=""></a>
+            </div>
+            <div class="button_wrap mb-3">
+              <a class="button_aLeft"><span>Blackspot</span></a>
+              <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/blackspot.png" alt=""></a>
+            </div>
+            <div class="button_wrap mb-3">
+              <a class="button_aLeft"><span>Trouble Spot</span></a>
+              <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/troublespot.png" alt=""></a>
+            </div>
+            <div class="button_wrap mb-3">
+              <a class="button_aLeft"><span>Ambang Gangguan</span></a>
+              <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/ambanggangguan.png" alt=""></a>
+            </div>
+            <div class="button_wrap mb-3">
+              <a class="button_aLeft"><span>Traffic Counting</span></a>
+              <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/trafficcounting.png" alt=""></a>
+            </div>
+            <div class="button_wrap mb-3">
+              <a class="button_aLeft"><span>Traffic Category</span></a>
+              <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/trafficcategory.png" alt=""></a>
+            </div>
+            <div class="button_wrap mb-3">
+              <a class="button_aLeft"><span>Average Speed</span></a>
+              <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/avgspeed.png" alt=""></a>
+            </div>
+            <div class="button_wrap mb-3">
+              <a class="button_aLeft"><span>Length Ocupantion</span></a>
+              <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/lengthocc.png" alt=""></a>
+            </div>
+            <div class="button_wrap mb-3">
+              <a class="button_aLeft"><span>Face Recognation</span></a>
+              <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/facerecog.png" alt=""></a>
+            </div>
+            <div class="button_wrap mb-3">
+              <a class="button_aLeft"><span>Giat Masyarakat</span></a>
+              <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/giatmasyarakat.png" alt=""></a>
+            </div>
           </div>
         </div>
     </div>
@@ -1092,6 +1161,26 @@ min-height: 40px;
           $('#nama4').html(nama);
           $('#ket4').html(ket);
       }
+
+      $(function() {
+        $('.slidebttn').hover(
+					function () {
+						var $this 		= $(this);
+						var $slidelem 	= $this.prev();
+						$slidelem.stop().animate({'width':'170px'},300);
+						$slidelem.find('span').stop(true,true).fadeIn();
+						$this.addClass('button_c');
+					},
+					function () {
+						var $this 		= $(this);
+						var $slidelem 	= $this.prev();
+						$slidelem.stop().animate({'width':'40px'},200);
+						$slidelem.find('span').stop(true,true).fadeOut();
+						$this.removeClass('button_c');
+					}
+				);
+      });
+
     </script>
   </body>
 </html>
