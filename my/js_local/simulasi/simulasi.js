@@ -2,6 +2,8 @@ var map;
 var markers=[];
 var i_polisi = 0;
 var i_ambulan = 0;
+var cctv_arr = [];
+var cctv_link = [];
 
 $(document).ready(function() {
   if (Notification.permission !== "granted")
@@ -503,7 +505,7 @@ function updateMarker(marker, latitude, longitude,color) {
   })
 }
       
-          //  set your counter to 1
+//  set your counter to 1
 function myLoop(arr_jalan,m,i1,color) { 
   setTimeout(function() {   //  call a 3s setTimeout when the loop is called
     i1++;                    //  increment the counter
@@ -574,43 +576,122 @@ function jalankan(x) {
   }
 }
 
-
 $(function(){
-  //make connection
-  // var socket = io.connect('http://localhost:3000')
+  // var socket = io.connect('http://36.91.103.46:3000')
 
-  var socket = io.connect('http://36.91.103.46:3000')
+  // var myCloseInfo = function(){
+  //   alert('this is a callback function that runs after close the notification.');
+  // };
 
-  var myCloseInfo = function(){
-  alert('this is a callback function that runs after close the notification.');
-  };
+  // //Listen on new_message
+  // socket.on("new_message", (data) => {
+  //   notifikasi(data.message);
+  // })
 
+  // function notifikasi(msg) {
+    
+  //   if (!Notification) {
+  //       alert('Browsermu tidak mendukung Web Notification.'); 
+  //       return;
+  //   }
 
-  //Listen on new_message
-  socket.on("new_message", (data) => {
-    notifikasi(data.message);
-  })
+  //   if (Notification.permission !== "granted")
+  //       Notification.requestPermission();
+  //   else 
+  //       var notifikasi = new Notification('Laporan Kecelakaan', {
+  //           icon: 'http://36.91.103.46/sm-bi/my/images/logo.png',
+  //           body: msg,
+  //       });
 
-  function notifikasi(msg) {
-    if (!Notification) {
-        alert('Browsermu tidak mendukung Web Notification.'); 
-        return;
-    }
-    if (Notification.permission !== "granted")
-        Notification.requestPermission();
-    else {
-        var notifikasi = new Notification('Laporan Kecelakaan', {
-            icon: 'http://36.91.103.46/sm-bi/my/images/logo.png',
-            body: msg,
-        });
-        notifikasi.onclick = function () {
-          crash('yes');
-          notifikasi.close();
-        };
-        setTimeout(function(){
-            notifikasi.close();
-        }, 5000);
-    }
-};
+  //       notifikasi.onclick = function () {
+  //         crash('yes');
+  //         notifikasi.close();
+  //       };
+
+  //       setTimeout(function(){
+  //           notifikasi.close();
+  //       }, 5000);
+  // };
 
 });
+
+
+// CCTV 
+
+function cctv(param='') { 
+  get_cctv();
+  setTimeout(() => {
+    list_cctv();
+  }, 500);
+}
+
+function create_cctv_map(arrx) { 
+  cctv_arr = [];
+  
+  arr = cctv_link;
+  if(arrx) arr = arrx; 
+  
+  for (let i = 0; i < arr.length; i++) {
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(arr[i].kordinat[0], arr[i].kordinat[1]),
+      map: map,
+      // icon:{
+      //   url : "../my/simulasi/dishub.png"
+      // }
+    });
+    cctv_arr.push(marker);
+  }
+  console.log(cctv_arr);
+}
+
+function list_cctv() { 
+  $('#list_cctv').html('');
+  setTimeout(() => {
+    var no = 0;
+    cctv_link.forEach(e => {
+      $('#list_cctv').append(`<div class="list-group-item list-group-item-action">
+        <input type="checkbox" class="mr-2 check-cctv-korlantas" onchange="check_cctv()" name="cctv[]" value="${no++}">
+        <span class="name_cctv">${e.nama} </span></div>`);
+    });
+  }, 300);
+}
+
+function check_cctv() { 
+  var check_cctv = [];
+  setTimeout(() => {
+    $('input[name="cctv[]"]:checked').each(function() {
+      check_cctv.push(cctv_link[this.value]);
+    });
+    setTimeout(() => {
+      clearMarkerCctv()
+      setTimeout(() => {
+        cctv = check_cctv;
+        create_cctv_map(cctv);
+      }, 200);
+    }, 500);
+    console.log('cek bro');
+    console.log(check_cctv);
+  }, 500);
+}
+
+function get_cctv(s='',item='') { 
+  $.ajax({
+    type: "POST",
+    url: "get_cctv",
+    dataType: "json",
+    data : {
+      a : item
+    },
+    success: function (r) {
+      cctv_link = r;
+    }
+  });
+}
+
+function clearMarkerCctv(arr) {
+  if (cctv_arr) {
+    for (let i = 0; i < cctv_arr.length; i++) {
+      cctv_arr[i].setMap(null);
+    }
+  }
+}
