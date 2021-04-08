@@ -370,7 +370,7 @@
     top: 100px;
     left: 0px;
     height: 25px;
-    width: 45px;
+    width: 65px;
     text-align: center;
     background: #fff;
     border-radius: 3px;
@@ -385,12 +385,12 @@
     left: 698px;
     z-index: 5;
   }
-  .btn-slider span{
+  .btn-slider i{
     color: black;
     font-size: 20px;
     line-height: 25px;
   }
-  .btn-slider.click span:before{
+  .btn-slider.click i:before{
     content: '\f100';
     z-index: 5;
   }
@@ -749,20 +749,63 @@
       <span>Index <i class="fa fa-angle-double-right"></i><span>
     </div> -->
     <div class="btn-slider">
-      <span class="fa fa-angle-double-right"></span>
+      <span style="font-size: 15px;">Index <i class="fa fa-angle-double-right"></i></span>
     </div>
     <div class="sidebar">
       <div class="mx-5 my-5">
         <h4>Index</h4>
-        <div class="d-blok border-bottom pb-3">
-          <a href="" class="btn btn-primary mb-2">Trend Data</a>
-          <a href="" class="btn btn-primary mb-2">Case Fatality Rate</a>
-          <a href="" class="btn btn-primary mb-2">Fatality Index</a>
-          <a href="" class="btn btn-primary mb-2">Index Kinerja</a>
-          <a href="" class="btn btn-primary mb-2">Index Ketertiban</a>
-          <a href="" class="btn btn-primary mb-2">Index Kecelakaan</a>
-          <a href="" class="btn btn-primary mb-2">Index Keamanan</a>
-          <a href="" class="btn btn-primary mb-2">Index Keselamatan</a>
+        <div class="border-bottom pb-3">
+          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="trend-data-tab" data-toggle="pill" href="#trend-data" role="tab" aria-controls="trend-data" aria-selected="false">Trend Data</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="case-fatality-rate-tab" data-toggle="pill" href="#case-fatality-rate" role="tab" aria-controls="case-fatality-rate" aria-selected="false">Case Fatality Rate</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="fatality-index-tab" data-toggle="pill" href="#fatality-index" role="tab" aria-controls="fatality-index" aria-selected="false">Fatality Index</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="index-kinerja-tab" data-toggle="pill" href="#index-kinerja" role="tab" aria-controls="index-kinerja" aria-selected="false">Index Kinerja</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Index Ketertiban</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Index Kecelakaan</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Index Keamanan</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Index Keselamatan</a>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade" id="trend-data" role="tabpanel" aria-labelledby="trend-data-tab">
+            <canvas id="td" width="400" height="400"></canvas>
+          </div>
+          <div class="tab-pane fade" id="case-fatality-rate" role="tabpanel" aria-labelledby="case-fatality-rate-tab">
+            <canvas id="cfr" width="400" height="400"></canvas>
+          </div>
+          <div class="tab-pane fade" id="fatality-index" role="tabpanel" aria-labelledby="fatality-index-tab">
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade" id="fi-1" role="tabpanel" aria-labelledby="fi-1-tab">...</div>
+              <div class="tab-pane fade" id="fi-2" role="tabpanel" aria-labelledby="fi-2-tab">...</div>
+            </div>
+            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="fi-1-tab" data-toggle="pill" href="#fi-1" role="tab" aria-controls="fi-1" aria-selected="false">Fatality Index-Polrestabes Surakarta</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="fi-2-tab" data-toggle="pill" href="#fi-2" role="tab" aria-controls="fi-2" aria-selected="false">Indeks Fatalitas per Provinsi</a>
+              </li>
+            </ul>
+          </div>
+          <div class="tab-pane fade" id="index-kinerja" role="tabpanel" aria-labelledby="index-kinerja-tab">
+            <canvas id="ikc" width="400" height="400"></canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -1095,6 +1138,26 @@
 	  <script src="<?= base_url('my/vendor/owl/owl.carousel.min.js')?>"></script>
     <script src="<?= base_url()?>aronox/assets/js/popover.js"></script>
     <script src="<?=base_url('my/js_local/simulasi/simulasi.js')?>"></script>
+
+    <!--Othercharts js-->
+    <script src="<?= base_url();?>aronox/assets/plugins/othercharts/jquery.sparkline.min.js"></script>
+
+    <!-- Peitychart js-->
+    <script src="<?= base_url();?>aronox/assets/plugins/peitychart/jquery.peity.min.js"></script>
+
+    <script src="<?= base_url();?>aronox/assets/plugins/charts-c3/d3.v5.min.js"></script>
+		<script src="<?= base_url();?>aronox/assets/plugins/charts-c3/c3-chart.js"></script>
+
+    <script src="<?= base_url();?>my/vendor/chart.js/Chart.min.js"></script>
+
+    <script src="<?= base_url();?>aronox/assets/plugins/echarts/echarts.js"></script>
+
+    <script src="<?= base_url();?>aronox/assets/js/apexcharts.js"></script>
+							
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
+    <script src="<?=base_url('my/js_local/simulasi/statistik.js')?>"></script>
     <script>
       $(function(){
             // Enables popover
