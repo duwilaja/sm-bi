@@ -140,6 +140,14 @@
         border-radius: 2px;
         text-align: center
     }
+
+    #list_cctv{
+      margin: 5px;
+      padding: 5px;
+      height: 300px;
+      font-size: 12px;
+      overflow: auto;
+    }
     
     /*******************************
     * MODAL AS LEFT/RIGHT SIDEBAR
@@ -667,7 +675,7 @@
                         <button class="btn btn-secondary" type="button"><i class="fe fe-search"></i></button>
                       </span>
                     </div>
-                    <div class="mt-2 text-left pt-2 border-top">
+                    <div class="mt-2 text-left pt-2 border-top" id="">
                       <div class="list-group-item list-group-item-action">
                           <input type="checkbox" class="mr-2 check-maps-polisi" name="">
                           <span class="">Kantor Polisi 1</span>
@@ -717,7 +725,7 @@
             <div class="row">
               <div class="col-md-4 pr-1">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-cctv-korlantas-tab" data-toggle="pill" href="#v-cctv-korlantas" role="tab" aria-controls="v-cctv-korlantas" aria-selected="false">
+                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-cctv-korlantas-tab" onclick="cctv()" data-toggle="pill" href="#v-cctv-korlantas" role="tab" aria-controls="v-cctv-korlantas" aria-selected="false">
                       <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/korlantas.png" alt="image" style="background-color:white!important;">
                       <div class="wrapper ml-3">
                         <p class="mb-0">
@@ -738,7 +746,7 @@
                   <div class="tab-pane fade" id="v-cctv-korlantas" role="tabpanel" aria-labelledby="v-cctv-korlantas-tab">
                     <div class="ml-2 row mx-0" style="text-align:left!important;">
                       <div class="col-3">
-                        <input type="checkbox" name="" id="select_all_cctv_korlantas"><span class="ml-3">All</span>
+                        <input type="checkbox" name="" id="select_all_cctv_korlantas" onchange="check_cctv()"><span class="ml-3">All</span>
                       </div>
                       <div class="col">
                         <input type="text" class="form-control" placeholder="">
@@ -747,19 +755,8 @@
                         <button class="btn btn-secondary" type="button"><i class="fe fe-search"></i></button>
                       </span>
                     </div>
-                    <div class="mt-2 text-left pt-2 border-top">
-                      <div class="list-group-item list-group-item-action">
-                          <input type="checkbox" class="mr-2 check-cctv-korlantas" name="">
-                          <span class="">CCTV Korlantas 1</span>
-                      </div>
-                      <div class="list-group-item list-group-item-action">
-                          <input type="checkbox" class="mr-2 check-cctv-korlantas" name="">
-                          <span class="">CCTV Korlantas 2</span>
-                      </div>
-                      <div class="list-group-item list-group-item-action">
-                          <input type="checkbox" class="mr-2 check-cctv-korlantas" name="">
-                          <span class="">CCTV Korlantas 3</span>
-                      </div>
+                    <div class="mt-2 text-left pt-2 border-top" id="list_cctv">
+                      
                     </div>
                   </div>
                   <div class="tab-pane fade" id="v-cctv-dishub" role="tabpanel" aria-labelledby="v-cctv-dishub-tab">
