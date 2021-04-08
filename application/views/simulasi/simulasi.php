@@ -163,7 +163,7 @@
     font-size: 12px;
     overflow: auto;
   }
-  
+
   /*******************************
   * MODAL AS LEFT/RIGHT SIDEBAR
   * Add "left" or "right" in modal parent div, after class="modal".
@@ -276,89 +276,133 @@
   align-items: center;
   justify-content: center;
   font-size:15px!important;
-}
+  }
 
-a:link {
-  text-decoration:none!important;
-}
+  a:link {
+    text-decoration:none!important;
+  }
 
-iframe {
-height: 100%;
-min-height: 40px;
-}
+  iframe {
+  height: 100%;
+  min-height: 40px;
+  }
 
-.popover {
-  max-width: 400px;
-}
+  .popover {
+    max-width: 400px;
+  }
 
-.panel2 {
-  position: absolute;
-  top: 100px;
-  right: 0;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  font-family: "Roboto", "sans-serif";
-  height: auto;
-  width: 380px;
-  border-radius:10px ;
-  /* line-height: 30px; */
-  /* padding-left: 10px; */
-}
+  .panel2 {
+    position: absolute;
+    top: 100px;
+    right: 0;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    font-family: "Roboto", "sans-serif";
+    height: auto;
+    width: 380px;
+    border-radius:10px ;
+    /* line-height: 30px; */
+    /* padding-left: 10px; */
+  }
 
-.panel3 {
-  position: absolute;
-  top: 100px;
-  right: 0;
-  z-index: 5;
-  font-family: "Roboto", "sans-serif";
-}
+  .panel3 {
+    position: absolute;
+    top: 100px;
+    right: 0;
+    z-index: 5;
+    font-family: "Roboto", "sans-serif";
+  }
 
-.button_wrap{
-    position: relative;
-    width: 200px;
-    height:40px;
-    overflow:hidden;
-    font-weight:bold;
-    font-size:11px;
-    margin:10px;
-}
-.button_aLeft{
-    width:40px;
-    height:40px;
-    -moz-border-radius:20px;
-	-webkit-border-radius:20px;
-    background-color:#fff;
-    color:black;
-    top:0px;
-    right:0px;
-    position:absolute;
-    line-height:36px;
-    text-align:left;
-}
-.button_aLeft span{
-    display:none;
-    padding-left:20px;
-}
-.button_bLeft{
-    width:40px;
-    /* height:30px; */
-    background-color:#fff;
-    -moz-border-radius:20px;
-	-webkit-border-radius:20px;
-    color:#000;
-    position:absolute;
-    top:0px;
-    right:0px;
-    text-transform:uppercase;
-    line-height:30px;
-    text-align:center;
-    cursor:pointer;
-}
-.button_bLeft span{
-    color:#008ddd;
-}
+  .button_wrap{
+      position: relative;
+      width: 200px;
+      height:40px;
+      overflow:hidden;
+      font-weight:bold;
+      font-size:11px;
+      margin:10px;
+  }
+  .button_aLeft{
+      width:40px;
+      height:40px;
+      -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+      background-color:#fff;
+      color:black;
+      top:0px;
+      right:0px;
+      position:absolute;
+      line-height:36px;
+      text-align:left;
+  }
+  .button_aLeft span{
+      display:none;
+      padding-left:20px;
+  }
+  .button_bLeft{
+      width:40px;
+      /* height:30px; */
+      background-color:#fff;
+      -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+      color:#000;
+      position:absolute;
+      top:0px;
+      right:0px;
+      text-transform:uppercase;
+      line-height:30px;
+      text-align:center;
+      cursor:pointer;
+  }
+  .button_bLeft span{
+      color:#008ddd;
+  }
 
+  .btn-slider{
+    position: absolute;
+    top: 100px;
+    left: 0px;
+    height: 25px;
+    width: 45px;
+    text-align: center;
+    background: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: left 0.4s ease;
+    z-index: 5;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    opacity:0.9;
+  }
+  .btn-slider.click{
+    left: 698px;
+    z-index: 5;
+  }
+  .btn-slider span{
+    color: black;
+    font-size: 20px;
+    line-height: 25px;
+  }
+  .btn-slider.click span:before{
+    content: '\f100';
+    z-index: 5;
+  }
+  .sidebar{
+    position: fixed;
+    width: 700px;
+    height: 100%;
+    top:100px;
+    left: -700px;
+    background: #fff;
+    transition: left 0.4s ease;
+    z-index: 5;
+    opacity:0.9;
+  }
+  .sidebar.show{
+    left: 0px;
+    top: 100px;
+  }
 
 </style>
 <body>
@@ -695,8 +739,26 @@ min-height: 40px;
     <!-- <div id="floating-panel">
         <input type="button" value="Auto Rotate" onclick="autoRotate();" />
     </div> -->
-    <div class="menus">
+    <!-- <div class="menus">
       <span>Index <i class="fa fa-angle-double-right"></i><span>
+    </div> -->
+    <div class="btn-slider">
+      <span class="fa fa-angle-double-right"></span>
+    </div>
+    <div class="sidebar">
+      <div class="mx-5 my-5">
+        <h4>Index</h4>
+        <div class="d-blok border-bottom pb-3">
+          <a href="" class="btn btn-primary mb-2">Trend Data</a>
+          <a href="" class="btn btn-primary mb-2">Case Fatality Rate</a>
+          <a href="" class="btn btn-primary mb-2">Fatality Index</a>
+          <a href="" class="btn btn-primary mb-2">Index Kinerja</a>
+          <a href="" class="btn btn-primary mb-2">Index Ketertiban</a>
+          <a href="" class="btn btn-primary mb-2">Index Kecelakaan</a>
+          <a href="" class="btn btn-primary mb-2">Index Keamanan</a>
+          <a href="" class="btn btn-primary mb-2">Index Keselamatan</a>
+        </div>
+      </div>
     </div>
     <div id="map"></div>
     <div class="floating-panel">
@@ -1179,6 +1241,11 @@ min-height: 40px;
 						$this.removeClass('button_c');
 					}
 				);
+      });
+
+      $('.btn-slider').click(function(){
+        $(this).toggleClass("click");
+        $('.sidebar').toggleClass("show");
       });
 
     </script>
