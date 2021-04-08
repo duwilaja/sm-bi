@@ -72,225 +72,255 @@
     <!-- jsFiddle will insert css and js -->
 </head>
 <style>
-    /* Always set the map height explicitly to define the size of the div
-    * element that contains the map. */
-    #map {
-        height: 100%;
-    }
-    
-    /* Optional: Makes the sample page fill the window. */
-    html,
-    body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    .img-circle {
-        border-radius: 50%;
-    }
-    .c-abu{
-        color:#CCC;
-    }
-    .list-rwy{
-        font-size: 12px;
-    }
-    .floating-panel {
-        position: absolute;
-        top: 10px;
-        right: 80px;
-        z-index: 5;
-        /* background-color: #fff; */
-        padding: 5px;
-        text-align: center;
-        font-family: "Roboto", "sans-serif";
-        opacity: 0.9;
-        /* line-height: 30px; */
-        /* padding-left: 10px; */
-    }
-    
-    .panel2 {
-        position: absolute;
-        top: 100px;
-        right: 0;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        font-family: "Roboto", "sans-serif";
-        height: 100%;
-        width: 100%;
-        /* line-height: 30px; */
-        /* padding-left: 10px; */
-    }
-    
-    .icons {
-        display: inline-flex!important;
-        width: 70px;
-        height: 70px;
-        text-align: center;
-        border-radius: 50% !important;
-        align-items: center;
-        justify-content: center;
-        font-size:30px!important;
-    }
-    
-    .info-jarak{
-        background: aliceblue;
-        font-size: 12px;
-        padding: 3px;
-        border-radius: 2px;
-        text-align: center
-    }
-
-    #list_cctv{
-      margin: 5px;
-      padding: 5px;
-      height: 300px;
+  /* Always set the map height explicitly to define the size of the div
+  * element that contains the map. */
+  #map {
+      height: 100%;
+  }
+  
+  /* Optional: Makes the sample page fill the window. */
+  html,
+  body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+  }
+  .img-circle {
+      border-radius: 50%;
+  }
+  .c-abu{
+      color:#CCC;
+  }
+  .list-rwy{
       font-size: 12px;
-      overflow: auto;
-    }
-    
-    /*******************************
-    * MODAL AS LEFT/RIGHT SIDEBAR
-    * Add "left" or "right" in modal parent div, after class="modal".
-    * Get free snippets on bootpen.com
-    *******************************/
-    .modal-left.left .modal-dialog,
-    .modal-left.right .modal-dialog {
-        position: fixed;
-        margin: auto;
-        width: 320px;
-        height: 100%;
-        -webkit-transform: translate3d(0%, 0, 0);
-        -ms-transform: translate3d(0%, 0, 0);
-        -o-transform: translate3d(0%, 0, 0);
-        transform: translate3d(0%, 0, 0);
-    }
-    
-    .modal-left.left .modal-content,
-    .modal-left.right .modal-content {
-        height: 100%;
-        overflow-y: auto;
-    }
-    
-    .modal-left.left .modal-body,
-    .modal-left.right .modal-body {
-        padding: 15px 15px 80px;
-    }
-    
-    /*Left*/
-    .modal-left.left.fade .modal-dialog{
-        left: -320px;
-        -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
-        -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
-        -o-transition: opacity 0.3s linear, left 0.3s ease-out;
-        transition: opacity 0.3s linear, left 0.3s ease-out;
-    }
-    
-    .modal-left.left.fade.in .modal-dialog{
-        left: 0;
-    }
-    
-    /*Right*/
-    .modal-left.right.fade .modal-dialog {
-        right: -320px;
-        -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
-        -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
-        -o-transition: opacity 0.3s linear, right 0.3s ease-out;
-        transition: opacity 0.3s linear, right 0.3s ease-out;
-    }
-    
-    .modal-left.right.fade.in .modal-dialog {
-        right: 0;
-    }
-    
-    /* ----- MODAL STYLE ----- */
-    .modal-content {
-        border-radius: 0;
-        border: none;
-    }
-    
-    .modal-header {
-        border-bottom-color: #EEEEEE;
-        background-color: #FAFAFA;
-    }
-    
-    .btn-demo {
-        margin: 15px;
-        padding: 10px 15px;
-        border-radius: 0;
-        font-size: 16px;
-        background-color: #FFFFFF;
-    }
-    
-    .btn-demo:focus {
-        outline: 0;
-    }
-    
-    .demo-footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        padding: 15px;
-        background-color: #212121;
-        text-align: center;
-    }
-    
-    .demo-footer > a {
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 16px;
-        color: #fff;
-    }
-
-    .txt-status{
-        border: solid 1px #9e9e9e;
-        padding: 2px 6px;
-        border-radius: 3px;
-        display: inline-flex;
-        font-size: 10px;
-        color: #9e9e9e;
-        margin: 5px 0px;
-    }
-
-    .iconss {
-    display: inline-flex!important;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    border-radius: 50% !important;
-    align-items: center;
-    justify-content: center;
-    font-size:15px!important;
+  }
+  .floating-panel {
+      position: absolute;
+      top: 10px;
+      right: 80px;
+      z-index: 5;
+      /* background-color: #fff; */
+      padding: 5px;
+      text-align: center;
+      font-family: "Roboto", "sans-serif";
+      opacity: 0.9;
+      /* line-height: 30px; */
+      /* padding-left: 10px; */
   }
 
-  a:link {
-    text-decoration:none!important;
+  .menus {
+      position: absolute;
+      top: 100px;
+      z-index: 5;
+      background-color: #fff;
+      padding: 5px;
+      text-align: center;
+      font-family: "Roboto", "sans-serif";
+      opacity: 0.9;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      /* line-height: 30px; */
+      /* padding-left: 10px; */
+  }
+  
+  .panel2 {
+      position: absolute;
+      top: 100px;
+      right: 0;
+      z-index: 5;
+      background-color: #fff;
+      padding: 5px;
+      font-family: "Roboto", "sans-serif";
+      height: 100%;
+      width: 100%;
+      /* line-height: 30px; */
+      /* padding-left: 10px; */
+  }
+  
+  .icons {
+      display: inline-flex!important;
+      width: 70px;
+      height: 70px;
+      text-align: center;
+      border-radius: 50% !important;
+      align-items: center;
+      justify-content: center;
+      font-size:30px!important;
+  }
+  
+  .info-jarak{
+      background: aliceblue;
+      font-size: 12px;
+      padding: 3px;
+      border-radius: 2px;
+      text-align: center
   }
 
-  iframe {
-	height: 100%;
-	min-height: 40px;
+  #list_cctv{
+    margin: 5px;
+    padding: 5px;
+    height: 300px;
+    font-size: 12px;
+    overflow: auto;
+  }
+  
+  /*******************************
+  * MODAL AS LEFT/RIGHT SIDEBAR
+  * Add "left" or "right" in modal parent div, after class="modal".
+  * Get free snippets on bootpen.com
+  *******************************/
+  .modal-left.left .modal-dialog,
+  .modal-left.right .modal-dialog {
+      position: fixed;
+      margin: auto;
+      width: 320px;
+      height: 100%;
+      -webkit-transform: translate3d(0%, 0, 0);
+      -ms-transform: translate3d(0%, 0, 0);
+      -o-transform: translate3d(0%, 0, 0);
+      transform: translate3d(0%, 0, 0);
+  }
+  
+  .modal-left.left .modal-content,
+  .modal-left.right .modal-content {
+      height: 100%;
+      overflow-y: auto;
+  }
+  
+  .modal-left.left .modal-body,
+  .modal-left.right .modal-body {
+      padding: 15px 15px 80px;
+  }
+  
+  /*Left*/
+  .modal-left.left.fade .modal-dialog{
+      left: -320px;
+      -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+      -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+      -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+      transition: opacity 0.3s linear, left 0.3s ease-out;
+  }
+  
+  .modal-left.left.fade.in .modal-dialog{
+      left: 0;
+  }
+  
+  /*Right*/
+  .modal-left.right.fade .modal-dialog {
+      right: -320px;
+      -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+      -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+      -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+      transition: opacity 0.3s linear, right 0.3s ease-out;
+  }
+  
+  .modal-left.right.fade.in .modal-dialog {
+      right: 0;
+  }
+  
+  /* ----- MODAL STYLE ----- */
+  .modal-content {
+      border-radius: 0;
+      border: none;
+  }
+  
+  .modal-header {
+      border-bottom-color: #EEEEEE;
+      background-color: #FAFAFA;
+  }
+  
+  .btn-demo {
+      margin: 15px;
+      padding: 10px 15px;
+      border-radius: 0;
+      font-size: 16px;
+      background-color: #FFFFFF;
+  }
+  
+  .btn-demo:focus {
+      outline: 0;
+  }
+  
+  .demo-footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      padding: 15px;
+      background-color: #212121;
+      text-align: center;
+  }
+  
+  .demo-footer > a {
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      color: #fff;
+  }
+
+  .txt-status{
+      border: solid 1px #9e9e9e;
+      padding: 2px 6px;
+      border-radius: 3px;
+      display: inline-flex;
+      font-size: 10px;
+      color: #9e9e9e;
+      margin: 5px 0px;
+  }
+
+  .iconss {
+  display: inline-flex!important;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border-radius: 50% !important;
+  align-items: center;
+  justify-content: center;
+  font-size:15px!important;
+}
+
+a:link {
+  text-decoration:none!important;
+}
+
+iframe {
+height: 100%;
+min-height: 40px;
 }
 
 .popover {
-    max-width: 400px;
+  max-width: 400px;
 }
 
 .panel2 {
-    position: absolute;
-    top: 100px;
-    right: 0;
-    z-index: 5;
-    background-color: #fff;
-    padding: 5px;
-    font-family: "Roboto", "sans-serif";
-    height: auto;
-    width: 180%;
-    border-radius:10px ;
-    /* line-height: 30px; */
-    /* padding-left: 10px; */
-  }
-  
+  position: absolute;
+  top: 100px;
+  right: 0;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  font-family: "Roboto", "sans-serif";
+  height: auto;
+  width: 380px;
+  border-radius:10px ;
+  /* line-height: 30px; */
+  /* padding-left: 10px; */
+}
+
+.panel3 {
+  position: absolute;
+  top: 100px;
+  right: 0;
+  z-index: 5;
+  /* background-color: #fff; */
+  padding: 5px;
+  font-family: "Roboto", "sans-serif";
+  height: auto;
+  width: 50px;
+  border-radius:10px ;
+  /* line-height: 30px; */
+  /* padding-left: 10px; */
+}
+
 </style>
 <body>
 
@@ -626,6 +656,9 @@
     <!-- <div id="floating-panel">
         <input type="button" value="Auto Rotate" onclick="autoRotate();" />
     </div> -->
+    <div class="menus">
+      <span>Index <i class="fa fa-angle-double-right"></i><span>
+    </div>
     <div id="map"></div>
     <div class="floating-panel">
       <div class="row">
@@ -638,6 +671,9 @@
           </li>
           <li class="nav-item" role="presentation">
             <a class="nav-link active bg-success icons text-white mx-1" id="pills-car-tab" data-toggle="pill" href="#pills-car" role="tab" aria-controls="pills-car" aria-selected="false"><img src="<?=base_url()?>my/simulasi/car1.png" alt="" style="width:70px;"></a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active icons text-white mx-1" id="pills-more-tab" data-toggle="pill" href="#pills-more" role="tab" aria-controls="pills-more" aria-selected="false"><img src="<?=base_url()?>my/simulasi/more.png" alt="" style="width:70px;"></a>
           </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
@@ -886,10 +922,23 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                  
+                </div> 
               </div>
             </div>
+        </div>
+        <div class="tab-pane fade" id="pills-more" role="tabpanel" aria-labelledby="pills-more-tab">
+          <div class="panel3">
+            <img src="<?=base_url()?>my/simulasi/vvip.png" alt="" class="mb-3">
+            <img src="<?=base_url()?>my/simulasi/blackspot.png" alt="" class="mb-3">
+            <img src="<?=base_url()?>my/simulasi/ambanggangguan.png" alt="" class="mb-3">
+            <img src="<?=base_url()?>my/simulasi/troublespot.png" alt="" class="mb-3">
+            <img src="<?=base_url()?>my/simulasi/trafficcounting.png" alt="" class="mb-3">
+            <img src="<?=base_url()?>my/simulasi/trafficcategory.png" alt="" class="mb-3">
+            <img src="<?=base_url()?>my/simulasi/avgspeed.png" alt="" class="mb-3">
+            <img src="<?=base_url()?>my/simulasi/lengthocc.png" alt="" class="mb-3">
+            <img src="<?=base_url()?>my/simulasi/facerecog.png" alt="" class="mb-3">
+            <img src="<?=base_url()?>my/simulasi/giatmasyarakat.png" alt="" class="mb-3">
+          </div>
         </div>
     </div>
     
