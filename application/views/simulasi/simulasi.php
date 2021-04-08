@@ -746,7 +746,7 @@
                   <div class="tab-pane fade" id="v-cctv-korlantas" role="tabpanel" aria-labelledby="v-cctv-korlantas-tab">
                     <div class="ml-2 row mx-0" style="text-align:left!important;">
                       <div class="col-3">
-                        <input type="checkbox" name="" id="select_all_cctv_korlantas" onchange="check_cctv()"><span class="ml-3">All</span>
+                        <input type="checkbox"  id="select_all_cctv_korlantas" onchange="check_cctv()"><span class="ml-3">All</span>
                       </div>
                       <div class="col">
                         <input type="text" class="form-control" placeholder="">
@@ -756,7 +756,6 @@
                       </span>
                     </div>
                     <div class="mt-2 text-left pt-2 border-top" id="list_cctv">
-                      
                     </div>
                   </div>
                   <div class="tab-pane fade" id="v-cctv-dishub" role="tabpanel" aria-labelledby="v-cctv-dishub-tab">
