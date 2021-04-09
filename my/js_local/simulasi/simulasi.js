@@ -583,41 +583,41 @@ function updateMarker(marker, latitude, longitude,color) {
     }
     
     $(function(){
-      // var socket = io.connect('http://36.91.103.46:3000')
+      var socket = io.connect('http://36.91.103.46:3000')
       
-      // var myCloseInfo = function(){
-      //   alert('this is a callback function that runs after close the notification.');
-      // };
+      var myCloseInfo = function(){
+        alert('this is a callback function that runs after close the notification.');
+      };
       
-      // //Listen on new_message
-      // socket.on("new_message", (data) => {
-      //   notifikasi(data.message);
-      // })
+      //Listen on new_message
+      socket.on("new_message", (data) => {
+        notifikasi(data.message);
+      })
       
-      // function notifikasi(msg) {
+      function notifikasi(msg) {
       
-      //   if (!Notification) {
-      //       alert('Browsermu tidak mendukung Web Notification.'); 
-      //       return;
-      //   }
+        if (!Notification) {
+            alert('Browsermu tidak mendukung Web Notification.'); 
+            return;
+        }
       
-      //   if (Notification.permission !== "granted")
-      //       Notification.requestPermission();
-      //   else 
-      //       var notifikasi = new Notification('Laporan Kecelakaan', {
-      //           icon: 'http://36.91.103.46/sm-bi/my/images/logo.png',
-      //           body: msg,
-      //       });
+        if (Notification.permission !== "granted")
+            Notification.requestPermission();
+        else 
+            var notifikasi = new Notification('Laporan Kecelakaan', {
+                icon: 'http://36.91.103.46/sm-bi/my/images/logo.png',
+                body: msg,
+            });
       
-      //       notifikasi.onclick = function () {
-      //         crash('yes');
-      //         notifikasi.close();
-      //       };
+            notifikasi.onclick = function () {
+              crash('yes');
+              notifikasi.close();
+            };
       
-      //       setTimeout(function(){
-      //           notifikasi.close();
-      //       }, 5000);
-      // };
+            setTimeout(function(){
+                notifikasi.close();
+            }, 5000);
+      };
       
     });
     
@@ -625,10 +625,9 @@ function updateMarker(marker, latitude, longitude,color) {
     // CCTV 
     
     function cctv(param='') { 
-      get_cctv();
-      setTimeout(() => {
+      prom_get_cctv().then(function(data) {
         list_cctv();
-      }, 500);
+      });
     }
     
     function create_cctv_map(arrx,item,icon) { 
@@ -964,6 +963,23 @@ function updateMarker(marker, latitude, longitude,color) {
         }
       });
     }
+
+    function prom_get_cctv(s='',item='') { 
+      return new Promise(function(resolve, reject) {
+        $.ajax({
+          type: "POST",
+          url: "get_cctv",
+          dataType: "json",
+          data : {
+            a : item
+          },
+          success: function (r) {
+            cctv_link = r;
+            resolve(cctv_arr);
+          }
+        });
+      })
+    }
     
     function clearMarkerCctv(arr) {
       if (cctv_arr) {
@@ -986,7 +1002,9 @@ function updateMarker(marker, latitude, longitude,color) {
         };
         if (item == 'cctv' && (item2 == 'traffic_counting' || item2 == 'traffic_category' || item2 == 'average_speed' || item2 == 'length_ocupantion')) {
     
-          get_cctv('CCTV',item2);
+          prom_get_cctv('CCTV',item2).then(function(data) {
+            // list_cctv();
+          });
           
           label = item2;
           
