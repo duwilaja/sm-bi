@@ -166,8 +166,6 @@ class MData_analytic extends CI_Model {
         $date->modify('-1 day');
         $d = $date->format('Y-m-d');
 
-       
-
         $this->db->where('channel_id', $arr['channel_id']);
 
         if (!empty($arr['filter']) && $arr['filter']  == "today") {
@@ -393,7 +391,6 @@ class MData_analytic extends CI_Model {
     }
 
     // Traffic Category
-
     public function get_traffic_category($arr=[])
     {
         if (isset($arr['cctv_id'])) {
@@ -427,10 +424,9 @@ class MData_analytic extends CI_Model {
         $jml = [];
 
         if (isset($arr['cctv_id'])) {
-            $cctv =  $this->db->get_where('cctv', ['id' => $arr['cctv_id']]);
-            $arr['channel_id'] = $cctv->row()->channel_id;
-         }
-
+          $cctv =  $this->db->get_where('cctv', ['id' => $arr['cctv_id']]);
+          $arr['channel_id'] = $cctv->row()->channel_id;
+        }
 
         $this->db->where('channel_id', $arr['channel_id']);
         $arr['ctddate'] = !empty($arr['ctddate']) && $arr['ctddate'] != ''  ? $arr['ctddate'] : $arr['ctddate'] = date('Y-m-d');

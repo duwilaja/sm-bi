@@ -267,6 +267,12 @@
       margin: 5px 0px;
   }
 
+  .my-custom-class-for-label {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+  
   .iconss {
   display: inline-flex!important;
   width: 30px;
@@ -1169,35 +1175,35 @@
         </div>
         <div class="tab-pane fade" id="pills-more" role="tabpanel" aria-labelledby="pills-more-tab">
           <div class="panel3">
-            <div class="button_wrap mb-3">
+            <div class="button_wrap mb-3" onclick="show_titik('vvip')">
               <a class="button_aLeft"><span>VVIP</span></a>
               <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/vvip.png" alt=""></a>
             </div>
-            <div class="button_wrap mb-3">
+            <div class="button_wrap mb-3" onclick="show_titik('black_spot')">
               <a class="button_aLeft"><span>Blackspot</span></a>
               <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/blackspot.png" alt=""></a>
             </div>
-            <div class="button_wrap mb-3">
+            <div class="button_wrap mb-3" onclick="show_titik('trouble_spot')">
               <a class="button_aLeft"><span>Trouble Spot</span></a>
               <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/troublespot.png" alt=""></a>
             </div>
-            <div class="button_wrap mb-3">
+            <div class="button_wrap mb-3" onclick="show_titik('ambang_gangguan')">
               <a class="button_aLeft"><span>Ambang Gangguan</span></a>
               <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/ambanggangguan.png" alt=""></a>
             </div>
-            <div class="button_wrap mb-3">
+            <div class="button_wrap mb-3" onclick="show_titik('cctv','traffic_counting')">
               <a class="button_aLeft"><span>Traffic Counting</span></a>
               <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/trafficcounting.png" alt=""></a>
             </div>
-            <div class="button_wrap mb-3">
+            <div class="button_wrap mb-3" onclick="show_titik('cctv','traffic_category')">
               <a class="button_aLeft"><span>Traffic Category</span></a>
               <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/trafficcategory.png" alt=""></a>
             </div>
-            <div class="button_wrap mb-3">
+            <div class="button_wrap mb-3" onclick="show_titik('cctv','average_speed')">
               <a class="button_aLeft"><span>Average Speed</span></a>
               <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/avgspeed.png" alt=""></a>
             </div>
-            <div class="button_wrap mb-3">
+            <div class="button_wrap mb-3" onclick="show_titik('cctv','length_ocupantion')">
               <a class="button_aLeft"><span>Length Ocupantion</span></a>
               <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/lengthocc.png" alt=""></a>
             </div>
@@ -1205,7 +1211,7 @@
               <a class="button_aLeft"><span>Face Recognation</span></a>
               <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/facerecog.png" alt=""></a>
             </div>
-            <div class="button_wrap mb-3">
+            <div class="button_wrap mb-3" onclick="show_titik('giat_masyarakat')">
               <a class="button_aLeft"><span>Giat Masyarakat</span></a>
               <a class="button_bLeft slidebttn"><img src="<?=base_url()?>my/simulasi/giatmasyarakat.png" alt=""></a>
             </div>
