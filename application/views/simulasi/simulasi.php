@@ -363,7 +363,7 @@
     position: absolute;
     top: 100px;
     left: 0px;
-    height: 25px;
+    height: 45px;
     width: 65px;
     text-align: center;
     background: #fff;
@@ -382,7 +382,7 @@
   .btn-slider i{
     color: black;
     font-size: 20px;
-    line-height: 25px;
+    line-height: 45px;
   }
   .btn-slider.click i:before{
     content: '\f100';
@@ -391,17 +391,31 @@
   .sidebar{
     position: fixed;
     width: 700px;
-    height: 100%;
+    height: 550px;
     top:100px;
     left: -700px;
     background: #fff;
     transition: left 0.4s ease;
     z-index: 5;
     opacity:0.9;
+    /* overflow:auto; */
   }
   .sidebar.show{
     left: 0px;
     top: 100px;
+  }
+
+  .side .nav-link {
+    border-radius: 3px;
+    background: #F1F1F1;
+    color: #888888;
+  }
+
+  .konten-sider {
+    /* margin: 5px;
+    padding: 5px; */
+    height: 380px;
+    overflow-y: auto;
   }
 
 </style>
@@ -749,8 +763,8 @@
       <div class="mx-5 my-5">
         <h4>Index</h4>
         <div class="border-bottom pb-3">
-          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
+          <ul class="nav nav-pills mb-3 side" id="pills-tab" role="tablist">
+            <li class="nav-item mb-2" role="presentation">
               <a class="nav-link" id="trend-data-tab" data-toggle="pill" href="#trend-data" role="tab" aria-controls="trend-data" aria-selected="false">Trend Data</a>
             </li>
             <li class="nav-item" role="presentation">
@@ -763,42 +777,125 @@
               <a class="nav-link" id="index-kinerja-tab" data-toggle="pill" href="#index-kinerja" role="tab" aria-controls="index-kinerja" aria-selected="false">Index Kinerja</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Index Ketertiban</a>
+              <a class="nav-link" id="index-ketertiban-tab" data-toggle="pill" href="#index-ketertiban" role="tab" aria-controls="index-ketertiban" aria-selected="false">Index Ketertiban</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Index Kecelakaan</a>
+              <a class="nav-link" id="index-kecelakaan-tab" data-toggle="pill" href="#index-kecelakaan" role="tab" aria-controls="index-kecelakaan" aria-selected="false">Index Kecelakaan</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Index Keamanan</a>
+              <a class="nav-link" id="index-keamanan-tab" data-toggle="pill" href="#index-keamanan" role="tab" aria-controls="index-keamanan" aria-selected="false">Index Keamanan</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Index Keselamatan</a>
+              <a class="nav-link" id="index-keselamatan-tab" data-toggle="pill" href="#index-keselamatan" role="tab" aria-controls="index-keselamatan" aria-selected="false">Index Keselamatan</a>
             </li>
           </ul>
         </div>
-        <div class="tab-content" id="pills-tabContent">
-          <div class="tab-pane fade" id="trend-data" role="tabpanel" aria-labelledby="trend-data-tab">
-            <canvas id="td" width="400" height="400"></canvas>
-          </div>
-          <div class="tab-pane fade" id="case-fatality-rate" role="tabpanel" aria-labelledby="case-fatality-rate-tab">
-            <canvas id="cfr" width="400" height="400"></canvas>
-          </div>
-          <div class="tab-pane fade" id="fatality-index" role="tabpanel" aria-labelledby="fatality-index-tab">
-            <div class="tab-content" id="pills-tabContent">
-              <div class="tab-pane fade" id="fi-1" role="tabpanel" aria-labelledby="fi-1-tab">...</div>
-              <div class="tab-pane fade" id="fi-2" role="tabpanel" aria-labelledby="fi-2-tab">...</div>
+        <div class="tab-content mt-4" id="pills-tabContent">
+          <div class="tab-pane fade konten-sider" id="trend-data" role="tabpanel" aria-labelledby="trend-data-tab">
+            <div class="card">
+                <div class="card-header">Trend Data - Polrestabes Surakarta</div>
+                <div class="card-body">
+                    <canvas id="td" width="400" height="400"></canvas>
+                </div>
             </div>
-            <ul class="nav nav-pills" id="pills-tab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <a class="nav-link" id="fi-1-tab" data-toggle="pill" href="#fi-1" role="tab" aria-controls="fi-1" aria-selected="false">Fatality Index-Polrestabes Surakarta</a>
-              </li>
-              <li class="nav-item" role="presentation">
-                <a class="nav-link" id="fi-2-tab" data-toggle="pill" href="#fi-2" role="tab" aria-controls="fi-2" aria-selected="false">Indeks Fatalitas per Provinsi</a>
-              </li>
-            </ul>
           </div>
-          <div class="tab-pane fade" id="index-kinerja" role="tabpanel" aria-labelledby="index-kinerja-tab">
-            <canvas id="ikc" width="400" height="400"></canvas>
+          <div class="tab-pane fade konten-sider" id="case-fatality-rate" role="tabpanel" aria-labelledby="case-fatality-rate-tab">
+            <div class="card">
+                <div class="card-header">Case Fatality Rate - Polrestabes Surkarta</div>
+                <div class="card-body">
+                    <canvas id="cfr" width="400" height="400"></canvas>
+                </div>
+            </div>
+          </div>
+          <div class="tab-pane fade konten-sider" id="fatality-index" role="tabpanel" aria-labelledby="fatality-index-tab">
+            <div class="card">
+                <div class="card-header">Fatality Index - Polrestabes Surkarta</div>
+                <div class="card-body">
+                    <canvas id="fi1" width="400" height="400"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"> Indeks Fatalitas per Provinsi</div>
+                <div class="card-body">
+                    <canvas id="fi2" width="400" height="400"></canvas>
+                </div>
+            </div>
+          </div>
+          <div class="tab-pane fade konten-sider" id="index-kinerja" role="tabpanel" aria-labelledby="index-kinerja-tab">
+            <div class="card">
+              <!-- <div class="card-header">Index Kinerja Cybercorps<span style="position:relative;left:8px;"><b>Polrestabes Surakarta  - Januari 2021</b></span></div> -->
+              <div class="card-header">Index Kinerja Cybercorps<span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+              <div class="card-body">
+                <canvas id="ikc" width="640" height="234"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade konten-sider" id="index-ketertiban" role="tabpanel" aria-labelledby="index-ketertiban-tab">
+            <div class="card">
+                <div class="card-header">Indesk Ketertiban<span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+                <div class="card-body">
+                    <canvas id="ikt1" width="620" height="234"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">Indesk Kepatuhan Remaja terhadap tata cara tertib berlalu lintas<span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+                <div class="card-body">
+                    <canvas id="ikt2" width="620" height="234"></canvas>
+                </div>
+            </div>
+          </div>
+          <div class="tab-pane fade konten-sider" id="index-kecelakaan" role="tabpanel" aria-labelledby="index-kecelakaan-tab">
+            <div class="card">
+              <div class="card-header">Indesk Target Kecelakaan <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+              <div class="card-body">
+                <canvas id="itc" width="620" height="234"></canvas>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Indesk fatalitas korban kecelakaan lalu lintas <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+              <center><span><b>Per Kecamatan</b></span></center>
+              <div class="card-body">
+                <canvas id="itc2" width="620" height="234"></canvas>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Indeks Perbandingan Jumlah Kecelakaan Dan Jumlah Korban  <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+              <center><span><b>Per Kecamatan</b></span></center>
+              <div class="card-body">
+                <canvas id="itc3" width="620" height="234"></canvas>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Indeks Perbandingan Jumlah Kecelakaan Dan Jumlah Korban <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+              <!-- <center><span><b>Jumlah Korban Meninggal Dunia</b></span></center> -->
+              <center><span><b>Per Jenis Kendaraan</b></span></center>
+              <div class="card-body">
+                <canvas id="itc4" width="620" height="234"></canvas>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Kecelakaan Disebabkan Perilaku Pengemudi <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+              <center><span><b>Jumlah Korban Meninggal Dunia</b></span></center>
+              <div class="card-body">
+                <canvas id="itc5" width="620" height="400"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade konten-sider" id="index-keamanan" role="tabpanel" aria-labelledby="index-keamanan-tab">
+            <div class="card">
+                <div class="card-header">Indesk Keamanan<span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+                <div class="card-body">
+                    <canvas id="ikc2" width="640" height="234"></canvas>
+                </div>
+            </div>
+          </div>
+          <div class="tab-pane fade konten-sider" id="index-keselamatan" role="tabpanel" aria-labelledby="index-keselamatan-tab">
+            <div class="card">
+                <div class="card-header">Indesk Keselamatan<span style="position:relative;left:8px;"><b>Polrestabes Surakarta </b></span></div>
+                <div class="card-body">
+                    <canvas id="ikc3" width="640" height="234"></canvas>
+                </div>
+            </div>
           </div>
         </div>
       </div>
