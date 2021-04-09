@@ -988,6 +988,13 @@ function updateMarker(marker, latitude, longitude,color) {
         }
       }
     }
+
+    function to_table_traffic_category(table='',data='') { 
+      $(table).html('');
+      data.forEach(e => {
+        $(table).append('<tr><td>'+e.type_kend+'</td><td>'+e.jml+'</td></tr>');
+      });
+    }
     
     // Titik
     
