@@ -125,8 +125,8 @@
   
   .icons {
       display: inline-flex!important;
-      width: 54px;
-      height: 54px;
+      width: 60px;
+      height: 60px;
       text-align: center;
       border-radius: 50% !important;
       align-items: center;
@@ -897,16 +897,16 @@
       <div class="row">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
           <li class="nav-item" role="presentation">
-            <a class="nav-link active icons mx-1" id="pills-maps-tab" data-toggle="pill" href="#pills-maps" role="tab" aria-controls="pills-maps" aria-selected="false"><img src="<?=base_url()?>my/simulasi/location1.png" alt="" style="width:54px;"></a>
+            <a class="nav-link active icons mx-1" id="pills-maps-tab" data-toggle="pill" href="#pills-maps" role="tab" aria-controls="pills-maps" aria-selected="false"><img src="<?=base_url()?>my/simulasi/location1.png" alt="" style="width:60px;"></a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link active icons text-white mx-1" id="pills-cctv-tab" data-toggle="pill" href="#pills-cctv" role="tab" aria-controls="pills-cctv" aria-selected="false"><img src="<?=base_url()?>my/simulasi/cctv1.png" alt="" style="width:54px;"></a>
+            <a class="nav-link active icons text-white mx-1" id="pills-cctv-tab" data-toggle="pill" href="#pills-cctv" role="tab" aria-controls="pills-cctv" aria-selected="false"><img src="<?=base_url()?>my/simulasi/cctv1.png" alt="" style="width:60px;"></a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link active icons text-white mx-1" id="pills-car-tab" data-toggle="pill" href="#pills-car" role="tab" aria-controls="pills-car" aria-selected="false"><img src="<?=base_url()?>my/simulasi/car1.png" alt="" style="width:54px;"></a>
+            <a class="nav-link active icons text-white mx-1" id="pills-car-tab" data-toggle="pill" href="#pills-car" role="tab" aria-controls="pills-car" aria-selected="false"><img src="<?=base_url()?>my/simulasi/car1.png" alt="" style="width:60px;"></a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link active icons text-white mx-1" id="pills-more-tab" data-toggle="pill" href="#pills-more" role="tab" aria-controls="pills-more" aria-selected="false"><img src="<?=base_url()?>my/simulasi/more.png" alt="" style="width:54px;"></a>
+            <a class="nav-link active icons text-white mx-1" id="pills-more-tab" data-toggle="pill" href="#pills-more" role="tab" aria-controls="pills-more" aria-selected="false"><img src="<?=base_url()?>my/simulasi/more.png" alt="" style="width:60px;"></a>
           </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
