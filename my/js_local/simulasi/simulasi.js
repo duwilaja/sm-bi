@@ -11,6 +11,18 @@ var label = '';
 var titik_arr = [];
 var titik_link = [];
 
+var polisi_arr = [];
+var polisi_link = [];
+
+var damkar_arr = [];
+var damkar_link = [];
+
+var rumah_sakit_arr = [];
+var rumah_sakit_link = [];
+
+var dishub_arr = [];
+var dishub_link = [];
+
 $(document).ready(function() {
   if (Notification.permission !== "granted")
   Notification.requestPermission();
@@ -946,7 +958,6 @@ function updateMarker(marker, latitude, longitude,color) {
           resolve(check_cctv);
         }, 300);
       })
-      
     }
     
     
@@ -1415,3 +1426,100 @@ function updateMarker(marker, latitude, longitude,color) {
           }
         });
       }
+
+    // Lokasi
+
+    function lokasi(name='') { 
+      prom_get_lokasi(name).then(function(hasil) {
+        list_lokasi(hasil,name);
+      });
+    }
+
+    function list_lokasi(arr=[],name='') { 
+      var lokasi_arr = [];
+      $('#list_lokasi_'+name).html('');
+      setTimeout(() => {
+        var no = 0;
+        arr.forEach(e => {
+          $('#list_lokasi_'+name).append(`<div class="list-group-item list-group-item-action">
+          <input type="checkbox" class="mr-2 check-lokasi-${name}" onchange="check_lokasi()" name="lokasi_${name}[]" value="${no++}">
+          <span class="name_cctv">${e.nama} </span></div>`);
+        });
+      }, 300);
+    }
+
+    function prom_get_lokasi(name='') { 
+      return new Promise(function(resolve, reject) {
+        $.ajax({
+          type: "POST",
+          url: "get_lokasi",
+          dataType: "json",
+          data : {
+            for : name
+          },
+          success: function (r) {
+            if (r.nama == 'polisi') polisi_link = r.data;
+            if (r.nama == 'dishub') dishub_link = r.data;
+            if (r.nama == 'rumah_sakit') rumah_sakit_link = r.data;
+            if (r.nama == 'damkar') damkar_link = r.data;
+            resolve(r.data);
+          }
+        });
+      })
+    }
+
+    function create_lokasi_map(arrx,item,icon=null) {
+      return new Promise(function(resolve, reject) {
+        lokasi_arr = [];
+        arr = lokasi_link;
+        if(arrx) arr = arrx; 
+        if(icon) icons = icon;
+
+        for (let i = 0; i < arr.length; i++) {
+
+          const total = arr[i].total;
+
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(arr[i].kordinat[0], arr[i].kordinat[1]),
+            map: map,
+            icon: icons
+          });
+          lokasi_arr.push(marker);
+        }
+        
+        resolve(lokasi_arr);
+      })
+    }
+    
+    function check_lokasi(name='') { 
+      prom_check_lokasi(name).then(function(hasil) {
+        prom_clearMarkerLokasi().then(function(data) {
+          cctv = hasil;
+          create_lokasi_map(cctv);
+        });
+      });
+    }
+    
+    function prom_clearMarkerLokasi() {
+      return new Promise(function(resolve, reject) {
+        if (cctv_arr) {
+          for (let i = 0; i < cctv_arr.length; i++) {
+            cctv_arr[i].setMap(null);
+          }
+          resolve(cctv_arr);
+        }
+      })
+    }
+    
+    function prom_check_lokasi(name='') {
+      return new Promise(function(resolve, reject) {
+        var check_cctv = [];
+        setTimeout(() => {
+          $('input[name="lokasi_'+name+'[]"]:checked').each(function() {
+            check_cctv.push(cctv_link[this.value]);
+          });
+          resolve(check_cctv);
+        }, 300);
+      })
+    }
+    
