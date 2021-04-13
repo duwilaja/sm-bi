@@ -945,7 +945,7 @@
                   <div class="tab-pane fade" id="v-maps-police" role="tabpanel" aria-labelledby="v-maps-police-tab">
                   <div class="ml-2 row mx-0" style="text-align:left!important;">
                       <div class="col-3">
-                        <input type="checkbox" name="" id="select_all_maps_polisi"><span class="ml-3">All</span>
+                        <input type="checkbox" name="" id="select_all_maps_polisi" onchange="check_lokasi('polisi')"><span class="ml-3">All</span>
                       </div>
                       <div class="col">
                         <input type="text" class="form-control" placeholder="">
@@ -960,7 +960,7 @@
                   <div class="tab-pane fade" id="v-maps-damkar" role="tabpanel" aria-labelledby="v-maps-damkar-tab">
                     <div class="ml-2 row mx-0" style="text-align:left!important;">
                       <div class="col-3">
-                        <input type="checkbox" name="" id="select_all_maps_damkar"><span class="ml-3">All</span>
+                        <input type="checkbox" name="" id="select_all_maps_damkar" onchange="check_lokasi('damkar')"><span class="ml-3">All</span>
                       </div>
                       <div class="col">
                         <input type="text" class="form-control" placeholder="">
@@ -975,7 +975,7 @@
                   <div class="tab-pane fade" id="v-maps-dishub" role="tabpanel" aria-labelledby="v-maps-dishub-tab">
                     <div class="ml-2 row mx-0" style="text-align:left!important;">
                       <div class="col-3">
-                        <input type="checkbox" name="" id="select_all_maps_dishub"><span class="ml-3">All</span>
+                        <input type="checkbox" name="" id="select_all_maps_dishub" onchange="check_lokasi('dishub')"><span class="ml-3">All</span>
                       </div>
                       <div class="col">
                         <input type="text" class="form-control" placeholder="">
@@ -990,7 +990,7 @@
                   <div class="tab-pane fade" id="v-maps-rumah_sakit" role="tabpanel" aria-labelledby="v-maps-rumah_sakit-tab">
                     <div class="ml-2 row mx-0" style="text-align:left!important;">
                       <div class="col-3">
-                        <input type="checkbox" name="" id="select_all_maps_rumah_sakit"><span class="ml-3">All</span>
+                        <input type="checkbox" name="" id="select_all_maps_rumah_sakit" onchange="check_lokasi('rumah_sakit')"><span class="ml-3">All</span>
                       </div>
                       <div class="col">
                         <input type="text" class="form-control" placeholder="">
