@@ -158,3 +158,56 @@ if (!function_exists('calc_minute')) {
 		return $menit*60;
 	}
 }
+
+if (!function_exists('secondstoTime')) {
+	function secondsToTime($durasi) {
+        $dtF = new \DateTime('@0');
+        $dtT = new \DateTime("@$durasi");
+        // print_r($dtF->diff($dtT));die();
+        if ($dtF->diff($dtT)->format('%a') && $dtF->diff($dtT)->format('%h') && $dtF->diff($dtT)->format('%i') && $dtF->diff($dtT)->format('%s') != 0) {
+            return $dtF->diff($dtT)->format('%a hari %h jam %i menit %s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%a') && $dtF->diff($dtT)->format('%h') && $dtF->diff($dtT)->format('%i') != 0) {
+            return $dtF->diff($dtT)->format('%a hari %h jam %i menit');
+        }
+        else if ($dtF->diff($dtT)->format('%a') && $dtF->diff($dtT)->format('%h') && $dtF->diff($dtT)->format('%s') != 0) {
+            return $dtF->diff($dtT)->format('%a hari %h jam %s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%a') && $dtF->diff($dtT)->format('%h') != 0) {
+            return $dtF->diff($dtT)->format('%a hari %h jam');
+        }
+        else if ($dtF->diff($dtT)->format('%a') && $dtF->diff($dtT)->format('%i') && $dtF->diff($dtT)->format('%s') != 0) {
+            return $dtF->diff($dtT)->format('%a hari %i menit %s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%a') && $dtF->diff($dtT)->format('%i') != 0) {
+            return $dtF->diff($dtT)->format('%a hari %i menit');
+        }
+        else if ($dtF->diff($dtT)->format('%a') && $dtF->diff($dtT)->format('%s') != 0) {
+            return $dtF->diff($dtT)->format('%a hari %s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%h') && $dtF->diff($dtT)->format('%i') && $dtF->diff($dtT)->format('%s') != 0) {
+            return $dtF->diff($dtT)->format('%h jam %i menit %s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%h') && $dtF->diff($dtT)->format('%s') != 0) {
+            return $dtF->diff($dtT)->format('%h jam %s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%h') && $dtF->diff($dtT)->format('%i') != 0) {
+            return $dtF->diff($dtT)->format('%h jam %i menit');
+        }
+        else if ($dtF->diff($dtT)->format('%s') && $dtF->diff($dtT)->format('%i') != 0) {
+            return $dtF->diff($dtT)->format('%i menit %s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%s') != 0) {
+            return $dtF->diff($dtT)->format('%s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%i') != 0) {
+            return $dtF->diff($dtT)->format('%i menit');
+        }
+        else if ($dtF->diff($dtT)->format('%h') != 0) {
+            return $dtF->diff($dtT)->format('%h jam');
+        }
+        else if ($dtF->diff($dtT)->format('%a') != 0) {
+            return $dtF->diff($dtT)->format('%a hari');
+        }
+    }
+}

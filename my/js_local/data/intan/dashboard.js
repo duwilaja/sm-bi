@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    dt_ttr_operator();
     slide();
 });
 
@@ -379,6 +380,34 @@ $(document).ready(function () {
 //     {lat: -6.892210, lng: 107.536977},
 //     {lat: -6.960185, lng: 107.376799},
 // ];
+
+function dt_ttr_operator() {
+  $('#tabel').DataTable({
+      // Processing indicator
+      "bAutoWidth": false,
+      "destroy": true,
+      "autoWidth": true,
+      "searching": true,
+      "processing": true,
+      // DataTables server-side processing mode
+      "serverSide": true,
+      "scrollX": true,
+      // Initial no order.
+      "order": [],
+      // Load data from an Ajax source
+      "ajax": {
+          "url": '../Data/dt_ttr_operator',
+          "type": "POST",
+          "data" : {}
+      },
+      // "paging":   false,
+      //Set column definition initialisation properties
+      "columnDefs": [{
+          // "targets": [8],
+          "orderable": false
+      }]
+  });
+}
 
 let map;
 
