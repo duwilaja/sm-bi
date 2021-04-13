@@ -142,7 +142,7 @@
       text-align: center
   }
 
-  #list_cctv{
+  #list_cctv,#list_lokasi_polisi,#list_lokasi_rumah_sakit,#list_lokasi_damkar,#list_lokasi_dishub{
     margin: 5px;
     padding: 5px;
     height: 300px;
@@ -914,18 +914,28 @@
             <div class="row">
             <div class="col-md-4 pr-1">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-maps-police-tab" data-toggle="pill" href="#v-maps-police" role="tab" aria-controls="v-maps-police" aria-selected="false">
+                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-maps-police-tab" onclick="lokasi('polisi')" data-toggle="pill" href="#v-maps-police" role="tab" aria-controls="v-maps-police" aria-selected="false">
                       <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/polri.png" alt="image" style="background-color:white!important;">
                       <div class="wrapper ml-3">
-                        <p class="mb-0">
-                        Polisi</p>
+                        <p class="mb-0">Polisi</p>
                       </div>
                   </a>
-                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-maps-damkar-tab" data-toggle="pill" href="#v-maps-damkar" role="tab" aria-controls="v-maps-damkar" aria-selected="false">
+                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-maps-damkar-tab" onclick="lokasi('damkar')" data-toggle="pill" href="#v-maps-damkar" role="tab" aria-controls="v-maps-damkar" aria-selected="false">
                     <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/damkar.png" alt="image" style="background-color:white!important;">
                     <div class="wrapper ml-3">
-                      <p class="mb-0">
-                      Damkar</p>
+                      <p class="mb-0"> Damkar</p>
+                    </div>
+                  </a>
+                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" onclick="lokasi('rumah_sakit')" id="v-maps-rumah_sakit-tab" data-toggle="pill" href="#v-maps-rumah_sakit" role="tab" aria-controls="v-maps-rumah_sakit-tab" aria-selected="false">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/ambulan.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">Rumah Sakit</p>
+                    </div>
+                  </a>
+                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" onclick="lokasi('dishub')" id="v-maps-dishub-tab" data-toggle="pill" href="#v-maps-dishub" role="tab" aria-controls="v-maps-dishub" aria-selected="false">
+                    <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/dishubb.png" alt="image" style="background-color:white!important;">
+                    <div class="wrapper ml-3">
+                      <p class="mb-0">Dishub</p>
                     </div>
                   </a>
                 </div>
@@ -935,7 +945,7 @@
                   <div class="tab-pane fade" id="v-maps-police" role="tabpanel" aria-labelledby="v-maps-police-tab">
                   <div class="ml-2 row mx-0" style="text-align:left!important;">
                       <div class="col-3">
-                        <input type="checkbox" name="" id="select_all_maps_polisi"><span class="ml-3">All</span>
+                        <input type="checkbox" name="" id="select_all_maps_polisi" onchange="check_lokasi('polisi')"><span class="ml-3">All</span>
                       </div>
                       <div class="col">
                         <input type="text" class="form-control" placeholder="">
@@ -944,25 +954,13 @@
                         <button class="btn btn-secondary" type="button"><i class="fe fe-search"></i></button>
                       </span>
                     </div>
-                    <div class="mt-2 text-left pt-2 border-top" id="">
-                      <div class="list-group-item list-group-item-action">
-                          <input type="checkbox" class="mr-2 check-maps-polisi" name="">
-                          <span class="">Kantor Polisi 1</span>
-                      </div>
-                      <div class="list-group-item list-group-item-action">
-                          <input type="checkbox" class="mr-2 check-maps-polisi" name="">
-                          <span class="">Kantor Polisi 2</span>
-                      </div>
-                      <div class="list-group-item list-group-item-action">
-                          <input type="checkbox" class="mr-2 check-maps-polisi" name="">
-                          <span class="">Kantor Polisi 3</span>
-                      </div>
+                    <div class="mt-2 text-left pt-2 border-top" id="list_lokasi_polisi">
                     </div>
                   </div>
                   <div class="tab-pane fade" id="v-maps-damkar" role="tabpanel" aria-labelledby="v-maps-damkar-tab">
-                  <div class="ml-2 row mx-0" style="text-align:left!important;">
+                    <div class="ml-2 row mx-0" style="text-align:left!important;">
                       <div class="col-3">
-                        <input type="checkbox" name="" id="select_all_maps_damkar"><span class="ml-3">All</span>
+                        <input type="checkbox" name="" id="select_all_maps_damkar" onchange="check_lokasi('damkar')"><span class="ml-3">All</span>
                       </div>
                       <div class="col">
                         <input type="text" class="form-control" placeholder="">
@@ -971,19 +969,37 @@
                         <button class="btn btn-secondary" type="button"><i class="fe fe-search"></i></button>
                       </span>
                     </div>
-                    <div class="mt-2 text-left pt-2 border-top">
-                      <div class="list-group-item list-group-item-action">
-                          <input type="checkbox" class="mr-2 check-maps-damkar" name="">
-                          <span class="">Kantor Damkar 1</span>
+                    <div class="mt-2 text-left pt-2 border-top" id="list_lokasi_damkar">
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="v-maps-dishub" role="tabpanel" aria-labelledby="v-maps-dishub-tab">
+                    <div class="ml-2 row mx-0" style="text-align:left!important;">
+                      <div class="col-3">
+                        <input type="checkbox" name="" id="select_all_maps_dishub" onchange="check_lokasi('dishub')"><span class="ml-3">All</span>
                       </div>
-                      <div class="list-group-item list-group-item-action">
-                          <input type="checkbox" class="mr-2 check-maps-damkar" name="">
-                          <span class="">CKantor Damkar2</span>
+                      <div class="col">
+                        <input type="text" class="form-control" placeholder="">
                       </div>
-                      <div class="list-group-item list-group-item-action">
-                          <input type="checkbox" class="mr-2 check-maps-damkar" name="">
-                          <span class="">CKantor Damkar3</span>
+                      <span class="col-auto">
+                        <button class="btn btn-secondary" type="button"><i class="fe fe-search"></i></button>
+                      </span>
+                    </div>
+                    <div class="mt-2 text-left pt-2 border-top" id="list_lokasi_dishub">
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="v-maps-rumah_sakit" role="tabpanel" aria-labelledby="v-maps-rumah_sakit-tab">
+                    <div class="ml-2 row mx-0" style="text-align:left!important;">
+                      <div class="col-3">
+                        <input type="checkbox" name="" id="select_all_maps_rumah_sakit" onchange="check_lokasi('rumah_sakit')"><span class="ml-3">All</span>
                       </div>
+                      <div class="col">
+                        <input type="text" class="form-control" placeholder="">
+                      </div>
+                      <span class="col-auto">
+                        <button class="btn btn-secondary" type="button"><i class="fe fe-search"></i></button>
+                      </span>
+                    </div>
+                    <div class="mt-2 text-left pt-2 border-top" id="list_lokasi_rumah_sakit">
                     </div>
                   </div>
                 </div>
@@ -1322,17 +1338,17 @@
           //select all checkboxes
           $("#select_all_maps_polisi").change(function(){
             var status = this.checked;
-            $('.check-maps-polisi').each(function(){
+            $('.check-lokasi-polisi').each(function(){
               this.checked = status;
             });
           });
 
-          $('.check-maps-polisi').change(function(){ 
+          $('.check-lokasi-polisi').change(function(){ 
             if(this.checked == false){
               $("#select_all_maps_polisi")[0].checked = false;
             }
             
-            if ($('.check-maps-polisi:checked').length == $('.check-maps-polisi').length ){ 
+            if ($('.check-lokasi-polisi:checked').length == $('.check-lokasi-polisi').length ){ 
               $("#select_all_maps_polisi")[0].checked = true;
             }
           });
@@ -1340,18 +1356,54 @@
           //select all checkboxes
           $("#select_all_maps_damkar").change(function(){
             var status = this.checked;
-            $('.check-maps-damkar').each(function(){
+            $('.check-lokasi-damkar').each(function(){
               this.checked = status;
             });
           });
 
-          $('.check-maps-damkar').change(function(){ 
+          $('.check-lokasi-damkar').change(function(){ 
             if(this.checked == false){
               $("#select_all_maps_damkar")[0].checked = false;
             }
             
-            if ($('.check-maps-damkar:checked').length == $('.check-maps-damkar').length ){ 
+            if ($('.check-lokasi-damkar:checked').length == $('.check-lokasi-damkar').length ){ 
               $("#select_all_maps_damkar")[0].checked = true;
+            }
+          });
+
+          //select all checkboxes
+          $("#select_all_maps_rumah_sakit").change(function(){
+            var status = this.checked;
+            $('.check-lokasi-rumah_sakit').each(function(){
+              this.checked = status;
+            });
+          });
+
+          $('.check-lokasi-rumah_sakit').change(function(){ 
+            if(this.checked == false){
+              $("#select_all_maps_rumah_sakit")[0].checked = false;
+            }
+            
+            if ($('.check-lokasi-rumah_sakit:checked').length == $('.check-lokasi-rumah_sakit').length ){ 
+              $("#select_all_maps_rumah_sakit")[0].checked = true;
+            }
+          });
+
+          //select all checkboxes
+          $("#select_all_maps_dishub").change(function(){
+            var status = this.checked;
+            $('.check-lokasi-dishub').each(function(){
+              this.checked = status;
+            });
+          });
+
+          $('.check-lokasi-dishub').change(function(){ 
+            if(this.checked == false){
+              $("#select_all_maps_dishub")[0].checked = false;
+            }
+            
+            if ($('.check-lokasi-dishub:checked').length == $('.check-lokasi-dishub').length ){ 
+              $("#select_all_maps_dishub")[0].checked = true;
             }
           });
       });

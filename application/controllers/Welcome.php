@@ -286,4 +286,36 @@ class Welcome extends CI_Controller {
 
 		echo json_encode($test);
 	}
+
+	public function get_lokasi()
+	{
+		$t = '';
+		$for = $this->input->post('for');
+		$data = [
+			'name' => $for,
+		];
+		if ($for == 'polisi') {
+			$t = 'md_pos_polisi';
+		}else if ($for == 'damkar') {
+			$t = 'md_damkar';
+		}else if ($for == 'rumah_sakit') {
+			$t = 'md_rumah_sakit';
+		}else if ($for == 'dishub') {
+			$t = 'md_dishub';
+		}
+
+		if ($t != '') {
+			$q = $this->db->get($t);
+			$data['data'] = $q->result();
+		}
+
+		foreach ($data['data'] as $key => $value) {
+			$value->lat = (float) $value->lat;
+			$value->lng = (float) $value->lng;
+
+			$data['data'][$key] = $value;
+		}
+
+		echo json_encode($data);
+	}
 }

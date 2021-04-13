@@ -11,6 +11,20 @@ var label = '';
 var titik_arr = [];
 var titik_link = [];
 
+var lokasi_arr = [];
+
+var polisi_arr = [];
+var polisi_link = [];
+
+var damkar_arr = [];
+var damkar_link = [];
+
+var rumah_sakit_arr = [];
+var rumah_sakit_link = [];
+
+var dishub_arr = [];
+var dishub_link = [];
+
 $(document).ready(function() {
   if (Notification.permission !== "granted")
   Notification.requestPermission();
@@ -27,7 +41,7 @@ function initMap() {
     // mapTypeId: "satellite",
     // heading: 90,
     tilt: 45,
-    disableDefaultUI: false,
+    disableDefaultUI: true,
     styles : [
       {
         "elementType": "geometry",
@@ -291,12 +305,7 @@ function initMap() {
   
   const trafficLayer = new google.maps.TrafficLayer();
   trafficLayer.setMap(map);
-  
-  setTimeout(() => {
-    rumah_sakit();
-    polisi();
-    dishub();
-  }, 500);
+
 }
 
 function rumah_sakit() { 
@@ -583,47 +592,49 @@ function updateMarker(marker, latitude, longitude,color) {
     }
     
     $(function(){
-      var socket = io.connect('http://36.91.103.46:3000')
+      // var socket = io.connect('http://36.91.103.46:3000')
       
-      var myCloseInfo = function(){
-        alert('this is a callback function that runs after close the notification.');
-      };
+      // var myCloseInfo = function(){
+      //   alert('this is a callback function that runs after close the notification.');
+      // };
       
-      //Listen on new_message
-      socket.on("new_message", (data) => {
-        notifikasi(data.message);
-      })
+      // //Listen on new_message
+      // socket.on("new_message", (data) => {
+      //   notifikasi(data.message);
+      // })
       
-      function notifikasi(msg) {
+      // function notifikasi(msg) {
       
-        if (!Notification) {
-            alert('Browsermu tidak mendukung Web Notification.'); 
-            return;
-        }
+      //   if (!Notification) {
+      //       alert('Browsermu tidak mendukung Web Notification.'); 
+      //       return;
+      //   }
       
-        if (Notification.permission !== "granted")
-            Notification.requestPermission();
-        else 
-            var notifikasi = new Notification('Laporan Kecelakaan', {
-                icon: 'http://36.91.103.46/sm-bi/my/images/logo.png',
-                body: msg,
-            });
+      //   if (Notification.permission !== "granted")
+      //       Notification.requestPermission();
+      //   else 
+      //       var notifikasi = new Notification('Laporan Kecelakaan', {
+      //           icon: 'http://36.91.103.46/sm-bi/my/images/logo.png',
+      //           body: msg,
+      //       });
       
-            notifikasi.onclick = function () {
-              crash('yes');
-              notifikasi.close();
-            };
+      //       notifikasi.onclick = function () {
+      //         crash('yes');
+      //         rumah_sakit();
+      //         polisi();
+      //         dishub();
+      //         notifikasi.close();
+      //       };
       
-            setTimeout(function(){
-                notifikasi.close();
-            }, 5000);
-      };
+      //       setTimeout(function(){
+      //           notifikasi.close();
+      //       }, 5000);
+      // };
       
     });
     
     
     // CCTV 
-    
     function cctv(param='') { 
       prom_get_cctv().then(function(data) {
         list_cctv();
@@ -653,6 +664,7 @@ function updateMarker(marker, latitude, longitude,color) {
       // setTimeout(() => {
       //   setInfoWindowCCTV(item);
       // }, 500);
+      
       prom_create_cctv_map(arrx,item,icon).then(function(data) {
         setInfoWindowCCTV(item);
       });
@@ -878,9 +890,8 @@ function updateMarker(marker, latitude, longitude,color) {
             `,
             );
           }
-          
+          map.panTo(cctv_arr[i].position);
         });
-        map.panTo(cctv_arr[i].position);
       }
       
     }
@@ -946,7 +957,6 @@ function updateMarker(marker, latitude, longitude,color) {
           resolve(check_cctv);
         }, 300);
       })
-      
     }
     
     
@@ -1415,3 +1425,192 @@ function updateMarker(marker, latitude, longitude,color) {
           }
         });
       }
+
+    // Lokasi
+
+    function lokasi(name='') { 
+      prom_get_lokasi(name).then(function(hasil) {
+        list_lokasi(hasil,name);
+        // prom_check_lokasi().then(function(hasil2) {
+        //   prom_clearMarkerCctv().then(function(data) {
+        //     create_lokasi_map(hasil2,label,{
+        //       url: "../my/images/cctv.png", // url
+        //       scaledSize: new google.maps.Size(20, 20), // scaled size
+        //       origin: new google.maps.Point(0,0), // origin
+        //       anchor: new google.maps.Point(0,0) // anchor
+        //     });
+        //   });
+        // });
+      });
+    }
+
+    function list_lokasi(arr=[],name='') { 
+      var lokasi_arr = [];
+      $('#list_lokasi_'+name).html('');
+      setTimeout(() => {
+        var no = 0;
+        arr.forEach(e => {
+          $('#list_lokasi_'+name).append(`<div class="list-group-item list-group-item-action">
+          <input type="checkbox" class="mr-2 check-lokasi-${name}" onchange="check_lokasi('${name}')" name="lokasi_${name}[]" value="${no++}">
+          <span class="name_cctv">${e.nama} </span></div>`);
+        });
+      }, 300);
+    }
+
+    function prom_get_lokasi(name='') { 
+      return new Promise(function(resolve, reject) {
+        $.ajax({
+          type: "POST",
+          url: "get_lokasi",
+          dataType: "json",
+          data : {
+            for : name
+          },
+          success: function (r) {
+            if (name == 'polisi') polisi_link = r.data;
+            if (name == 'dishub') dishub_link = r.data;
+            if (name == 'rumah_sakit') rumah_sakit_link = r.data;
+            if (name == 'damkar') damkar_link = r.data;
+            resolve(r.data);
+          }
+        });
+      })
+    }
+
+    function create_lokasi_map(arrx,name) {
+      return new Promise(function(resolve, reject) {
+        lokasi_arr = [];
+        var icon;
+        var marker;
+        // arr = lokasi_link;
+        if(arrx) arr = arrx; 
+        // if(icon) icons = icon;
+
+        if (name == 'polisi') {
+          icon = {
+            url : "../my/simulasi/polisi.png"
+          }
+        }else if (name == 'dishub') {
+          icon = {
+            url : "../my/simulasi/dishub.png"
+          }
+        }else if (name == 'damkar') {
+          icon = {
+            url : "../my/simulasi/icon_damkar.png"
+          }
+        }else if (name == 'rumah_sakit') {
+          icon = {
+            url : "../my/simulasi/hospital.png"
+          }
+        }
+
+        for (let i = 0; i < arr.length; i++) {
+
+          const total = arr[i].total;
+
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(arr[i].lat, arr[i].lng),
+            map: map,
+            icon : icon
+          });
+
+          lokasi_arr.push(marker);
+
+        }
+        
+        resolve(lokasi_arr);
+      })
+    }
+
+    function create_lokasi_info_window(arr,data_link,name) { 
+      return new Promise(function(resolve, reject) {
+        // var arr_link = [];
+        // if (name == 'polisi') arr_link = polisi_link;
+        // if (name == 'dishub') arr_link = dishub_link;
+        // if (name == 'rumah_sakit') arr_link = rumah_sakit_link;
+        // if (name == 'damkar') arr_link = damkar_link;
+
+        // console.log(arr_link);
+
+        if (infoWindow) {
+          infoWindow.close();
+        }
+
+        for (let i = 0; i < arr.length; i++) {
+          const e = arr[i];
+          const contentString = `<div><p><b>${data_link[i].nama}</b></p>
+          <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
+          <div class="mt-3">
+          <table class="w-100">
+          <tr>
+          <td><b>Alamat</b></td>
+          <td>:</td>
+          <td>${data_link[i].alamat}</td>
+          </tr>
+          <tr>
+          <td><b>Kordinat</b></td>
+          <td>:</td>
+          <td>${data_link[i].lat} , ${data_link[i].lng}</td>
+          </tr>
+          </table>
+          </div>
+          </div>`;
+  
+           infowindow = new google.maps.InfoWindow({
+            content: contentString,
+          });
+
+          arr[i].addListener("click", () => {
+            map.panTo(arr[i].position); 
+            infowindow.open(map, arr[i]);
+          });
+        }
+
+
+        resolve(true);
+      })
+    }
+    
+    function check_lokasi(name='') { 
+      prom_check_lokasi(name).then(function(hasil) {
+        prom_clearMarkerLokasi(lokasi_arr).then(function(data) {
+        //   cctv = hasil;
+          // create_lokasi_map(hasil);
+          console.log(hasil,name);
+          create_lokasi_map(hasil,name).then(function(data1) { 
+            create_lokasi_info_window(data1,hasil,name);
+          });
+        });
+      });
+    }
+    
+    function prom_clearMarkerLokasi(arr) {
+      return new Promise(function(resolve, reject) {
+        if (arr) {
+          for (let i = 0; i < arr.length; i++) {
+            arr[i].setMap(null);
+          }
+          resolve(arr);
+        }
+      })
+    }
+    
+    function prom_check_lokasi(name='') {
+      return new Promise(function(resolve, reject) {
+        var arr = [];
+        var lokasi_arr = [];
+
+          if (name == 'polisi') lokasi_arr = polisi_link;
+          if (name == 'dishub') lokasi_arr = dishub_link;
+          if (name == 'rumah_sakit') lokasi_arr = rumah_sakit_link;
+          if (name == 'damkar') lokasi_arr = damkar_link;
+
+        setTimeout(() => {
+          $('input[name="lokasi_'+name+'[]"]:checked').each(function() {
+            arr.push(lokasi_arr[this.value]);
+          });
+          resolve(arr);
+        }, 300);
+      })
+    }
+    
