@@ -188,11 +188,11 @@
 			<div class="card-header">
 				<h3 class="card-title">Live Data Inteligent Traffic Analytic (INTAN)</h3>
 				<div class="card-options">
-                        <form >
+                        <!-- <form >
                             <div class="input-group">
                                 <input type="date">
                             </div>
-                        </form>
+                        </form> -->
 				</div>
 			</div>
 			<div class="card-body">
@@ -210,9 +210,7 @@
                                 <a href="#"><button class="btn btn-default w-100 mt-3">Rabu, 29 Desember 2020</button></a>
 							</div>
 							<br> -->
-						<div class="row">
-  							<div class="ml-auto mb-3 mr-3"><a href="<?=site_url('Data/export_data_intan')?>" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Excel</a></div>
-						</div>
+  						<div class="mb-2"><a href="javascript:void(0)" onclick="export_excel_intan()" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Excel</a></div>
 						<div class="table-responsive text-muted">
 							<table class="table border table-bordered text-nowrap mb-0" style="color:black" id="tabel">
 								<thead style="background-color:turquoise;">

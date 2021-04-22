@@ -252,12 +252,29 @@ class Data extends CI_Controller {
 		$excel->getActiveSheet(0)->setTitle("DATA INTAN");
 		$excel->setActiveSheetIndex(0);
 		
-		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment; filename="Data Intan.xlsx"'); 
-		header('Cache-Control: max-age=0');
+		$link = 'my/report_intan_'.date('YmdHis').'.xlsx';
 		$write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
-		$write->save('php://output');
-	  }
+		$write->save($link);
+
+		echo json_encode([
+			'status' => true,
+			'link' => $link
+		]);
+	}
+
+	public function link_download_intan()
+	{
+		$link = './'.$this->input->get('l');
+		// redirect($link);
+		// header("location: ../".$link);
+		ignore_user_abort(true);
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Length: '.filesize($link));
+		header('Content-Disposition: attachment; filename="report_intan.xlsx"'); 
+		header('Cache-Control: max-age=0');
+		readfile($link);
+		unlink($link);
+	}
 
 	public function ais()
 	{
