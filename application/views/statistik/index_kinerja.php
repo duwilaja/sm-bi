@@ -1,13 +1,3 @@
-<style>
-	#map {
-		height: 277px;
-	}
-	#map2 {
-		height: 277px;
-	}
-</style>
-
-<!--Row-->
 <div class="row">
 	<div class="col-md-12">
 		<p>
@@ -64,72 +54,12 @@
 </div>
 
 <div class="row">
-	<div class="col-12">
-		<div class="card">
-			<div class="card-header">
-				<span>Grafik User Per Polda</span>
-			</div>
-			<div class="overflow-hidden">
-				<div id="cybercops-bar-polda" class="worldh h-276" ></div>
-			</div>
-			
-		</div>
-	</div>
-	<div class="col-12">
-		<div class="card">
-			<div class="card-header">
-				<span>Grafik User Per Polres</span>
-			</div>
-			<div class="overflow-hidden">
-				<div id="cybercops-bar-polres" class="worldh h-276" ></div>
-			</div>
-			
-		</div>
-	</div>
-</div>
-
-
-<div class="row">
-	<div class="col-12">
-		<div class="card">
-			<div class="card-body">
-				<div id="map" style="height:450px; z-index: 1;"></div>
-			</div>
-		</div>
-	</div>
-</div>	
-
-<div class="row">
 	<div class="col-md-12">
 		<div class="card">
-			<div class="card-header">
-				<h3 class="card-title">Data User</h3>
-				<div class="card-options">
-				</div>
-			</div>
+			<div class="card-header">Index Kinerja Cybercorps<span style="position:relative;left:8px;"><b>Polda Jabar  - Januari 2021</b></span></div>
 			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table" id="tabel_user_cybercops">
-						<thead>
-							<tr>
-								<th>Nrp</th>
-								<th>Nama</th>
-								<th>Polda</th>
-								<th>Polres</th>
-								<th>Pangkat</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-					<!-- <div class="tombol_detail">
-						<a href="#"><button class="btn btn-default w-100 mt-3">Selengkapnya</button></a>
-					</div> -->
-				</div>
+				<canvas id="ikc" width="400" height="400"></canvas>
 			</div>
 		</div>
-		
 	</div>
 </div>
-
-
