@@ -227,12 +227,12 @@ class Welcome extends CI_Controller {
 				'id' =>  $v->id,
 				'nama' =>  $v->nama_cctv,
 				'rtsp' =>  $v->rtsp_cctv,
-				'total' => 0,
-				'kategori' => $this->mda->get_traffic_category([
-					'channel_id' => $v->channel_id,
-					'ctddate' => date('Y-m-d'),
-					'filter' => 'today'
-				])->result(),
+				// 'total' => $total,
+				// 'kategori' => $this->mda->get_traffic_category([
+				// 	'channel_id' => $v->channel_id,
+				// 	'ctddate' => date('Y-m-d'),
+				// 	'filter' => 'today'
+				// ])->result(),
 				'kordinat' => kordinat($v->kordinat),
 			]);
 		}
