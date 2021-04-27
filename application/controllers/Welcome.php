@@ -222,12 +222,12 @@ class Welcome extends CI_Controller {
 		
 		$q = $this->db->get('cctv c');
 		foreach ($q->result() as $k => $v) {
-			$total = $this->mda->total_kendaraan($v->channel_id,'hari')['jml'];
+			// $total = $this->mda->total_kendaraan($v->channel_id,'hari')['jml'];
 			array_push($data,[
 				'id' =>  $v->id,
 				'nama' =>  $v->nama_cctv,
 				'rtsp' =>  $v->rtsp_cctv,
-				'total' => $total,
+				'total' => 0,
 				'kategori' => $this->mda->get_traffic_category([
 					'channel_id' => $v->channel_id,
 					'ctddate' => date('Y-m-d'),
