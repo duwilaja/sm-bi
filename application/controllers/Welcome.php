@@ -217,7 +217,7 @@ class Welcome extends CI_Controller {
 		$kategori = [];
 		$total = '';
 
-		$this->load->model('MData_analytic','mda');
+		// $this->load->model('MData_analytic','mda');
 		$a = $this->input->post('a');
 		
 		$q = $this->db->get('cctv c');
