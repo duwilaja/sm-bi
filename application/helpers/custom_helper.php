@@ -27,6 +27,13 @@ if (!function_exists('persen_nt')) {
   }
 }
 
+if (!function_exists('kordinat')) {
+	function kordinat($kordinat=''){ //persen naik/turun
+		$k = explode(',',$kordinat);
+		return  [@(float)$k[0],@(float)$k[1]];
+  	}
+}
+
 if (!function_exists('tgl_indo')) {
 	function tgl_indo($tanggal){
         $bulan = array (
@@ -150,4 +157,57 @@ if (!function_exists('calc_minute')) {
 		$menit = round(abs($to_time - $from_time) / 60,2);
 		return $menit*60;
 	}
+}
+
+if (!function_exists('secondstoTime')) {
+	function secondsToTime($durasi) {
+        $dtF = new \DateTime('@0');
+        $dtT = new \DateTime("@$durasi");
+        // print_r($dtF->diff($dtT));die();
+        if ($dtF->diff($dtT)->format('%a') && $dtF->diff($dtT)->format('%h') && $dtF->diff($dtT)->format('%i') && $dtF->diff($dtT)->format('%s') != 0) {
+            return $dtF->diff($dtT)->format('%a hari %h jam %i menit %s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%a') && $dtF->diff($dtT)->format('%h') && $dtF->diff($dtT)->format('%i') != 0) {
+            return $dtF->diff($dtT)->format('%a hari %h jam %i menit');
+        }
+        else if ($dtF->diff($dtT)->format('%a') && $dtF->diff($dtT)->format('%h') && $dtF->diff($dtT)->format('%s') != 0) {
+            return $dtF->diff($dtT)->format('%a hari %h jam %s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%a') && $dtF->diff($dtT)->format('%h') != 0) {
+            return $dtF->diff($dtT)->format('%a hari %h jam');
+        }
+        else if ($dtF->diff($dtT)->format('%a') && $dtF->diff($dtT)->format('%i') && $dtF->diff($dtT)->format('%s') != 0) {
+            return $dtF->diff($dtT)->format('%a hari %i menit %s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%a') && $dtF->diff($dtT)->format('%i') != 0) {
+            return $dtF->diff($dtT)->format('%a hari %i menit');
+        }
+        else if ($dtF->diff($dtT)->format('%a') && $dtF->diff($dtT)->format('%s') != 0) {
+            return $dtF->diff($dtT)->format('%a hari %s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%h') && $dtF->diff($dtT)->format('%i') && $dtF->diff($dtT)->format('%s') != 0) {
+            return $dtF->diff($dtT)->format('%h jam %i menit %s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%h') && $dtF->diff($dtT)->format('%s') != 0) {
+            return $dtF->diff($dtT)->format('%h jam %s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%h') && $dtF->diff($dtT)->format('%i') != 0) {
+            return $dtF->diff($dtT)->format('%h jam %i menit');
+        }
+        else if ($dtF->diff($dtT)->format('%s') && $dtF->diff($dtT)->format('%i') != 0) {
+            return $dtF->diff($dtT)->format('%i menit %s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%s') != 0) {
+            return $dtF->diff($dtT)->format('%s detik');
+        }
+        else if ($dtF->diff($dtT)->format('%i') != 0) {
+            return $dtF->diff($dtT)->format('%i menit');
+        }
+        else if ($dtF->diff($dtT)->format('%h') != 0) {
+            return $dtF->diff($dtT)->format('%h jam');
+        }
+        else if ($dtF->diff($dtT)->format('%a') != 0) {
+            return $dtF->diff($dtT)->format('%a hari');
+        }
+    }
 }

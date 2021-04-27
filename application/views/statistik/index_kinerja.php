@@ -1,3 +1,4 @@
+<?php if($this->input->get('kode') == '') { ?>
 <div class="row">
 	<div class="col-md-12">
 		<p>
@@ -52,10 +53,13 @@
 		</div>
 	</div>
 </div>
+<?php } ?>
 
 <div class="row">
 	<div class="col-md-12">
 		<div class="card">
+			<!-- <div class="card-header">Index Kinerja Cybercorps<span style="position:relative;left:8px;"><b>Polrestabes Surakarta  - Januari 2021</b></span></div> -->
+			<div class="card-header">Index Kinerja Cybercorps<span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
 			<div class="card-header">Index Kinerja Cybercorps<span style="position:relative;left:8px;"><b>Polda Jabar  - Januari 2021</b></span></div>
 			<div class="card-body">
 				<canvas id="ikc" width="400" height="400"></canvas>
