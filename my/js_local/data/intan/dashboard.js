@@ -409,6 +409,26 @@ function dt_ttr_operator() {
   });
 }
 
+function export_excel_intan() {
+  download_report_intan();
+}
+
+function download_report_intan() {
+  new Promise((resolve, reject) => {
+      $.ajax({  
+          url : "../Data/export_data_intan",
+          method : "POST",
+          async : true,
+          // data: $('#filter').serialize(), 
+          dataType : 'json',
+          success: function(response){ 
+              window.location.assign('../Data/link_download_intan?l='+response.link);
+              resolve(response.link);
+          }
+      });
+    });
+}
+
 let map;
 
 function initMap() {
