@@ -84,6 +84,11 @@ class MIntan extends CI_Model {
          // Definisi
          $condition = [];
          $data = [];
+		 
+		$f_date_start = $this->input->post("f_date_start");
+		$f_date_end = $this->input->post("f_date_end");
+		if($f_date_start!='') array_push($condition,array('where','date(ctd_date)>=',$f_date_start));
+        if($f_date_end!='') array_push($condition,array('where','date(ctd_date)<=',$f_date_end));
          
          $CI = &get_instance();
          $CI->load->model('DataTable', 'dt');
@@ -133,5 +138,22 @@ class MIntan extends CI_Model {
          return json_encode($output);
     }
     
+	public function polda(){
+		return $this->db->get("polda")->result();
+	}
+	public function polres($id){
+		return $this->db->select("res_id as v,res_nam as t")->where("polda",$id)->get("polres")->result();
+	}
+	public function sum($f_date_start,$f_date_end,$f_polda,$f_polres){
+		$where=array();
+		if($f_polda!='') $where['polda']=$f_polda;
+		if($f_polres!='') $where['polres']=$f_polres;
+		
+		$qsscjln=$this->db->select("pos as txt, count(*) as jml")->where($where)->group_by("pos")->get_compiled_select("ssc_jalan");
+		$qsscpub=$this->db->select("yan as txt, count(*) as jml")->where($where)->group_by("yan")->get_compiled_select("ssc_yan_publik");
+		$qsscdar=$this->db->select("yan as txt, count(*) as jml")->where($where)->group_by("yan")->get_compiled_select("ssc_yan_darurat");
+		//echo "$qsscjln UNION $qsscpub UNION $qsscdar";
+		return $this->db->query("$qsscjln UNION $qsscpub UNION $qsscdar")->result();
+	}
 }
 

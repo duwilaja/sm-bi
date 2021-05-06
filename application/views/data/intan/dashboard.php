@@ -38,12 +38,15 @@
 								<div class="col-md-2">
                                     <div class="form-group">
                                         <p>Polda</p>
-                                        <select class="form-control form-control-sm"  name="f_polda" id="f_polda">
+                                        <select class="form-control form-control-sm"  name="f_polda" id="f_polda" onchange="getCombo('intan_polres',this.value,'#f_polres','','-- Pilih Polres --');">
 											<option value="">-- Pilih Polda --</option>
+											<?php foreach($polda as $row){?>
+											<option value="<?php echo $row->da_id?>"><?php echo $row->da_nam?></option>
+											<?php }?>
 										</select>
                                     </div>
                                 </div>
-								<div class="col-md-2">
+								<div class="col-md-3">
                                     <div class="form-group">
                                         <p>Polres</p>
                                         <select class="form-control form-control-sm"  name="f_polres" id="f_polres">
@@ -56,7 +59,7 @@
                         <div class="card-footer overflow-hidden">
                             <div style="float:right;">
                                 <button type="reset" onclick="reset_form()" class="btn btn-warning">Reset</button>
-                                <button type="submit" id="cari" class="btn btn-success" type="submit" >Cari</button>
+                                <button type="button" id="cari" class="btn btn-success" onclick="getSum(); reloadtbl();" >Cari</button>
                                 <!-- <button type="submit" id="cari" class="btn btn-success" type="submit" onclick="lihatDt()">Cari</button> -->
                             </div>
                         </div>
@@ -74,8 +77,8 @@
 						</div>
 						<div class="ml-3">
 							<small class=" mb-0">Ambulan</small><br>
-							<h3 class="font-weight-semibold mb-0">5,643</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
+							<h3 class="font-weight-semibold mb-0" id="ambulance">0</h3>
+							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="ambulance_loc"></span></small>
 						</div>
 					</div>
 					<div class=" col-xl-3 col-sm-6 d-flex mb-5 mb-xl-0">
@@ -83,8 +86,8 @@
 							<i class="fa fa-home danger feature-icon bg-danger"></i>
 						</div>
 						<div class=" d-flex flex-column  ml-3"> <small class=" mb-0">Pos Pol</small>
-							<h3 class="font-weight-semibold mb-0">2,536</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
+							<h3 class="font-weight-semibold mb-0" id="pos_polisi">0</h3>
+							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="pos_polisi_loc"></span></small>
 						</div>
 					</div>
 					<div class=" col-xl-3 col-sm-6 d-flex  mb-5 mb-sm-0">
@@ -92,8 +95,8 @@
 							<i class="fa fa-search secondary feature-icon bg-secondary"></i>
 						</div>
 						<div class=" d-flex flex-column ml-3"> <small class=" mb-0">Patrol</small>
-							<h3 class="font-weight-semibold mb-0">12,863</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
+							<h3 class="font-weight-semibold mb-0" id="pos_pjr">0</h3>
+							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="pos_pjr_loc"></span></small>
 						</div>
 					</div>
 					<div class=" col-xl-3 col-sm-6 d-flex">
@@ -101,8 +104,8 @@
 							<i class="fa fa-hospital-o success feature-icon bg-success"></i>
 						</div>
 						<div class=" d-flex flex-column  ml-3"> <small class=" mb-0">Faskes</small>
-							<h3 class="font-weight-semibold mb-0">7,836</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Seluruh Indonesia</span></small>
+							<h3 class="font-weight-semibold mb-0" id="faskes">0</h3>
+							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="faskes_loc"></span></small>
 						</div>
 					</div>
 				</div>
@@ -370,7 +373,7 @@
 							</div>
 							<div class="tab-pane fade konten-card" id="index-keamanan" role="tabpanel" aria-labelledby="index-keamanan-tab">
 								<div class="card">
-									<div class="card-header">Indesk Keamanan<span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+									<div class="card-header">Indeks Keamanan<span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
 									<div class="card-body">
 										<canvas id="ikc2" width="800" height="280"></canvas>
 									</div>
