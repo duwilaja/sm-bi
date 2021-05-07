@@ -1,7 +1,7 @@
 
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Mindicar extends CI_Model {
+class MIndicar extends CI_Model {
 
     private $t = '';
     public $see = '*';
