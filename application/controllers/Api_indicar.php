@@ -8,7 +8,7 @@ class Api_indicar extends CI_Controller {
         date_default_timezone_set("Asia/Jakarta");
 		parent::__construct();
         $this->load->helper('string');
-        $this->load->model('Mindicar','mic');
+        $this->load->model('MIndicar','mic');
 		// Your own constructor code
 	}
 
