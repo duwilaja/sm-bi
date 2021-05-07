@@ -134,6 +134,7 @@ class Data extends CI_Controller {
         $data['js_local'] = 'data/intan/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
+			$data['polda'] = $this->intan->polda();
 			$this->template->load("data/intan/dashboard",$data);
 
 			// 404 page 
@@ -148,6 +149,26 @@ class Data extends CI_Controller {
 	public function dt_ttr_operator()
 	{
 		echo $this->intan->dt_ttr_operator();
+	}
+	public function intan_polres()
+	{
+		$id = $this->input->post("id");
+		echo json_encode(array("code"=>"200","msgs"=>$this->intan->polres($id)));
+	}
+	public function intan_sum()
+	{
+		$loc='Seluruh Indonesia';
+		$f_date_start = $this->input->post("f_date_start");
+		$f_date_end = $this->input->post("f_date_end");
+		$f_polda = $this->input->post("f_polda");
+		$f_polres = $this->input->post("f_polres");
+		if($f_polda!=''){
+			$loc=$this->input->post('danam');
+		}
+		if($f_polres!=''){
+			$loc=$this->input->post('resnam');
+		}
+		echo json_encode(array("code"=>"200","loc"=>$loc,"msgs"=>$this->intan->sum($f_date_start,$f_date_end,$f_polda,$f_polres)));
 	}
 
 	public function export_data_intan(){

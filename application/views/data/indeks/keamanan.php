@@ -48,7 +48,7 @@
                                 <div class="form-group">
                                     <p>Polda</p>
                                     <select class="form-control form-control-sm" name="f_polda" id="f_polda">
-                                        <option value="">No Selected</option>
+                                        <option value="">-- Pilih Polda --</option>
                                         <?php foreach($polda as $row):?>
                                         <option value="<?php echo $row->da_id;?>"><?php echo $row->da_nam;?></option>
                                         <?php endforeach;?>
@@ -68,7 +68,7 @@
                     <div class="card-footer overflow-hidden">
                         <div style="float:right;">
                             <button type="reset" onclick="reset_form()" class="btn btn-warning">Reset</button>
-                            <button type="submit" id="cari" class="btn btn-success" type="submit" >Cari</button>
+                            <button type="button" id="cari" class="btn btn-success" onclick="grafik();" >Cari</button>
                             <!-- <button type="submit" id="cari" class="btn btn-success" type="submit" onclick="lihatDt()">Cari</button> -->
                         </div>
                     </div>
@@ -82,7 +82,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header">Indesk Keamanan<span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+            <div class="card-header">Indeks Keamanan&nbsp;<span style="font-weight:bold;" id="loc"></span></div>
             <div class="card-body">
                 <canvas id="ikc2" width="400" height="400"></canvas>
             </div>
