@@ -1078,7 +1078,7 @@
             <div class="row">
               <div class="col-md-4 pr-1">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-car-police-tab" data-toggle="pill" href="#v-car-police" role="tab" aria-controls="v-car-police" aria-selected="false">
+                  <a onclick="get_kend('polisi')" class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-car-police-tab" data-toggle="pill" href="#v-car-police" role="tab" aria-controls="v-car-police" aria-selected="false">
                       <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/polri.png" alt="image" style="background-color:white!important;">
                       <div class="wrapper ml-3">
                         <p class="mb-0">
@@ -1111,8 +1111,9 @@
               <div class="col-md-8 pl-0">
                 <div class="tab-content" id="v-pills-tabContent">
                   <div class="tab-pane fade" id="v-car-police" role="tabpanel" aria-labelledby="v-car-police-tab">
-                    <div class="owl-carousel owl-theme mb-4">
+                    <div class="owl-carousel owl-theme mb-4" id="list_kend">
                         <div class="item"><a href="#" onclick="tes(1,'Diva','Polisi 1')"><img class="avatar brround w-80" src="<?= base_url();?>aronox/assets/images/users/1.jpg" alt="image" style="height:3rem!important;"></a></div>
+                        <div class="item"><a href="#" onclick="tes(2,'Wardana','Polisi 2')"><img class="avatar brround w-80" src="<?= base_url();?>aronox/assets/images/users/1.jpg" alt="image" style="height:3rem!important;"></a></div>
                         <div class="item"><a href="#" onclick="tes(2,'Wardana','Polisi 2')"><img class="avatar brround w-80" src="<?= base_url();?>aronox/assets/images/users/1.jpg" alt="image" style="height:3rem!important;"></a></div>
                     </div>
                     <div class="border-top pt-2">
@@ -1274,24 +1275,25 @@
                 }
             });
         });
-
+      
       $('.owl-carousel').owlCarousel({
-          // loop:true,
-          margin:10,
-          nav:false,
-          dots:false,
-          responsive:{
-              0:{
-                  items:1
-              },
-              600:{
-                  items:3
-              },
-              1000:{
-                  items:5
-              }
-          }
+        // loop:true,
+        margin:10,
+        nav:false,
+        dots:false,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:5
+            }
+        }
       })
+    
       $(document).ready(function(){
           $(".nav-link").click(function(){
               if ($(this).hasClass('active')){

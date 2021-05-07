@@ -25,6 +25,11 @@ var rumah_sakit_link = [];
 var dishub_arr = [];
 var dishub_link = [];
 
+var kend_indicar = {
+  'mobil' : [],
+  'route' : []
+};
+
 $(document).ready(function() {
   if (Notification.permission !== "granted")
   Notification.requestPermission();
@@ -305,7 +310,6 @@ function initMap() {
   
   const trafficLayer = new google.maps.TrafficLayer();
   trafficLayer.setMap(map);
-
 }
 
 function rumah_sakit() { 
@@ -479,15 +483,10 @@ function realtime_ambulan() {
   myLoop(arr_jalan,m_ambulan,i_ambulan,'#bc090c');
 }  
 
-function updateMarker(marker, latitude, longitude,color) {
+function updateMarker(marker, latitude, longitude,color,angel) {
   var prevPosn = marker.getPosition();
   marker.setPosition(
-    new google.maps.LatLng(
-      latitude,
-      longitude
-      )
-      );
-      
+    new google.maps.LatLng(latitude,longitude));
       var car = "M17.402,0H5.643C2.526,0,0,3.467,0,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759c3.116,0,5.644-2.527,5.644-5.644 V6.584C23.044,3.467,20.518,0,17.402,0z M22.057,14.188v11.665l-2.729,0.351v-4.806L22.057,14.188z M20.625,10.773 c-1.016,3.9-2.219,8.51-2.219,8.51H4.638l-2.222-8.51C2.417,10.773,11.3,7.755,20.625,10.773z M3.748,21.713v4.492l-2.73-0.349 V14.502L3.748,21.713z M1.018,37.938V27.579l2.73,0.343v8.196L1.018,37.938z M2.575,40.882l2.218-3.336h13.771l2.219,3.336H2.575z M19.328,35.805v-7.872l2.729-0.355v10.048L19.328,35.805z";
       // var icon = {
       //     path: car,
@@ -516,9 +515,13 @@ function updateMarker(marker, latitude, longitude,color) {
         offset: '5%',
         // rotation: parseInt(heading[i]),
         anchor: new google.maps.Point(10, 25),
-        rotation: google.maps.geometry.spherical.computeHeading(prevPosn, marker.getPosition())
+        // rotation: google.maps.geometry.spherical.computeHeading(prevPosn, marker.getPosition())
+        rotation: parseFloat(angel)
       })
+
     }
+
+    
     
     //  set your counter to 1
     function myLoop(arr_jalan,m,i1,color) { 
@@ -591,45 +594,159 @@ function updateMarker(marker, latitude, longitude,color) {
       }
     }
     
+    async function postData(url = '', data = {}) {
+      // Default options are marked with *
+      const response = await fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json', 
+          // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE3MyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJJT1QuS09STEFOVEFTQEdNQUlMLkNPTSIsIkFzcE5ldC5JZGVudGl0eS5TZWN1cml0eVN0YW1wIjoiYTZhNjI0YzMtZDhmYi00NzI4LTdlN2MtMzlmYjJlNjdkNjQyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5HcnVwIiwic3ViIjoiMTczIiwianRpIjoiZjY5MTMwMzMtNmFlOC00ODQ3LWJmYjAtMDNkYzkzNDcyYmJhIiwiaWF0IjoxNjIwMjYzNzgyLCJ1c2VybmFtZSI6IklPVC5LT1JMQU5UQVNAR01BSUwuQ09NIiwiZnVsbG5hbWUiOiJJbmRpY2FyIERlbW8gIiwic3RhdHVzIjoiQWN0aXZlIiwicm9sZV9uYW1lIjoiQWRtaW5HcnVwLEFkbWluR3J1cCIsImV4cGlyZWQiOiIwNS8wNy8yMDIxIDAxOjE2OjIyIiwidHlwZV91c2VyIjoiQ3VzdG9tZXIiLCJ0ZW5hbnQiOiJEZWZhdWx0IiwiZ3JvdXAiOiJpb3Qua29ybGFudGFzQGdtYWlsLmNvbSxpb3Qua29ybGFudGFzQGdtYWlsLmNvbSIsImN1c3RvbWVyY29kZSI6IjhhYzhiYjY5MWI4OWFkNDk1Y2Q5NTkzZWZhMWZhMmRhIiwidGVuYW50Y29kZSI6IiIsInVzZXJjb2RlIjoiOTg5MDIzZDIwMTAxODU3ZjE4ZWU0OWU3NmYzNGRmZmUiLCJuYmYiOjE2MjAyNjM3ODIsImV4cCI6MTYyMDM1MDE4MiwiaXNzIjoiSW5kaUNhckJhY2tlbmQiLCJhdWQiOiJJbmRpQ2FyQmFja2VuZCJ9.ehb-k2VQ1MDZaDfwyeRKCmmuEEsc8cBT5xHkPzg0Ngk'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+      });
+      return response.json(); // parses JSON response into native JavaScript objects
+    }
+
+    function realtime_indicar() { 
+      if(kend_indicar.mobil.length < 1){
+        getMakeMarkerIndicar().then((x) => {
+          x.mobil.forEach(m => {
+            updateMarker(m,m.position.lat(),m.position.lng(),'#795548',m.rotation);
+          });
+        }).catch((err) => {
+          
+        });
+      }else{
+        var i = 0;
+        postData('../Api_indicar/get_realtime_indicar',{})
+        .then(data => {
+          data.dataset.forEach(m => {
+            updateMarker(kend_indicar.mobil[m.vehicleid],m.latitude,m.longitude,'#795548',m.angle);
+          });
+        });  
+      }
+
+    }
+
+    function getMakeMarkerIndicar() { 
+      return new Promise(function(resolve, reject) {
+        var marker = {};
+        postData('../Api_indicar/get_realtime_indicar',{})
+        .then(data => {
+          
+          data.dataset.forEach(e => {
+            // updateMarker(m_polisi,e.latitude,e.longitude,'#2d2d2d')   
+            marker = new google.maps.Marker({
+              position: new google.maps.LatLng(e.latitude, e.longitude),
+              map: map,
+              rotation : e.angle,
+              // icon: icons,
+              Label: {
+                className:'my-custom-class-for-label',
+                text: e.vehiclename ,
+                // fontWeight: 'bold',
+                // fontSize: '9px',
+                // fontFamily: '"Courier New", Courier,Monospace',
+                // color: 'white',
+              }
+            });
+            kend_indicar.mobil[e.vehicleid] = marker;
+            kend_indicar.route[e.vehicleid] = e.angle;
+          });
+          resolve(kend_indicar);
+        });    
+      })
+    }
+    
+    function get_kend(kend='polisi') { 
+      var i = 0;
+      const ok = new Promise(function(resolve, reject) {
+      postData('https://www.indicar.id/platform/public/index.php/sysapi/vehicles/list',{})
+      .then(data => {
+        data.dataset.forEach(m => {
+          $('.owl-carousel')
+          .trigger('add.owl.carousel', [`<div class="item"><a href="#" onclick="tes(${m.vehicleid},'${m.vehiclename}','${m.vehiclegroup}')"><img class="avatar brround w-80" src="../aronox/assets/images/users/1.jpg" alt="image" style="height:3rem!important;"></a></div>`])
+          .trigger('refresh.owl.carousel');
+        });
+      });
+      });
+    }
+
+    // $('.owl-carousel').owlCarousel({
+    //   // loop:true,
+    //   margin:10,
+    //   nav:false,
+    //   dots:false,
+    //   responsive:{
+    //       0:{
+    //           items:1
+    //       },
+    //       600:{
+    //           items:3
+    //       },
+    //       1000:{
+    //           items:5
+    //       }
+    //   }
+    // })
+
     $(function(){
-      // var socket = io.connect('http://36.91.103.46:3000')
       
-      // var myCloseInfo = function(){
-      //   alert('this is a callback function that runs after close the notification.');
-      // };
+      realtime_indicar();
       
-      // //Listen on new_message
-      // socket.on("new_message", (data) => {
-      //   notifikasi(data.message);
-      // })
+      setTimeout(() => {
+        setInterval(() => {
+          realtime_indicar();
+        }, 10000);
+      }, 1000);
+
+      var socket = io.connect('http://36.91.103.46:3000')
       
-      // function notifikasi(msg) {
+      var myCloseInfo = function(){
+        alert('this is a callback function that runs after close the notification.');
+      };
       
-      //   if (!Notification) {
-      //       alert('Browsermu tidak mendukung Web Notification.'); 
-      //       return;
-      //   }
+      //Listen on new_message
+      socket.on("new_message", (data) => {
+        notifikasi(data.message);
+      })
       
-      //   if (Notification.permission !== "granted")
-      //       Notification.requestPermission();
-      //   else 
-      //       var notifikasi = new Notification('Laporan Kecelakaan', {
-      //           icon: 'http://36.91.103.46/sm-bi/my/images/logo.png',
-      //           body: msg,
-      //       });
+      function notifikasi(msg) {
       
-      //       notifikasi.onclick = function () {
-      //         crash('yes');
-      //         rumah_sakit();
-      //         polisi();
-      //         dishub();
-      //         notifikasi.close();
-      //       };
+        if (!Notification) {
+            alert('Browsermu tidak mendukung Web Notification.'); 
+            return;
+        }
       
-      //       setTimeout(function(){
-      //           notifikasi.close();
-      //       }, 5000);
-      // };
+        if (Notification.permission !== "granted")
+            Notification.requestPermission();
+        else 
+            console.log('dassa');
+
+            var notifikasi = new Notification('Laporan Kecelakaan', {
+                icon: 'http://36.91.103.46/sm-bi/my/images/logo.png',
+                body: msg,
+            });
+      
+            notifikasi.onclick = function () {
+              crash('yes');
+              rumah_sakit();
+              polisi();
+              dishub();
+              notifikasi.close();
+            };
+      
+            setTimeout(function(){
+                notifikasi.close();
+            }, 5000);
+      };
       
     });
     

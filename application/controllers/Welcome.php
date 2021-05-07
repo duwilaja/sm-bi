@@ -104,6 +104,12 @@ class Welcome extends CI_Controller {
 		$this->load->view('simulasi/simulasi',$data);
 	}
 
+	public function simulasi2()
+	{
+        $data['js_local'] = 'simulasi/simulasi.js';
+		$this->load->view('simulasi/simulasi2',$data);
+	}
+
 	public function get_api_cctv()
 	{
 		$curl = curl_init();
