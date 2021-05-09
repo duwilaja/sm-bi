@@ -102,12 +102,13 @@ class MIndicar extends CI_Model {
             if ($exp <= $now) {
                 $data = $this->api_token();
                 $token = $data['token'];
+                $token_biasa = $token;
                 if($type==1) $token = $data['indicarToken'];
                 $indicarToken =$data['indicarToken'];
                 $tokenExpired = $data['tokenExpired'];
                 $status = "get Token Baru";
                 $insert_token =  array(
-                    'token' => $token ,
+                    'token' => $token_biasa ,
                     'indicarToken' => $indicarToken,
                     'ctddate' => $datetime,
                     'exp_date' => $tokenExpired
@@ -120,11 +121,13 @@ class MIndicar extends CI_Model {
         }else{
             $data = $this->api_token();
             $token = $data['token'];
+            $token_biasa = $token;
+            if($type==1) $token = $data['indicarToken'];
             $indicarToken =$data['indicarToken'];
             $tokenExpired = $data['tokenExpired'];
             $status = "get Token Baru";
             $insert_token =  array(
-                'token' => $token ,
+                'token' => $token_biasa ,
                 'indicarToken' => $indicarToken,
                 'ctddate' => $datetime,
                 'exp_date' => $tokenExpired
