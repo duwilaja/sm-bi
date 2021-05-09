@@ -96,13 +96,13 @@ class MIndicar extends CI_Model {
             $exp = $dtx->exp_date;
             $token = $dtx->token;
             if($type==1) $token = $dtx->indicarToken; //indicar
-            echo $dtx->exp_date;
         } 
        
         if (!empty($exp)) {
             if ($exp <= $now) {
                 $data = $this->api_token();
                 $token = $data['token'];
+                if($type==1) $token = $data['indicarToken'];
                 $indicarToken =$data['indicarToken'];
                 $tokenExpired = $data['tokenExpired'];
                 $status = "get Token Baru";
