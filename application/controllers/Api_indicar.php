@@ -110,7 +110,7 @@ class Api_indicar extends CI_Controller {
     // Realtime Indicar
     public function get_realtime_indicar()
     {
-        echo $this->mic->realtime_indicars();
+        echo $this->mic->realtime_indicar();
     }
 
 }

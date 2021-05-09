@@ -84,8 +84,8 @@ class MIndicar extends CI_Model {
         date_default_timezone_set("Asia/Jakarta");
         $token = '';
         $indicarToken = '';
+        $this->db->order_by('rowid', 'desc');
         $dt = $this->db->get('indicar_key',1);
-        $this->db->order_by('id', 'desc');
         $datetime = date('Y-m-d H:i:s');
         $now = strtotime($datetime);
         $status = "";
@@ -96,10 +96,11 @@ class MIndicar extends CI_Model {
             $exp = $dtx->exp_date;
             $token = $dtx->token;
             if($type==1) $token = $dtx->indicarToken; //indicar
+            echo $dtx->exp_date;
         } 
        
         if (!empty($exp)) {
-            if ($now >= $exp) {
+            if ($exp <= $now) {
                 $data = $this->api_token();
                 $token = $data['token'];
                 $indicarToken =$data['indicarToken'];
