@@ -26,7 +26,6 @@ class Api_indicar extends CI_Controller {
     }
     function dt_kendaraan()
     {
-
         // $data = $this->mic->get_http();
         // $result = $data['dataset'];
         // $insert =[];
@@ -111,7 +110,7 @@ class Api_indicar extends CI_Controller {
     // Realtime Indicar
     public function get_realtime_indicar()
     {
-        echo $this->mic->realtime_indicar();
+        echo $this->mic->realtime_indicars();
     }
 
 }
