@@ -34,9 +34,9 @@ class MIndicar extends CI_Model {
         $data = json_decode($response, true);
         return $data;
     }
+
     function get_http()
     {
-
         $curl = curl_init();
         curl_setopt_array($curl, array(
         CURLOPT_URL => "http://api.solo.indicar.id/kendaraan/list",
@@ -97,42 +97,15 @@ class MIndicar extends CI_Model {
             $token = $dtx->token;
             if($type==1) $token = $dtx->indicarToken; //indicar
         } 
-       
         if (!empty($exp)) {
             if ($exp <= $now) {
-                $data = $this->api_token();
-                $token = $data['token'];
-                $token_biasa = $token;
-                if($type==1) $token = $data['indicarToken'];
-                $indicarToken =$data['indicarToken'];
-                $tokenExpired = $data['tokenExpired'];
-                $status = "get Token Baru";
-                $insert_token =  array(
-                    'token' => $token_biasa ,
-                    'indicarToken' => $indicarToken,
-                    'ctddate' => $datetime,
-                    'exp_date' => $tokenExpired
-                );
-                $this->db->insert('indicar_key',$insert_token);
+                $token = $this->in_token($type);
                 $status = "Token Telah Diupdate";
-                }else{
-                    $status = "Token Belum expired";
-                }   
+            }else{
+                $status = "Token belum expired";
+            }   
         }else{
-            $data = $this->api_token();
-            $token = $data['token'];
-            $token_biasa = $token;
-            if($type==1) $token = $data['indicarToken'];
-            $indicarToken =$data['indicarToken'];
-            $tokenExpired = $data['tokenExpired'];
-            $status = "get Token Baru";
-            $insert_token =  array(
-                'token' => $token_biasa ,
-                'indicarToken' => $indicarToken,
-                'ctddate' => $datetime,
-                'exp_date' => $tokenExpired
-            );
-            $this->db->insert('indicar_key',$insert_token);
+            $token = $this->in_token($type);
             $status = "Token Telah Ditambah";
         }
         $result = array(
@@ -142,6 +115,25 @@ class MIndicar extends CI_Model {
         );
         return $result;
 
+    }
+
+    public function in_token($type='')
+    {
+        $data = $this->api_token();
+        $token = $data['token'];
+        $token_biasa = $token;
+        if($type==1) $token = $data['indicarToken'];
+        $indicarToken =$data['indicarToken'];
+        $tokenExpired = $data['tokenExpired'];
+        $status = "get Token Baru";
+        $insert_token =  array(
+            'token' => $token_biasa ,
+            'indicarToken' => $indicarToken,
+            'ctddate' =>  date('Y-m-d H:i:s'),
+            'exp_date' => $tokenExpired
+        );
+        $this->db->insert('indicar_key',$insert_token);
+        return $token;
     }
 
     function get_token() // ambil token terbaru
@@ -399,6 +391,11 @@ class MIndicar extends CI_Model {
 
         $response = curl_exec($curl);
         $api = json_decode($response, true);
+        
+        if ($api['success'] == 0) {
+            $this->in_token($type);
+        }
+
         return json_encode($api);
     }
     
