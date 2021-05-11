@@ -3,7 +3,6 @@ var no = 1;
 
 
 $(document).ready(function(){
-    jml_data_tmc();
     slide();
 
     $('#f_polda').change(function(){ 
@@ -16,7 +15,7 @@ $(document).ready(function(){
             dataType : 'json',
             success: function(data){
                  
-                var html = '<option value=""></option>';
+                var html = '<option value="">-- Pilih Polres --</option>';
                 var i;
                 for(i=0; i<data.length; i++){
                     html += '<option value='+data[i].res_id+'>'+data[i].res_nam+'</option>';
@@ -27,22 +26,9 @@ $(document).ready(function(){
         });
         // return false;
     });
+	
+	grafik();
 
-    $("#cari").click(function(){
-        var start = $("#f_date_start").val();
-        var end =   $("#f_date_end").val();
-        if (start == '' || end == '') {
-            alert('isi start date & end date');
-        }else{
-            if (end < start) {
-                alert('start date tidak boleh lebih besar dari end date');
-            }else{
-                jml_data_tmc();
-                slide();
-                }
-        
-        }
-    });
 });
 
 function slide() {
@@ -69,90 +55,97 @@ function slide() {
     })
 }
 
-
-function jml_data_tmc(start='',end='',polda='',polres='') {
+function grafik() {
     var start = $("#f_date_start").val();
     var end = $("#f_date_end").val();
     var polda = $("#f_polda").val();
     var polres = $("#f_polres").val();
+	
+	var lokasi="Nasional";
+	if(polda!=''){ lokasi=$("#f_polda option:selected").text(); }
+	if(polres!=''){ lokasi=$("#f_polres option:selected").text(); }
+	
     $.ajax({
         // url : "../Grafik_api/jml_data_tmc",
-        url: "../Grafik_api/jml_data_etle",
+        url: "keselamatan_datasets",
         method : "POST",
         data : {start: start, end:end,polda:polda,polres:polres },
-        async : true,
-        dataType : 'json',
         success: function(r){
-
-            $('#total').text(r[0]);
-            $('#tervalidasi').text(r[1]);
-            $('#terberkas').text(r[2]);
-            $('#terkirim').text(r[3]);
-            $('#terkonfirmasi').text(r[4]);
-            $('#terbayar').text(r[5]);
-            $('#blokir').text(r[6]);
-            $('#polda1').text(r[7]);
-            $('#polda2').text(r[8]);
-            $('#polda3').text(r[9]);
-            $('#polda4').text(r[10]);
-            $('#polda5').text(r[11]);
-            $('#polda6').text(r[12]);
-            $('#polda7').text(r[13]);
-            $('#polres1').text(r[14]);
-            $('#polres2').text(r[15]);
-            $('#polres3').text(r[16]);
-            $('#polres4').text(r[17]);
-            $('#polres5').text(r[18]);
-            $('#polres6').text(r[19]);
-            $('#polres7').text(r[20]);
-
+			//console.log(r);
+			var dat=JSON.parse(r);
+			$("#loc").html(lokasi);
+			if(myChart!=null){
+				myChart.destroy();
+			}
+			var labels=dat['labels'];//["Jan","Feb", "Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+			var dataset=build_datasets(dat['labels'],dat['datas']);
+			myChart=series_chart(ctx2,'bar',labels,dataset);
         }
     });
 }
-
-
-
+function randomColor(){
+	return "#"+(Math.random().toString(16)+"000000").slice(2, 8).toUpperCase();
+}
 
 var ctx2 = document.getElementById("ikc2").getContext('2d');
-var myChart = new Chart(ctx2, {
-    type: 'bar', 
-    data: {
-        labels: ["Jan","Feb", "Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"],
-        datasets: [{
-            label: 'Kecelakaan', // Name the series
-            data: [60,80,50,150,50,70,200,150,100,100,100,150], // Specify the data values array
-            fill: false,
-            type : 'bar',
-            borderColor: '#ff1f14', // Add custom color border (Line)
-            backgroundColor: '#ff4e45', // Add custom color background (Points and Fill)
-            borderWidth: 1 // Specify bar border width
-        },
-        {
-            label: 'Selamat', // Name the series
-            data: [40,70,150,100,150,80,100,50,150,50,100,100], // Specify the data values array
-            fill: false,
-            type : 'bar',
-            borderColor: '#4050ff', // Add custom color border (Line)
-            backgroundColor: '#5462ff', // Add custom color background (Points and Fill)
-            borderWidth: 1 // Specify bar border width
-        },
-        {
-            label: 'Pengendara', // Name the series
-            data: [100,150,200,250,200,150,300,200,250,150,200,250], // Specify the data values array
-            fill: false,
-            type : 'line',
-            borderColor: 'yellow', // Add custom color border (Line)
-            backgroundColor: '#f8ff24', // Add custom color background (Points and Fill)
-            borderWidth: 1 // Specify bar border width
-        },
-    ],
-    },
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
-    }
-});
+var myChart = null;
+var lbls=["Korban","Meninggal","Luka Berat","Luka Ringan"];
+var typs=["line","bar","bar","bar"];
 
+function get_data(a,b,c){
+	var ret=0;
+	for(var y=0;y<c.length;y++){
+		var d=c[y];
+		if(d['ym']==b){
+			switch(a){
+				case "Korban": ret=parseInt(d['k']); break;
+				case "Meninggal": ret=parseInt(d['md']); break;
+				case "Luka Berat": ret=parseInt(d['lb']); break;
+				case "Luka Ringan": ret=parseInt(d['lr']); break;
+			}
+		}
+	}
+	return ret;
+}
+function get_sets(l,ds,lbl,typ){
+	var set=[];
+	for(var x=0;x<lbl.length;x++){ //loop bulan
+		set[x]=get_data(l,lbl[x],ds);
+	}
+	var fil=typ=='line'?false:true;
+	var sd={
+		label: l,
+		data: set,
+		fill: fil,
+		type: typ,
+		borderColor: randomColor(),
+		backgroundColor: randomColor(),
+		borderWidth: 1
+	}
+	return sd;
+}
+function build_datasets(lbl,dataset){
+	var data=[];
+	for(var i=0;i<lbls.length;i++){
+		data.push(get_sets(lbls[i],dataset,lbl,typs[i]));
+	}
+	console.log(data);
+	
+	return data;
+}
 
-
-
+function series_chart(ctx,type='bar',labels=[],datasets=[]){
+	var thechart = new Chart(ctx, {
+		type: type, 
+		data: {
+			labels: labels,
+			datasets: datasets
+		},
+		options: {
+		  responsive: true, // Instruct chart js to respond nicely.
+		  maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+		}
+	});
+	
+	return thechart;
+}

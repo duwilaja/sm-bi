@@ -162,6 +162,31 @@ class Statistik extends CI_Controller {
 			$this->load->view('login',$data);
 		}
 	}
+	public function keselamatan_datasets(){
+		$start=$this->input->post("start");
+		$end=$this->input->post("end");
+		$polda=$this->input->post("polda");
+		$polres=$this->input->post("polres");
+		
+		$end=$end==''?date('Y-m-d'):$end;
+		$start=$start==''?date('Y-m-d',strtotime("$end -12 month")):$start;
+		$origin = date_create($start);
+		$target = date_create($end);
+		$origin = date_create($origin->format('Y').'-'.$origin->format('m').'-1');
+		$interval = date_diff($origin, $target);
+		$mon=$interval->m + ($interval->y*12);
+		$mon=$interval->d > 0 ?$mon+1:$mon;
+		$mon=$origin->format("m") != $target->format("m") ?$mon+1:$mon;
+		$labels=array(); $bln=$origin->format('Y-m-d');
+		for($i=0;$i<$mon;$i++){
+			if($bln<=$end) $labels[]=date('M Y',strtotime("$bln"));
+			$bln=date('Y-m-d',strtotime("$bln 1 month"));
+		}
+		
+		$datas=$this->statistik->get_ais_laka($start,$end,$polda,$polres);
+		$out=array("labels"=>$labels,"datas"=>$datas);
+		echo json_encode($out);
+	}
 	
 }
 
