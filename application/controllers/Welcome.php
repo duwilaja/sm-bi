@@ -104,6 +104,12 @@ class Welcome extends CI_Controller {
 		$this->load->view('simulasi/simulasi',$data);
 	}
 
+	public function simulasi2()
+	{
+        $data['js_local'] = 'simulasi/simulasi.js';
+		$this->load->view('simulasi/simulasi2',$data);
+	}
+
 	public function get_api_cctv()
 	{
 		$curl = curl_init();
@@ -216,23 +222,27 @@ class Welcome extends CI_Controller {
 		$data = [];
 		$kategori = [];
 		$total = '';
+		$kategori = [];
 
 		$this->load->model('MData_analytic','mda');
 		$a = $this->input->post('a');
 		
 		$q = $this->db->get('cctv c');
 		foreach ($q->result() as $k => $v) {
-			$total = $this->mda->total_kendaraan($v->channel_id,'hari')['jml'];
+			
+			if ($a != '') $total = $this->mda->total_kendaraan($v->channel_id,'hari')['jml'];
+			if ($a == 'traffic_category') $kategori = $this->mda->get_traffic_category([
+					'channel_id' => $v->channel_id,
+					'ctddate' => date('Y-m-d'),
+					'filter' => 'today'
+				])->result();
+
 			array_push($data,[
 				'id' =>  $v->id,
 				'nama' =>  $v->nama_cctv,
 				'rtsp' =>  $v->rtsp_cctv,
 				'total' => $total,
-				'kategori' => $this->mda->get_traffic_category([
-					'channel_id' => $v->channel_id,
-					'ctddate' => date('Y-m-d'),
-					'filter' => 'today'
-				])->result(),
+				'kategori' =>  $kategori,
 				'kordinat' => kordinat($v->kordinat),
 			]);
 		}
