@@ -106,7 +106,7 @@ class Welcome extends CI_Controller {
 
 	public function simulasi2()
 	{
-        $data['js_local'] = 'simulasi/simulasi.js';
+        $data['js_local'] = 'simulasi/simulasi2.js';
 		$this->load->view('simulasi/simulasi2',$data);
 	}
 

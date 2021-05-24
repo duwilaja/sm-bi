@@ -74,12 +74,20 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <!-- jsFiddle will insert css and js -->
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 </head>
 <style>
   /* Always set the map height explicitly to define the size of the div
   * element that contains the map. */
   #mapid {
       height: 100%;
+  }
+
+  .leaflet-control-container .leaflet-routing-container-hide {
+    position: absolute;
+    left: 0;
   }
   
   /* Optional: Makes the sample page fill the window. */
@@ -1242,7 +1250,7 @@
     <!-- Owl  -->
 	  <script src="<?= base_url('my/vendor/owl/owl.carousel.min.js')?>"></script>
     <script src="<?= base_url()?>aronox/assets/js/popover.js"></script>
-    <script src="<?=base_url('my/js_local/simulasi/simulasi.js')?>"></script>
+    <script src="<?=base_url('my/js_local/simulasi/simulasi2.js')?>"></script>
 
     <!--Othercharts js-->
     <script src="<?= base_url();?>aronox/assets/plugins/othercharts/jquery.sparkline.min.js"></script>
@@ -1460,100 +1468,5 @@
       });
 
     </script>
-
-    <script>
-var mk = [];
-var mymap = L.map('mapid').setView([-7.558865108655025, 110.82722410076913], 13);
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoibWF0cmlrbW10IiwiYSI6ImNrb2R3cmtrMzA1aWkydW5xZTMxMGFmYnIifQ.lOy8K-JftfPVgLisOyiMww'
-}).addTo(mymap);
-
-function onEachFeature(feature, layer) {
-	var popupContent = "";
-
-	//jika feature memiliki properties
-	// dan jika memiliki properties.Kelurahan
-	if (feature.properties && feature.properties.Kecamatan) {
-		popupContent += feature.properties.Kecamatan;
-	}
-
-	layer.bindPopup(popupContent);
-}
-
-// Icon options
-var iconOptions = {
-   iconUrl: '../my/simulasi/car-top.png',
-   iconSize: [30, 40]
-}
-
-// Creating a custom icon
-// var customIcon = L.icon(iconOptions);
-
-// const a = L.marker([-7.558865108655025, 110.82722410076913],{icon: customIcon,rotationAngle:90}).addTo(mymap)
-// 		.bindPopup("<b>Hello world!</b><br />I am a popup.");
-
-// a.on('click', function(e){
-//     mymap.setView(e.latlng, 20);
-// });
-
-var planes = [
-    [
-        "aLatLng(-7.556845, 110.782013)",
-        -7.55684490468251,
-        110.78201293945314
-    ],
-    [
-        "aLatLng(-7.559738, 110.804501)",
-        -7.559737793090385,
-        110.804500579834
-    ],
-    [
-        "aLatLng(-7.579477, 110.769482)",
-        -7.579476984441851,
-        110.76948165893556
-    ],
-    [
-        "aLatLng(-7.578626, 110.802612)",
-        -7.578626175872434,
-        110.80261230468751
-    ],
-    [
-        "aLatLng(-7.574542, 110.830421)",
-        -7.574542271343764,
-        110.8304214477539
-    ]
-  ];
-
-  mymap.on('click', function(e) {      
-        var popLocation= e.latlng;
-        mk.push(['a'+e.latlng,e.latlng.lat,e.latlng.lng]);
-        var popup = L.popup()
-        .setLatLng(popLocation)
-        .setContent('<p>Hello world!<br />This is a nice popup.</p>')
-        .openOn(mymap);   
-
-        console.log(mk);     
-    });
-
-for (var i = 0; i < planes.length; i++) {
-   marker = new L.marker([planes[i][1],planes[i][2]])
-    .bindPopup(planes[i][0])
-    .addTo(mymap);
-
-    marker.on('click', function(e){
-        mymap.setView(e.latlng, 17);
-    });
-  }
-
-// geojson = L.geoJson(ok, {
-// 		onEachFeature: onEachFeature
-// 	}).addTo(mymap);
-    
-</script>
   </body>
 </html>
