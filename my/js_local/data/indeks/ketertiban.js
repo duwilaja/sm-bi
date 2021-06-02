@@ -77,6 +77,9 @@ function grafik() {
 			if(myChart1!=null){
 				myChart1.destroy();
 			}
+			if(myChart2!=null){
+				myChart2.destroy();
+			}
 			var labels=dat['labels'];//["Jan","Feb", "Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
 			var dataset=build_datasets(dat['labels'],dat['datasim'],lbls);
 			var dataset2 = build_datasets(pelanggaran,dat['datapelanggaran'],lbls2);

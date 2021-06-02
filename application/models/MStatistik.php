@@ -62,6 +62,98 @@ class MStatistik extends CI_Model {
         return $this->db->select($select)->where($where)->group_by($grpby)->order_by("pelanggaran,usia")->get("tar_data")->result();
     }
 	
+	public function get_target_laka($start,$end,$polda,$polres)
+    {
+		$select="'Target' as z,thn as x,SUM(jml) as y";
+        $where=array("thn>="=>$start,"thn<="=>$end);
+		if($polda!=''){
+			$where+=array("da"=>$polda);
+		}
+		if($polres!=''){
+			$where+=array("res"=>$polres);
+		}
+		$grpby="z,x";
+        return $this->db->select($select)->where($where)->group_by($grpby)->order_by("x")->get("target_laka")->result();
+    }
+	public function get_jml_laka($start,$end,$polda,$polres,$axis="thn")
+    {
+		$select="'Kejadian' as z,$axis as x,SUM(jml) as y";
+        $where=array("tanggal>="=>$start,"tanggal<="=>$end);
+		if($polda!=''){
+			$where+=array("polda"=>$polda);
+		}
+		if($polres!=''){
+			$where+=array("polres"=>$polres);
+		}
+		$grpby="z,x";
+        return $this->db->select($select)->where($where)->group_by($grpby)->order_by("x")->get("ais_laka")->result();
+    }
+	public function get_laka_axis($start,$end,$polda,$polres,$axis="lokasi")
+    {
+		$this->db->distinct();
+		$select=$axis;
+        $where=array("tanggal>="=>$start,"tanggal<="=>$end);
+		if($polda!=''){
+			$where+=array("polda"=>$polda);
+		}
+		if($polres!=''){
+			$where+=array("polres"=>$polres);
+		}
+		$grpby="z,x";
+        return $this->db->select($select)->where($where)->get("ais_laka")->result_array();
+    }
+	public function get_laka_kor($start,$end,$polda,$polres,$axis="lokasi")
+    {
+		$select="'Korban' as z,$axis as x,SUM(md+lb+lr) as y";
+        $where=array("tanggal>="=>$start,"tanggal<="=>$end);
+		if($polda!=''){
+			$where+=array("polda"=>$polda);
+		}
+		if($polres!=''){
+			$where+=array("polres"=>$polres);
+		}
+		$grpby="z,x";
+        return $this->db->select($select)->where($where)->group_by($grpby)->order_by("x")->get("ais_laka")->result();
+    }
+	public function get_laka_die($start,$end,$polda,$polres,$axis="lokasi")
+    {
+		$select="'Meninggal' as z,$axis as x,SUM(md) as y";
+        $where=array("tanggal>="=>$start,"tanggal<="=>$end);
+		if($polda!=''){
+			$where+=array("polda"=>$polda);
+		}
+		if($polres!=''){
+			$where+=array("polres"=>$polres);
+		}
+		$grpby="z,x";
+        return $this->db->select($select)->where($where)->group_by($grpby)->order_by("x")->get("ais_laka")->result_array();
+    }
+	
+	public function get_cops($start,$end,$polda,$polres){
+		$select="nrp,nama";
+        $where=array("isactive"=>'Y');
+		if($polda!=''){
+			$where+=array("polda"=>$polda);
+		}
+		if($polres!=''){
+			$where+=array("polres"=>$polres);
+		}
+        return $this->db->select($select)->where($where)->get("persons")->result_array();
+	}
+	public function get_kinerja($start,$end,$polda,$polres)
+    {
+		$select="'Kinerja' as z,nrp as x,COUNT(nrp) as y";
+        $where=array("tgl>="=>$start,"tgl<="=>$end);
+		if($polda!=''){
+			$where+=array("polda"=>$polda);
+		}
+		if($polres!=''){
+			$where+=array("polres"=>$polres);
+		}
+		$grpby="z,x";
+        return $this->db->select($select)->where($where)->group_by($grpby)->order_by("x")->get("v_kinerja")->result_array();
+    }
+	
 }
 
 

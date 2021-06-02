@@ -3,7 +3,6 @@ var no = 1;
 
 
 $(document).ready(function(){
-    jml_data_tmc();
     slide();
 
     $('#f_polda').change(function(){ 
@@ -16,7 +15,7 @@ $(document).ready(function(){
             dataType : 'json',
             success: function(data){
                  
-                var html = '<option value=""></option>';
+                var html = '<option value="">-- Pilih Polres --</option>';
                 var i;
                 for(i=0; i<data.length; i++){
                     html += '<option value='+data[i].res_id+'>'+data[i].res_nam+'</option>';
@@ -27,22 +26,10 @@ $(document).ready(function(){
         });
         // return false;
     });
-
-    $("#cari").click(function(){
-        var start = $("#f_date_start").val();
-        var end =   $("#f_date_end").val();
-        if (start == '' || end == '') {
-            alert('isi start date & end date');
-        }else{
-            if (end < start) {
-                alert('start date tidak boleh lebih besar dari end date');
-            }else{
-                jml_data_tmc();
-                slide();
-                }
-        
-        }
-    });
+	
+	//dum();
+	grafik();
+    
 });
 
 function slide() {
@@ -70,272 +57,169 @@ function slide() {
 }
 
 
-function jml_data_tmc(start='',end='',polda='',polres='') {
+function get_data(a,b,c){
+	var ret=0;
+	for(var y=0;y<c.length;y++){
+		var d=c[y];
+		if(d['x']==b && d['z']==a){
+			ret=parseInt(d['y']);
+		}
+	}
+	return ret;
+}
+function get_sets(l,ds,lbl,typ){
+	var set=[];
+	for(var x=0;x<lbl.length;x++){ //loop bulan
+		set[x]=get_data(l,lbl[x],ds);
+	}
+	var fil=typ=='line'?false:true;
+	var sd={
+		label: l,
+		data: set,
+		fill: fil,
+		type: typ,
+		borderColor: randomColor(),
+		backgroundColor: randomColor(),
+		borderWidth: 1
+	}
+	return sd;
+}
+function build_datasets(lbl,dataset,lblx,typs){
+	var data=[];
+	for(var i=0;i<lblx.length;i++){
+		data.push(get_sets(lblx[i],dataset,lbl,typs[i]));
+	}
+	console.log(data);
+	
+	return data;
+}
+
+function series_chart(ctx,type='bar',labels=[],datasets=[]){
+	var thechart = new Chart(ctx, {
+		type: type, 
+		data: {
+			labels: labels,
+			datasets: datasets
+		},
+		options: {
+		  responsive: true, // Instruct chart js to respond nicely.
+		  maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+		}
+	});
+	
+	return thechart;
+}
+
+function getPolarColors(n){
+	var re=[];
+	for(var i=0;i<n;i++){
+		re[i]=randomColor();
+	}
+	return re;
+}
+
+function polar_chart(label,dataset){
+	var data = {
+		datasets: [{
+			data: dataset,//[100,100,100,100,150],
+			backgroundColor: getPolarColors(dataset.length),//["red","green","blue","orange","purple"],
+			label: 'My dataset' // for legend
+		}],
+		labels: label /*[
+			"Ceroboh terhadap lalu lintas dari depan",
+			"Gagal menjaga jarak aman",
+			"Ceroboh saat belok",
+			"Ceroboh saat menyalip",
+			"Melampaui batas kecepatan"
+		]*/
+	};
+	var options = {
+		responsive: true, 
+		// maintainAspectRatio: false,
+		plugins: {
+			datalabels: {
+				formatter: (value, ctx) => {
+					let sum = 0;
+					let dataArr = ctx.chart.data.datasets[0].data;
+					dataArr.map(data => {
+						sum += data;
+					});
+					let percentage = (value*100 / sum).toFixed(2)+"%";
+					return percentage;
+				},
+				color: '#fff',
+			}
+		}
+	};
+	
+	var thechart = new Chart(ctx5, {
+	data: data,
+    type: 'polarArea',
+    options: options });
+	
+	return thechart;
+}
+
+var ctx1 = document.getElementById("ifakl").getContext('2d');
+var myChart1=null;
+var ctx2 = document.getElementById("ifak2").getContext('2d');
+var myChart2=null;
+var ctx3 = document.getElementById("per_jml_kec").getContext('2d');
+var myChart3=null;
+var ctx4 = document.getElementById("grafik_kecelakaan").getContext('2d');
+var myChart4=null;
+var ctx5 = document.getElementById("indeks_penyebab_kecelakaan").getContext('2d');
+var myChart5=null;
+
+function grafik() {
     var start = $("#f_date_start").val();
     var end = $("#f_date_end").val();
     var polda = $("#f_polda").val();
     var polres = $("#f_polres").val();
+	
+	var lokasi="Nasional";
+	if(polda!=''){ lokasi=$("#f_polda option:selected").text(); }
+	if(polres!=''){ lokasi=$("#f_polres option:selected").text(); }
+	
     $.ajax({
         // url : "../Grafik_api/jml_data_tmc",
-        url: "../Grafik_api/jml_data_etle",
+        url: "kecelakaan_datasets",
         method : "POST",
         data : {start: start, end:end,polda:polda,polres:polres },
-        async : true,
-        dataType : 'json',
         success: function(r){
-
-            $('#total').text(r[0]);
-            $('#tervalidasi').text(r[1]);
-            $('#terberkas').text(r[2]);
-            $('#terkirim').text(r[3]);
-            $('#terkonfirmasi').text(r[4]);
-            $('#terbayar').text(r[5]);
-            $('#blokir').text(r[6]);
-            $('#polda1').text(r[7]);
-            $('#polda2').text(r[8]);
-            $('#polda3').text(r[9]);
-            $('#polda4').text(r[10]);
-            $('#polda5').text(r[11]);
-            $('#polda6').text(r[12]);
-            $('#polda7').text(r[13]);
-            $('#polres1').text(r[14]);
-            $('#polres2').text(r[15]);
-            $('#polres3').text(r[16]);
-            $('#polres4').text(r[17]);
-            $('#polres5').text(r[18]);
-            $('#polres6').text(r[19]);
-            $('#polres7').text(r[20]);
-
+			console.log(r);
+			var dat=JSON.parse(r);
+			$(".loc").html(lokasi);
+			if(myChart1!=null){
+				myChart1.destroy();
+			}
+			if(myChart2!=null){
+				myChart2.destroy();
+			}
+			if(myChart3!=null){
+				myChart3.destroy();
+			}
+			if(myChart4!=null){
+				myChart4.destroy();
+			}
+			if(myChart5!=null){
+				myChart5.destroy();
+			}
+			var dataset1 = build_datasets(dat['axis1'],dat['datas1'],dat['label1'],['line','line']);
+			var dataset2 = build_datasets(dat['axis2'],dat['datas2'],dat['label2'],['bar','bar']);
+			var dataset3 = build_datasets(dat['axis3'],dat['datas3'],dat['label3'],['bar','bar']);
+			var dataset4 = build_datasets(dat['axis4'],dat['datas4'],dat['label4'],['bar','bar']);
+			
+			myChart1=series_chart(ctx1,'line',dat['axis1'],dataset1);
+			myChart2=series_chart(ctx2,'bar',dat['axis2'],dataset2);
+			myChart3=series_chart(ctx3,'bar',dat['axis3'],dataset3);
+			myChart4=series_chart(ctx4,'bar',dat['axis4'],dataset4);
+			myChart5=polar_chart(dat['axis5'],dat['datas5']);//(ctx5,'polarArea',dat['axis1'],dataset1);
+			
         }
     });
 }
-
-
-var ifakl = document.getElementById("ifakl").getContext('2d');
-var myChart = new Chart(ifakl, {
-    type: 'bar',
-    data: {
-        labels: ["2016","2017","2018","2019","2020"],
-        datasets: [{
-            label: 'Target', // Name the series
-            data: [50000,40000,30000,20000,10000], // Specify the data values array
-            fill: false,
-            type : 'line',
-            borderColor: '#38c0ff', // Add custom color border (Line)
-            backgroundColor: '#38c0ff', // Add custom color background (Points and Fill)
-            borderWidth: 1 // Specify bar border width
-        },
-        {
-            label: 'Real', // Name the series
-            data: [75000,28000,35000,15000,5000], // Specify the data values array
-            fill: false,
-            type : 'line',
-            borderColor: '#ffcd36', // Add custom color border (Line)
-            backgroundColor: '#ffcd36', // Add custom color background (Points and Fill)
-            borderWidth: 1 // Specify bar border width
-        },
-    ],
-    },
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
-    }
-});  
-
-
-
-Chart.defaults.global.defaultFontFamily = "Lato";
-var per_jml_kec = document.getElementById("per_jml_kec").getContext('2d');
-// var horizontalBarChart = new Chart(per_jml_kec, {
-//    type: 'horizontalBar',
-//    data: {
-//       labels: ["BABEL","MALUT","GORONTALO","BENGKULU","KALTIM","MALUKU","KALSEL","KEPRI","PAPUA","JAMBI","KALTENG","SUMSEL","SULTARA","NTT"],
-//     //   datasets: [{
-//     //     //  data: [2000, 4000, 6000, 8000, 10000, 12000, 14000],
-//     //     //  backgroundColor: ["#73BFB8", "#73BFB8", "#73BFB8", "#73BFB8", "#73BFB8", "#73BFB8", "#73BFB8"], 
-//     //   }]
-//          datasets:[
-//                 {
-//                     label: "Jumlah Korban",
-//                     backgroundColor: "orange",
-//                     data: [3,7,6,3,4,9,8,7,2,4,6,8,9,5]
-//                 },
-//                 {
-//                     label: "Jumlah Laka",
-//                     backgroundColor: "red",
-//                     data: [4,3,1,4,6,8,5,9,4,7,8,2,4,6]
-//                 }
-//          ]
-//    },
-
-//    options: {
-//     responsive: true, // Instruct chart js to respond nicely.
-//     maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
-//   }
-// });
-var horizontalBarChart = new Chart(per_jml_kec, {
-    type: 'bar',
-    data: {
-        labels: ["Laweyan","Serengan","Pasar Kliwon","Jebres","Banjarsari","Kota Surakarta"],
-          datasets:[
-                 {
-                     label: "Jumlah Korban",
-                     backgroundColor: "#38c0ff",
-                     data: [50000,25000,40000,80000,50000,200000]
-                 },
-                 {
-                     label: "Jumlah Laka",
-                     backgroundColor: "#ffcd36",
-                     data: [70000,50000,80000,100000,70000,250000]
-                 }
-          ]
-    },
- 
-    options: {
-     responsive: true, // Instruct chart js to respond nicely.
-     maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
-     scales: {
-        xAxes: [{
-            // stacked: true,
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 350000
-          }
-        }],
-        yAxes: [{
-            // stacked: true,
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 350000
-          }
-        }]
-    }
-   }
- });
-var data = {
-    datasets: [{
-        data: [100,100,100,100,150],
-        backgroundColor: ["red","green","blue","orange","purple"],
-        label: 'My dataset' // for legend
-    }],
-    labels: [
-        "Ceroboh terhadap lalu lintas dari depan",
-        "Gagal menjaga jarak aman",
-        "Ceroboh saat belok",
-        "Ceroboh saat menyalip",
-        "Melampaui batas kecepatan"
-    ]
-};
-var options = {
-    responsive: true, 
-    // maintainAspectRatio: false,
-    plugins: {
-        datalabels: {
-            formatter: (value, ctx) => {
-                let sum = 0;
-                let dataArr = ctx.chart.data.datasets[0].data;
-                dataArr.map(data => {
-                    sum += data;
-                });
-                let percentage = (value*100 / sum).toFixed(2)+"%";
-                return percentage;
-            },
-            color: '#fff',
-        }
-    }
-};
-var indeks_penyebab_kecelakaan = $("#indeks_penyebab_kecelakaan");
-new Chart(indeks_penyebab_kecelakaan, {
-    data: data,
-    type: 'polarArea',
-    options: options
-});
-
-
-Chart.defaults.global.defaultFontFamily = "Lato";
-var grafik_kecelakaan = document.getElementById("grafik_kecelakaan").getContext('2d');
-var horizontalBarChart = new Chart(grafik_kecelakaan, {
-    type: 'bar',
-    data: {
-       labels: ["TAKSI","BUS SEKOLAH","BUS PARIWISATA","RENTAL","OJEK","ANGKOT","ANGKUTAN BARANG","PRIBADI"],
-          datasets:[
-                 {
-                     label: "Jumlah Korban",
-                     backgroundColor: "#38c0ff",
-                     data: [200,150,300,50,200,150,100,175]
-                 },
-                 {
-                     label: "Jumlah Laka",
-                     backgroundColor: "#ffcd36",
-                     data: [400,450,150,90,300,250,120,200]
-                 }
-          ]
-    },
- 
-    options: {
-     responsive: true, // Instruct chart js to respond nicely.
-     maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
-     scales: {
-        xAxes: [{
-            // stacked: true,
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 1000
-          }
-        }],
-        yAxes: [{
-            // stacked: true,
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 1000
-          }
-        }]
-    }
-   }
- });
-
-
-Chart.defaults.global.defaultFontFamily = "Lato";
-var ifak2 = document.getElementById("ifak2").getContext('2d');
-var horizontalBarChart = new Chart(ifak2, {
-     type: 'bar',
-     data: {
-        labels: ["Laweyan","Serengan","Pasar Kliwon","Jebres","Banjarsari","Kota Surakarta"],
-           datasets:[
-                  {
-                      label: "Jumlah Korban",
-                      backgroundColor: "#38c0ff",
-                      data: [50000,25000,40000,80000,50000,200000]
-                  },
-                  {
-                      label: "Jumlah Penduduk",
-                      backgroundColor: "#ffcd36",
-                      data: [100000,50000,80000,150000,180000,550000]
-                }
-
-           ]
-     },
-  
-     options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
-      scales: {
-          xAxes: [{
-            //   stacked: true,
-              ticks: {
-                suggestedMin: 0,
-                suggestedMax: 350000
-            }
-          }],
-          yAxes: [{
-            //   stacked: true,
-              ticks: {
-                suggestedMin: 0,
-                suggestedMax: 350000
-            }
-          }]
-      }
-    }
-  }); 
-
+function randomColor(){
+	return "#"+(Math.random().toString(16)+"000000").slice(2, 8).toUpperCase();
+}
 

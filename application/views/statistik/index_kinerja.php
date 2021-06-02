@@ -28,10 +28,13 @@
 									<p>Polda</p>
 									<select class="form-control form-control-sm"  name="f_polda" id="f_polda">
 										<option value="">-- Pilih Polda --</option>
+										<?php foreach($polda as $row):?>
+                                        <option value="<?php echo $row->da_id;?>"><?php echo $row->da_nam;?></option>
+                                        <?php endforeach;?>
 									</select>
 								</div>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group">
 									<p>Polres</p>
 									<select class="form-control form-control-sm"  name="f_polres" id="f_polres">
@@ -44,7 +47,7 @@
 					<div class="card-footer overflow-hidden">
 						<div style="float:right;">
 							<button type="reset" onclick="reset_form()" class="btn btn-warning">Reset</button>
-							<button type="submit" id="cari" class="btn btn-success" type="submit" >Cari</button>
+							<button type="submit" id="cari" class="btn btn-success" onclick="grafik()" >Cari</button>
 							<!-- <button type="submit" id="cari" class="btn btn-success" type="submit" onclick="lihatDt()">Cari</button> -->
 						</div>
 					</div>
@@ -59,10 +62,9 @@
 	<div class="col-md-12">
 		<div class="card">
 			<!-- <div class="card-header">Index Kinerja Cybercorps<span style="position:relative;left:8px;"><b>Polrestabes Surakarta  - Januari 2021</b></span></div> -->
-			<div class="card-header">Index Kinerja Cybercorps<span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
-			<div class="card-header">Index Kinerja Cybercorps<span style="position:relative;left:8px;"><b>Polda Jabar  - Januari 2021</b></span></div>
+			<div class="card-header">Index Kinerja Cybercorps&nbsp;<span style="font-weight:bold;" class="loc"></span></div>
 			<div class="card-body">
-				<canvas id="ikc" width="400" height="400"></canvas>
+				<canvas id="ikc2" width="400" height="400"></canvas>
 			</div>
 		</div>
 	</div>
