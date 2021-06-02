@@ -47,7 +47,7 @@
 									<div class="form-group">
 										<p>Polda</p>
 										<select class="form-control form-control-sm" name="f_polda" id="f_polda">
-											<option value="">No Selected</option>
+											<option value="">-- Pilih Polda --</option>
 											<?php foreach($polda as $row):?>
 											<option value="<?php echo $row->da_id;?>"><?php echo $row->da_nam;?></option>
 											<?php endforeach;?>
@@ -67,7 +67,7 @@
 						<div class="card-footer overflow-hidden">
 							<div style="float:right;">
 								<button type="reset" onclick="reset_form()" class="btn btn-warning">Reset</button>
-								<button type="submit" id="cari" class="btn btn-success" type="submit" >Cari</button>
+								<button type="button" id="cari" class="btn btn-success" onclick="grafik();">Cari</button>
 								<!-- <button type="submit" id="cari" class="btn btn-success" type="submit" onclick="lihatDt()">Cari</button> -->
 							</div>
 						</div>
@@ -82,7 +82,7 @@
 		<div class="col-md-12">
 			<div class="card">
 				<!-- <div class="card-header">Indesk fatalitas korban kecelakaan <span style="position:relative;left:8px;"><b>Polrestabes Surakartaa</b></span></div> -->
-				<div class="card-header">Indesk Target Kecelakaan <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+				<div class="card-header">Indeks Target Kecelakaan&nbsp;<span style="font-weight:bold;" class="loc"></span></div>
 				<!-- <center><span><b>Jumlah Korban Meninggal Dunia</b></span></center> -->
 				<div class="card-body">
 					<canvas id="ifakl" width="400" height="400"></canvas>
@@ -94,9 +94,9 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
-				<div class="card-header">Indesk fatalitas korban kecelakaan lalu lintas <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+				<div class="card-header">Indeks fatalitas korban kecelakaan lalu lintas&nbsp;<span style="font-weight:bold;" class="loc"></span></div>
 				<!-- <center><span><b>Terhadap populasi penduduk</b></span></center> -->
-				<center><span><b>Per Kecamatan</b></span></center>
+				<center><span><b>Per Lokasi</b></span></center>
 				<div class="card-body">
 					<canvas id="ifak2" width="400" height="400"></canvas>
 				</div>
@@ -107,8 +107,8 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
-				<div class="card-header">Indeks Perbandingan Jumlah Kecelakaan Dan Jumlah Korban  <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
-				<center><span><b>Per Kecamatan</b></span></center>
+				<div class="card-header">Indeks Perbandingan Jumlah Kecelakaan Dan Jumlah Korban&nbsp;<span style="font-weight:bold;" class="loc"></span></div>
+				<center><span><b>Per Lokasi</b></span></center>
 				<div class="card-body">
 					<canvas id="per_jml_kec" width="400" height="400"></canvas>
 				</div>
@@ -119,7 +119,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
-				<div class="card-header">Indeks Perbandingan Jumlah Kecelakaan Dan Jumlah Korban <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+				<div class="card-header">Indeks Perbandingan Jumlah Kecelakaan Dan Jumlah Korban&nbsp;<span style="font-weight:bold;" class="loc"></span></div>
 				<!-- <center><span><b>Jumlah Korban Meninggal Dunia</b></span></center> -->
 				<center><span><b>Per Jenis Kendaraan</b></span></center>
 				<div class="card-body">
@@ -133,7 +133,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
-				<div class="card-header">Kecelakaan Disebabkan Perilaku Pengemudi <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
+				<div class="card-header">Penyebab Kecelakaan&nbsp;<span style="font-weight:bold;" class="loc"></span></div>
 				<center><span><b>Jumlah Korban Meninggal Dunia</b></span></center>
 				<div class="card-body">
 					<canvas id="indeks_penyebab_kecelakaan" width="400" height="200"></canvas>
@@ -141,13 +141,4 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
