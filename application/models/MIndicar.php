@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class MIndicar extends CI_Model {
 
     private $t = '';
+    private $email = 'admin@iotrans.id';
+    private $password = 'iottrans2021';
     public $see = '*';
 
     public function __construct()
@@ -14,7 +16,7 @@ class MIndicar extends CI_Model {
     function api_token()  // get token api
     {
         $curl = curl_init();
-        $search = array("email" => "user2@gmail.com", "password" => "user2pass");
+        $search = array("email" => $this->email, "password" => $this->password);
         curl_setopt_array($curl, array(
         CURLOPT_URL => "http://api.solo.indicar.id/users/login",
         CURLOPT_RETURNTRANSFER => true,

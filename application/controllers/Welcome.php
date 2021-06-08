@@ -10,6 +10,7 @@ class Welcome extends CI_Controller {
 	{
 		parent::__construct();
 		
+		$this->db2 = $this->load->database('intan',true);
 	}
 
 	// public function contoh()
@@ -106,8 +107,33 @@ class Welcome extends CI_Controller {
 
 	public function simulasi2()
 	{
-        $data['js_local'] = 'simulasi/simulasi2.js';
+        $data = [
+			'js_local' => 'simulasi/simulasi2.js',
+			'lokasi' => $this->get_kategori_lokasi()->result()
+		];
+
 		$this->load->view('simulasi/simulasi2',$data);
+	}
+
+	public function get_kategori_lokasi()
+	{
+		$this->db2->select('id,kategori_static,nama_lokasi,lat,lng,deskripsi');
+
+		$kategori = $this->input->get('kategori');
+		$json = $this->input->get('json');
+		
+		if ($kategori != '') {
+			$this->db2->where('kategori_static', $kategori);
+		}else{
+			$this->db2->group_by('kategori_static');
+		}
+		
+		$q = $this->db2->get('lokasi');
+		if ($json == "json") {
+			echo json_encode($q->result());
+		}else{
+			return $q;
+		}
 	}
 
 	public function get_api_cctv()

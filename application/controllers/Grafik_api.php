@@ -2071,7 +2071,7 @@ class Grafik_api extends CI_Controller {
         echo json_encode($rsp);
     }
 
-    private function get_tmc_jml_bulan($d='',$status='',$polda,$polres)
+    private function get_tmc_jml_bulan($d='',$status='',$polda="",$polres="")
     {
         for ($i=1; $i <= 12 ; $i++) { 
             $bulan[$i] = 0;
@@ -2086,14 +2086,14 @@ class Grafik_api extends CI_Controller {
         return array_values($bulan);
     }
 
-    private function get_eri_jml_bulan($d='',$kategori,$polda,$polres)
+    private function get_eri_jml_bulan($d='',$kategori="",$polda="",$polres="")
     {
         for ($i=1; $i <= 12 ; $i++) { 
             $bulan[$i] = 0;
         }
 
         if($d == '') $d = date('Y-m-d');
-        $q = $this->eri->get_jml_bulan($d,$kategori,$polda,$polres);
+        $q = $this->eri->get_jml_bulan($d,$kategori="",$polda,$polres);
         foreach ($q->result() as $v) {
             @$bulan[(int)$v->bulan] = (int) $v->jml;
         }
@@ -2101,7 +2101,7 @@ class Grafik_api extends CI_Controller {
         return array_values($bulan);
     }
 
-    private function get_ais_jml_bulan($d='',$polda,$polres)
+    private function get_ais_jml_bulan($d='',$polda="",$polres="")
     {
         for ($i=1; $i <= 12 ; $i++) { 
             $bulan[$i] = 0;
