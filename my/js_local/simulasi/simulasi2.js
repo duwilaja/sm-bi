@@ -108,6 +108,7 @@ var titik_arr = [];
 var titik_link = [];
 
 var lokasi_arr = [];
+var lokasi_link = [];
 
 var polisi_arr = [];
 var polisi_link = [];
@@ -129,6 +130,15 @@ var kend_indicar = {
 $(document).ready(function() {
   if (Notification.permission !== "granted")
   Notification.requestPermission();
+
+  getData('../Welcome/get_kategori_lokasi')
+  .then(data => {
+    data.forEach(e => {
+      let lokasi = document.getElementById('lokasi_solo');
+      lokasi.innerHTML = 'Hello';
+    });
+  });
+
 });
 
 const createMarker = ({ map, position }) => {
@@ -307,43 +317,12 @@ function realtime_ambulan() {
   myLoop(arr_jalan,m_ambulan,i_ambulan,'#bc090c');
 }  
 
-function updateMarker(marker, latitude, longitude,color,angel) {
-  var prevPosn = marker.getPosition();
-  marker.setPosition(
-    new google.maps.LatLng(latitude,longitude));
-      var car = "M17.402,0H5.643C2.526,0,0,3.467,0,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759c3.116,0,5.644-2.527,5.644-5.644 V6.584C23.044,3.467,20.518,0,17.402,0z M22.057,14.188v11.665l-2.729,0.351v-4.806L22.057,14.188z M20.625,10.773 c-1.016,3.9-2.219,8.51-2.219,8.51H4.638l-2.222-8.51C2.417,10.773,11.3,7.755,20.625,10.773z M3.748,21.713v4.492l-2.73-0.349 V14.502L3.748,21.713z M1.018,37.938V27.579l2.73,0.343v8.196L1.018,37.938z M2.575,40.882l2.218-3.336h13.771l2.219,3.336H2.575z M19.328,35.805v-7.872l2.729-0.355v10.048L19.328,35.805z";
-      // var icon = {
-      //     path: car,
-      //     scale: .7,
-      //     strokeColor: 'white',
-      //     strokeWeight: .10,
-      //     fillOpacity: 1,
-      //     fillColor: '#404040',
-      //     offset: '5%',
-      //     // rotation: parseInt(heading[i]),
-      //     anchor: new google.maps.Point(10, 25) // orig 10,50 back of car, 10,0 front of car, 10,25 center of car
-      // };
-      marker.setIcon({
-        // path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-        // strokeColor: 'red',
-        // strokeWeight: 3,
-        // scale: 6,
-        // rotation: google.maps.geometry.spherical.computeHeading(prevPosn, marker.getPosition())
-        
-        path: car,
-        scale: .7,
-        strokeColor: 'white',
-        strokeWeight: .10,
-        fillOpacity: 1,
-        fillColor: color,
-        offset: '5%',
-        // rotation: parseInt(heading[i]),
-        anchor: new google.maps.Point(10, 25),
-        // rotation: google.maps.geometry.spherical.computeHeading(prevPosn, marker.getPosition())
-        rotation: parseFloat(angel)
-      })
-
-    }
+function updateMarker(marker, latitude, longitude,color,angel,vehiclename) {
+    var newLatLng = new L.LatLng(latitude, longitude);
+     marker.setLatLng(newLatLng); 
+     marker.setRotationAngle(angel);
+     createLabel(marker,vehiclename);
+ }
 
     
     
@@ -428,7 +407,7 @@ function updateMarker(marker, latitude, longitude,color,angel) {
         headers: {
           'Content-Type': 'application/json',
           'Accept' : 'application/json', 
-          // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE3MyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJJT1QuS09STEFOVEFTQEdNQUlMLkNPTSIsIkFzcE5ldC5JZGVudGl0eS5TZWN1cml0eVN0YW1wIjoiYTZhNjI0YzMtZDhmYi00NzI4LTdlN2MtMzlmYjJlNjdkNjQyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5HcnVwIiwic3ViIjoiMTczIiwianRpIjoiZjY5MTMwMzMtNmFlOC00ODQ3LWJmYjAtMDNkYzkzNDcyYmJhIiwiaWF0IjoxNjIwMjYzNzgyLCJ1c2VybmFtZSI6IklPVC5LT1JMQU5UQVNAR01BSUwuQ09NIiwiZnVsbG5hbWUiOiJJbmRpY2FyIERlbW8gIiwic3RhdHVzIjoiQWN0aXZlIiwicm9sZV9uYW1lIjoiQWRtaW5HcnVwLEFkbWluR3J1cCIsImV4cGlyZWQiOiIwNS8wNy8yMDIxIDAxOjE2OjIyIiwidHlwZV91c2VyIjoiQ3VzdG9tZXIiLCJ0ZW5hbnQiOiJEZWZhdWx0IiwiZ3JvdXAiOiJpb3Qua29ybGFudGFzQGdtYWlsLmNvbSxpb3Qua29ybGFudGFzQGdtYWlsLmNvbSIsImN1c3RvbWVyY29kZSI6IjhhYzhiYjY5MWI4OWFkNDk1Y2Q5NTkzZWZhMWZhMmRhIiwidGVuYW50Y29kZSI6IiIsInVzZXJjb2RlIjoiOTg5MDIzZDIwMTAxODU3ZjE4ZWU0OWU3NmYzNGRmZmUiLCJuYmYiOjE2MjAyNjM3ODIsImV4cCI6MTYyMDM1MDE4MiwiaXNzIjoiSW5kaUNhckJhY2tlbmQiLCJhdWQiOiJJbmRpQ2FyQmFja2VuZCJ9.ehb-k2VQ1MDZaDfwyeRKCmmuEEsc8cBT5xHkPzg0Ngk'
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE3MyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJJT1QuS09STEFOVEFTQEdNQUlMLkNPTSIsIkFzcE5ldC5JZGVudGl0eS5TZWN1cml0eVN0YW1wIjoiYTZhNjI0YzMtZDhmYi00NzI4LTdlN2MtMzlmYjJlNjdkNjQyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5HcnVwIiwic3ViIjoiMTczIiwianRpIjoiYTQ1ODUzYWMtOTYwMy00ZDhjLTliZGEtY2Q3Mzc4Njc4MjkxIiwiaWF0IjoxNjIzMTIwMTM1LCJ1c2VybmFtZSI6IklPVC5LT1JMQU5UQVNAR01BSUwuQ09NIiwiZnVsbG5hbWUiOiJJbmRpY2FyIERlbW8gIiwic3RhdHVzIjoiQWN0aXZlIiwicm9sZV9uYW1lIjoiQWRtaW5HcnVwLEFkbWluR3J1cCIsImV4cGlyZWQiOiIwNi8wOS8yMDIxIDAyOjQyOjE1IiwidHlwZV91c2VyIjoiQ3VzdG9tZXIiLCJ0ZW5hbnQiOiJEZWZhdWx0IiwiZ3JvdXAiOiJpb3Qua29ybGFudGFzQGdtYWlsLmNvbSxpb3Qua29ybGFudGFzQGdtYWlsLmNvbSIsImN1c3RvbWVyY29kZSI6IjhhYzhiYjY5MWI4OWFkNDk1Y2Q5NTkzZWZhMWZhMmRhIiwidGVuYW50Y29kZSI6IiIsInVzZXJjb2RlIjoiOTg5MDIzZDIwMTAxODU3ZjE4ZWU0OWU3NmYzNGRmZmUiLCJuYmYiOjE2MjMxMjAxMzUsImV4cCI6MTYyMzIwNjUzNSwiaXNzIjoiSW5kaUNhckJhY2tlbmQiLCJhdWQiOiJJbmRpQ2FyQmFja2VuZCJ9.paO3HI5EvW8HKTrc7_tIZpPUEua3rkyjAOSqa37LvMo'
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         redirect: 'follow', // manual, *follow, error
@@ -442,48 +421,82 @@ function updateMarker(marker, latitude, longitude,color,angel) {
       if(kend_indicar.mobil.length < 1){
         getMakeMarkerIndicar().then((x) => {
           x.mobil.forEach(m => {
-            updateMarker(m,m.position.lat(),m.position.lng(),'#795548',m.rotation);
+            updateMarker(m,m.position.lat(),m.position.lng(),'#795548',m.rotation,m.vehiclename);
           });
         }).catch((err) => {
           
         });
       }else{
         var i = 0;
-        postData('../Api_indicar/get_realtime_indicar',{})
+        postData('https://www.indicar.id/platform/public/index.php/sysapi/vehicles/list',{})
         .then(data => {
           data.dataset.forEach(m => {
-            updateMarker(kend_indicar.mobil[m.vehicleid],m.latitude,m.longitude,'#795548',m.angle);
+            updateMarker(kend_indicar.mobil[m.vehicleid],m.latitude,m.longitude,'#795548',m.angle,m.vehiclename);
           });
         });  
       }
 
     }
 
+    function createLabel(layer, text){
+      removeLabel(layer);
+       var icon = createStaticLabelIcon(text);
+       var testspan = document.createElement("div");
+       document.body.appendChild(testspan); 
+       
+       testspan.className = "textwidth";
+       testspan.style.fontSize = "10px";
+       testspan.style.width = "max-content";
+       testspan.innerHTML = text;
+       var width = testspan.clientWidth/2;
+       icon.options.iconAnchor = [width, -5]; //That the label is centered
+         
+       var label = L.marker(layer.getLatLng(),{icon: icon}).addTo(mymap);
+       layer.appendedLabel = label;
+       
+       document.body.removeChild(testspan); 
+     }
+     
+     function createStaticLabelIcon(labelText) {
+         return L.divIcon({
+             className: "leaflet-marker-label",
+             html: '<div class="leaflet-marker-iconlabel" style="background: #fff;color: #000;width:max-content;padding: 0px 6px;border-radius: 10px;margin-top: 8px;opacity: 0.8;border: solid 1px #AAA;font-weight: bold;">'+labelText+'</div>',
+             text : labelText,
+         });
+     }
+
+     
+function removeLabel(layer){
+  if(layer.appendedLabel){
+     mymap.removeLayer(layer.appendedLabel); //Remove label that connected with marker, else the label will not removed
+   }
+ }
+
     function getMakeMarkerIndicar() { 
       return new Promise(function(resolve, reject) {
         var marker = {};
-        postData('../Api_indicar/get_realtime_indicar',{})
+        postData('https://www.indicar.id/platform/public/index.php/sysapi/vehicles/list',{})
         .then(data => {
           
+          var myIcon = L.icon({
+              iconUrl: "../my/simulasi/car-top-view.png",
+              iconSize: [20, 20],
+              // iconAnchor: [22, 94],
+              // popupAnchor: [-3, -76],
+            // // shadowUrl: 'my-icon-shadow.png',
+            // shadowSize: [68, 95],
+            // shadowAnchor: [22, 94]
+        });
+
           data.dataset.forEach(e => {
-            // updateMarker(m_polisi,e.latitude,e.longitude,'#2d2d2d')   
-            marker = new google.maps.Marker({
-              position: new google.maps.LatLng(e.latitude, e.longitude),
-              map: map,
-              rotation : e.angle,
-              // icon: icons,
-              Label: {
-                className:'my-custom-class-for-label',
-                text: e.vehiclename ,
-                // fontWeight: 'bold',
-                // fontSize: '9px',
-                // fontFamily: '"Courier New", Courier,Monospace',
-                // color: 'white',
-              }
-            });
+            marker = new L.marker([e.latitude, e.longitude],{icon : myIcon,rotationAngle: e.angle})
+            .addTo(mymap);
+
+            createLabel(marker,e.vehiclename);
             kend_indicar.mobil[e.vehicleid] = marker;
             kend_indicar.route[e.vehicleid] = e.angle;
           });
+
           resolve(kend_indicar);
         });    
       })
@@ -528,49 +541,49 @@ function updateMarker(marker, latitude, longitude,color,angel) {
       setTimeout(() => {
         setInterval(() => {
           realtime_indicar();
-        }, 10000);
+        }, 8000);
       }, 1000);
 
-      var socket = io.connect('http://36.91.103.46:3000')
+      // var socket = io.connect('http://36.91.103.46:3000')
       
-      var myCloseInfo = function(){
-        alert('this is a callback function that runs after close the notification.');
-      };
+      // var myCloseInfo = function(){
+      //   alert('this is a callback function that runs after close the notification.');
+      // };
       
-      //Listen on new_message
-      socket.on("new_message", (data) => {
-        notifikasi(data.message);
-      })
+      // //Listen on new_message
+      // socket.on("new_message", (data) => {
+      //   notifikasi(data.message);
+      // })
       
-      function notifikasi(msg) {
+      // function notifikasi(msg) {
       
-        if (!Notification) {
-            alert('Browsermu tidak mendukung Web Notification.'); 
-            return;
-        }
+      //   if (!Notification) {
+      //       alert('Browsermu tidak mendukung Web Notification.'); 
+      //       return;
+      //   }
       
-        if (Notification.permission !== "granted")
-            Notification.requestPermission();
-        else 
-            console.log('dassa');
+      //   if (Notification.permission !== "granted")
+      //       Notification.requestPermission();
+      //   else 
+      //       console.log('dassa');
 
-            var notifikasi = new Notification('Laporan Kecelakaan', {
-                icon: 'http://36.91.103.46/sm-bi/my/images/logo.png',
-                body: msg,
-            });
+      //       var notifikasi = new Notification('Laporan Kecelakaan', {
+      //           icon: 'http://36.91.103.46/sm-bi/my/images/logo.png',
+      //           body: msg,
+      //       });
       
-            notifikasi.onclick = function () {
-              crash('yes');
-              rumah_sakit();
-              polisi();
-              dishub();
-              notifikasi.close();
-            };
+      //       notifikasi.onclick = function () {
+      //         crash('yes');
+      //         rumah_sakit();
+      //         polisi();
+      //         dishub();
+      //         notifikasi.close();
+      //       };
       
-            setTimeout(function(){
-                notifikasi.close();
-            }, 5000);
-      };
+      //       setTimeout(function(){
+      //           notifikasi.close();
+      //       }, 5000);
+      // };
       
     });
     
@@ -627,7 +640,7 @@ function updateMarker(marker, latitude, longitude,color,angel) {
           // shadowSize: [68, 95],
           // shadowAnchor: [22, 94]
       });
-
+     
         for (let i = 0; i < arr.length; i++) {
 
           const total = arr[i].total;
@@ -1138,11 +1151,11 @@ function updateMarker(marker, latitude, longitude,color,angel) {
       
       setTimeout(() => {
         var varr;
-        var icon = {
-          scaledSize: new google.maps.Size(20, 20), // scaled size
-          origin: new google.maps.Point(0,0), // origin
-          anchor: new google.maps.Point(0,0) // anchor
-        };
+        // var icon = {
+        //   scaledSize: new google.maps.Size(20, 20), // scaled size
+        //   origin: new google.maps.Point(0,0), // origin
+        //   anchor: new google.maps.Point(0,0) // anchor
+        // };
         if (item == 'cctv' && (item2 == 'traffic_counting' || item2 == 'traffic_category' || item2 == 'average_speed' || item2 == 'length_ocupantion')) {
     
           prom_get_cctv('CCTV',item2).then(function(data) {
@@ -1557,13 +1570,13 @@ function updateMarker(marker, latitude, longitude,color,angel) {
 
     function list_lokasi(arr=[],name='') { 
       var lokasi_arr = [];
-      $('#list_lokasi_'+name).html('');
+      $('#list_lokasi_all').html('');
       setTimeout(() => {
         var no = 0;
         arr.forEach(e => {
-          $('#list_lokasi_'+name).append(`<div class="list-group-item list-group-item-action">
-          <input type="checkbox" class="mr-2 check-lokasi-${name}" onchange="check_lokasi('${name}')" name="lokasi_${name}[]" value="${no++}">
-          <span class="name_cctv">${e.nama} </span></div>`);
+          $('#list_lokasi_all').append(`<div class="list-group-item list-group-item-action">
+          <input type="checkbox" class="mr-2 check-lokasi-all" onchange="check_lokasi('${name}')" name="lokasi_all[]" value="${no++}">
+          <span class="name_cctv">${e.nama_lokasi} </span></div>`);
         });
       }, 300);
     }
@@ -1572,7 +1585,7 @@ function updateMarker(marker, latitude, longitude,color,angel) {
       return new Promise(function(resolve, reject) {
         $.ajax({
           type: "POST",
-          url: "get_lokasi",
+          url: "get_kategori_lokasi?kategori="+name+'&json=json',
           dataType: "json",
           data : {
             for : name
@@ -1582,7 +1595,8 @@ function updateMarker(marker, latitude, longitude,color,angel) {
             if (name == 'dishub') dishub_link = r.data;
             if (name == 'rumah_sakit') rumah_sakit_link = r.data;
             if (name == 'damkar') damkar_link = r.data;
-            resolve(r.data);
+            lokasi_link = r;
+            resolve(r);
           }
         });
       })
@@ -1613,8 +1627,8 @@ function updateMarker(marker, latitude, longitude,color,angel) {
         });
 
         for (let i = 0; i < arr.length; i++) {
-
-          marker = new L.marker([arr[i].lat,arr[i].lng],{icon: myIcon})
+  
+          marker = new L.marker([arr[i].lat,arr[i].lng])
           .addTo(mymap);
 
           lokasi_arr.push(marker);
@@ -1629,14 +1643,14 @@ function updateMarker(marker, latitude, longitude,color,angel) {
       return new Promise(function(resolve, reject) {
         var info = '';
         for (let i = 0; i < arr.length; i++) {
-          info = `<div><p><b>${data_link[i].nama}</b></p>
+          info = `<div><p><b>${data_link[i].nama_lokasi}</b></p>
           <hr style="margin-top:0 !important;margin-bottom:1rem !important;">
           <div class="mt-3">
           <table class="w-100">
           <tr>
           <td><b>Alamat</b></td>
           <td>:</td>
-          <td>${data_link[i].alamat}</td>
+          <td>${data_link[i].deskripsi}</td>
           </tr>
           <tr style="margin-top:10px;">
           <td><b>Kordinat</b></td>
@@ -1666,6 +1680,7 @@ function updateMarker(marker, latitude, longitude,color,angel) {
     
     function check_lokasi(name='') { 
       prom_check_lokasi(name).then(function(hasil) {
+
         prom_clearMarkerLokasi(lokasi_arr).then(function(data) {
         //   cctv = hasil;
           // create_lokasi_map(hasil);
@@ -1698,8 +1713,11 @@ function updateMarker(marker, latitude, longitude,color,angel) {
           if (name == 'rumah_sakit') lokasi_arr = rumah_sakit_link;
           if (name == 'damkar') lokasi_arr = damkar_link;
 
+          lokasi_arr = lokasi_link;
+
         setTimeout(() => {
-          $('input[name="lokasi_'+name+'[]"]:checked').each(function() {
+          $('input[name="lokasi_all[]"]:checked').each(function() {
+            debugger;
             arr.push(lokasi_arr[this.value]);
           });
           resolve(arr);
@@ -1707,3 +1725,24 @@ function updateMarker(marker, latitude, longitude,color,angel) {
       })
     }
     
+
+    function iframe(url='') {
+      document.getElementById('cek_iframe').src = url;
+    }
+
+    async function getData(url = '', data = {}) {
+      // Default options are marked with *
+      const response = await fetch(url, {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      });
+      return response.json(); // parses JSON response into native JavaScript objects
+    }
