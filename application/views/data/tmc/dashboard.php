@@ -48,7 +48,7 @@
 								<div class="form-group">
 									<p>Polda</p>
 									<select class="form-control form-control-sm" name="f_polda" id="f_polda">
-										<option value="">No Selected</option>
+										<option value="">-- Pilih Polda --</option>
 										<?php foreach($polda as $row):?>
 										<option value="<?php echo $row->da_id;?>"><?php echo $row->da_nam;?></option>
 										<?php endforeach;?>
@@ -68,7 +68,7 @@
 					<div class="card-footer overflow-hidden">
 						<div style="float:right;">
 							<button type="reset" onclick="reset_form()" class="btn btn-warning">Reset</button>
-							<button type="submit" id="cari" class="btn btn-success" type="submit" >Cari</button>
+							<button type="button" id="cari" class="btn btn-success" >Cari</button>
 							<!-- <button type="submit" id="cari" class="btn btn-success" type="submit" onclick="lihatDt()">Cari</button> -->
 						</div>
 					</div>
@@ -91,7 +91,7 @@
 								<div class="ml-3">
 									<small class=" mb-0" style="font-weight:bold;">Informasi Lalin</small><br>
 									<h3 class="font-weight-semibold mb-0" id="t_pnp">0</h3>
-									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Polrestabes Surakarta</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold loc"></span></small>
 								</div>
 							</div>
 							<div class="item d-flex">
@@ -100,7 +100,7 @@
 								</div>
 								<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Interaksi</small>
 									<h3 class="font-weight-semibold mb-0" id="t_bus">0</h3>
-									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Polrestabes Surakarta</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold loc"></span></small>
 								</div>
 							</div>
 							<div class="item d-flex">
@@ -109,7 +109,7 @@
 								</div>
 								<div class=" d-flex flex-column ml-3"> <small class=" mb-0" style="font-weight:bold;">Publikasi</small>
 									<h3 class="font-weight-semibold mb-0" id="t_brg">0</h3>
-									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Polrestabes Surakarta</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold loc"></span></small>
 								</div>
 							</div>
 							<div class="item d-flex">
@@ -118,7 +118,7 @@
 								</div>
 								<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Kordinasi</small>
 									<h3 class="font-weight-semibold mb-0" id="t_motor">0</h3>
-									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Polrestabes Surakarta</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold loc"></span></small>
 								</div>
 							</div>
 							<div class="item d-flex">
@@ -129,7 +129,7 @@
 								</div>
 								<div class=" d-flex flex-column  ml-3"> <small class=" mb-0" style="font-weight:bold;">Prasarana Publik</small>
 									<h3 class="font-weight-semibold mb-0" id="t_khusus">0</h3>
-									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold">Polrestabes Surakarta</span></small>
+									<small class="mb-0 text-muted"><span class="text-success font-weight-semibold loc"></span></small>
 								</div>
 							</div>
 						</div>
