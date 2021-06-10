@@ -69,7 +69,11 @@
   /* Always set the map height explicitly to define the size of the div
   * element that contains the map. */
   #mapid {
-      height: 100%;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;  
   }
 
   .leaflet-control-container .leaflet-routing-container-hide {
@@ -809,7 +813,7 @@
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane panel2 fade" id="pills-maps" role="tabpanel" aria-labelledby="pills-maps-tab">
             <div class="row">
-            <div class="col-md-4 pr-1" style="height:320px;overflow-y:auto;">
+            <div class="col-md-4 col-sm-4 pr-1" style="height:320px;overflow-y:auto;">
                 <?php foreach ($lokasi as $v) { ?>
                   <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-maps-police-tab" onclick="lokasi('<?=$v->kategori_static?>')" data-toggle="pill" href="#v-maps-police" role="tab" aria-controls="v-maps-police" aria-selected="false">
                       <!-- <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/polri.png" alt="image" style="background-color:white!important;"> -->
@@ -837,7 +841,7 @@
                     </div>
                   </a> -->
               </div>
-              <div class="col-md-8 pl-0">
+              <div class="col-md-8 col-sm-8 pl-0">
                 <div class="tab-content" id="v-pills-tabContent">
                   <div class="tab-pane fade" id="v-maps-police" role="tabpanel" aria-labelledby="v-maps-police-tab">
                   <div class="ml-2 row mx-0" style="text-align:left!important;">
@@ -905,7 +909,7 @@
           </div>
           <div class="tab-pane panel2 fade" id="pills-cctv" role="tabpanel" aria-labelledby="pills-cctv-tab">
             <div class="row">
-              <div class="col-md-4 pr-1">
+              <div class="col-md-4 col-sm-4 pr-1">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                   <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-cctv-korlantas-tab" onclick="cctv()" data-toggle="pill" href="#v-cctv-korlantas" role="tab" aria-controls="v-cctv-korlantas" aria-selected="false">
                       <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/korlantas.png" alt="image" style="background-color:white!important;">
@@ -923,7 +927,7 @@
                   </a>
                 </div>
               </div>
-              <div class="col-md-8 pl-0">
+              <div class="col-md-8 col-sm-8 pl-0">
                 <div class="tab-content" id="v-pills-tabContent">
                   <div class="tab-pane fade" id="v-cctv-korlantas" role="tabpanel" aria-labelledby="v-cctv-korlantas-tab">
                     <div class="ml-2 row mx-0" style="text-align:left!important;">
@@ -973,7 +977,7 @@
           </div>
           <div class="tab-pane panel2 fade" id="pills-car" role="tabpanel" aria-labelledby="pills-car-tab">
             <div class="row">
-              <div class="col-md-4 pr-1">
+              <div class="col-md-4 col-sm-4 pr-1">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                   <a onclick="get_kend('polisi')" class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-car-police-tab" data-toggle="pill" href="#v-car-police" role="tab" aria-controls="v-car-police" aria-selected="false">
                       <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/polri.png" alt="image" style="background-color:white!important;">
@@ -1005,7 +1009,7 @@
                   </a>
                 </div>
               </div>
-              <div class="col-md-8 pl-0">
+              <div class="col-md-8 col-sm-8 pl-0">
                 <div class="tab-content" id="v-pills-tabContent">
                   <div class="tab-pane fade" id="v-car-police" role="tabpanel" aria-labelledby="v-car-police-tab">
                     <div class="owl-carousel owl-theme mb-4" id="list_kend">

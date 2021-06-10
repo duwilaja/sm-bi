@@ -2,7 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Api_indicar extends CI_Controller {
-	
+    
+    private $email = 'admin@iotrans.id';
+    private $password = 'iottrans2021';
+
+    
 	public function __construct()
 	{
         date_default_timezone_set("Asia/Jakarta");
@@ -11,6 +15,66 @@ class Api_indicar extends CI_Controller {
         $this->load->model('MIndicar','mic');
 		// Your own constructor code
 	}
+
+    function api_token()  // get token api
+    {
+        $curl = curl_init();
+        $search = array("email" => $this->email, "password" => $this->password);
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "http://api.solo.indicar.id/users/login",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_HTTPHEADER => array(
+            "Content-Type: application/json",
+            ),
+        CURLOPT_POSTFIELDS => json_encode($search),    
+        ));
+
+        $response = curl_exec($curl);
+        $data = json_decode($response, true);
+        return $data;
+    }
+
+    function get_token() // ambil token terbaru
+    {
+        $t = [];
+
+        $indicarKey = $this->db->get('indicar_key');
+
+        if ($indicarKey->num_rows() > 0) {
+            $x = $indicarKey->last_row('array');
+            $exp = date('Y-m-d H:i:s', $x['exp_date']);
+            if(date('Y-m-d H:i:s') > $exp){
+                $t = $this->api_token();
+                $this->db->insert('indicar_key', [
+                    'token' => $t['token'],
+                    'indicarToken' => $t['indicarToken'],
+                    'exp_date' => $t['tokenExpired']
+                ]);
+            }else{
+                $t = $x;
+            }
+        }else{
+            $t = $this->api_token();
+            $this->db->insert('indicar_key', [
+                'token' => $t['token'],
+                'indicarToken' => $t['indicarToken'],
+                'exp_date' => $t['tokenExpired']
+            ]);
+        }
+        
+        $rsp = [
+            'token' => $t['token'],
+            'indicarToken' => $t['indicarToken']
+        ];
+        
+        echo json_encode($rsp);
+    }
 
     function cek_token(){ // cek exp date
         echo json_encode($this->mic->cek_token(1));

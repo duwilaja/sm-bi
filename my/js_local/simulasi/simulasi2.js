@@ -122,6 +122,8 @@ var rumah_sakit_link = [];
 var dishub_arr = [];
 var dishub_link = [];
 
+var indicarKey = [];
+
 var kend_indicar = {
   'mobil' : [],
   'route' : []
@@ -137,6 +139,11 @@ $(document).ready(function() {
       let lokasi = document.getElementById('lokasi_solo');
       lokasi.innerHTML = 'Hello';
     });
+  });
+
+  getData('../Api_indicar/get_token')
+  .then(data => {
+    indicarKey = data;
   });
 
 });
@@ -407,7 +414,7 @@ function updateMarker(marker, latitude, longitude,color,angel,vehiclename) {
         headers: {
           'Content-Type': 'application/json',
           'Accept' : 'application/json', 
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE3MyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJJT1QuS09STEFOVEFTQEdNQUlMLkNPTSIsIkFzcE5ldC5JZGVudGl0eS5TZWN1cml0eVN0YW1wIjoiYTZhNjI0YzMtZDhmYi00NzI4LTdlN2MtMzlmYjJlNjdkNjQyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5HcnVwIiwic3ViIjoiMTczIiwianRpIjoiYTQ1ODUzYWMtOTYwMy00ZDhjLTliZGEtY2Q3Mzc4Njc4MjkxIiwiaWF0IjoxNjIzMTIwMTM1LCJ1c2VybmFtZSI6IklPVC5LT1JMQU5UQVNAR01BSUwuQ09NIiwiZnVsbG5hbWUiOiJJbmRpY2FyIERlbW8gIiwic3RhdHVzIjoiQWN0aXZlIiwicm9sZV9uYW1lIjoiQWRtaW5HcnVwLEFkbWluR3J1cCIsImV4cGlyZWQiOiIwNi8wOS8yMDIxIDAyOjQyOjE1IiwidHlwZV91c2VyIjoiQ3VzdG9tZXIiLCJ0ZW5hbnQiOiJEZWZhdWx0IiwiZ3JvdXAiOiJpb3Qua29ybGFudGFzQGdtYWlsLmNvbSxpb3Qua29ybGFudGFzQGdtYWlsLmNvbSIsImN1c3RvbWVyY29kZSI6IjhhYzhiYjY5MWI4OWFkNDk1Y2Q5NTkzZWZhMWZhMmRhIiwidGVuYW50Y29kZSI6IiIsInVzZXJjb2RlIjoiOTg5MDIzZDIwMTAxODU3ZjE4ZWU0OWU3NmYzNGRmZmUiLCJuYmYiOjE2MjMxMjAxMzUsImV4cCI6MTYyMzIwNjUzNSwiaXNzIjoiSW5kaUNhckJhY2tlbmQiLCJhdWQiOiJJbmRpQ2FyQmFja2VuZCJ9.paO3HI5EvW8HKTrc7_tIZpPUEua3rkyjAOSqa37LvMo'
+          'Authorization': 'Bearer '+indicarKey.indicarToken
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         redirect: 'follow', // manual, *follow, error
