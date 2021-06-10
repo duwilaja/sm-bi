@@ -41,10 +41,10 @@ $(document).ready(function(){
             dataType : 'json',
             success: function(data){
                  
-                var html = '';
+                var html = '<option value="">-- Pilih Polres --</option>';
                 var i;
                 for(i=0; i<data.length; i++){
-                    html += '<option value='+data[i].res_id+'>'+data[i].res_nam+'</option>';
+                    html += '<option value="'+data[i].res_id+'">'+data[i].res_nam+'</option>';
                 }
                 $('#f_polres').html(html);
 
@@ -62,7 +62,8 @@ $(document).ready(function(){
             if (end < start) {
                 alert('start date tidak boleh lebih besar dari end date');
             }else{
-                
+                jml_data_tmc();
+				
                 bar_tmc_kondisi();
                 bar_tmc_penyebab(); 
                 
@@ -1396,6 +1397,11 @@ function jml_data_tmc(start='',end='',polda='',polres='') {
     var end = $("#f_date_end").val();
     var polda = $("#f_polda").val();
     var polres = $("#f_polres").val();
+	
+	var loc="Nasional";
+	loc=polda==''?loc:$("#f_polda option:selected").text();
+	loc=polres==''?loc:$("#f_polres option:selected").text();
+	
     $.ajax({
         url : "../Grafik_api/jml_data_tmc",
         method : "POST",
@@ -1410,6 +1416,8 @@ function jml_data_tmc(start='',end='',polda='',polres='') {
             $('#t_motor').text(r[3]);
             $('#t_khusus').text(r[4]);
             $('#t_total').text(r[5]);
+			
+			$(".loc").html(loc);
         }
     });
 }

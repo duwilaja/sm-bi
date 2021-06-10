@@ -78,7 +78,7 @@
 						<div class="ml-3">
 							<small class=" mb-0">Ambulan</small><br>
 							<h3 class="font-weight-semibold mb-0" id="ambulance">0</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="ambulance_loc"></span></small>
+							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold loc"></span></small>
 						</div>
 					</div>
 					<div class=" col-xl-3 col-sm-6 d-flex mb-5 mb-xl-0">
@@ -87,7 +87,7 @@
 						</div>
 						<div class=" d-flex flex-column  ml-3"> <small class=" mb-0">Pos Pol</small>
 							<h3 class="font-weight-semibold mb-0" id="pos_polisi">0</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="pos_polisi_loc"></span></small>
+							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold loc"></span></small>
 						</div>
 					</div>
 					<div class=" col-xl-3 col-sm-6 d-flex  mb-5 mb-sm-0">
@@ -96,7 +96,7 @@
 						</div>
 						<div class=" d-flex flex-column ml-3"> <small class=" mb-0">Patrol</small>
 							<h3 class="font-weight-semibold mb-0" id="pos_pjr">0</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="pos_pjr_loc"></span></small>
+							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold loc"></span></small>
 						</div>
 					</div>
 					<div class=" col-xl-3 col-sm-6 d-flex">
@@ -105,7 +105,7 @@
 						</div>
 						<div class=" d-flex flex-column  ml-3"> <small class=" mb-0">Faskes</small>
 							<h3 class="font-weight-semibold mb-0" id="faskes">0</h3>
-							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold" id="faskes_loc"></span></small>
+							<small class="mb-0 text-muted"><span class="text-success font-weight-semibold loc"></span></small>
 						</div>
 					</div>
 				</div>

@@ -23,6 +23,7 @@ function getSum(){
 		resnam:resnam};
 	
 	//alert(frmdata);
+	$(".loc").html("");
 	$("#pos_polisi").html("0"); $("#pos_polisi_loc").html("");
 	$("#faskes").html("0"); $("#faskes_loc").html("");
 	$("#pos_pjr").html("0"); $("#pos_pjr_loc").html("");
@@ -46,6 +47,7 @@ function getSum(){
 					$("#"+f).html(v);
 					$("#"+f+"_loc").html(json['loc']);
 				}
+				$(".loc").html(json["loc"]);
 				//log(s);
 			}
 		},
