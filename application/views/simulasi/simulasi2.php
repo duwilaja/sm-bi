@@ -1129,7 +1129,7 @@
     <script src="<?=base_url('my/js_local/simulasi/simulasi2.js')?>"></script>
 
     <!-- Peitychart js-->
-    <script src="http://bbecquet.github.io/Leaflet.RotatedMarker/leaflet.rotatedMarker.js"></script>
+    <script src="<?=base_url('my/simulasi/js/leaflet.rotatedMarker.js')?>"></script>
 
     <script>
       $(function(){
