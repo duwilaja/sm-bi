@@ -4,10 +4,12 @@ $(document).ready(function () {
     dt_ttr_operator();
     slide();
 	getSum();
+	grafik();
 });
 
 function reloadtbl(){
 	mytbl.ajax.reload();
+	grafik();
 }
 function getSum(){
 	var url='intan_sum';
@@ -228,4 +230,89 @@ function slide() {
             }
         }
     })
+}
+
+var ctx2 = document.getElementById("intanchart").getContext('2d');
+var myChart = null;
+
+function grafik() {
+    var start = $("#f_date_start").val();
+    var end = $("#f_date_end").val();
+    var polda = $("#f_polda").val();
+    var polres = $("#f_polres").val();
+	
+	var lokasi="Nasional";
+	if(polda!=''){ lokasi=$("#f_polda option:selected").text(); }
+	if(polres!=''){ lokasi=$("#f_polres option:selected").text(); }
+	
+    $.ajax({
+        // url : "../Grafik_api/jml_data_tmc",
+        url: "intan_datasets",
+        method : "POST",
+        data : {start: start, end:end,polda:polda,polres:polres },
+        success: function(r){
+			console.log(r);
+			var dat=JSON.parse(r);
+			$(".loc").html(lokasi);
+			if(myChart!=null){
+				myChart.destroy();
+			}
+			var dataset=build_datasets(dat['axis'],dat['datas'],dat['sets']);
+			myChart=series_chart(ctx2,'bar',dat['axis'],dataset);
+        }
+    });
+}
+
+function randomColor(){
+	return "#"+(Math.random().toString(16)+"000000").slice(2, 8).toUpperCase();
+}
+
+function get_data(a,c,b){
+	var ret=0;
+	for(var y=0;y<c.length;y++){
+		var d=c[y];
+		if(a==d['x']&&b==d['z']) ret=d['y'];
+	}
+	return ret;
+}
+function get_sets(ax,ds,lbl){
+	var set=[];
+	for(var x=0;x<ax.length;x++){ //loop axis
+		set[x]=get_data(ax[x],ds,lbl);
+	}
+	var sd={
+		label: lbl,
+		data: set,
+		//fill: false,
+		type: "bar",
+		borderColor: randomColor(),
+		backgroundColor: randomColor(),
+		borderWidth: 1
+	}
+	return sd;
+}
+function build_datasets(axis,dataset,sets){
+	var data=[];
+	for(var i=0;i<sets.length;i++){
+		data.push(get_sets(axis,dataset,sets[i]));
+	}
+	console.log(data);
+	
+	return data;
+}
+
+function series_chart(ctx,type='bar',labels=[],datasets=[]){
+	var thechart = new Chart(ctx, {
+		type: type, 
+		data: {
+			labels: labels,
+			datasets: datasets
+		},
+		options: {
+		  responsive: true, // Instruct chart js to respond nicely.
+		  maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+		}
+	});
+	
+	return thechart;
 }

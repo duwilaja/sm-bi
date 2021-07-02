@@ -155,5 +155,21 @@ class MIntan extends CI_Model {
 		//echo "$qsscjln UNION $qsscpub UNION $qsscdar";
 		return $this->db->query("$qsscjln UNION $qsscpub UNION $qsscdar")->result();
 	}
+	public function sets(){
+		return $this->db->select("kasus")->distinct()->get("pelapor")->result_array();
+	}
+	public function datasets($start,$end,$polda,$polres){
+		$select="kasus as z,DATE_FORMAT(time_call,'%b %Y') as x,COUNT(pelapor_id) as y";
+        $where=array("DATE(time_call)>="=>$start,"DATE(time_call)<="=>$end);
+		$join=array("pelapor","ttr_operator.pelapor_id=pelapor.id");
+		if($polda!=''){
+			//$where+=array("polda"=>$polda);
+		}
+		if($polres!=''){
+			//$where+=array("polres"=>$polres);
+		}
+		$grpby="z,x";
+        return $this->db->select($select)->from("ttr_operator")->join($join[0],$join[1])->where($where)->group_by($grpby)->order_by("x")->get()->result_array();
+	}
 }
 

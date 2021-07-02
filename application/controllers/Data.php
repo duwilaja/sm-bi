@@ -13,6 +13,7 @@ class Data extends CI_Controller {
 		$this->load->model('MTmc','tmc');
 		$this->load->model('MDares','dares');
 		$this->load->model('MIntan','intan');
+		$this->load->model('MSsc','ssc');
     }
     
     public function cybercop()
@@ -62,6 +63,7 @@ class Data extends CI_Controller {
         $data['js_local'] = 'data/ssc/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
+			$data['title'] = "Data SSC";
 			$data['polda'] = $this->dares->get_polda()->result();
 			$this->template->load("data/ssc/dashboard",$data);
 
@@ -73,6 +75,51 @@ class Data extends CI_Controller {
 			$this->load->view('login',$data);
 		}
 	}
+	public function ssc_sum()
+	{
+		$loc='Nasional';
+		$f_date_start = $this->input->post("f_date_start");
+		$f_date_end = $this->input->post("f_date_end");
+		$f_polda = $this->input->post("f_polda");
+		$f_polres = $this->input->post("f_polres");
+		if($f_polda!=''){
+			$loc=$this->input->post('danam');
+		}
+		if($f_polres!=''){
+			$loc=$this->input->post('resnam');
+		}
+		echo json_encode(array("code"=>"200","loc"=>$loc,"msgs"=>$this->ssc->sum($f_date_start,$f_date_end,$f_polda,$f_polres)));
+	}
+	public function dt_ssc()
+	{
+		echo $this->ssc->dt_ssc();
+	}
+	function ssc_datasets(){
+		$start = $this->input->post("f_date_start");
+		$end = $this->input->post("f_date_end");
+		$polda = $this->input->post("f_polda");
+		$polres = $this->input->post("f_polres");
+		
+		$end=$end==''?date('Y-m-d'):$end;
+		$start=$start==''?date('Y-m-d',strtotime("$end -12 month")):$start;
+		$origin = date_create($start);
+		$target = date_create($end);
+		$origin = date_create($origin->format('Y').'-'.$origin->format('m').'-1');
+		$interval = date_diff($origin, $target);
+		$mon=$interval->m + ($interval->y*12);
+		$mon=$interval->d > 0 ?$mon+1:$mon;
+		$mon=$origin->format("m") != $target->format("m") ?$mon+1:$mon;
+		$labels=array(); $bln=$origin->format('Y-m-d');
+		for($i=0;$i<$mon;$i++){
+			if($bln<=$end) $labels[]=date('M Y',strtotime("$bln"));
+			$bln=date('Y-m-d',strtotime("$bln 1 month"));
+		}
+		/////////
+		$sets=$this->one_dimension($this->ssc->sets(),'jns');
+		$datas=$this->ssc->datasets($start,$end,$polda,$polres);
+		echo json_encode(array("axis"=>$labels,"datas"=>$datas,"sets"=>$sets));
+	}
+	
 	public function ssc2()
 	{
         $user=$this->session->userdata('user_data');
@@ -130,10 +177,11 @@ class Data extends CI_Controller {
 	public function intan()
 	{
         $user=$this->session->userdata('user_data');
-		$data['js_statistik'] = 'simulasi/statistik.js';
+		//$data['js_statistik'] = 'simulasi/statistik.js';
         $data['js_local'] = 'data/intan/dashboard.js';
 		if(isset($user)){
 			$data['session'] = $user;
+			$data['title']= "Data Intan";
 			$data['polda'] = $this->intan->polda();
 			$this->template->load("data/intan/dashboard",$data);
 
@@ -157,7 +205,7 @@ class Data extends CI_Controller {
 	}
 	public function intan_sum()
 	{
-		$loc='Seluruh Indonesia';
+		$loc='Nasional';
 		$f_date_start = $this->input->post("f_date_start");
 		$f_date_end = $this->input->post("f_date_end");
 		$f_polda = $this->input->post("f_polda");
@@ -169,6 +217,38 @@ class Data extends CI_Controller {
 			$loc=$this->input->post('resnam');
 		}
 		echo json_encode(array("code"=>"200","loc"=>$loc,"msgs"=>$this->intan->sum($f_date_start,$f_date_end,$f_polda,$f_polres)));
+	}
+	function intan_datasets(){
+		$start = $this->input->post("f_date_start");
+		$end = $this->input->post("f_date_end");
+		$polda = $this->input->post("f_polda");
+		$polres = $this->input->post("f_polres");
+		
+		$end=$end==''?date('Y-m-d'):$end;
+		$start=$start==''?date('Y-m-d',strtotime("$end -12 month")):$start;
+		$origin = date_create($start);
+		$target = date_create($end);
+		$origin = date_create($origin->format('Y').'-'.$origin->format('m').'-1');
+		$interval = date_diff($origin, $target);
+		$mon=$interval->m + ($interval->y*12);
+		$mon=$interval->d > 0 ?$mon+1:$mon;
+		$mon=$origin->format("m") != $target->format("m") ?$mon+1:$mon;
+		$labels=array(); $bln=$origin->format('Y-m-d');
+		for($i=0;$i<$mon;$i++){
+			if($bln<=$end) $labels[]=date('M Y',strtotime("$bln"));
+			$bln=date('Y-m-d',strtotime("$bln 1 month"));
+		}
+		/////////
+		$sets=$this->one_dimension($this->intan->sets(),'kasus');
+		$datas=$this->intan->datasets($start,$end,$polda,$polres);
+		echo json_encode(array("axis"=>$labels,"datas"=>$datas,"sets"=>$sets));
+	}
+	private function one_dimension($arr,$idx){
+		$ret=array();
+		for($i=0;$i<count($arr);$i++){
+			$ret[]=$arr[$i][$idx];
+		}
+		return $ret;
 	}
 
 	public function export_data_intan(){

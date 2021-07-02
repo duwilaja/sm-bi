@@ -1,0 +1,8 @@
+CREATE VIEW v_ssc AS
+SELECT polda,polres,tgl,nama,jenis,pos as jns,'pos' as tbl FROM `ssc_jalan`
+UNION
+SELECT polda,polres,tgl,nama,jenis,gangguan as jns,'gangguan' as tbl FROM `ssc_status_gangguan`
+UNION
+SELECT polda,polres,tgl,nama,jenis,yan as jns,'yan publik' as tbl FROM `ssc_yan_publik`
+UNION
+SELECT polda,polres,tgl,nama,jenis,yan as jns,'yan darurat' as tbl FROM `ssc_yan_darurat`
