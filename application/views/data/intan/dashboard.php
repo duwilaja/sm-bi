@@ -245,6 +245,18 @@
 <!-- End Row -->
 
 <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">Grafik Data Intan&nbsp;<span style="font-weight:bold;" class="loc"></span></div>
+            <div class="card-body">
+                <canvas id="intanchart" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row hidden">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-status card-status-left bg-warning br-bl-7 br-tl-7"></div>

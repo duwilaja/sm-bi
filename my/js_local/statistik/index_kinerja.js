@@ -46,7 +46,7 @@ function grafik() {
 			var dat=JSON.parse(r);
 			$(".loc").html(lokasi);
 			if(myChart!=null){
-				//myChart.destroy();
+				myChart.destroy();
 			}
 			//var labels=dat['labels'];//["Jan","Feb", "Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
 			var dataset=build_datasets(dat['axis'],dat['datas'],dat['label']);

@@ -22,6 +22,7 @@ class Statistik extends CI_Controller {
 		$data['js_local'] = 'statistik/trend_data.js';
 		if(isset($user)){
 			$data['session'] = $user;
+			$data['title']= "Trend Data";
 			$data['polda'] = $this->dares->get_polda()->result();
 			$this->template->load("statistik/trend_data",$data);
 		}else{
@@ -39,6 +40,7 @@ class Statistik extends CI_Controller {
 		$data['js_local'] = 'statistik/case_fatality_rate.js';
 		if(isset($user)){
 			$data['session'] = $user;
+			$data['title']= "Case Fatality Rate";
 			$this->template->load("statistik/case_fatality_rate",$data);
 		}else{
 			$retval=array("403","Failed","Please login","error");
@@ -54,6 +56,7 @@ class Statistik extends CI_Controller {
         $data['js_local'] = 'statistik/fatality_index.js';
 		if(isset($user)){
 			$data['session'] = $user;
+			$data['title']= "Fatality Index";
 			$this->template->load("statistik/fatality_index",$data);
 		}else{
 			$retval=array("403","Failed","Please login","error");
@@ -69,6 +72,7 @@ class Statistik extends CI_Controller {
         $data['js_local'] = 'statistik/index_kinerja.js';
 		if(isset($user)){
 			$data['session'] = $user;
+			$data['title']= "Index Kinerja Cybercop";
 			$data['polda'] = $this->dares->get_polda()->result();
 			$this->template->load("statistik/index_kinerja",$data);
 		}else{
@@ -158,6 +162,7 @@ class Statistik extends CI_Controller {
         $data['js_local'] = 'data/indeks/kecelakaan.js';
 		if(isset($user)){
 			$data['session'] = $user;
+			$data['title']= "Index Kecelakaan";
 			$data['polda'] = $this->dares->get_polda()->result();
 			$this->template->load("data/indeks/kecelakaan",$data);
 		}else{

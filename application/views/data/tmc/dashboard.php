@@ -55,7 +55,7 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group">
 									<p>Polres</p>
 									<select class="form-control form-control-sm"  name="f_polres" id="f_polres">

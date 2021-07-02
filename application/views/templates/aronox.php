@@ -157,7 +157,7 @@ if(count($farr)>0&&$session['nrp']!=''){
 											<li aria-haspopup="true"><a href="<?=site_url('data/eri')?>">ERI</a></li>
 											<li aria-haspopup="true"><a href="<?=site_url('data/sdc')?>">SDC</a></li> -->
 											<li aria-haspopup="true"><a href="<?=site_url('data/tmc')?>">TMC</a></li>
-											<li aria-haspopup="true"><a href="<?=site_url('data/ssc2')?>">SSC</a></li>
+											<li aria-haspopup="true"><a href="<?=site_url('data/ssc')?>">SSC</a></li>
 											<li aria-haspopup="true"><a href="<?=site_url('data/intan')?>">INTAN</a></li>
 											<!-- <li aria-haspopup="true"><a href="<?=site_url('data/etle')?>">ETLE</a></li>
 												<li aria-haspopup="true"><a href="<?=site_url('data/intan')?>">INTAN</a></li>
