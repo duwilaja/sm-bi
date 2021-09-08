@@ -62,7 +62,7 @@
 	<div class="col-md-12">
 		<div class="card">
 			<!-- <div class="card-header">Index Kinerja Cybercorps<span style="position:relative;left:8px;"><b>Polrestabes Surakarta  - Januari 2021</b></span></div> -->
-			<div class="card-header">Index Kinerja Cybercorps&nbsp;<span style="font-weight:bold;" class="loc"></span></div>
+			<div class="card-header">Index Kinerja Cybercorps<span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
 			<div class="card-body">
 				<canvas id="ikc2" width="400" height="400"></canvas>
 			</div>

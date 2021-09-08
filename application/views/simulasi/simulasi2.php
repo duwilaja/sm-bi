@@ -8,9 +8,6 @@
     <!-- Style css -->
     <link href="<?php echo base_url();?>aronox/assets/css/style.css" rel="stylesheet" />
     
-    <!--Horizontal css -->
-    <link id="effect" href="<?php echo base_url();?>aronox/assets/plugins/horizontal-menu/dropdown-effects/fade-up.css" rel="stylesheet" />
-    <link href="<?php echo base_url();?>aronox/assets/plugins/horizontal-menu/horizontal.css" rel="stylesheet" />
     
     <!-- P-scroll bar css-->
     <link href="<?php echo base_url();?>aronox/assets/plugins/p-scroll/perfect-scrollbar.css" rel="stylesheet" />
@@ -20,22 +17,14 @@
     <link href="<?php echo base_url();?>aronox/assets/plugins/iconfonts/font-awesome/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>aronox/assets/plugins/iconfonts/plugin.css" rel="stylesheet" />
     
-    <!-- WYSIWYG Editor css -->
-    <link href="<?php echo base_url();?>aronox/assets/plugins/wysiwyag/richtext.css" rel="stylesheet" />
-    
+
     <!-- Select2 css -->
     <link href="<?php echo base_url();?>aronox/assets/plugins/select2/select2.min.css" rel="stylesheet" />
     
     <link href="<?php echo base_url();?>aronox/assets/css/apexcharts.css" rel="stylesheet" />
     
-    <!-- Skin css-->
-    <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?php echo base_url();?>aronox/assets/skins/hor-skin/hor-skin1.css" />
-    
     <!-- datatables CSS-->
     <!--link rel="stylesheet" href="my/vendor/datatables/datatables.min.css"-->
-    <link href="<?php echo base_url();?>aronox//assets/plugins/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<?php echo base_url();?>my/vendor/datatables.net-bs4/dataTables.bootstrap4.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>my/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
     
     <!-- bootstrap CSS-->
     <link rel="stylesheet" href="<?php echo base_url();?>my/vendor/bootstrap/css/bootstrap-select.min.css">
@@ -62,20 +51,34 @@
     <link href="<?php echo base_url();?>aronox/assets/plugins/tabs/style.css" rel="stylesheet" />
     
     
-    <link href="<?php echo base_url();?>aronox/assets/plugins/charts-c3/c3-chart.css" rel="stylesheet" />
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    
+     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script> -->
     <!-- jsFiddle will insert css and js -->
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 </head>
 <style>
   /* Always set the map height explicitly to define the size of the div
   * element that contains the map. */
-  #map {
-      height: 100%;
+  #mapid {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;  
+  }
+
+  .leaflet-control-container .leaflet-routing-container-hide {
+    position: absolute;
+    left: 0;
   }
   
   /* Optional: Makes the sample page fill the window. */
@@ -98,7 +101,7 @@
       position: absolute;
       top: 30px;
       right: 80px;
-      z-index: 5;
+      z-index: 1000;
       /* background-color: #fff; */
       padding: 5px;
       text-align: center;
@@ -111,7 +114,7 @@
   .menus {
       position: absolute;
       top: 100px;
-      z-index: 5;
+      z-index: 1000;
       background-color: #fff;
       padding: 5px;
       text-align: center;
@@ -362,14 +365,14 @@
     border-radius: 3px;
     cursor: pointer;
     transition: left 0.4s ease;
-    z-index: 5;
+    z-index: 1000;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     opacity:0.9;
   }
   .btn-slider.click{
     left: 698px;
-    z-index: 5;
+    z-index: 1000;
   }
   .btn-slider i{
     color: black;
@@ -378,7 +381,7 @@
   }
   .btn-slider.click i:before{
     content: '\f100';
-    z-index: 5;
+    z-index: 1000;
   }
   .sidebar{
     position: fixed;
@@ -388,13 +391,14 @@
     left: -700px;
     background: #fff;
     transition: left 0.4s ease;
-    z-index: 5;
+    z-index: 1000;
     opacity:0.9;
     /* overflow:auto; */
   }
   .sidebar.show{
     left: 0px;
     top: 100px;
+    z-index:1000;
   }
 
   .side .nav-link {
@@ -407,7 +411,7 @@
     /* margin: 5px;
     padding: 5px; */
     height: 380px;
-    overflow-y: auto;
+    /* overflow-y: auto; */
   }
 
 </style>
@@ -757,142 +761,39 @@
         <div class="border-bottom pb-3">
           <ul class="nav nav-pills mb-3 side" id="pills-tab" role="tablist">
             <li class="nav-item mb-2" role="presentation">
-              <a class="nav-link" id="trend-data-tab" data-toggle="pill" href="#trend-data" role="tab" aria-controls="trend-data" aria-selected="false">Trend Data</a>
+              <a class="nav-link" id="trend-data-tab" onclick="iframe('../statistik/trend_data?kode=4e82f33ca4254486e3e19d8755881ee6')" data-toggle="pill" href="#trend-data" role="tab" aria-controls="trend-data" aria-selected="false">Trend Data</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="case-fatality-rate-tab" data-toggle="pill" href="#case-fatality-rate" role="tab" aria-controls="case-fatality-rate" aria-selected="false">Case Fatality Rate</a>
+              <a class="nav-link" id="case-fatality-rate-tab" onclick="iframe('../statistik/case_fatality_rate?kode=4e82f33ca4254486e3e19d8755881ee6')" data-toggle="pill" href="#case-fatality-rate" role="tab" aria-controls="case-fatality-rate" aria-selected="false">Case Fatality Rate</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="fatality-index-tab" data-toggle="pill" href="#fatality-index" role="tab" aria-controls="fatality-index" aria-selected="false">Fatality Index</a>
+              <a class="nav-link" id="fatality-index-tab" onclick="iframe('../statistik/fatality_index?kode=4e82f33ca4254486e3e19d8755881ee6')" data-toggle="pill" href="#fatality-index" role="tab" aria-controls="fatality-index" aria-selected="false">Fatality Index</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="index-kinerja-tab" data-toggle="pill" href="#index-kinerja" role="tab" aria-controls="index-kinerja" aria-selected="false">Index Kinerja</a>
+              <a class="nav-link" id="index-kinerja-tab"  onclick="iframe('../statistik/index_kinerja?kode=4e82f33ca4254486e3e19d8755881ee6')"  data-toggle="pill" href="#index-kinerja" role="tab" aria-controls="index-kinerja" aria-selected="false">Index Kinerja</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="index-ketertiban-tab" data-toggle="pill" href="#index-ketertiban" role="tab" aria-controls="index-ketertiban" aria-selected="false">Index Ketertiban</a>
+              <a class="nav-link" id="index-ketertiban-tab" onclick="iframe('../statistik/ketertiban?kode=4e82f33ca4254486e3e19d8755881ee6')" data-toggle="pill" href="#index-ketertiban" role="tab" aria-controls="index-ketertiban" aria-selected="false">Index Ketertiban</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="index-kecelakaan-tab" data-toggle="pill" href="#index-kecelakaan" role="tab" aria-controls="index-kecelakaan" aria-selected="false">Index Kecelakaan</a>
+              <a class="nav-link" id="index-kecelakaan-tab" onclick="iframe('../statistik/kecelakaan?kode=4e82f33ca4254486e3e19d8755881ee6')" data-toggle="pill" href="#index-kecelakaan" role="tab" aria-controls="index-kecelakaan" aria-selected="false">Index Kecelakaan</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="index-keamanan-tab" data-toggle="pill" href="#index-keamanan" role="tab" aria-controls="index-keamanan" aria-selected="false">Index Keamanan</a>
+              <a class="nav-link" id="index-keamanan-tab" onclick="iframe('../statistik/keamanan?kode=4e82f33ca4254486e3e19d8755881ee6')" data-toggle="pill" href="#index-keamanan" role="tab" aria-controls="index-keamanan" aria-selected="false">Index Keamanan</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="index-keselamatan-tab" data-toggle="pill" href="#index-keselamatan" role="tab" aria-controls="index-keselamatan" aria-selected="false">Index Keselamatan</a>
+              <a class="nav-link" id="index-keselamatan-tab" onclick="iframe('../statistik/keselamatan?kode=4e82f33ca4254486e3e19d8755881ee6')" data-toggle="pill" href="#index-keselamatan" role="tab" aria-controls="index-keselamatan" aria-selected="false">Index Keselamatan</a>
             </li>
           </ul>
         </div>
         <div class="tab-content mt-4" id="pills-tabContent">
-          <div class="tab-pane fade konten-sider" id="trend-data" role="tabpanel" aria-labelledby="trend-data-tab">
-            <div class="card">
-                <div class="card-header">Trend Data - Polrestabes Surakarta</div>
-                <div class="card-body">
-                    <canvas id="td" width="400" height="400"></canvas>
-                </div>
-            </div>
-          </div>
-          <div class="tab-pane fade konten-sider" id="case-fatality-rate" role="tabpanel" aria-labelledby="case-fatality-rate-tab">
-            <div class="card">
-                <div class="card-header">Case Fatality Rate - Polrestabes Surkarta</div>
-                <div class="card-body">
-                    <canvas id="cfr" width="400" height="400"></canvas>
-                </div>
-            </div>
-          </div>
-          <div class="tab-pane fade konten-sider" id="fatality-index" role="tabpanel" aria-labelledby="fatality-index-tab">
-            <div class="card">
-                <div class="card-header">Fatality Index - Polrestabes Surkarta</div>
-                <div class="card-body">
-                    <canvas id="fi1" width="400" height="400"></canvas>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header"> Indeks Fatalitas per Provinsi</div>
-                <div class="card-body">
-                    <canvas id="fi2" width="400" height="400"></canvas>
-                </div>
-            </div>
-          </div>
-          <div class="tab-pane fade konten-sider" id="index-kinerja" role="tabpanel" aria-labelledby="index-kinerja-tab">
-            <div class="card">
-              <!-- <div class="card-header">Index Kinerja Cybercorps<span style="position:relative;left:8px;"><b>Polrestabes Surakarta  - Januari 2021</b></span></div> -->
-              <div class="card-header">Index Kinerja Cybercorps<span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
-              <div class="card-body">
-                <canvas id="ikc" width="640" height="234"></canvas>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade konten-sider" id="index-ketertiban" role="tabpanel" aria-labelledby="index-ketertiban-tab">
-            <div class="card">
-                <div class="card-header">Indesk Ketertiban<span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
-                <div class="card-body">
-                    <canvas id="ikt1" width="620" height="234"></canvas>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">Indesk Kepatuhan Remaja terhadap tata cara tertib berlalu lintas<span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
-                <div class="card-body">
-                    <canvas id="ikt2" width="620" height="234"></canvas>
-                </div>
-            </div>
-          </div>
-          <div class="tab-pane fade konten-sider" id="index-kecelakaan" role="tabpanel" aria-labelledby="index-kecelakaan-tab">
-            <div class="card">
-              <div class="card-header">Indesk Target Kecelakaan <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
-              <div class="card-body">
-                <canvas id="itc" width="620" height="234"></canvas>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">Indesk fatalitas korban kecelakaan lalu lintas <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
-              <center><span><b>Per Kecamatan</b></span></center>
-              <div class="card-body">
-                <canvas id="itc2" width="620" height="234"></canvas>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">Indeks Perbandingan Jumlah Kecelakaan Dan Jumlah Korban  <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
-              <center><span><b>Per Kecamatan</b></span></center>
-              <div class="card-body">
-                <canvas id="itc3" width="620" height="234"></canvas>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">Indeks Perbandingan Jumlah Kecelakaan Dan Jumlah Korban <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
-              <!-- <center><span><b>Jumlah Korban Meninggal Dunia</b></span></center> -->
-              <center><span><b>Per Jenis Kendaraan</b></span></center>
-              <div class="card-body">
-                <canvas id="itc4" width="620" height="234"></canvas>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">Kecelakaan Disebabkan Perilaku Pengemudi <span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
-              <center><span><b>Jumlah Korban Meninggal Dunia</b></span></center>
-              <div class="card-body">
-                <canvas id="itc5" width="620" height="400"></canvas>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade konten-sider" id="index-keamanan" role="tabpanel" aria-labelledby="index-keamanan-tab">
-            <div class="card">
-                <div class="card-header">Indesk Keamanan<span style="position:relative;left:8px;"><b>Polrestabes Surakarta</b></span></div>
-                <div class="card-body">
-                    <canvas id="ikc2" width="640" height="234"></canvas>
-                </div>
-            </div>
-          </div>
-          <div class="tab-pane fade konten-sider" id="index-keselamatan" role="tabpanel" aria-labelledby="index-keselamatan-tab">
-            <div class="card">
-                <div class="card-header">Indesk Keselamatan<span style="position:relative;left:8px;"><b>Polrestabes Surakarta </b></span></div>
-                <div class="card-body">
-                    <canvas id="ikc3" width="640" height="234"></canvas>
-                </div>
-            </div>
+          <div class="konten-sider">
+            <iframe  id="cek_iframe" width="100%" frameborder="0"></iframe>
           </div>
         </div>
       </div>
     </div>
-    <div id="map"></div>
+    <div id="mapid"></div>
     <div class="floating-panel">
       <div class="row">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -912,15 +813,16 @@
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane panel2 fade" id="pills-maps" role="tabpanel" aria-labelledby="pills-maps-tab">
             <div class="row">
-            <div class="col-md-4 pr-1">
-                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-maps-police-tab" onclick="lokasi('polisi')" data-toggle="pill" href="#v-maps-police" role="tab" aria-controls="v-maps-police" aria-selected="false">
-                      <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/polri.png" alt="image" style="background-color:white!important;">
+            <div class="col-md-4 col-sm-4 pr-1" style="height:320px;overflow-y:auto;">
+                <?php foreach ($lokasi as $v) { ?>
+                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-maps-police-tab" onclick="lokasi('<?=$v->kategori_static?>')" data-toggle="pill" href="#v-maps-police" role="tab" aria-controls="v-maps-police" aria-selected="false">
+                      <!-- <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/polri.png" alt="image" style="background-color:white!important;"> -->
                       <div class="wrapper ml-3">
-                        <p class="mb-0">Polisi</p>
+                        <p class="mb-0"><?=$v->kategori_static;?></p>
                       </div>
                   </a>
-                  <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-maps-damkar-tab" onclick="lokasi('damkar')" data-toggle="pill" href="#v-maps-damkar" role="tab" aria-controls="v-maps-damkar" aria-selected="false">
+                  <?php } ?>
+                  <!-- <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-maps-damkar-tab" onclick="lokasi('damkar')" data-toggle="pill" href="#v-maps-damkar" role="tab" aria-controls="v-maps-damkar" aria-selected="false">
                     <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/damkar.png" alt="image" style="background-color:white!important;">
                     <div class="wrapper ml-3">
                       <p class="mb-0"> Damkar</p>
@@ -937,15 +839,14 @@
                     <div class="wrapper ml-3">
                       <p class="mb-0">Dishub</p>
                     </div>
-                  </a>
-                </div>
+                  </a> -->
               </div>
-              <div class="col-md-8 pl-0">
+              <div class="col-md-8 col-sm-8 pl-0">
                 <div class="tab-content" id="v-pills-tabContent">
                   <div class="tab-pane fade" id="v-maps-police" role="tabpanel" aria-labelledby="v-maps-police-tab">
                   <div class="ml-2 row mx-0" style="text-align:left!important;">
                       <div class="col-3">
-                        <input type="checkbox" name="" id="select_all_maps_polisi" onchange="check_lokasi('polisi')"><span class="ml-3">All</span>
+                        <input type="checkbox" name="" id="select_all_maps" onchange="check_lokasi('polisi')"><span class="ml-3">All</span>
                       </div>
                       <div class="col">
                         <input type="text" class="form-control" placeholder="">
@@ -954,7 +855,7 @@
                         <button class="btn btn-secondary" type="button"><i class="fe fe-search"></i></button>
                       </span>
                     </div>
-                    <div class="mt-2 text-left pt-2 border-top" id="list_lokasi_polisi">
+                    <div class="mt-2 text-left pt-2 border-top" id="list_lokasi_all" style="height:320px;overflow-y:auto;">
                     </div>
                   </div>
                   <div class="tab-pane fade" id="v-maps-damkar" role="tabpanel" aria-labelledby="v-maps-damkar-tab">
@@ -1008,7 +909,7 @@
           </div>
           <div class="tab-pane panel2 fade" id="pills-cctv" role="tabpanel" aria-labelledby="pills-cctv-tab">
             <div class="row">
-              <div class="col-md-4 pr-1">
+              <div class="col-md-4 col-sm-4 pr-1">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                   <a class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-cctv-korlantas-tab" onclick="cctv()" data-toggle="pill" href="#v-cctv-korlantas" role="tab" aria-controls="v-cctv-korlantas" aria-selected="false">
                       <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/korlantas.png" alt="image" style="background-color:white!important;">
@@ -1026,7 +927,7 @@
                   </a>
                 </div>
               </div>
-              <div class="col-md-8 pl-0">
+              <div class="col-md-8 col-sm-8 pl-0">
                 <div class="tab-content" id="v-pills-tabContent">
                   <div class="tab-pane fade" id="v-cctv-korlantas" role="tabpanel" aria-labelledby="v-cctv-korlantas-tab">
                     <div class="ml-2 row mx-0" style="text-align:left!important;">
@@ -1076,7 +977,7 @@
           </div>
           <div class="tab-pane panel2 fade" id="pills-car" role="tabpanel" aria-labelledby="pills-car-tab">
             <div class="row">
-              <div class="col-md-4 pr-1">
+              <div class="col-md-4 col-sm-4 pr-1">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                   <a onclick="get_kend('polisi')" class="nav-link list d-flex align-items-center border-bottom border-right py-3" id="v-car-police-tab" data-toggle="pill" href="#v-car-police" role="tab" aria-controls="v-car-police" aria-selected="false">
                       <img class="avatar avatar-md brround" src="<?= base_url();?>my/simulasi/polri.png" alt="image" style="background-color:white!important;">
@@ -1108,7 +1009,7 @@
                   </a>
                 </div>
               </div>
-              <div class="col-md-8 pl-0">
+              <div class="col-md-8 col-sm-8 pl-0">
                 <div class="tab-content" id="v-pills-tabContent">
                   <div class="tab-pane fade" id="v-car-police" role="tabpanel" aria-labelledby="v-car-police-tab">
                     <div class="owl-carousel owl-theme mb-4" id="list_kend">
@@ -1221,43 +1122,15 @@
           </div>
         </div>
     </div>
-    
-    <!-- <div class="panel2">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col">tes</div>
-        </div>
-    </div> -->
-    
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuUVO-e2zvXVWuIHvRPFMFZOfLwsF98W4&callback=initMap&libraries=geometry&v=weekly"
-      async
-    ></script>
+
     <!-- Owl  -->
 	  <script src="<?= base_url('my/vendor/owl/owl.carousel.min.js')?>"></script>
     <script src="<?= base_url()?>aronox/assets/js/popover.js"></script>
-    <script src="<?=base_url('my/js_local/simulasi/simulasi.js')?>"></script>
-
-    <!--Othercharts js-->
-    <script src="<?= base_url();?>aronox/assets/plugins/othercharts/jquery.sparkline.min.js"></script>
+    <script src="<?=base_url('my/js_local/simulasi/simulasi2.js')?>"></script>
 
     <!-- Peitychart js-->
-    <script src="<?= base_url();?>aronox/assets/plugins/peitychart/jquery.peity.min.js"></script>
+    <script src="<?=base_url('my/simulasi/js/leaflet.rotatedMarker.js')?>"></script>
 
-    <script src="<?= base_url();?>aronox/assets/plugins/charts-c3/d3.v5.min.js"></script>
-		<script src="<?= base_url();?>aronox/assets/plugins/charts-c3/c3-chart.js"></script>
-
-    <script src="<?= base_url();?>my/vendor/chart.js/Chart.min.js"></script>
-
-    <script src="<?= base_url();?>aronox/assets/plugins/echarts/echarts.js"></script>
-
-    <script src="<?= base_url();?>aronox/assets/js/apexcharts.js"></script>
-							
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
-
-    <script src="<?=base_url('my/js_local/simulasi/statistik.js')?>"></script>
     <script>
       $(function(){
             // Enables popover
@@ -1406,6 +1279,24 @@
             
             if ($('.check-lokasi-dishub:checked').length == $('.check-lokasi-dishub').length ){ 
               $("#select_all_maps_dishub")[0].checked = true;
+            }
+          });
+
+          //select all checkboxes
+          $("#select_all_maps").change(function(){
+            var status = this.checked;
+            $('.check-lokasi-all').each(function(){
+              this.checked = status;
+            });
+          });
+
+          $('.check-lokasi-all').change(function(){ 
+            if(this.checked == false){
+              $("#select_all_maps")[0].checked = false;
+            }
+            
+            if ($('.check-lokasi-all:checked').length == $('.check-lokasi-all').length ){ 
+              $("#select_all_maps")[0].checked = true;
             }
           });
       });
