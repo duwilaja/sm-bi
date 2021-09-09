@@ -262,8 +262,8 @@ class Api_cctv2 extends CI_Controller {
 		curl_close($curl);
 		$x = json_decode($response,true);
 		echo json_encode($x);
-		if(count($x->rows)>0){
-			$hasil=$this->db->insert_batch("t8000_rtflow",$x->rows);
+		if(count($x['rows'])>0){
+			$hasil=$this->db->insert_batch("t8000_rtflow",$x['rows']);
 			echo "$hasil rows inserted.";
 		}else{
 			echo "No rows";
