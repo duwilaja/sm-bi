@@ -17,9 +17,9 @@ class Login extends CI_Controller {
 		$nrp=$this->input->post("user");
 		$pwd=$this->input->post("passwd");
 		
-		$this->db->where('nrp',$nrp);
-		$this->db->where('pwd',md5($pwd));
-		$acc=$this->db->get("accounts")->result_array();
+		$this->db->where('uid',$nrp);
+		$this->db->where('upwd',md5($pwd));
+		$acc=$this->db->get("core_user")->result_array();
 			
 		if(count($acc)>0){
 			$this->db->where(array('nrp'=>$nrp,'das'=>'Y'));
