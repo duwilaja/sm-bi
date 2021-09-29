@@ -16,13 +16,15 @@ if (!function_exists('persen_nt')) {
 	function persen_nt($awal='',$akhir=''){ //persen naik/turun
     if ($awal > $akhir) { // persen turun
       $h1 = ($awal - $akhir)/$awal;
+      if($h1 == 0) return [0,'netral'];
       $h2 = $h1*100;
-      return [round($h2,1),'naik'];
+      return [round($h2,1),'turun'];
     }else{ //persen naik
       $selisih = $akhir - $awal;
+      if($selisih == 0) return [0,'netral'];
       @$h = $selisih / $akhir;
       $xx = $h*100;
-      return [round($xx,1),'turun'];
+      return [round($xx,1),'naik'];
     }
   }
 }
@@ -209,5 +211,34 @@ if (!function_exists('secondstoTime')) {
         else if ($dtF->diff($dtT)->format('%a') != 0) {
             return $dtF->diff($dtT)->format('%a hari');
         }
+    }
+
+    function cek_data($data)
+    {
+        $d = 0;
+        try {
+            if ($data != '' || $data != null || isset($data)) {
+                $d = (float)$data;
+            }
+        } catch (Exception $e) {
+            // echo $e->getMessage();
+        }
+
+        return $d;
+    }
+
+    function to_jml_array($data=[],$field='')
+    {
+        $d = [];
+        foreach ($data as $k => $v) {
+            $d[] = (float)$v->$field;
+        }
+
+        return $d;
+    }
+
+    function custom_date($date="",$custom='+ 1 days')
+    {
+      return date('Y-m-d', strtotime($date. ' '.$custom));
     }
 }
