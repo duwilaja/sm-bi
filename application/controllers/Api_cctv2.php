@@ -222,12 +222,11 @@ class Api_cctv2 extends CI_Controller {
 		curl_close($curl);
 		$x = json_decode($response,true);
 		$this->token = $x['token'];
-		$this->cek_traffic_flow();
-        // if ($kend == 'mobil') {
-        //     $this->get_kendaraan();
-        // }else if ($kend == 'motor') {
-        //     $this->get_kendaraan_motor();
-        // }else if ($kend == 'camera') {
+		 if ($kend == 'mobil') {
+			$this->cek_traffic_flow();
+         }else if ($kend == 'trafficevent') {
+             $this->get_traffic_event();
+         }//else if ($kend == 'camera') {
         //     $this->cek_camera();
         // }
 	}
@@ -262,6 +261,12 @@ class Api_cctv2 extends CI_Controller {
 		curl_close($curl);
 		$x = json_decode($response,true);
 		echo json_encode($x);
+		if(count($x['rows'])>0){
+			$hasil=$this->db->insert_batch("t8000_rtflow",$x['rows']);
+			echo "$hasil rows inserted.";
+		}else{
+			echo "No rows";
+		}
 	}
 
 	public function get_kendaraan()
@@ -755,6 +760,93 @@ class Api_cctv2 extends CI_Controller {
 		} else {
 			echo $response;
 		}
+	}
+	
+	public function api_traffic_event()
+	{
+		$curl = curl_init();
+
+		$opt = [
+			"userName" => $this->username, 
+			"ipAddress" => "172.16.59.20",
+			'clientType' => "winpc"
+		];
+
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => $this->url."/videoService/accounts/authorize",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 30,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "POST",
+		CURLOPT_POSTFIELDS => json_encode($opt),
+		CURLOPT_HTTPHEADER => array(
+			"cache-control: no-cache",
+			"content-type: application/json",
+		),
+		));
+
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+		
+		curl_close($curl);
+
+		if ($err) {
+			echo "cURL Error #:" . $err;
+		} else {
+			
+			$r = json_decode($response);
+
+			$realm = $r->realm;
+			$randomkey = $r->randomKey;
+
+
+			// $s = $this->signiture($this->config->item('password_dss'),$this->config->item('username_dss'),$r->realm,$r->randomKey);
+			$s = $this->signiture($this->password,$this->username,$realm,$randomkey);
+
+			$this->second_login($s,$randomkey,'trafficevent');
+		}
+	}
+	
+	public function get_traffic_event()
+	{
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => $this->url.'/eventdetect/v1/trafficEvent/trafficEventPageList',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'POST',
+		CURLOPT_POSTFIELDS =>'{
+			"pageNum" : 1,
+			"pageSize" : 20
+		}',
+		CURLOPT_HTTPHEADER => array(
+			'Content-Type: application/json',
+			'X-Subject-Token: '.$this->token
+		),
+		));
+
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		$x = json_decode($response,true);
+		echo json_encode($x);
+/*		if(count($x['rows'])>0){
+			$hasil=$this->db->insert_batch("t8000_rtflow",$x['rows']);
+			echo "$hasil rows inserted.";
+		}else{
+			echo "No rows";
+		}*/
 	}
 
 }
