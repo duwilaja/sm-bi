@@ -826,7 +826,15 @@ class Api_cctv2 extends CI_Controller {
 		CURLOPT_CUSTOMREQUEST => 'POST',
 		CURLOPT_POSTFIELDS =>'{
 			"pageNum" : 1,
-			"pageSize" : 20
+			"pageSize" : 20,
+			"channelId" : [],
+			"deviceId" : [],
+			"eventType" : ["1","2","3","4","5","6","7","8","9","11","12","16"],
+			"isShowShieldData" : 0,
+			"operStatus" : null,
+			"orgNodeId" : [],
+			"startTime" : '.mktime(0,0,0,date('m'),date('d'),date('Y')).'
+			"endTime" : '.time().'
 		}',
 		CURLOPT_HTTPHEADER => array(
 			'Content-Type: application/json',
