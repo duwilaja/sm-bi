@@ -225,7 +225,7 @@ class Api_cctv2 extends CI_Controller {
 		 if ($kend == 'mobil') {
 			$this->cek_traffic_flow();
          }else if ($kend == 'trafficevent') {
-             $this->get_device_tree();
+             $this->get_traffic_event();
          }//else if ($kend == 'camera') {
         //     $this->cek_camera();
         // }
@@ -832,7 +832,7 @@ class Api_cctv2 extends CI_Controller {
 			"eventType" : ["1","2","3","4","5","6","7","8","9","11","12","16"],
 			"isShowShieldData" : 0,
 			"operStatus" : null,
-			"orgNodeId" : [],
+			"orgNodeId" : ["S4NbecfYA1D4CRRCI9TTB4"],
 			"startTime" : '.mktime(0,0,0,date('m'),date('d'),date('Y')).'
 			"endTime" : '.time().'
 		}',
