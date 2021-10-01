@@ -305,7 +305,11 @@ class Api extends CI_Controller {
                     
                     $date_before = custom_date(date('Y-m-d'),'- 1 days'); 
                     $filter_before['tgl'] = $date_before;
-                } 
+                }else{
+                    $filter_before['tgl !='] = date('Y-m-d');
+                }
+                
+                
 
                 $qpenyebab = $this->mpub->get('tmc_info_lalin','',$filter,'penyebab');
                 foreach ($qpenyebab->result() as $k => $v) {
