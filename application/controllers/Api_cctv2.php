@@ -845,10 +845,16 @@ class Api_cctv2 extends CI_Controller {
 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 		$response = curl_exec($curl);
-
+		
+		$err = curl_error($curl);
+		
 		curl_close($curl);
 		//$x = json_decode($response,true);
-		echo 'Disini hasil exec eventdetect/v1/trafficEvent/trafficEventPageList : '.$response;
+		if($err==''){
+			echo 'Disini hasil exec eventdetect/v1/trafficEvent/trafficEventPageList : '.$response;
+		}else{
+			echo "ERROR: $err";
+		}
 /*		if(count($x['rows'])>0){
 			$hasil=$this->db->insert_batch("t8000_rtflow",$x['rows']);
 			echo "$hasil rows inserted.";
