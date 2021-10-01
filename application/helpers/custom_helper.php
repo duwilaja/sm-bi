@@ -227,14 +227,13 @@ if (!function_exists('secondstoTime')) {
         return $d;
     }
 
-    function to_jml_array($data=[],$field='')
+    function to_jml_array($data=[],$field='',$result=[],$field2='')
     {
-        $d = [];
         foreach ($data as $k => $v) {
-            $d[] = (float)$v->$field;
+            $result[$v->$field2] = (float)$v->$field;
         }
 
-        return $d;
+        return $result;
     }
 
     function custom_date($date="",$custom='+ 1 days')

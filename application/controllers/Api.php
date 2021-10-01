@@ -81,6 +81,20 @@ class Api extends CI_Controller {
         return $bool;
     }
 
+    private function roleNameUser($polda='',$polres='')
+    {
+        $x = [];
+        if ($polda == '' && $polres == '') {
+            return [0,'Nasional'];
+        }else if($polda != ''){
+            $p = $this->mpub->get('polda',$polda)->row()->da_nam;
+            return [1,$p];
+        }else if($polres != ''){
+            $p = $this->mpub->get('polres',$polres)->row()->da_nam;
+            return [2,$p];
+        }
+    }
+
     // Login User
 	public function auth_users()
     {        
@@ -108,7 +122,8 @@ class Api extends CI_Controller {
                         $this->db->where(array('nrp'=>$nrp,'das'=>'Y'));
                         $retval=$this->db->get("persons")->result_array();
                         if(count($retval)>0){
-                         $data['session']= $retval[0];
+                         $data['session'] = $retval[0];
+                         $data['session']['roleNameUser'] = $this->roleNameUser($data['session']['polda'],$data['session']['polres']);
                          $msg = "Success Login Application";
                          $status = true; 
                      }else{
@@ -175,16 +190,19 @@ class Api extends CI_Controller {
                     
                     $date_before = custom_date(date('Y-m-d'),'- 1 days'); 
                     $filter_before['tgl'] = $date_before;
+                }else{
+                    $filter_before['tgl !='] = date('Y-m-d');
+                }
 
-                    $filter_before['status'] = 'Macet';
-                    $macet_before = $this->mpub->get('tmc_info_lalin','',$filter_before,'status');
-    
-                    $filter_before['status'] = 'Padat';
-                    $padat_before = $this->mpub->get('tmc_info_lalin','',$filter_before,'status');
-    
-                    $filter_before['status'] = 'Lancar';
-                    $lancar_before = $this->mpub->get('tmc_info_lalin','',$filter_before,'status'); 
-                } 
+                $filter_before['status'] = 'Macet';
+                $macet_before = $this->mpub->get('tmc_info_lalin','',$filter_before,'status');
+
+                $filter_before['status'] = 'Padat';
+                $padat_before = $this->mpub->get('tmc_info_lalin','',$filter_before,'status');
+
+                $filter_before['status'] = 'Lancar';
+                $lancar_before = $this->mpub->get('tmc_info_lalin','',$filter_before,'status'); 
+                
 
                 $filter['status'] = 'Macet';
                 $macet = $this->mpub->get('tmc_info_lalin','',$filter,'status');
@@ -200,17 +218,14 @@ class Api extends CI_Controller {
                 $padat = cek_data(@$padat->row()->jml);
                 $lancar = cek_data(@$lancar->row()->jml);
 
-                $persen_macet = [0, 'netral'];
                 if(!empty($macet_before)){
                     $persen_macet = persen_nt(cek_data(@$macet_before->row()->jml),$macet);
                 }
 
-                $persen_padat = [0, 'netral'];
                 if(!empty($padat_before)){
                     $persen_padat = persen_nt(cek_data(@$padat_before->row()->jml),$padat);
                 }
 
-                $persen_lancar = [0, 'netral'];
                 if(!empty($lancar_before)){
                     $persen_lancar = persen_nt(cek_data(@$lancar_before->row()->jml),$lancar);
                 }
@@ -242,6 +257,90 @@ class Api extends CI_Controller {
        
     }
 
+    public function get_tmc_penyebab_kemacetan()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mendapatkan data profile petugas";
+            $filter = [];
+            $filter_before = [];
+            $penyebab = [];
+
+            try {   
+              if ($this->cek_token()) {
+
+                $this->mpub->see = "sebab,img_frontend";
+                $qpenyebab = $this->mpub->get('penyebab_macet');
+                foreach ($qpenyebab->result() as $k => $v) {
+                    $xx = strtolower(str_replace(' ','_',$v->sebab));
+                    $penyebab[$xx] = [
+                        'nama' => $v->sebab,
+                        'img' => $v->img_frontend,
+                        'jml' => 0,
+                        'persen' => [0,'netral']
+                    ];
+                }
+
+                $this->mpub->see = "count(*) as jml,penyebab";
+                $polda = $this->input->get('polda');
+                $polres = $this->input->get('polres');
+                $date = $this->input->get('date');
+
+                if ($polda != '') {
+                    $filter['polda'] = $polda;
+                    $filter_before['polda'] = $polda;
+                }
+                
+                if ($polres != ''){
+                    $filter['polres'] = $polres;
+                    $filter_before['polres'] = $polres;
+                }
+                
+                if ($date != ''){
+                    
+                    $filter['tgl'] = $date;
+                    
+                    $date_before = custom_date(date('Y-m-d'),'- 1 days'); 
+                    $filter_before['tgl'] = $date_before;
+                } 
+
+                $qpenyebab = $this->mpub->get('tmc_info_lalin','',$filter,'penyebab');
+                foreach ($qpenyebab->result() as $k => $v) {
+                    if ($v->penyebab != '') {
+                        $xx = strtolower(str_replace(' ','_',$v->penyebab));
+
+                        $penyebab[$xx]['jml'] = $v->jml;
+                        $filter_before['penyebab'] = $xx;
+                        $persen = cek_data(@$this->mpub->get('tmc_info_lalin','',$filter_before,'status')->row()->jml);
+                        $penyebab[$xx]['persen'] = persen_nt(cek_data($v->jml),$persen);
+                    }
+                }
+
+                $data = $penyebab;
+                $msg = "Berhasil mengambil data";
+                $status = true; 
+
+              }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
     // Grafik TMC Lalin
     public function grafik_tmc_lalin()
     {        
@@ -253,11 +352,16 @@ class Api extends CI_Controller {
             $msg = "Gagal";
             $filter = [];
 
+            $month = [];
+            for ($i=1; $i <= 12 ; $i++) { 
+                $month[$i] = 0;
+            }
+
             try {   
               if ($this->cek_token()) {
                 $this->mpub->see = "count(*) as jml,MONTH(tgl) as bulan";
-                $polda = $this->input->get('polda_id');
-                $polres = $this->input->get('polres_id');
+                $polda = $this->input->get('polda');
+                $polres = $this->input->get('polres');
 
                 if ($polda != '') $filter['polda'] = $polda;
                 if ($polres != '') $filter['polres'] = $polres;
@@ -272,13 +376,98 @@ class Api extends CI_Controller {
                 $lancar = $this->mpub->get('tmc_info_lalin','',$filter,'MONTH(tgl)');
 
                 $data['series'] = [
-                    ['name' => 'Macet','data' => to_jml_array($macet->result(),'jml')],
-                    ['name' => 'Padat','data' => to_jml_array($padat->result(),'jml')],
-                    ['name' => 'Lancar','data' => to_jml_array($lancar->result(),'jml')],
+                    ['name' => 'Macet','data' => array_values(to_jml_array($macet->result(),'jml',$month,'bulan'))],
+                    ['name' => 'Padat','data' => array_values(to_jml_array($padat->result(),'jml',$month,'bulan'))],
+                    ['name' => 'Lancar','data' => array_values(to_jml_array($lancar->result(),'jml',$month,'bulan'))],
                 ];
                 
                 $msg = "Berhasil mengambil data";
                 $status = true; 
+              }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
+    // TMC Interaksi
+    public function get_tmc_interaksi()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mendapatkan data";
+            $filter = [];
+            $filter_before = [];
+            $penyebab = [];
+
+            try {   
+              if ($this->cek_token()) {
+
+                $this->mpub->see = "sebab,img_frontend";
+                $qpenyebab = $this->mpub->get('tmc_interaksi');
+                foreach ($qpenyebab->result() as $k => $v) {
+                    $xx = strtolower(str_replace(' ','_',$v->sebab));
+                    $penyebab[$xx] = [
+                        'nama' => $v->sebab,
+                        'img' => $v->img_frontend,
+                        'jml' => 0,
+                        'persen' => [0,'netral']
+                    ];
+                }
+
+                $this->mpub->see = "count(*) as jml,penyebab";
+                $polda = $this->input->get('polda');
+                $polres = $this->input->get('polres');
+                $date = $this->input->get('date');
+
+                if ($polda != '') {
+                    $filter['polda'] = $polda;
+                    $filter_before['polda'] = $polda;
+                }
+                
+                if ($polres != ''){
+                    $filter['polres'] = $polres;
+                    $filter_before['polres'] = $polres;
+                }
+                
+                if ($date != ''){
+                    
+                    $filter['tgl'] = $date;
+                    
+                    $date_before = custom_date(date('Y-m-d'),'- 1 days'); 
+                    $filter_before['tgl'] = $date_before;
+                } 
+
+                $qpenyebab = $this->mpub->get('tmc_info_lalin','',$filter,'penyebab');
+                foreach ($qpenyebab->result() as $k => $v) {
+                    if ($v->penyebab != '') {
+                        $xx = strtolower(str_replace(' ','_',$v->penyebab));
+
+                        $penyebab[$xx]['jml'] = $v->jml;
+                        $filter_before['penyebab'] = $xx;
+                        $persen = cek_data(@$this->mpub->get('tmc_info_lalin','',$filter_before,'status')->row()->jml);
+                        $penyebab[$xx]['persen'] = persen_nt(cek_data($v->jml),$persen);
+                    }
+                }
+
+                $data = $penyebab;
+                $msg = "Berhasil mengambil data";
+                $status = true; 
+
               }
             } catch (Exception $error) {
                 $statusCode = 417;
