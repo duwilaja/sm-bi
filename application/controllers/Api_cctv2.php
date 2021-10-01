@@ -816,7 +816,7 @@ class Api_cctv2 extends CI_Controller {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => $this->url.'/eventdetect/v1/trafficEvent/trafficEventPageList',
+		CURLOPT_URL => $this->url.'/eventdetect/v1/trafficEvent/trafficEventPageList?nowTime='.time(),
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
@@ -826,7 +826,15 @@ class Api_cctv2 extends CI_Controller {
 		CURLOPT_CUSTOMREQUEST => 'POST',
 		CURLOPT_POSTFIELDS =>'{
 			"pageNum" : 1,
-			"pageSize" : 20
+			"pageSize" : 20,
+			"channelId" : [],
+			"deviceId" : [],
+			"eventType" : ["1","2","3","4","5","6","7","8","9","11","12","16"],
+			"isShowShieldData" : 0,
+			"operStatus" : null,
+			"orgNodeId" : [],
+			"startTime" : '.mktime(0,0,0,date('m'),date('d'),date('Y')).'
+			"endTime" : '.time().'
 		}',
 		CURLOPT_HTTPHEADER => array(
 			'Content-Type: application/json',
@@ -840,7 +848,7 @@ class Api_cctv2 extends CI_Controller {
 
 		curl_close($curl);
 		$x = json_decode($response,true);
-		echo json_encode($x);
+		echo 'Disini hasil exec eventdetect/v1/trafficEvent/trafficEventPageList : '.json_encode($x);
 /*		if(count($x['rows'])>0){
 			$hasil=$this->db->insert_batch("t8000_rtflow",$x['rows']);
 			echo "$hasil rows inserted.";
