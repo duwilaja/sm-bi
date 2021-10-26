@@ -1186,7 +1186,7 @@ class Api extends CI_Controller {
                     
                     $filter['tgl'] = $date;
                     
-                    $date_before = custom_date(date('Y-m-d'),'- 1 days'); 
+                    $date_before = custom_date($filter['tgl'],'- 1 days'); 
                     $filter_before['tgl'] = $date_before;
                 }else{
                     $filter_before['tgl !='] = date('Y-m-d');
@@ -1298,7 +1298,7 @@ class Api extends CI_Controller {
                     
                     $filter['tgl'] = $date;
                     
-                    $date_before = custom_date(date('Y-m-d'),'- 1 days'); 
+                    $date_before = custom_date($filter['tgl'],'- 1 days'); 
                     $filter_before['tgl'] = $date_before;
                 }else{
                     $filter_before['tgl !='] = date('Y-m-d');
@@ -1423,7 +1423,7 @@ class Api extends CI_Controller {
                     
                     $filter['tgl'] = $date;
                     
-                    $date_before = custom_date(date('Y-m-d'),'- 1 days'); 
+                    $date_before = custom_date($filter['tgl'],'- 1 days'); 
                     $filter_before['tgl'] = $date_before;
                 }else{
                     $filter_before['tgl !='] = date('Y-m-d');
@@ -1536,7 +1536,7 @@ class Api extends CI_Controller {
                     
                     $filter['tgl'] = $date;
                     
-                    $date_before = custom_date(date('Y-m-d'),'- 1 days'); 
+                    $date_before = custom_date($filter['tgl'],'- 1 days'); 
                     $filter_before['tgl'] = $date_before;
                 }else{
                     $filter_before['tgl !='] = date('Y-m-d');
@@ -1854,6 +1854,44 @@ class Api extends CI_Controller {
             echo json_encode($arr);
         }
        
+    }
+
+    public function polda()
+    {
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $this->db->select('rowid as value, da_nam as label');
+            $dt = $this->db->get('polda')->result();
+            $arr = [
+                'data' => ['options'=>$dt],
+                'msg' => 'Berhasil Mengambil Data',
+                'statusCode' => 200,
+                'status' => true
+            ];
+            echo json_encode($arr);
+        }
+    }
+
+    public function polres()
+    {
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $poldaid = $this->input->get('poldaid');
+            for ($i=1; $i < 9; $i++) { 
+                if ($poldaid == $i) {
+                $poldaid = "0".$i;
+                }
+            }
+            $this->db->select('rowid as value, res_nam as label, polda');
+            $dt = $this->db->get_where('polres',array('polda'=> (int)$poldaid))->result();
+            $arr = [
+                'data' => ['options'=>$dt],
+                'msg' => 'Berhasil Mengambil Data',
+                'statusCode' => 200,
+                'status' => true
+            ];
+            echo json_encode($arr);
+        }
     }
 
 }
