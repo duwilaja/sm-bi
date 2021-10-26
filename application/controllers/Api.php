@@ -1629,4 +1629,749 @@ class Api extends CI_Controller {
        
     }
 
+    // SSC Jenis Pos
+    public function get_ssc_jenis_pos()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mendapatkan data jenis pos";
+            $filter = [];
+            $filter_before = [];
+            $polisi_before = 0;
+            $pjr_before = 0;
+            $gatur_before = 0;
+            $total_before = 0;
+
+            try {   
+            if ($this->cek_token()) {
+                $this->mpub->see = "count(*) as jml";
+                $polda = $this->input->get('polda');
+                $polres = $this->input->get('polres');
+                $date = $this->input->get('date');
+
+                if ($polda != '') {
+                    $filter['polda'] = $polda;
+                    $filter_before['polda'] = $polda;
+                }
+                
+                if ($polres != ''){
+                    $filter['polres'] = $polres;
+                    $filter_before['polres'] = $polres;
+                }
+                
+                if ($date != ''){
+                    
+                    $filter['tgl'] = $date;
+                    
+                    $date_before = custom_date($filter['tgl'],'- 1 days'); 
+                    $filter_before['tgl'] = $date_before;
+                }else{
+                    $filter_before['tgl !='] = date('Y-m-d');
+                }
+                
+                $total_before = $this->db->get_where('ssc_jalan',$filter_before)->num_rows();
+                
+                $filter_before['pos'] = 'Pos Polisi';
+                $polisi_before = $this->mpub->get('ssc_jalan','',$filter_before,'pos');
+                
+                $filter_before['pos'] = 'Pos PJR';
+                $pjr_before = $this->mpub->get('ssc_jalan','',$filter_before,'pos');
+                
+                $filter_before['pos'] = 'Pos Gatur';
+                $gatur_before = $this->mpub->get('ssc_jalan','',$filter_before,'pos'); 
+                
+                $total = $this->db->get_where('ssc_jalan',$filter)->num_rows();
+
+                $filter['pos'] = 'Pos Polisi';
+                $polisi = $this->mpub->get('ssc_jalan','',$filter,'pos');
+
+                $filter['pos'] = 'Pos PJR';
+                $pjr = $this->mpub->get('ssc_jalan','',$filter,'pos');
+
+                $filter['pos'] = 'Pos Gatur';
+                $gatur = $this->mpub->get('ssc_jalan','',$filter,'pos');
+
+                // Fix
+                $polisi = cek_data(@$polisi->row()->jml);
+                $pjr = cek_data(@$pjr->row()->jml);
+                $gatur = cek_data(@$gatur->row()->jml);
+                $total = cek_data(@$total);
+
+                $persen_total = persen_nt(cek_data(@$total_before),$total);
+
+                if(!empty($polisi_before)){
+                    $persen_polisi = persen_nt(cek_data(@$polisi_before->row()->jml),$polisi);
+                }
+
+                if(!empty($pjr_before)){
+                    $persen_pjr = persen_nt(cek_data(@$pjr_before->row()->jml),$pjr);
+                }
+
+                if(!empty($gatur_before)){
+                    $persen_gatur = persen_nt(cek_data(@$gatur_before->row()->jml),$gatur);
+                }
+
+                $data = [
+                    'ssc_jenis_pos' => [
+                        'total' => [$total,$persen_total],
+                        'polisi' => [$polisi,$persen_polisi],
+                        'pjr' => [$pjr,$persen_pjr],
+                        'gatur' => [$gatur,$persen_gatur ],
+                    ]
+                ];
+                    $msg = "Berhasil mengambil data";
+                    $status = true; 
+            }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+    
+    }
+
+    // SSC Jenis Gangguan
+    public function get_ssc_jenis_gangguan()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mendapatkan data jenis gangguan";
+            $filter = [];
+            $filter_before = [];
+            $black_spot_before = 0;
+            $trouble_spot_before = 0;
+            $tindak_pidana_before = 0;
+
+            try {   
+              if ($this->cek_token()) {
+                $this->mpub->see = "count(*) as jml";
+                $polda = $this->input->get('polda');
+                $polres = $this->input->get('polres');
+                $date = $this->input->get('date');
+
+                if ($polda != '') {
+                    $filter['polda'] = $polda;
+                    $filter_before['polda'] = $polda;
+                }
+                
+                if ($polres != ''){
+                    $filter['polres'] = $polres;
+                    $filter_before['polres'] = $polres;
+                }
+
+                if ($date != ''){
+                    
+                    $filter['tgl'] = $date;
+                    
+                    $date_before = custom_date($filter['tgl'],'- 1 days'); 
+                    $filter_before['tgl'] = $date_before;
+                }else{
+                    $filter_before['tgl !='] = date('Y-m-d');
+                }
+
+                $total_before = $this->db->get_where('ssc_status_gangguan',$filter_before)->num_rows();
+
+                $filter_before['gangguan'] = 'Black Spot';
+                $black_spot_before = $this->mpub->get('ssc_status_gangguan','',$filter_before,'gangguan');
+
+                $filter_before['gangguan'] = 'Trouble Spot';
+                $trouble_spot_before = $this->mpub->get('ssc_status_gangguan','',$filter_before,'gangguan');
+
+                $filter_before['gangguan'] = 'Ambang Gangguan';
+                $ambang_gangguan_before = $this->mpub->get('ssc_status_gangguan','',$filter_before,'gangguan');
+
+                $filter_before['gangguan'] = 'Tindak Pidana';
+                $tindak_pidana_before = $this->mpub->get('ssc_status_gangguan','',$filter_before,'gangguan');
+
+                $total = $this->db->get_where('ssc_status_gangguan',$filter)->num_rows();
+
+                $filter['gangguan'] = 'Black Spot';
+                $black_spot = $this->mpub->get('ssc_status_gangguan','',$filter,'gangguan');
+
+                $filter['gangguan'] = 'Trouble Spot';
+                $trouble_spot = $this->mpub->get('ssc_status_gangguan','',$filter,'gangguan');
+
+                $filter['gangguan'] = 'Ambang Gangguan';
+                $ambang_gangguan = $this->mpub->get('ssc_status_gangguan','',$filter,'gangguan');
+
+                $filter['gangguan'] = 'Tindak Pidana';
+                $tindak_pidana = $this->mpub->get('ssc_status_gangguan','',$filter,'gangguan');
+
+                // Fix
+                $black_spot = cek_data(@$black_spot->row()->jml);
+                $trouble_spot = cek_data(@$trouble_spot->row()->jml);
+                $tindak_pidana = cek_data(@$tindak_pidana->row()->jml);
+                $ambang_gangguan = cek_data(@$ambang_gangguan->row()->jml);
+                $total = cek_data(@$total);
+
+                $persen_total = persen_nt(cek_data(@$total_before),$total);
+
+                if(!empty($black_spot_before)){
+                    $persen_black_spot = persen_nt(cek_data(@$black_spot_before->row()->jml),$black_spot);
+                }
+
+                if(!empty($trouble_spot_before)){
+                    $persen_trouble_spot = persen_nt(cek_data(@$trouble_spot_before->row()->jml),$trouble_spot);
+                }
+
+                if(!empty($ambang_gangguan_before)){
+                    $persen_ambang_gangguan = persen_nt(cek_data(@$ambang_gangguan_before->row()->jml),$ambang_gangguan);
+                }
+
+                if(!empty($tindak_pidana_before)){
+                    $persen_tindak_pidana = persen_nt(cek_data(@$tindak_pidana_before->row()->jml),$tindak_pidana);
+                }
+
+                $data = [
+                    'ssc_jenis_gangguan' => [
+                        'total' => [$total,$persen_total],
+                        'black_spot' => [$black_spot,$persen_black_spot],
+                        'trouble_spot' => [$trouble_spot,$persen_trouble_spot],
+                        'ambang_gangguan' => [$ambang_gangguan,$persen_ambang_gangguan],
+                        'tindak_pidana' => [$tindak_pidana,$persen_tindak_pidana ],
+                    ]
+                ];
+                     $msg = "Berhasil mengambil data";
+                     $status = true; 
+              }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
+    // SSC Pelayanan Publik
+    public function get_ssc_pelayanan_publik()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mendapatkan data pelayanan publik";
+            $filter = [];
+            $filter_before = [];
+            $faskes_before = 0;
+            $rest_area_before = 0;
+            $spbu_before = 0;
+            $total_before = 0;
+
+            try {   
+            if ($this->cek_token()) {
+                $this->mpub->see = "count(*) as jml";
+                $polda = $this->input->get('polda');
+                $polres = $this->input->get('polres');
+                $date = $this->input->get('date');
+
+                if ($polda != '') {
+                    $filter['polda'] = $polda;
+                    $filter_before['polda'] = $polda;
+                }
+                
+                if ($polres != ''){
+                    $filter['polres'] = $polres;
+                    $filter_before['polres'] = $polres;
+                }
+                
+                if ($date != ''){
+                    
+                    $filter['tgl'] = $date;
+                    
+                    $date_before = custom_date($filter['tgl'],'- 1 days'); 
+                    $filter_before['tgl'] = $date_before;
+                }else{
+                    $filter_before['tgl !='] = date('Y-m-d');
+                }
+                
+                $total_before = $this->db->get_where('ssc_yan_publik',$filter_before)->num_rows();
+                
+                $filter_before['yan'] = 'Faskes';
+                $faskes_before = $this->mpub->get('ssc_yan_publik','',$filter_before,'yan');
+                
+                $filter_before['yan'] = 'Rest Area';
+                $rest_area_before = $this->mpub->get('ssc_yan_publik','',$filter_before,'yan');
+                
+                $filter_before['yan'] = 'SPBU';
+                $spbu_before = $this->mpub->get('ssc_yan_publik','',$filter_before,'yan'); 
+                
+                $total = $this->db->get_where('ssc_yan_publik',$filter)->num_rows();
+
+                $filter['yan'] = 'Faskes';
+                $faskes = $this->mpub->get('ssc_yan_publik','',$filter,'yan');
+
+                $filter['yan'] = 'Rest Area';
+                $rest_area = $this->mpub->get('ssc_yan_publik','',$filter,'yan');
+
+                $filter['yan'] = 'SPBU';
+                $spbu = $this->mpub->get('ssc_yan_publik','',$filter,'yan');
+
+                // Fix
+                $faskes = cek_data(@$faskes->row()->jml);
+                $rest_area = cek_data(@$rest_area->row()->jml);
+                $spbu = cek_data(@$spbu->row()->jml);
+                $total = cek_data(@$total);
+
+                $persen_total = persen_nt(cek_data(@$total_before),$total);
+
+                if(!empty($faskes_before)){
+                    $persen_faskes = persen_nt(cek_data(@$faskes_before->row()->jml),$faskes);
+                }
+
+                if(!empty($rest_area_before)){
+                    $persen_rest_area = persen_nt(cek_data(@$rest_area_before->row()->jml),$rest_area);
+                }
+
+                if(!empty($spbu_before)){
+                    $persen_spbu = persen_nt(cek_data(@$spbu_before->row()->jml),$spbu);
+                }
+
+                $data = [
+                    'ssc_pelayanan_publik' => [
+                        'total' => [$total,$persen_total],
+                        'faskes' => [$faskes,$persen_faskes],
+                        'rest_area' => [$rest_area,$persen_rest_area],
+                        'spbu' => [$spbu,$persen_spbu ],
+                    ]
+                ];
+                    $msg = "Berhasil mengambil data";
+                    $status = true; 
+            }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+    
+    }
+
+    // SSC Pelayanan Darurat
+    public function get_ssc_pelayanan_darurat()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mendapatkan data pelayanan darurat";
+            $filter = [];
+            $filter_before = [];
+            $ambulance_before = 0;
+            $mobil_derek_before = 0;
+            $bengkel_derek_before = 0;
+            $total_before = 0;
+
+            try {   
+            if ($this->cek_token()) {
+                $this->mpub->see = "count(*) as jml";
+                $polda = $this->input->get('polda');
+                $polres = $this->input->get('polres');
+                $date = $this->input->get('date');
+
+                if ($polda != '') {
+                    $filter['polda'] = $polda;
+                    $filter_before['polda'] = $polda;
+                }
+                
+                if ($polres != ''){
+                    $filter['polres'] = $polres;
+                    $filter_before['polres'] = $polres;
+                }
+                
+                if ($date != ''){
+                    
+                    $filter['tgl'] = $date;
+                    
+                    $date_before = custom_date($filter['tgl'],'- 1 days'); 
+                    $filter_before['tgl'] = $date_before;
+                }else{
+                    $filter_before['tgl !='] = date('Y-m-d');
+                }
+                
+                $total_before = $this->db->get_where('ssc_yan_darurat',$filter_before)->num_rows();
+                
+                $filter_before['yan'] = 'Ambulance';
+                $ambulance_before = $this->mpub->get('ssc_yan_darurat','',$filter_before,'yan');
+                
+                $filter_before['yan'] = 'Mobil Derek';
+                $mobil_derek_before = $this->mpub->get('ssc_yan_darurat','',$filter_before,'yan');
+                
+                $filter_before['yan'] = 'Bengkel Keliling';
+                $bengkel_derek_before = $this->mpub->get('ssc_yan_darurat','',$filter_before,'yan'); 
+                
+                $total = $this->db->get_where('ssc_yan_darurat',$filter)->num_rows();
+
+                $filter['yan'] = 'Ambulance';
+                $ambulance = $this->mpub->get('ssc_yan_darurat','',$filter,'yan');
+
+                $filter['yan'] = 'Mobil Derek';
+                $mobil_derek = $this->mpub->get('ssc_yan_darurat','',$filter,'yan');
+
+                $filter['yan'] = 'Bengkel Keliling';
+                $bengkel_keliling = $this->mpub->get('ssc_yan_darurat','',$filter,'yan');
+
+                // Fix
+                $ambulance = cek_data(@$ambulance->row()->jml);
+                $mobil_derek = cek_data(@$mobil_derek->row()->jml);
+                $bengkel_keliling = cek_data(@$bengkel_keliling->row()->jml);
+                $total = cek_data(@$total);
+
+                $persen_total = persen_nt(cek_data(@$total_before),$total);
+
+                if(!empty($ambulance_before)){
+                    $persen_ambulance = persen_nt(cek_data(@$ambulance_before->row()->jml),$ambulance);
+                }
+
+                if(!empty($mobil_derek_before)){
+                    $persen_mobil_derek = persen_nt(cek_data(@$mobil_derek_before->row()->jml),$mobil_derek);
+                }
+
+                if(!empty($bengkel_derek_before)){
+                    $persen_bengkel_keliling = persen_nt(cek_data(@$bengkel_derek_before->row()->jml),$bengkel_keliling);
+                }
+
+                $data = [
+                    'ssc_pelayanan_darurat' => [
+                        'total' => [$total,$persen_total],
+                        'ambulance' => [$ambulance,$persen_ambulance],
+                        'mobil_derek' => [$mobil_derek,$persen_mobil_derek],
+                        'bengkel_keliling' => [$bengkel_keliling,$persen_bengkel_keliling ],
+                    ]
+                ];
+                    $msg = "Berhasil mengambil data";
+                    $status = true; 
+            }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+    
+    }
+
+    // Grafik SSC Jenis Pos
+    public function grafik_ssc_jenis_pos()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal";
+            $filter = [];
+
+            $month = [];
+            for ($i=1; $i <= 12 ; $i++) { 
+                $month[$i] = 0;
+            }
+
+            try {   
+              if ($this->cek_token()) {
+                $this->mpub->see = "count(*) as jml,MONTH(tgl) as bulan";
+                $polda = $this->input->get('polda');
+                $polres = $this->input->get('polres');
+
+                if ($polda != '') $filter['polda'] = $polda;
+                if ($polres != '') $filter['polres'] = $polres;
+
+                $filter['pos'] = 'Pos Polisi';
+                $polisi = $this->mpub->get('ssc_jalan','',$filter,'MONTH(tgl)');
+
+                $filter['pos'] = 'Pos PJR';
+                $pjr = $this->mpub->get('ssc_jalan','',$filter,'MONTH(tgl)');
+
+                $filter['pos'] = 'Pos Gatur';
+                $gatur = $this->mpub->get('ssc_jalan','',$filter,'MONTH(tgl)');
+
+                $data['series'] = [
+                    ['name' => 'Pos Polisi','data' => array_values(to_jml_array($polisi->result(),'jml',$month,'bulan'))],
+                    ['name' => 'Pos PJR','data' => array_values(to_jml_array($pjr->result(),'jml',$month,'bulan'))],
+                    ['name' => 'Pos Gatur','data' => array_values(to_jml_array($gatur->result(),'jml',$month,'bulan'))],
+                ];
+                
+                $msg = "Berhasil mengambil data";
+                $status = true; 
+              }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
+    // Grafik SCC Jenis Gangguan
+    public function grafik_ssc_jenis_gangguan()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal";
+            $filter = [];
+
+            $month = [];
+            for ($i=1; $i <= 12 ; $i++) { 
+                $month[$i] = 0;
+            }
+
+            try {   
+              if ($this->cek_token()) {
+                $this->mpub->see = "count(*) as jml,MONTH(tgl) as bulan";
+                $polda = $this->input->get('polda');
+                $polres = $this->input->get('polres');
+
+                if ($polda != '') $filter['polda'] = $polda;
+                if ($polres != '') $filter['polres'] = $polres;
+
+                $filter['gangguan'] = 'Black spot';
+                $black_spot = $this->mpub->get('ssc_status_gangguan','',$filter,'MONTH(tgl)');
+
+                $filter['gangguan'] = 'Trouble Spot';
+                $trouble_spot = $this->mpub->get('ssc_status_gangguan','',$filter,'MONTH(tgl)');
+
+                $filter['gangguan'] = 'Ambang Gangguan';
+                $ambang_gangguan = $this->mpub->get('ssc_status_gangguan','',$filter,'MONTH(tgl)');
+
+                $filter['gangguan'] = 'Tindak Pidana';
+                $tindak_pidana = $this->mpub->get('ssc_status_gangguan','',$filter,'MONTH(tgl)');
+
+                $data['series'] = [
+                    ['name' => 'Black Spot','data' => array_values(to_jml_array($black_spot->result(),'jml',$month,'bulan'))],
+                    ['name' => 'Trouble Spot','data' => array_values(to_jml_array($trouble_spot->result(),'jml',$month,'bulan'))],
+                    ['name' => 'Tindak Pidana','data' => array_values(to_jml_array($tindak_pidana->result(),'jml',$month,'bulan'))],
+                    ['name' => 'Ambang Gangguan','data' => array_values(to_jml_array($ambang_gangguan->result(),'jml',$month,'bulan'))],
+                ];
+                
+                $msg = "Berhasil mengambil data";
+                $status = true; 
+              }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+    
+    // Grafik SCC Pelayanan Publik
+    public function grafik_ssc_pelayanan_publik()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal";
+            $filter = [];
+
+            $month = [];
+            for ($i=1; $i <= 12 ; $i++) { 
+                $month[$i] = 0;
+            }
+
+            try {   
+              if ($this->cek_token()) {
+                $this->mpub->see = "count(*) as jml,MONTH(tgl) as bulan";
+                $polda = $this->input->get('polda');
+                $polres = $this->input->get('polres');
+
+                if ($polda != '') $filter['polda'] = $polda;
+                if ($polres != '') $filter['polres'] = $polres;
+
+                $filter['yan'] = 'Faskes';
+                $faskes = $this->mpub->get('ssc_yan_publik','',$filter,'MONTH(tgl)');
+
+                $filter['yan'] = 'Rest Area';
+                $rest_area = $this->mpub->get('ssc_yan_publik','',$filter,'MONTH(tgl)');
+
+                $filter['yan'] = 'SPBU';
+                $spbu = $this->mpub->get('ssc_yan_publik','',$filter,'MONTH(tgl)');
+
+                $data['series'] = [
+                    ['name' => 'Faskes','data' => array_values(to_jml_array($faskes->result(),'jml',$month,'bulan'))],
+                    ['name' => 'Rest Area','data' => array_values(to_jml_array($rest_area->result(),'jml',$month,'bulan'))],
+                    ['name' => 'SPBU','data' => array_values(to_jml_array($spbu->result(),'jml',$month,'bulan'))],
+                ];
+                
+                $msg = "Berhasil mengambil data";
+                $status = true; 
+              }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
+    // Grafik SCC Pelayanan Darurat
+    public function grafik_ssc_pelayanan_darurat()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal";
+            $filter = [];
+
+            $month = [];
+            for ($i=1; $i <= 12 ; $i++) { 
+                $month[$i] = 0;
+            }
+
+            try {   
+              if ($this->cek_token()) {
+                $this->mpub->see = "count(*) as jml,MONTH(tgl) as bulan";
+                $polda = $this->input->get('polda');
+                $polres = $this->input->get('polres');
+
+                if ($polda != '') $filter['polda'] = $polda;
+                if ($polres != '') $filter['polres'] = $polres;
+
+                $filter['yan'] = 'Ambulance';
+                $ambulance = $this->mpub->get('ssc_yan_darurat','',$filter,'MONTH(tgl)');
+
+                $filter['yan'] = 'Mobil Derek';
+                $mobil_derek = $this->mpub->get('ssc_yan_darurat','',$filter,'MONTH(tgl)');
+
+                $filter['yan'] = 'Bengkel Keliling';
+                $bengkel_keliling = $this->mpub->get('ssc_yan_darurat','',$filter,'MONTH(tgl)');
+
+                $data['series'] = [
+                    ['name' => 'Ambulance','data' => array_values(to_jml_array($ambulance->result(),'jml',$month,'bulan'))],
+                    ['name' => 'Mobil Derek','data' => array_values(to_jml_array($mobil_derek->result(),'jml',$month,'bulan'))],
+                    ['name' => 'Bengkel Keliling','data' => array_values(to_jml_array($bengkel_keliling->result(),'jml',$month,'bulan'))],
+                ];
+                
+                $msg = "Berhasil mengambil data";
+                $status = true; 
+              }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
+    public function polda()
+    {
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $this->db->select('rowid as value, da_nam as label');
+            $dt = $this->db->get('polda')->result();
+            $arr = [
+                'data' => ['options'=>$dt],
+                'msg' => 'Berhasil Mengambil Data',
+                'statusCode' => 200,
+                'status' => true
+            ];
+            echo json_encode($arr);
+        }
+    }
+
+    public function polres()
+    {
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $poldaid = $this->input->get('poldaid');
+            for ($i=1; $i < 9; $i++) { 
+                if ($poldaid == $i) {
+                $poldaid = "0".$i;
+                }
+            }
+            $this->db->select('rowid as value, res_nam as label, polda');
+            $dt = $this->db->get_where('polres',array('polda'=> (int)$poldaid))->result();
+            $arr = [
+                'data' => ['options'=>$dt],
+                'msg' => 'Berhasil Mengambil Data',
+                'statusCode' => 200,
+                'status' => true
+            ];
+            echo json_encode($arr);
+        }
+    }
+
 }

@@ -814,6 +814,8 @@ class Api_cctv2 extends CI_Controller {
 	public function get_traffic_event()
 	{
 		$curl = curl_init();
+		
+		//S4NbecfYA1D4CRRCI9TTB4
 
 		curl_setopt_array($curl, array(
 		CURLOPT_URL => $this->url.'/eventdetect/v1/trafficEvent/trafficEventPageList?nowTime='.time(),
@@ -832,7 +834,7 @@ class Api_cctv2 extends CI_Controller {
 			"eventType" : ["1","2","3","4","5","6","7","8","9","11","12","16"],
 			"isShowShieldData" : 0,
 			"operStatus" : null,
-			"orgNodeId" : [],
+			"orgNodeId" : ["S4NbecfYA1D4CRRCI9TTB4"],
 			"startTime" : '.mktime(0,0,0,date('m'),date('d'),date('Y')).'
 			"endTime" : '.time().'
 		}',
@@ -845,16 +847,69 @@ class Api_cctv2 extends CI_Controller {
 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 		$response = curl_exec($curl);
-
+		
+		$err = curl_error($curl);
+		
 		curl_close($curl);
-		$x = json_decode($response,true);
-		echo 'Disini hasil exec eventdetect/v1/trafficEvent/trafficEventPageList : '.json_encode($x);
+		//$x = json_decode($response,true);
+		if($err==''){
+			echo 'Disini hasil exec eventdetect/v1/trafficEvent/trafficEventPageList : '.$response;
+		}else{
+			echo "ERROR: $err";
+		}
 /*		if(count($x['rows'])>0){
 			$hasil=$this->db->insert_batch("t8000_rtflow",$x['rows']);
 			echo "$hasil rows inserted.";
 		}else{
 			echo "No rows";
 		}*/
+	}
+	
+	
+	public function get_device_tree()
+	{
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => $this->url.'/videoService/devicesManager/deviceTree?nodeType=1&typeCode=01&page=1&pageSize=20',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'GET',
+/*		CURLOPT_POSTFIELDS =>'{
+			"pageNum" : 1,
+			"pageSize" : 20,
+			"channelId" : [],
+			"deviceId" : [],
+			"eventType" : ["1","2","3","4","5","6","7","8","9","11","12","16"],
+			"isShowShieldData" : 0,
+			"operStatus" : null,
+			"orgNodeId" : [],
+			"startTime" : '.mktime(0,0,0,date('m'),date('d'),date('Y')).'
+			"endTime" : '.time().'
+		}',*/
+		CURLOPT_HTTPHEADER => array(
+			'Content-Type: application/json',
+			'X-Subject-Token: '.$this->token
+		),
+		));
+
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+		$response = curl_exec($curl);
+		
+		$err = curl_error($curl);
+		
+		curl_close($curl);
+		//$x = json_decode($response,true);
+		if($err==''){
+			echo 'Disini hasil exec /videoService/devicesManager/deviceTree : '.$response;
+		}else{
+			echo "ERROR: $err";
+		}
 	}
 
 }
