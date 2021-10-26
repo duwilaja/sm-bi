@@ -814,6 +814,8 @@ class Api_cctv2 extends CI_Controller {
 	public function get_traffic_event()
 	{
 		$curl = curl_init();
+		
+		//S4NbecfYA1D4CRRCI9TTB4
 
 		curl_setopt_array($curl, array(
 		CURLOPT_URL => $this->url.'/eventdetect/v1/trafficEvent/trafficEventPageList?nowTime='.time(),
