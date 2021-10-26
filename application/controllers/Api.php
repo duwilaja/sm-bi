@@ -308,8 +308,6 @@ class Api extends CI_Controller {
                 }else{
                     $filter_before['tgl !='] = date('Y-m-d');
                 }
-                
-                
 
                 $qpenyebab = $this->mpub->get('tmc_info_lalin','',$filter,'penyebab');
                 foreach ($qpenyebab->result() as $k => $v) {
@@ -405,6 +403,8 @@ class Api extends CI_Controller {
        
     }
 
+
+    
     // TMC Interaksi
     public function get_tmc_interaksi()
     {        
@@ -416,24 +416,21 @@ class Api extends CI_Controller {
             $msg = "Gagal mendapatkan data";
             $filter = [];
             $filter_before = [];
-            $penyebab = [];
+            $interaksi = [];
+            $total = [];
+
+            $img = [
+                'tweeter' => 'tw.png',
+                'facebook' => 'fb.png',
+                'center' => 'center.png',
+                'web' => 'web.png',
+            ];
 
             try {   
               if ($this->cek_token()) {
 
-                $this->mpub->see = "sebab,img_frontend";
-                $qpenyebab = $this->mpub->get('tmc_interaksi');
-                foreach ($qpenyebab->result() as $k => $v) {
-                    $xx = strtolower(str_replace(' ','_',$v->sebab));
-                    $penyebab[$xx] = [
-                        'nama' => $v->sebab,
-                        'img' => $v->img_frontend,
-                        'jml' => 0,
-                        'persen' => [0,'netral']
-                    ];
-                }
-
-                $this->mpub->see = "count(*) as jml,penyebab";
+                $this->mpub->see = "count(*) as jml,media";
+                
                 $polda = $this->input->get('polda');
                 $polres = $this->input->get('polres');
                 $date = $this->input->get('date');
@@ -452,26 +449,105 @@ class Api extends CI_Controller {
                     
                     $filter['tgl'] = $date;
                     
-                    $date_before = custom_date(date('Y-m-d'),'- 1 days'); 
+                    $date_before = custom_date($filter['tgl'],'- 1 days'); 
                     $filter_before['tgl'] = $date_before;
-                } 
-
-                $qpenyebab = $this->mpub->get('tmc_info_lalin','',$filter,'penyebab');
-                foreach ($qpenyebab->result() as $k => $v) {
-                    if ($v->penyebab != '') {
-                        $xx = strtolower(str_replace(' ','_',$v->penyebab));
-
-                        $penyebab[$xx]['jml'] = $v->jml;
-                        $filter_before['penyebab'] = $xx;
-                        $persen = cek_data(@$this->mpub->get('tmc_info_lalin','',$filter_before,'status')->row()->jml);
-                        $penyebab[$xx]['persen'] = persen_nt(cek_data($v->jml),$persen);
-                    }
+                }else{
+                    $filter_before['tgl !='] = date('Y-m-d');
                 }
 
-                $data = $penyebab;
+                $filter_before['media !='] = "";  
+                $total_interaksi_before = $this->mpub->get('tmc_interaksi','',$filter_before)->row()->jml;
+                $total_interaksi = $this->mpub->get('tmc_interaksi','',$filter)->row()->jml;
+
+                $total = [
+                    'jml' => $total_interaksi,
+                    'persen' => persen_nt(cek_data($total_interaksi_before),$total_interaksi)
+                ];
+                
+                foreach ($img as $k => $v) {
+                    $interaksi[$k] = [
+                        'nama' => $k,
+                        'img' => $v,
+                        'jml' => 0,
+                        'persen' => [0,'netral']
+                    ];
+                }
+
+                foreach ($interaksi as $k => $v) {
+                    $filter['media'] = $k;
+                    $filter_before['media'] = $k;
+                    $int = [
+                        'jml' => 0
+                    ];
+
+                    $inter = $this->mpub->get('tmc_interaksi','',$filter,'media');
+                    $inter = $inter->num_rows() > 0 ? $int = $inter->row_array() : $int['jml'] = 0;  ;
+                    
+                    $interaksi[$k]['jml'] = $int['jml'];
+
+                    $before = cek_data(@$this->mpub->get('tmc_interaksi','',$filter_before,'media')->row()->jml);
+                    $interaksi[$k]['persen'] = persen_nt(cek_data($before),cek_data($int['jml']));
+                }
+
+                $data = $interaksi;
                 $msg = "Berhasil mengambil data";
                 $status = true; 
 
+              }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
+            }
+
+            $arr = [
+                'data' => $data,
+                'total' => $total,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
+    // Grafik TMC Interaksi
+    public function grafik_tmc_interaksi()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal";
+            $filter = [];
+
+            $month = [];
+            for ($i=1; $i <= 12 ; $i++) { 
+                $month[$i] = 0;
+            }
+
+            try {   
+              if ($this->cek_token()) {
+                $polda = $this->input->get('polda');
+                $polres = $this->input->get('polres');
+
+                if ($polda != '') { $filter['polda'] = $polda;$filterx['polda'] = $polda; }
+                if ($polres != '') { $filter['polres'] = $polres;$filterx['polres'] = $polres;}
+
+                $filter['media !='] = '';
+                $this->mpub->see = "media";
+                $qinteraksi = $this->mpub->get('tmc_interaksi','',$filter,'media');
+                foreach ($qinteraksi->result() as $k => $v) {
+                    $filterx['media'] = $v->media;
+                    $this->mpub->see = "count(*) as jml,MONTH(tgl) as bulan";
+                    $x = $this->mpub->get('tmc_interaksi','',$filterx,'MONTH(tgl)');
+                    $data['series'][$k] = ['name' => $v->media,'data' => array_values(to_jml_array($x->result(),'jml',$month,'bulan'))];
+                }
+                
+                $msg = "Berhasil mengambil data";
+                $status = true; 
               }
             } catch (Exception $error) {
                 $statusCode = 417;
@@ -489,6 +565,410 @@ class Api extends CI_Controller {
         }
        
     }
+
+     // TMC Publikasi
+     public function get_tmc_publikasi()
+     {        
+         $this->header();
+         if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+             $data = [];
+             $status = false;
+             $statusCode = 200;
+             $msg = "Gagal mendapatkan data";
+             $filter = [];
+             $filter_before = [];
+             $publikasi = [];
+             $total = [];
+ 
+             $img = [
+                 'tweeter' => 'tw.png',
+                 'facebook' => 'fb.png',
+                 'center' => 'center.png',
+                 'web' => 'web.png',
+             ];
+ 
+             try {   
+               if ($this->cek_token()) {
+ 
+                 $this->mpub->see = "count(*) as jml,media";
+                 
+                 $polda = $this->input->get('polda');
+                 $polres = $this->input->get('polres');
+                 $date = $this->input->get('date');
+ 
+                 if ($polda != '') {
+                     $filter['polda'] = $polda;
+                     $filter_before['polda'] = $polda;
+                 }
+                 
+                 if ($polres != ''){
+                     $filter['polres'] = $polres;
+                     $filter_before['polres'] = $polres;
+                 }
+                 
+                 if ($date != ''){
+                     
+                     $filter['tgl'] = $date;
+                     
+                     $date_before = custom_date($filter['tgl'],'- 1 days'); 
+                     $filter_before['tgl'] = $date_before;
+                 }else{
+                     $filter_before['tgl !='] = date('Y-m-d');
+                 }
+ 
+                 $filter_before['media !='] = "";  
+                 $total_publikasi_before = $this->mpub->get('tmc_publikasi','',$filter_before)->row()->jml;
+                 $total_publikasi = $this->mpub->get('tmc_publikasi','',$filter)->row()->jml;
+ 
+                 $total = [
+                     'jml' => $total_publikasi,
+                     'persen' => persen_nt(cek_data($total_publikasi_before),$total_publikasi)
+                 ];
+                 
+                 foreach ($img as $k => $v) {
+                     $publikasi[$k] = [
+                         'nama' => ucwords(str_replace('_',' ',$k)),
+                         'img' => $v,
+                         'jml' => 0,
+                         'persen' => [0,'netral']
+                     ];
+                 }
+ 
+
+                 foreach ($publikasi as $k => $v) {
+                    $filter['media'] = $v['nama'];
+                    $filter_before['media'] = $v['nama'];
+                    $int = [
+                        'jml' => 0
+                    ];
+
+                    $publi = $this->mpub->get('tmc_publikasi','',$filter,'media');
+                    $publi = $publi->num_rows() > 0 ? $int = $publi->row_array() : $int['jml'] = 0;  ;
+                    
+                    $publikasi[$k]['jml'] = $int['jml'];
+
+                    $before = cek_data(@$this->mpub->get('tmc_publikasi','',$filter_before,'media')->row()->jml);
+                    $publikasi[$k]['persen'] = persen_nt(cek_data($before),cek_data($int['jml']));
+                }
+ 
+                 $data = $publikasi;
+                 $msg = "Berhasil mengambil data";
+                 $status = true; 
+ 
+               }
+             } catch (Exception $error) {
+                 $statusCode = 417;
+                 $msg = $error->getMessage();
+             }
+ 
+             $arr = [
+                 'data' => $data,
+                 'total' => $total,
+                 'msg' => $msg,
+                 'statusCode' => $statusCode,
+                 'status' => $status
+             ];
+             
+             echo json_encode($arr);
+         }
+        
+     }
+ 
+     // Grafik TMC publikasi
+     public function grafik_tmc_publikasi()
+     {        
+         $this->header();
+         if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+             $data = [];
+             $status = false;
+             $statusCode = 200;
+             $msg = "Gagal";
+             $filter = [];
+ 
+             $month = [];
+             for ($i=1; $i <= 12 ; $i++) { 
+                 $month[$i] = 0;
+             }
+ 
+             try {   
+               if ($this->cek_token()) {
+                 $polda = $this->input->get('polda');
+                 $polres = $this->input->get('polres');
+ 
+                 if ($polda != '') { $filter['polda'] = $polda;$filterx['polda'] = $polda; }
+                 if ($polres != '') { $filter['polres'] = $polres;$filterx['polres'] = $polres;}
+ 
+                 $filter['media !='] = '';
+                 $this->mpub->see = "media";
+                 $qpublikasi = $this->mpub->get('tmc_publikasi','',$filter,'media');
+                 foreach ($qpublikasi->result() as $k => $v) {
+                     $filterx['media'] = $v->media;
+                     $this->mpub->see = "count(*) as jml,MONTH(tgl) as bulan";
+                     $x = $this->mpub->get('tmc_publikasi','',$filterx,'MONTH(tgl)');
+                     $data['series'][$k] = ['name' => $v->media,'data' => array_values(to_jml_array($x->result(),'jml',$month,'bulan'))];
+                 }
+                 
+                 $msg = "Berhasil mengambil data";
+                 $status = true; 
+               }
+             } catch (Exception $error) {
+                 $statusCode = 417;
+                 $msg = $error->getMessage();
+             }
+ 
+             $arr = [
+                 'data' => $data,
+                 'msg' => $msg,
+                 'statusCode' => $statusCode,
+                 'status' => $status
+             ];
+             
+             echo json_encode($arr);
+         }
+        
+     }
+
+     // TMC Koordinasi
+     public function get_tmc_koordinasi()
+     {        
+         $this->header();
+         if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+             $data = [];
+             $status = false;
+             $statusCode = 200;
+             $msg = "Gagal mendapatkan data";
+             $filter = [];
+             $filter_before = [];
+             $koordinasi = [];
+             $total = [];
+ 
+             $img = [
+                 'perijinan' => 'perijinan.png',
+                 'pemberitahuan' => 'pemberitahuan.png',
+                 'info_kegiatan' => 'info_kegiatan.png',
+                 'permohonan_pengawalan' => 'pengawalan.png',
+             ];
+ 
+             try {   
+               if ($this->cek_token()) {
+ 
+                 $this->mpub->see = "count(*) as jml,jenis";
+                 
+                 $polda = $this->input->get('polda');
+                 $polres = $this->input->get('polres');
+                 $date = $this->input->get('date');
+ 
+                 if ($polda != '') {
+                     $filter['polda'] = $polda;
+                     $filter_before['polda'] = $polda;
+                 }
+                 
+                 if ($polres != ''){
+                     $filter['polres'] = $polres;
+                     $filter_before['polres'] = $polres;
+                 }
+                 
+                 if ($date != ''){
+                     
+                     $filter['tgl'] = $date;
+                     
+                     $date_before = custom_date($filter['tgl'],'- 1 days'); 
+                     $filter_before['tgl'] = $date_before;
+                 }else{
+                     $filter_before['tgl !='] = date('Y-m-d');
+                 }
+ 
+                 $filter_before['jenis !='] = "";  
+                 $total_koordinasi_before = $this->mpub->get('tmc_koordinasi','',$filter_before)->row()->jml;
+                 $total_koordinasi = $this->mpub->get('tmc_koordinasi','',$filter)->row()->jml;
+ 
+                 $total = [
+                     'jml' => $total_koordinasi,
+                     'persen' => persen_nt(cek_data($total_koordinasi_before),$total_koordinasi)
+                 ];
+                 
+                 foreach ($img as $k => $v) {
+                     $koordinasi[$k] = [
+                         'nama' => ucwords(str_replace('_',' ',$k)),
+                         'img' => $v,
+                         'jml' => 0,
+                         'persen' => [0,'netral']
+                     ];
+                 }
+ 
+
+                 foreach ($koordinasi as $k => $v) {
+
+                    $filter['jenis'] = $v['nama'];
+                    $filter_before['jenis'] = $v['nama'];
+                    $int = [
+                        'jml' => 0
+                    ];
+
+                    $data_ = $this->mpub->get('tmc_koordinasi','',$filter,'jenis');
+                    $data_ = $data_->num_rows() > 0 ? $int = $data_->row_array() : $int['jml'] = 0; 
+
+                    $koordinasi[$k]['jml'] = $int['jml'];
+
+                    $before = cek_data(@$this->mpub->get('tmc_koordinasi','',$filter_before,'jenis')->row()->jml);
+                    $koordinasi[$k]['persen'] = persen_nt(cek_data($before),cek_data($int['jml']));
+                }
+ 
+                 $data = $koordinasi;
+                 $msg = "Berhasil mengambil data";
+                 $status = true; 
+ 
+               }
+             } catch (Exception $error) {
+                 $statusCode = 417;
+                 $msg = $error->getMessage();
+             }
+ 
+             $arr = [
+                 'data' => $data,
+                 'total' => $total,
+                 'msg' => $msg,
+                 'statusCode' => $statusCode,
+                 'status' => $status
+             ];
+             
+             echo json_encode($arr);
+         }
+        
+     }
+
+     // Grafik Line TMC koordinasi
+     public function grafik_line_tmc_koordinasi()
+     {        
+         $this->header();
+         if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+             $data = [];
+             $status = false;
+             $statusCode = 200;
+             $msg = "Gagal";
+             $filter = [];
+ 
+             $month = [];
+             for ($i=1; $i <= 12 ; $i++) { 
+                 $month[$i] = 0;
+             }
+ 
+             try {   
+               if ($this->cek_token()) {
+                 $polda = $this->input->get('polda');
+                 $polres = $this->input->get('polres');
+ 
+                 if ($polda != '') { $filter['polda'] = $polda;$filterx['polda'] = $polda; }
+                 if ($polres != '') { $filter['polres'] = $polres;$filterx['polres'] = $polres;}
+ 
+                 $filter['giat !='] = '';
+                 $this->mpub->see = "giat";
+                 $qpublikasi = $this->mpub->get('tmc_koordinasi','',$filter,'giat');
+                 foreach ($qpublikasi->result() as $k => $v) {
+                     $filterx['giat'] = $v->giat;
+                     $this->mpub->see = "count(*) as jml,MONTH(tgl) as bulan";
+                     $x = $this->mpub->get('tmc_koordinasi','',$filterx,'MONTH(tgl)');
+                     $data['series'][$k] = ['name' => $v->giat,'data' => array_values(to_jml_array($x->result(),'jml',$month,'bulan'))];
+                 }
+                 
+                 $msg = "Berhasil mengambil data";
+                 $status = true; 
+               }
+             } catch (Exception $error) {
+                 $statusCode = 417;
+                 $msg = $error->getMessage();
+             }
+ 
+             $arr = [
+                 'data' => $data,
+                 'msg' => $msg,
+                 'statusCode' => $statusCode,
+                 'status' => $status
+             ];
+             
+             echo json_encode($arr);
+         }
+        
+     }
+
+     // Grafik Piew TMC koordinasi
+     public function grafik_pie_tmc_koordinasi()
+     {        
+         $this->header();
+         if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+             $data = [];
+             $status = false;
+             $statusCode = 200;
+             $msg = "Gagal";
+             $filter = [];
+
+             $options = [
+                    'chart' => [
+                      'type' => 'pie',
+                    ],
+                    'colors' => ['#1877F2', '#01E8E5', '#C824FE', '#F7592D'],
+                    'labels' => ['Pengawalan', 'Info Kegiatan', 'Pemberitahuan', 'Perijinan'],
+                    'responsive' => [[
+                      'breakpoint' => 480,
+                      'options' => [
+                        'chart' => [
+                          'width' => 200
+                        ],
+                        
+                      ]
+                    ]],
+                    'legend' => [
+                        'show' => false
+                    ]
+                ];
+ 
+             try {   
+               if ($this->cek_token()) {
+                 $polda = $this->input->get('polda');
+                 $date = $this->input->get('date');
+                 $polres = $this->input->get('polres');
+ 
+                 if ($date != '') { $filter['tgl'] = $date; }
+                 if ($polda != '') { $filter['polda'] = $polda;$filterx['polda'] = $polda; }
+                 if ($polres != '') { $filter['polres'] = $polres;$filterx['polres'] = $polres;}
+ 
+                //  $filter['jenis !='] = '';
+                // //  $this->mpub->see = "count(*) as jml,jenis";
+                // //  $qpublikasi = $this->mpub->get('tmc_koordinasi','',$filter,'jenis');
+                // //  foreach ($qpublikasi->result() as $k => $v) {
+                // //      $options['labels'][] = $v->jenis;
+                // //      $data['series'][] = $v->jml;
+                // //  }
+
+                 foreach ($options['labels'] as $v) {
+                    $filter['jenis !='] = '';
+                    $filter['jenis'] = $v;
+                    $this->mpub->see = "count(*) as jml,jenis";
+                    $data_ = $this->mpub->get('tmc_koordinasi','',$filter,'jenis');
+                    $data_ = $data_->num_rows() > 0 ? $int = $data_->row_array() : $int['jml'] = 0; 
+                    $data['series'][] = (float)$int['jml'];
+                 }
+                 
+                 $data['options'] = $options;
+                 $msg = "Berhasil mengambil data";
+                 $status = true; 
+               }
+             } catch (Exception $error) {
+                 $statusCode = 417;
+                 $msg = $error->getMessage();
+             }
+ 
+             $arr = [
+                 'data' => $data,
+                 'msg' => $msg,
+                 'statusCode' => $statusCode,
+                 'status' => $status
+             ];
+             
+             echo json_encode($arr);
+         }
+        
+     }
 
     // Set Activity Petugas
     public function set_activity_petugas()

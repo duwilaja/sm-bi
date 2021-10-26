@@ -217,7 +217,7 @@ if (!function_exists('secondstoTime')) {
     {
         $d = 0;
         try {
-            if ($data != '' || $data != null || isset($data)) {
+            if (!is_null($data)) {
                 $d = (float)$data;
             }
         } catch (Exception $e) {

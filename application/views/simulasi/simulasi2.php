@@ -46,13 +46,10 @@
     <link rel="stylesheet" href="<?php echo base_url('my/vendor/owl/')?>owl.carousel.min.css">
     <link rel="stylesheet" href="<?php echo base_url('my/vendor/owl/')?>owl.theme.default.min.css">
     
-    
     <!-- Tabs css-->
     <link href="<?php echo base_url();?>aronox/assets/plugins/tabs/style.css" rel="stylesheet" />
-    
-    
-    
-     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
     
