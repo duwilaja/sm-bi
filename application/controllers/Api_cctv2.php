@@ -283,7 +283,7 @@ class Api_cctv2 extends CI_Controller {
 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		CURLOPT_CUSTOMREQUEST => 'POST',
 		CURLOPT_POSTFIELDS =>'{
-			"channelCodes" : ["42Vm1u6JA1DDIVOUOO6EEM"],
+			"channelCodes" : ["42Vm1u6JA1DDIVOUOO6EEM"]
 		}',
 		CURLOPT_HTTPHEADER => array(
 			'Content-Type: application/json',
