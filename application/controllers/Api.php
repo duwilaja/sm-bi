@@ -2374,4 +2374,118 @@ class Api extends CI_Controller {
         }
     }
 
+    public function get_black_spot()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mendapatkan data black spot";
+            $filter = [];
+
+            try {   
+              if ($this->cek_token()) {
+                $this->mpub->see = "rowid,tgl,jalan,jenis,status,lat,lng";
+
+                $filter['status'] = 'Black Spot';
+                $black_spot = $this->mpub->get('tmc_data_statusjalan','',$filter);
+
+                $data = $black_spot->result();
+                $msg = "Berhasil mengambil data";
+                $status = true; 
+              }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
+    public function get_trouble_spot()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mendapatkan data trouble spot";
+            $filter = [];
+
+            try {   
+              if ($this->cek_token()) {
+                $this->mpub->see = "rowid,tgl,jalan,jenis,status,lat,lng";
+
+                $filter['status'] = 'Trouble Spot';
+                $trouble_spot = $this->mpub->get('tmc_data_statusjalan','',$filter);
+
+                $data = $trouble_spot->result();
+                $msg = "Berhasil mengambil data";
+                $status = true; 
+              }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
+    public function get_ambang_gangguan()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mendapatkan data ambang gangguan";
+            $filter = [];
+
+            try {   
+              if ($this->cek_token()) {
+                $this->mpub->see = "rowid,tgl,jalan,jenis,status,lat,lng,penyebab,penyebabd";
+
+                $filter['status'] = 'Ambang Gangguan';
+                $ambang_gangguan = $this->mpub->get('tmc_data_gangguan','',$filter);
+
+                $data = $ambang_gangguan->result();
+                $msg = "Berhasil mengambil data";
+                $status = true; 
+              }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
 }
