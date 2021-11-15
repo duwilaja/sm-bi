@@ -4,13 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Api_cctv2 extends CI_Controller {
 	
 	private $username = "system";
-	private $password = "Admin135";
+	private $password = "Admin135!";
 	private $realm = "";
 	private $randomKey = "";
 	private $rdmkey = "";
 	private $publicKey = "";
 	private $mac = "";
-	private $url = "http://172.16.59.20:8314";
+	private $url = "https://172.16.59.233:8320";
 	private $token = "";
 	private $signiture = "";
 	private $cert = "";
@@ -50,7 +50,7 @@ class Api_cctv2 extends CI_Controller {
 
 		$opt = [
 			"userName" => $this->username, 
-			"ipAddress" => "172.16.59.20",
+			"ipAddress" => "172.16.59.233",
 			'clientType' => "winpc"
 		];
 
@@ -130,8 +130,6 @@ class Api_cctv2 extends CI_Controller {
 		} else {
 			$r = json_decode($response);
 
-			echo json_encode($r);
-			die;
 			$realm = $r->realm;
 			$randomkey = $r->randomKey;
 
@@ -207,7 +205,7 @@ class Api_cctv2 extends CI_Controller {
 			"signature": "'.$signiture.'", 
 			"clientType":"winpc",
 			"encryptType":	"MD5",
-			"ipAddress":"172.16.59.20" 
+			"ipAddress":"172.16.59.233" 
 			
 		}',
 		CURLOPT_HTTPHEADER => array(
@@ -218,7 +216,7 @@ class Api_cctv2 extends CI_Controller {
 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 		$response = curl_exec($curl);
-
+		
 		curl_close($curl);
 		$x = json_decode($response,true);
 		$this->token = $x['token'];
@@ -226,9 +224,11 @@ class Api_cctv2 extends CI_Controller {
 			$this->cek_traffic_flow();
          }else if ($kend == 'trafficevent') {
              $this->get_traffic_event();
-         }//else if ($kend == 'camera') {
-        //     $this->cek_camera();
-        // }
+         }else if ($kend == 'devicetree') {
+			$this->get_device_tree();
+		 }else if ($kend == 'etle') {
+             $this->get_etle();
+         }
 	}
 
 	public function cek_traffic_flow()
@@ -267,6 +267,37 @@ class Api_cctv2 extends CI_Controller {
 		}else{
 			echo "No rows";
 		}
+	}
+
+	public function get_etle()
+	{
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => $this->url.'/vehicleService/rest/illegal/queryList?page=1&pageSize=20',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'POST',
+		CURLOPT_POSTFIELDS =>'{
+			"channelCodes" : ["42Vm1u6JA1DDIVOUOO6EEM"],
+		}',
+		CURLOPT_HTTPHEADER => array(
+			'Content-Type: application/json',
+			'X-Subject-Token: '.$this->token
+		),
+		));
+
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		$x = json_decode($response,true);
+		echo json_encode($x);
 	}
 
 	public function get_kendaraan()
@@ -764,11 +795,12 @@ class Api_cctv2 extends CI_Controller {
 	
 	public function api_traffic_event()
 	{
+		$g = $this->input->get('q');
 		$curl = curl_init();
 
 		$opt = [
 			"userName" => $this->username, 
-			"ipAddress" => "172.16.59.20",
+			"ipAddress" => "172.16.59.233",
 			'clientType' => "winpc"
 		];
 
@@ -800,6 +832,7 @@ class Api_cctv2 extends CI_Controller {
 			
 			$r = json_decode($response);
 
+
 			$realm = $r->realm;
 			$randomkey = $r->randomKey;
 
@@ -807,18 +840,18 @@ class Api_cctv2 extends CI_Controller {
 			// $s = $this->signiture($this->config->item('password_dss'),$this->config->item('username_dss'),$r->realm,$r->randomKey);
 			$s = $this->signiture($this->password,$this->username,$realm,$randomkey);
 
-			$this->second_login($s,$randomkey,'trafficevent');
+			// $this->second_login($s,$randomkey,'trafficevent');
+			$this->second_login($s,$randomkey,$g);
 		}
 	}
-	
+
 	public function get_traffic_event()
 	{
-		$curl = curl_init();
 		
-		//S4NbecfYA1D4CRRCI9TTB4
+		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => $this->url.'/eventdetect/v1/trafficEvent/trafficEventPageList?nowTime='.time(),
+		CURLOPT_URL => $this->url.'/eventdetect/v1/trafficevent/trafficeventpagelist',
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
@@ -826,17 +859,16 @@ class Api_cctv2 extends CI_Controller {
 		CURLOPT_FOLLOWLOCATION => true,
 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		CURLOPT_CUSTOMREQUEST => 'POST',
-		CURLOPT_POSTFIELDS =>'{
-			"pageNum" : 1,
-			"pageSize" : 20,
-			"channelId" : [],
-			"deviceId" : [],
-			"eventType" : ["1","2","3","4","5","6","7","8","9","11","12","16"],
-			"isShowShieldData" : 0,
-			"operStatus" : null,
-			"orgNodeId" : ["S4NbecfYA1D4CRRCI9TTB4"],
-			"startTime" : '.mktime(0,0,0,date('m'),date('d'),date('Y')).'
-			"endTime" : '.time().'
+		CURLOPT_POSTFIELDS =>
+		'{
+			"deviceId":[],
+			"channelId":[],
+			"eventType":["1","2","3","4","5","6","7","8","9","10","11","12","16"],
+			"operStatus":null,
+			"orgNodeId":["S4NbecfYA1DDEMR138QUB4"],
+			"isSHowShieldData":0,
+			"pageNum":1,
+			"pageSize":20
 		}',
 		CURLOPT_HTTPHEADER => array(
 			'Content-Type: application/json',
@@ -852,8 +884,13 @@ class Api_cctv2 extends CI_Controller {
 		
 		curl_close($curl);
 		//$x = json_decode($response,true);
+		$json = [];
 		if($err==''){
-			echo 'Disini hasil exec eventdetect/v1/trafficEvent/trafficEventPageList : '.$response;
+			$json['msg'] = 'Disini hasil exec eventdetect/v1/trafficEvent/trafficEventPageList :';
+			$json['data'] = json_decode($response);
+			$json['token'] = $this->token;
+			echo json_encode($json);
+			// echo 'Disini hasil exec eventdetect/v1/trafficEvent/trafficEventPageList : '.$response;
 		}else{
 			echo "ERROR: $err";
 		}
@@ -870,8 +907,13 @@ class Api_cctv2 extends CI_Controller {
 	{
 		$curl = curl_init();
 
+		// $url = "/videoService/devicesManager/deviceTree?";
+		$url = "/videoService/devicesManager/devices/JuNLkujUA1D5TFGEIIBVUQ";
+		// $param = "id=S4NbecfYA1DAQO398AUMN4&nodeType=1&typeCode=01,0,ALL&page=1&pageSize=4";
+		// $param = "?id=S4NbecfYA1D4CRRCI9TTB4&nodeType=1&typeCode=01&page=1&pageSize=1";
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => $this->url.'/videoService/devicesManager/deviceTree?nodeType=1&typeCode=01&page=1&pageSize=20',
+		CURLOPT_URL => $this->url.'/videoService/devicesManager/deviceTree?nodeType=0&typeCode=0&page=1&pageSize=20',
+		// CURLOPT_URL => $this->url.$url,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
@@ -892,7 +934,7 @@ class Api_cctv2 extends CI_Controller {
 			"endTime" : '.time().'
 		}',*/
 		CURLOPT_HTTPHEADER => array(
-			'Content-Type: application/json',
+			// 'Content-Type: application/json',
 			'X-Subject-Token: '.$this->token
 		),
 		));
@@ -906,7 +948,10 @@ class Api_cctv2 extends CI_Controller {
 		curl_close($curl);
 		//$x = json_decode($response,true);
 		if($err==''){
-			echo 'Disini hasil exec /videoService/devicesManager/deviceTree : '.$response;
+			// echo 'Disini hasil exec /videoService/devicesManager/deviceTree : '.$response;
+			// $json['msg'] = $url.$param;
+			$json['data'] = json_decode($response,true);
+			echo json_encode($json);
 		}else{
 			echo "ERROR: $err";
 		}
